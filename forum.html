@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - EduHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .forum-container {
+            padding: 40px 20px;
+            background: var(--light-color);
+            min-height: calc(100vh - 70px);
+        }
+
+        .forum-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .forum-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .new-post-btn {
+            margin-bottom: 30px;
+        }
+
+        .post-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .post-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .post-author {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .post-time {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .post-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .reply-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reply-btn:hover {
+            background: #0b7dda;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .close {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: var(--dark-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🎓 EduHub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="courses.html" class="nav-link">Courses</a></li>
+                <li><a href="forum.html" class="nav-link active">Forum</a></li>
+                <li><a href="bookstore.html" class="nav-link">Bookstore</a></li>
+                <li><a href="portal.html" class="nav-link">Portal</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Forum Section -->
+    <div class="forum-container">
+        <div class="container">
+            <div class="forum-header">
+                <h1>💬 Community Forum</h1>
+                <p>Connect, learn, and grow with fellow students</p>
+            </div>
+
+            <div class="new-post-btn">
+                <button class="btn btn-primary" onclick="openModal()">Create New Discussion</button>
+            </div>
+
+            <!-- Sample Posts -->
+            <div class="post-item">
+                <div class="post-header">
+                    <div>
+                        <div class="post-author">👤 Sarah Johnson</div>
+                        <div class="post-time">2 hours ago</div>
+                    </div>
+                </div>
+                <div class="post-title">Tips for Understanding Calculus</div>
+                <div class="post-content">
+                    I found some great resources that really helped me understand calculus concepts. 
+                    Would love to share tips with the community. What's your favorite calculus topic?
+                </div>
+                <div class="post-footer">
+                    <div class="post-stats">
+                        <span>👍 12 Likes</span>
+                        <span>💬 5 Replies</span>
+                    </div>
+                    <button class="reply-btn" onclick="openReplyModal()">Reply</button>
+                </div>
+            </div>
+
+            <div class="post-item">
+                <div class="post-header">
+                    <div>
+                        <div class="post-author">👤 Mike Chen</div>
+                        <div class="post-time">5 hours ago</div>
+                    </div>
+                </div>
+                <div class="post-title">Help with Web Development Project</div>
+                <div class="post-content">
+                    I'm struggling with CSS layouts for my project. Anyone willing to review my code 
+                    and provide feedback? I'm trying to create a responsive dashboard.
+                </div>
+                <div class="post-footer">
+                    <div class="post-stats">
+                        <span>👍 8 Likes</span>
+                        <span>💬 12 Replies</span>
+                    </div>
+                    <button class="reply-btn" onclick="openReplyModal()">Reply</button>
+                </div>
+            </div>
+
+            <div class="post-item">
+                <div class="post-header">
+                    <div>
+                        <div class="post-author">👤 Emma Williams</div>
+                        <div class="post-time">1 day ago</div>
+                    </div>
+                </div>
+                <div class="post-title">Book Recommendations for Physics</div>
+                <div class="post-content">
+                    Looking for good physics books that explain complex concepts in simple terms. 
+                    What are your top recommendations? I'm particularly interested in quantum mechanics.
+                </div>
+                <div class="post-footer">
+                    <div class="post-stats">
+                        <span>👍 15 Likes</span>
+                        <span>💬 8 Replies</span>
+                    </div>
+                    <button class="reply-btn" onclick="openReplyModal()">Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Post Modal -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Create New Discussion</h2>
+            <form onsubmit="handleNewPost(event)">
+                <div class="form-group">
+                    <label for="title">Discussion Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Your Message</label>
+                    <textarea id="content" rows="5" style="width: 100%; padding: 10px; border-radius: 5px; border: 2px solid #ddd;" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Discussion</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal()" style="margin-left: 10px;">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div id="replyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReplyModal()">&times;</span>
+            <h2>Reply to Discussion</h2>
+            <form onsubmit="handleReply(event)">
+                <div class="form-group">
+                    <label for="replyContent">Your Reply</label>
+                    <textarea id="replyContent" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 2px solid #ddd;" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Reply</button>
+                <button type="button" class="btn btn-secondary" onclick="closeReplyModal()" style="margin-left: 10px;">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About EduHub</h4>
+                    <p>A comprehensive learning platform.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function openModal() {
+            document.getElementById('postModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('postModal').style.display = 'none';
+        }
+
+        function openReplyModal() {
+            document.getElementById('replyModal').style.display = 'block';
+        }
+
+        function closeReplyModal() {
+            document.getElementById('replyModal').style.display = 'none';
+        }
+
+        function handleNewPost(e) {
+            e.preventDefault();
+            alert('Your discussion has been posted!');
+            closeModal();
+            document.getElementById('title').value = '';
+            document.getElementById('content').value = '';
+        }
+
+        function handleReply(e) {
+            e.preventDefault();
+            alert('Your reply has been posted!');
+            closeReplyModal();
+            document.getElementById('replyContent').value = '';
+        }
+
+        window.onclick = function(event) {
+            let modal = document.getElementById('postModal');
+            let replyModal = document.getElementById('replyModal');
+            if (event.target == modal) modal.style.display = 'none';
+            if (event.target == replyModal) replyModal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
