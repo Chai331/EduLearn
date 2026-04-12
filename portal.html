@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - EduHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .portal-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 70px);
+            background: var(--light-color);
+        }
+
+        .portal-sidebar {
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .portal-sidebar h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .portal-sidebar ul {
+            list-style: none;
+        }
+
+        .portal-sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .portal-sidebar a {
+            display: block;
+            padding: 10px;
+            color: var(--dark-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .portal-sidebar a:hover {
+            background: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .portal-content {
+            padding: 40px;
+        }
+
+        .portal-content h1 {
+            margin-bottom: 30px;
+            color: var(--dark-color);
+        }
+
+        .auth-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .auth-buttons .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .auth-buttons .btn-primary:hover {
+            background: #45a049;
+        }
+
+        .progress-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .portal-container {
+                grid-template-columns: 1fr;
+            }
+
+            .portal-sidebar {
+                display: none;
+            }
+
+            .portal-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🎓 EduHub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="courses.html" class="nav-link">Courses</a></li>
+                <li><a href="forum.html" class="nav-link">Forum</a></li>
+                <li><a href="bookstore.html" class="nav-link">Bookstore</a></li>
+                <li><a href="portal.html" class="nav-link active">Portal</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portal -->
+    <div class="portal-container">
+        <div class="portal-sidebar" id="sidebar">
+            <h3>📋 Menu</h3>
+            <ul>
+                <li><a href="#dashboard" class="sidebar-link" onclick="showSection('dashboard')">Dashboard</a></li>
+                <li><a href="#enrollment" class="sidebar-link" onclick="showSection('enrollment')">My Courses</a></li>
+                <li><a href="#progress" class="sidebar-link" onclick="showSection('progress')">Progress</a></li>
+                <li><a href="#profile" class="sidebar-link" onclick="showSection('profile')">Profile</a></li>
+                <li><a href="#logout" class="sidebar-link" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="portal-content">
+            <!-- Login Form (Initially Visible) -->
+            <div id="loginForm" class="auth-form">
+                <h2 style="text-align: center; margin-bottom: 30px;">Welcome Back</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="auth-buttons">
+                        <button type="submit" class="btn-primary">Sign In</button>
+                        <button type="button" class="btn-primary" onclick="toggleForm()">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Registration Form (Hidden) -->
+            <div id="registerForm" class="auth-form" style="display:none;">
+                <h2 style="text-align: center; margin-bottom: 30px;">Create Account</h2>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regemail">Email Address</label>
+                        <input type="email" id="regemail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regpassword">Password</label>
+                        <input type="password" id="regpassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm">Confirm Password</label>
+                        <input type="password" id="confirm" required>
+                    </div>
+                    <div class="auth-buttons">
+                        <button type="submit" class="btn-primary">Create Account</button>
+                        <button type="button" class="btn-primary" onclick="toggleForm()">Back to Sign In</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Dashboard (Hidden Initially) -->
+            <div id="dashboard" style="display:none;">
+                <h1>Welcome, <span id="userName">Student</span>!</h1>
+                <div class="progress-card">
+                    <h3>Overall Progress</h3>
+                    <p>You've completed 35% of your learning journey</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 35%;"></div>
+                    </div>
+                </div>
+                <div class="progress-card">
+                    <h3>📚 Enrolled Courses: 4</h3>
+                    <p>Continue your learning with these courses.</p>
+                </div>
+            </div>
+
+            <!-- My Courses (Hidden Initially) -->
+            <div id="enrollment" style="display:none;">
+                <h1>My Courses</h1>
+                <div class="progress-card">
+                    <h3>Mathematics Fundamentals</h3>
+                    <p>Progress: 60%</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%;"></div>
+                    </div>
+                </div>
+                <div class="progress-card">
+                    <h3>Web Development</h3>
+                    <p>Progress: 45%</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile (Hidden Initially) -->
+            <div id="profile" style="display:none;">
+                <h1>My Profile</h1>
+                <div class="progress-card">
+                    <p><strong>Name:</strong> <span id="profileName">John Doe</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail">john@example.com</span></p>
+                    <p><strong>Student ID:</strong> EH12345</p>
+                    <p><strong>Member Since:</strong> January 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About EduHub</h4>
+                    <p>A comprehensive learning platform.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleForm() {
+            document.getElementById('loginForm').style.display = 
+                document.getElementById('loginForm').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = 
+                document.getElementById('registerForm').style.display === 'none' ? 'block' : 'none';
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            localStorage.setItem('userName', email.split('@')[0]);
+            showDashboard();
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const fullname = document.getElementById('fullname').value;
+            localStorage.setItem('userName', fullname);
+            alert('Account created successfully! Please sign in.');
+            toggleForm();
+        }
+
+        function showDashboard() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('sidebar').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('userName').textContent = localStorage.getItem('userName') || 'Student';
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.portal-content > div').forEach(el => {
+                if (el.id && el.id !== 'sidebar') el.style.display = 'none';
+            });
+            const section = document.getElementById(sectionId);
+            if (section) section.style.display = 'block';
+        }
+
+        function logout() {
+            localStorage.removeItem('userName');
+            location.reload();
+        }
+
+        // Check if user is logged in
+        if (localStorage.getItem('userName')) {
+            showDashboard();
+        }
+    </script>
+</body>
+</html>
