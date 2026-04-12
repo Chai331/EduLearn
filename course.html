@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - EduHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .courses-container {
+            padding: 40px 20px;
+            background: var(--light-color);
+            min-height: calc(100vh - 70px);
+        }
+
+        .courses-container h1 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .course-body {
+            padding: 20px;
+        }
+
+        .course-body h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .course-body p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .course-button {
+            display: block;
+            text-align: center;
+            background: var(--secondary-color);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .course-button:hover {
+            background: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🎓 EduHub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="courses.html" class="nav-link active">Courses</a></li>
+                <li><a href="forum.html" class="nav-link">Forum</a></li>
+                <li><a href="bookstore.html" class="nav-link">Bookstore</a></li>
+                <li><a href="portal.html" class="nav-link">Portal</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Courses Section -->
+    <div class="courses-container">
+        <div class="container">
+            <h1>Our Courses</h1>
+            <div class="course-grid">
+                <div class="course-card">
+                    <div class="course-image">📐</div>
+                    <div class="course-body">
+                        <h3>Mathematics Fundamentals</h3>
+                        <p>Master the basics of algebra, geometry, and trigonometry.</p>
+                        <div class="course-meta">
+                            <span>12 Modules</span>
+                            <span>Beginner</span>
+                        </div>
+                        <a href="#" class="course-button">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">🧪</div>
+                    <div class="course-body">
+                        <h3>Chemistry 101</h3>
+                        <p>Explore the periodic table and chemical reactions.</p>
+                        <div class="course-meta">
+                            <span>10 Modules</span>
+                            <span>Beginner</span>
+                        </div>
+                        <a href="#" class="course-button">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">🧬</div>
+                    <div class="course-body">
+                        <h3>Biology Essentials</h3>
+                        <p>Understand cells, genetics, and human anatomy.</p>
+                        <div class="course-meta">
+                            <span>15 Modules</span>
+                            <span>Intermediate</span>
+                        </div>
+                        <a href="#" class="course-button">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">💻</div>
+                    <div class="course-body">
+                        <h3>Web Development</h3>
+                        <p>Learn HTML, CSS, and JavaScript from scratch.</p>
+                        <div class="course-meta">
+                            <span>20 Modules</span>
+                            <span>Intermediate</span>
+                        </div>
+                        <a href="#" class="course-button">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">📚</div>
+                    <div class="course-body">
+                        <h3>Literature & Writing</h3>
+                        <p>Develop your writing skills and literary analysis.</p>
+                        <div class="course-meta">
+                            <span>8 Modules</span>
+                            <span>Beginner</span>
+                        </div>
+                        <a href="#" class="course-button">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">🌍</div>
+                    <div class="course-body">
+                        <h3>World History</h3>
+                        <p>Journey through significant historical events worldwide.</p>
+                        <div class="course-meta">
+                            <span>18 Modules</span>
+                            <span>Intermediate</span>
+                        </div>
+                        <a href="#" class="course-button">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About EduHub</h4>
+                    <p>A comprehensive learning platform designed for students and educators.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="forum.html">Forum</a></li>
+                        <li><a href="bookstore.html">Bookstore</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@eduhub.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
