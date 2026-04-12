@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub - Your Learning Journey Starts Here</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🎓 EduHub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="courses.html" class="nav-link">Courses</a></li>
+                <li><a href="forum.html" class="nav-link">Forum</a></li>
+                <li><a href="bookstore.html" class="nav-link">Bookstore</a></li>
+                <li><a href="portal.html" class="nav-link">Portal</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Welcome to EduHub</h2>
+            <p>Your Complete Learning Platform</p>
+            <p class="hero-subtitle">Access courses, resources, and connect with learners worldwide</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('features')">Explore Now</button>
+                <button class="btn btn-secondary" onclick="location.href='portal.html'">Sign In</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/400x300?text=Learning+Platform" alt="Learning Platform">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Why Choose EduHub?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Rich Course Content</h3>
+                    <p>Access lecture notes, video tutorials, and interactive quizzes organized by subject.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Community Forum</h3>
+                    <p>Engage in peer-to-peer learning with moderation tools and Q&A sections.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Online Bookstore</h3>
+                    <p>Browse and purchase academic books with an integrated shopping cart.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your learning progress and save resources for later reference.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Learning?</h2>
+            <p>Join thousands of students on their educational journey</p>
+            <button class="btn btn-primary btn-large" onclick="location.href='portal.html'">Get Started Today</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About EduHub</h4>
+                    <p>A comprehensive learning platform designed for students and educators.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="forum.html">Forum</a></li>
+                        <li><a href="bookstore.html">Bookstore</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@eduhub.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
