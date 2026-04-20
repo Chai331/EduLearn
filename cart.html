@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EduLearn Shopping Cart – Review your selected books before checkout." />
+  <title>Shopping Cart – EduLearn</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="w3-bar edu-navbar w3-top" id="mainNav">
+  <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+  <div class="w3-right w3-hide-small">
+    <a href="dashboard.html"  class="w3-bar-item w3-button nav-link">Home</a>
+    <a href="courses.html"    class="w3-bar-item w3-button nav-link">Courses</a>
+    <a href="portal.html"     class="w3-bar-item w3-button nav-link">My Portal</a>
+    <a href="bookstore.html"  class="w3-bar-item w3-button nav-link">Bookstore</a>
+    <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></a>
+</nav>
+<div id="mobileMenu" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium mobile-menu">
+  <a href="dashboard.html"  class="w3-bar-item w3-button">Home</a>
+  <a href="bookstore.html"  class="w3-bar-item w3-button">Bookstore</a>
+  <a href="checkout.html"   class="w3-bar-item w3-button">Checkout</a>
+  <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="w3-content container-max">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="bookstore.html">Bookstore</a> &rsaquo; Cart</div>
+    <h1><i class="fas fa-shopping-cart"></i> Shopping Cart</h1>
+    <p>Review your items before proceeding to checkout</p>
+  </div>
+</div>
+
+<section class="section-pad" style="background:#f5f7fa;">
+  <div class="w3-content container-max">
+    <div class="w3-row-padding">
+      <!-- Cart Table -->
+      <div class="w3-col m8 s12">
+        <div style="background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:2px solid #f3f4f6;">
+            <h2 style="font-size:1rem;font-weight:800;color:#1a1a2e;"><i class="fas fa-list" style="color:#667eea;margin-right:8px;"></i>Cart Items</h2>
+            <button onclick="clearCart()" style="background:none;border:none;color:#ef4444;font-size:0.82rem;font-weight:600;cursor:pointer;"><i class="fas fa-trash"></i> Clear All</button>
+          </div>
+
+          <div id="emptyCart" style="display:none;text-align:center;padding:3rem 0;">
+            <i class="fas fa-shopping-cart" style="font-size:3rem;color:#e5e7eb;margin-bottom:1rem;display:block;"></i>
+            <p style="color:#9ca3af;font-size:0.95rem;margin-bottom:1.5rem;">Your cart is empty</p>
+            <a href="bookstore.html" class="btn-primary-lg"><i class="fas fa-store"></i> Browse Books</a>
+          </div>
+
+          <table class="cart-table" id="cartTable">
+            <thead>
+              <tr>
+                <th>Book</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cartBody"></tbody>
+          </table>
+        </div>
+        <div style="margin-top:1rem;">
+          <a href="bookstore.html" style="color:#667eea;font-size:0.88rem;font-weight:600;"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="w3-col m4 s12">
+        <div class="order-summary-card">
+          <h3>Order Summary</h3>
+          <div class="summary-row"><span>Subtotal</span><span id="summSubtotal">RM 0.00</span></div>
+          <div class="summary-row"><span>Shipping</span><span id="summShipping">RM 0.00</span></div>
+          <div class="summary-row"><span>Discount (Promo)</span><span id="summDiscount" style="color:#10b981;">- RM 0.00</span></div>
+          <div class="summary-row total"><span>Total</span><span id="summTotal">RM 0.00</span></div>
+
+          <!-- Promo Code -->
+          <div style="margin:1rem 0;display:flex;gap:0.5rem;">
+            <input type="text" id="promoInput" class="form-control" placeholder="Promo code" style="font-size:0.82rem;padding:0.55rem 0.8rem;" />
+            <button onclick="applyPromo()" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:0 1rem;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.82rem;white-space:nowrap;">Apply</button>
+          </div>
+          <div id="promoMsg" style="font-size:0.78rem;margin-bottom:0.5rem;"></div>
+
+          <a href="checkout.html" class="btn-primary-lg" style="display:block;text-align:center;font-size:0.95rem;padding:0.85rem;"><i class="fas fa-lock"></i> Proceed to Checkout</a>
+          <div style="text-align:center;margin-top:0.8rem;font-size:0.75rem;color:#9ca3af;"><i class="fas fa-shield-alt" style="color:#10b981;"></i> Secure &amp; encrypted payment</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="edu-footer">
+  <div class="w3-content container-max">
+    <div class="footer-bottom" style="border-top:none;padding:1.5rem 0;">
+      <p>&copy; 2025 EduLearn. All rights reserved. | <a href="bookstore.html">Back to Bookstore</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="db.js"></script>
+<script>
+  var __sess = EduDB.getSession();
+  if (!__sess) { window.location.href = 'index.html'; }
+  document.addEventListener('DOMContentLoaded', function() {
+    var ng = document.getElementById('navGreet');
+    if (ng && __sess) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
+  });
+  function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+  function toggleMobileMenu(){var m=document.getElementById("mobileMenu");m.className.indexOf("w3-show")===-1?m.className+=" w3-show":m.className=m.className.replace(" w3-show","");}
+  window.onscroll=function(){document.getElementById("mainNav").classList[window.pageYOffset>60?"add":"remove"]("scrolled");};
+
+  var discount=0;
+  function getCart(){return EduDB.getCart();}
+  function saveCart(c){EduDB.saveCart(c);}
+
+  function renderCart(){
+    var c=getCart();
+    var body=document.getElementById("cartBody");
+    body.innerHTML="";
+    if(c.length===0){
+      document.getElementById("cartTable").style.display="none";
+      document.getElementById("emptyCart").style.display="block";
+      updateSummary(0);
+      return;
+    }
+    document.getElementById("cartTable").style.display="table";
+    document.getElementById("emptyCart").style.display="none";
+    var subtotal=0;
+    c.forEach(function(item,i){
+      var lineTotal=(item.price*item.qty).toFixed(2);
+      subtotal+=parseFloat(lineTotal);
+      var tr=document.createElement("tr");
+      tr.innerHTML='<td><div style="font-weight:700;color:#1a1a2e;font-size:0.88rem;">'+item.name+'</div></td>'
+        +'<td style="color:#667eea;font-weight:700;">RM '+item.price.toFixed(2)+'</td>'
+        +'<td><div class="qty-control">'
+          +'<button class="qty-btn" onclick="changeQty('+i+',-1)">−</button>'
+          +'<span class="qty-num">'+item.qty+'</span>'
+          +'<button class="qty-btn" onclick="changeQty('+i+',1)">+</button>'
+        +'</div></td>'
+        +'<td style="font-weight:700;">RM '+lineTotal+'</td>'
+        +'<td><button class="remove-btn" onclick="removeItem('+i+')" title="Remove"><i class="fas fa-times"></i></button></td>';
+      body.appendChild(tr);
+    });
+    updateSummary(subtotal);
+  }
+
+  function updateSummary(subtotal){
+    var shipping=subtotal>0?8.00:0;
+    var disc=discount*subtotal;
+    var total=subtotal+shipping-disc;
+    document.getElementById("summSubtotal").textContent="RM "+subtotal.toFixed(2);
+    document.getElementById("summShipping").textContent="RM "+shipping.toFixed(2);
+    document.getElementById("summDiscount").textContent="- RM "+disc.toFixed(2);
+    document.getElementById("summTotal").textContent="RM "+total.toFixed(2);
+  }
+
+  function changeQty(i,d){
+    var c=getCart(); c[i].qty+=d;
+    if(c[i].qty<=0) c.splice(i,1);
+    saveCart(c); renderCart();
+  }
+  function removeItem(i){
+    var c=getCart(); c.splice(i,1); saveCart(c); renderCart();
+  }
+  function clearCart(){
+    if(confirm("Clear all items from cart?")){ localStorage.removeItem("eduCart"); renderCart(); }
+  }
+  function applyPromo(){
+    var code=document.getElementById("promoInput").value.trim().toUpperCase();
+    var msg=document.getElementById("promoMsg");
+    if(code==="EDULEARN10"){ discount=0.10; msg.innerHTML='<span style="color:#10b981;"><i class="fas fa-check-circle"></i> 10% discount applied!</span>'; }
+    else if(code==="SAVE20"){ discount=0.20; msg.innerHTML='<span style="color:#10b981;"><i class="fas fa-check-circle"></i> 20% discount applied!</span>'; }
+    else { discount=0; msg.innerHTML='<span style="color:#ef4444;"><i class="fas fa-times-circle"></i> Invalid promo code.</span>'; }
+    renderCart();
+  }
+
+  renderCart();
+</script>
+</body>
+</html>
