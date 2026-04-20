@@ -1,0 +1,60 @@
+1.Given the function f(x) = 3 - 5x - 2x^2, what is the value of f(4)
+A. -49
+B. -45
+C. 55
+D. 3
+Answer: A
+2.What is the difference quotient (f(x+h) - f(x)) / h for the linear function f(x) = 2x + 1
+A. 2h
+B. 2
+C. 1
+D. 2x
+Answer: B
+3.Find the domain of the function f(x) = 1 / (x - 5)
+A. x > 5
+B. x < 5
+C. x != 5
+D. All real numbers
+Answer: C
+4.Determine the parity of the function f(x) = x^2 + 4
+A. Odd function
+B. Even function
+C. Neither even nor odd
+D. Both even and odd
+Answer: B
+5.If f(x) = x^2 and g(x) = x - 3, what is the composite function (f ∘ g)(x)
+A. x^2 - 3
+B. x^2 - 9
+C. x^2 - 6x + 9
+D. x^2 + 9
+Answer: C
+6.For a function f(x), if the limit as x approaches c from the left is 2, and the limit from the right is 4, what can be said about the limit at c
+A. The limit is 3
+B. The limit is 2
+C. The limit is 4
+D. The limit does not exist
+Answer: D
+7.How do you find the vertical asymptotes of a rational function f(x) = P(x) / Q(x)
+A. Set P(x) = 0 and solve for x
+B. Set Q(x) = 0 and solve for x where P(x) is not 0
+C. Find the limit of f(x) as x approaches infinity
+D. Plug in x = 0
+Answer: B
+8.Which condition must be met for a function f(x) to be continuous at a point x = a
+A. f(a) must be defined
+B. The limit of f(x) as x approaches a must exist
+C. The limit of f(x) as x approaches a must equal f(a)
+D. All of the above
+Answer: D
+9.Find the horizontal asymptote of the function f(x) = (2x^2 + 1) / (x^2 - 3)
+A. y = 0
+B. y = 2
+C. y = 1/3
+D. No horizontal asymptote
+Answer: B
+10.If a piecewise function is defined as f(x) = 3x for x < 1 and f(x) = a + x for x >= 1, what value of a makes the function continuous at x = 1
+A. a = 1
+B. a = 2
+C. a = 3
+D. a = 4
+Answer: B

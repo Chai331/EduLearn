@@ -1,0 +1,69 @@
+1. Which OSI layer is responsible for routing data based on IP addresses?
+A. Layer 2 (Data Link)
+B. Layer 3 (Network)
+C. Layer 4 (Transport)
+D. Layer 7 (Application)
+Answer: B
+
+2. A network switch creates logical segments within a physical network using:
+A. Subnets
+B. VLANs
+C. VPNs
+D. NAT
+Answer: B
+
+3. A network segment that acts as a buffer between the internal network and the internet is a:
+A. Honeypot
+B. DMZ (Demilitarized Zone)
+C. Intranet
+D. Extranet
+Answer: B
+
+4. If a firewall packet does not match any specific rule, it is blocked by the:
+A. Explicit Permit
+B. Implicit Deny
+C. Default Allow
+D. Dynamic ACL
+Answer: B
+
+5. A firewall that filters packets based only on source/destination IP and port without tracking sessions is:
+A. Stateful
+B. Stateless
+C. Application-aware
+D. Next-Generation
+Answer: B
+
+6. Which wireless security standard improved on WPA with AES encryption and 802.1X support?
+A. WEP
+B. WPA (TKIP)
+C. WPA2
+D. WPA3
+Answer: C
+
+7. A massive volume of traffic from multiple compromised hosts intended to crash a service is a:
+A. DoS attack
+B. DDoS attack
+C. MITM attack
+D. Spoofing attack
+Answer: B
+
+8. Which protocol provides secure file transfer over an encrypted SSH connection (Port 22)?
+A. FTP
+B. SFTP
+C. FTPS
+D. HTTP
+Answer: B
+
+9. In load balancing, "Persistence" or "Source IP Affinity" is used to:
+A. Distribute load evenly
+B. Keep a client connected to the same server for a session
+C. Encrypt the data
+D. Block DDoS attacks
+Answer: B
+
+10. A system that monitors network traffic and can actively block malicious packets is an:
+A. IDS
+B. IPS
+C. Firewall
+D. SIEM
+Answer: B

@@ -1,0 +1,69 @@
+1. Which of the following is NOT one of the three core goals of the CIA Triad?
+A. Confidentiality
+B. Integrity
+C. Availability
+D. Auditability
+Answer: D
+
+2. A security control that relies on human implementation (e.g., policies or training) is categorized as:
+A. Technical Control
+B. Managerial Control
+C. Operational Control
+D. Physical Control
+Answer: C
+
+3. In a security exercise, which team is responsible for performing the defensive role?
+A. Red Team
+B. Blue Team
+C. White Team
+D. Purple Team
+Answer: B
+
+4. In the penetration testing life cycle, establishing a command and control backdoor to reconnect after a reboot is called:
+A. Initial Exploitation
+B. Persistence
+C. Lateral Movement
+D. Pivoting
+Answer: B
+
+5. Which property ensures that a sender cannot deny having sent a message?
+A. Confidentiality
+B. Non-repudiation
+C. Availability
+D. Integrity
+Answer: B
+
+6. A highly sophisticated, nation-state sponsored attacker characterized by long-term persistence is an:
+A. Script Kiddie
+B. Hacktivist
+C. APT (Advanced Persistent Threat)
+D. Insider Threat
+Answer: C
+
+7. The process of identifying which TCP/UDP ports are open on a target system is known as:
+A. Host Discovery
+B. Port Scanning
+C. Fingerprinting
+D. Enumeration
+Answer: B
+
+8. Which Windows command is used to display the IP configuration of the local host?
+A. ping
+B. netstat
+C. ipconfig
+D. nslookup
+Answer: C
+
+9. A vulnerability that is unknown to the vendor and has no available patch is called a:
+A. Zero-day
+B. Legacy vulnerability
+C. Weak configuration
+D. Logic bomb
+Answer: A
+
+10. Which tool is primarily used for packet capture and protocol analysis?
+A. Nessus
+B. Nmap
+C. Wireshark
+D. Metasploit
+Answer: C

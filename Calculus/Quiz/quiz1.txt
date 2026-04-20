@@ -1,0 +1,69 @@
+1. Given f(x) = 3 - 5x - 2x^2, find the value of f(4).
+A. -49
+B. -45
+C. 55
+D. 3
+Answer: A
+
+2. The difference quotient of a function f(x) is defined as (f(x+h) - f(x)) / h. If f(x) = 2x + 1, what is the result?
+A. 2h
+B. 2
+C. 1
+D. 2x
+Answer: B
+
+3. Find the domain of the function f(x) = 1 / (x - 5).
+A. x > 5
+B. x < 5
+C. x ≠ 5
+D. All real numbers
+Answer: C
+
+4. Determine the parity of the function f(x) = x^2 + 4.
+A. Odd
+B. Even
+C. Neither
+D. Both Odd and Even
+Answer: B
+
+5. What is the domain of the square root function g(x) = sqrt(x - 2)?
+A. x ≥ 2
+B. x > 2
+C. x ≠ 2
+D. x ≤ 2
+Answer: A
+
+6. If f(x) = x^2 and g(x) = x - 3, find (f ∘ g)(x).
+A. x^2 - 3
+B. x^2 - 9
+C. x^2 + 9
+D. x^2 - 6x + 9
+Answer: D
+
+7. Which of the following describes the function f(x) = x^3 - x?
+A. Even
+B. Neither
+C. Odd
+D. Constant
+Answer: C
+
+8. Using the function f(x) = 3 - 5x - 2x^2, what is f(-1)?
+A. 0
+B. 10
+C. 6
+D. -4
+Answer: C
+
+9. Identify the domain of f(x) = (x + 1) / (x^2 - 9).
+A. x ≠ 3
+B. x ≠ -3
+C. x ≠ 3 and x ≠ -3
+D. x > 3
+Answer: C
+
+10. Given f(x) = 2x and g(x) = 3x + 1, find (g ∘ f)(x).
+A. 6x + 1
+B. 6x + 2
+C. 5x + 1
+D. 6x^2 + x
+Answer: A
