@@ -1,322 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum - EduHub</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .forum-container {
-            padding: 40px 20px;
-            background: var(--light-color);
-            min-height: calc(100vh - 70px);
-        }
-
-        .forum-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .forum-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .new-post-btn {
-            margin-bottom: 30px;
-        }
-
-        .post-item {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .post-item:hover {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .post-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 10px;
-        }
-
-        .post-author {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .post-time {
-            font-size: 0.85rem;
-            color: #999;
-        }
-
-        .post-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-
-        .post-content {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .post-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: #999;
-        }
-
-        .post-stats {
-            display: flex;
-            gap: 20px;
-        }
-
-        .reply-btn {
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .reply-btn:hover {
-            background: #0b7dda;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background: white;
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 600px;
-        }
-
-        .close {
-            float: right;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .close:hover {
-            color: var(--dark-color);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EduLearn Discussion Forum – Peer-to-peer learning, Q&A, and moderated discussions." />
+  <title>Forum – EduLearn</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <h1>🎓 EduHub</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="courses.html" class="nav-link">Courses</a></li>
-                <li><a href="forum.html" class="nav-link active">Forum</a></li>
-                <li><a href="bookstore.html" class="nav-link">Bookstore</a></li>
-                <li><a href="portal.html" class="nav-link">Portal</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+<nav class="w3-bar edu-navbar w3-top" id="mainNav">
+  <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+  <div class="w3-right w3-hide-small">
+    <a href="dashboard.html"  class="w3-bar-item w3-button nav-link">Home</a>
+    <a href="courses.html"    class="w3-bar-item w3-button nav-link">Courses</a>
+    <a href="portal.html"     class="w3-bar-item w3-button nav-link">My Portal</a>
+    <a href="forum.html"      class="w3-bar-item w3-button nav-link active">Forum</a>
+    <a href="bookstore.html"  class="w3-bar-item w3-button nav-link">Bookstore</a>
+    <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></a>
+</nav>
+<div id="mobileMenu" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium mobile-menu">
+  <a href="dashboard.html"  class="w3-bar-item w3-button">Home</a>
+  <a href="courses.html"    class="w3-bar-item w3-button">Courses</a>
+  <a href="portal.html"     class="w3-bar-item w3-button">My Portal</a>
+  <a href="forum.html"      class="w3-bar-item w3-button">Forum</a>
+  <a href="bookstore.html"  class="w3-bar-item w3-button">Bookstore</a>
+  <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="page-header">
+  <div class="w3-content container-max">
+    <div class="breadcrumb"><a href="dashboard.html">Home</a> &rsaquo; Forum</div>
+    <h1><i class="fas fa-comments"></i> Discussion Forum</h1>
+    <p>Ask questions, share knowledge, and learn together</p>
+  </div>
+</div>
+
+<section class="section-pad" style="background:#f5f7fa;">
+  <div class="w3-content container-max">
+    <div class="w3-row-padding">
+
+      <!-- LEFT: Posts -->
+      <div class="w3-col m8 s12">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+          <h2 style="font-size:1.1rem;font-weight:800;color:#1a1a2e;"><i class="fas fa-fire" style="color:#f59e0b;margin-right:6px;"></i>Recent Discussions</h2>
+          <button class="new-post-btn" onclick="toggleForm()" id="newPostBtn"><i class="fas fa-plus"></i> New Post</button>
         </div>
-    </nav>
 
-    <!-- Forum Section -->
-    <div class="forum-container">
-        <div class="container">
-            <div class="forum-header">
-                <h1>💬 Community Forum</h1>
-                <p>Connect, learn, and grow with fellow students</p>
-            </div>
-
-            <div class="new-post-btn">
-                <button class="btn btn-primary" onclick="openModal()">Create New Discussion</button>
-            </div>
-
-            <!-- Sample Posts -->
-            <div class="post-item">
-                <div class="post-header">
-                    <div>
-                        <div class="post-author">👤 Sarah Johnson</div>
-                        <div class="post-time">2 hours ago</div>
-                    </div>
-                </div>
-                <div class="post-title">Tips for Understanding Calculus</div>
-                <div class="post-content">
-                    I found some great resources that really helped me understand calculus concepts. 
-                    Would love to share tips with the community. What's your favorite calculus topic?
-                </div>
-                <div class="post-footer">
-                    <div class="post-stats">
-                        <span>👍 12 Likes</span>
-                        <span>💬 5 Replies</span>
-                    </div>
-                    <button class="reply-btn" onclick="openReplyModal()">Reply</button>
-                </div>
-            </div>
-
-            <div class="post-item">
-                <div class="post-header">
-                    <div>
-                        <div class="post-author">👤 Mike Chen</div>
-                        <div class="post-time">5 hours ago</div>
-                    </div>
-                </div>
-                <div class="post-title">Help with Web Development Project</div>
-                <div class="post-content">
-                    I'm struggling with CSS layouts for my project. Anyone willing to review my code 
-                    and provide feedback? I'm trying to create a responsive dashboard.
-                </div>
-                <div class="post-footer">
-                    <div class="post-stats">
-                        <span>👍 8 Likes</span>
-                        <span>💬 12 Replies</span>
-                    </div>
-                    <button class="reply-btn" onclick="openReplyModal()">Reply</button>
-                </div>
-            </div>
-
-            <div class="post-item">
-                <div class="post-header">
-                    <div>
-                        <div class="post-author">👤 Emma Williams</div>
-                        <div class="post-time">1 day ago</div>
-                    </div>
-                </div>
-                <div class="post-title">Book Recommendations for Physics</div>
-                <div class="post-content">
-                    Looking for good physics books that explain complex concepts in simple terms. 
-                    What are your top recommendations? I'm particularly interested in quantum mechanics.
-                </div>
-                <div class="post-footer">
-                    <div class="post-stats">
-                        <span>👍 15 Likes</span>
-                        <span>💬 8 Replies</span>
-                    </div>
-                    <button class="reply-btn" onclick="openReplyModal()">Reply</button>
-                </div>
-            </div>
+        <!-- New Post Form -->
+        <div class="forum-form-box" id="newPostForm">
+          <h3 style="font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;">Create a New Post</h3>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="postTitle" class="form-control" placeholder="Enter your question or topic title…" />
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="postCategory" class="form-control">
+              <option value="security">Cyber Security</option>
+              <option value="vision">Computer Vision</option>
+              <option value="ds">Data Structures</option>
+              <option value="general">General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Content</label>
+            <textarea id="postContent" class="form-control" placeholder="Describe your question in detail…"></textarea>
+          </div>
+          <div style="display:flex;gap:0.8rem;">
+            <button class="btn-submit" style="max-width:160px;padding:0.7rem;" onclick="submitPost()"><i class="fas fa-paper-plane"></i> Post</button>
+            <button onclick="toggleForm()" style="background:#f3f4f6;border:none;padding:0.7rem 1.2rem;border-radius:10px;font-weight:600;cursor:pointer;color:#4b5563;">Cancel</button>
+          </div>
         </div>
+
+        <!-- Filter Tabs -->
+        <div style="display:flex;gap:0.5rem;margin-bottom:1.2rem;flex-wrap:wrap;">
+          <button class="filter-btn active" onclick="filterPosts(this,'all')">All</button>
+          <button class="filter-btn" onclick="filterPosts(this,'security')">Cyber Security</button>
+          <button class="filter-btn" onclick="filterPosts(this,'vision')">Computer Vision</button>
+          <button class="filter-btn" onclick="filterPosts(this,'ds')">Data Structures</button>
+          <button class="filter-btn" onclick="filterPosts(this,'general')">General</button>
+        </div>
+
+        <!-- Post List (rendered by JS from DB) -->
+        <div class="forum-list" id="postContainer"></div>
+      </div>
+
+      <!-- RIGHT: Sidebar -->
+      <div class="w3-col m4 s12">
+        <div class="progress-section" style="margin-bottom:1.5rem;">
+          <h3 style="font-size:0.92rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i class="fas fa-search" style="color:#667eea;margin-right:6px;"></i>Search Forum</h3>
+          <div style="display:flex;gap:0.5rem;">
+            <input type="text" id="forumSearch" class="form-control" placeholder="Search discussions…" style="font-size:0.85rem;padding:0.6rem 0.9rem;" oninput="filterPosts(null,currentCat)" />
+            <button onclick="filterPosts(null,currentCat)" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:8px;padding:0 1rem;cursor:pointer;"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <div class="progress-section" style="margin-bottom:1.5rem;">
+          <h3 style="font-size:0.92rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i class="fas fa-chart-bar" style="color:#667eea;margin-right:6px;"></i>Forum Stats</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+            <div style="background:#f9fafb;border-radius:10px;padding:0.8rem;text-align:center;"><div id="statPosts" style="font-size:1.4rem;font-weight:800;color:#667eea;">0</div><div style="font-size:0.72rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;">Posts</div></div>
+            <div style="background:#f9fafb;border-radius:10px;padding:0.8rem;text-align:center;"><div id="statReplies" style="font-size:1.4rem;font-weight:800;color:#10b981;">0</div><div style="font-size:0.72rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;">Replies</div></div>
+            <div style="background:#f9fafb;border-radius:10px;padding:0.8rem;text-align:center;"><div id="statSolved" style="font-size:1.4rem;font-weight:800;color:#f59e0b;">0</div><div style="font-size:0.72rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;">Solved</div></div>
+            <div style="background:#f9fafb;border-radius:10px;padding:0.8rem;text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:#f5576c;">430</div><div style="font-size:0.72rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;">Members</div></div>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <h3 style="font-size:0.92rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i class="fas fa-trophy" style="color:#f59e0b;margin-right:6px;"></i>Top Contributors</h3>
+          <ul style="list-style:none;">
+            <li style="display:flex;align-items:center;gap:0.7rem;padding:0.6rem 0;border-bottom:1px solid #f3f4f6;"><div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.9rem;">R</div><div style="flex:1;"><div style="font-size:0.85rem;font-weight:600;color:#1a1a2e;">Raj Kumar</div><div style="font-size:0.75rem;color:#9ca3af;">142 replies</div></div><span>🥇</span></li>
+            <li style="display:flex;align-items:center;gap:0.7rem;padding:0.6rem 0;border-bottom:1px solid #f3f4f6;"><div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f5576c,#f093fb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.9rem;">S</div><div style="flex:1;"><div style="font-size:0.85rem;font-weight:600;color:#1a1a2e;">Siti Nurhaliza</div><div style="font-size:0.75rem;color:#9ca3af;">98 replies</div></div><span>🥈</span></li>
+            <li style="display:flex;align-items:center;gap:0.7rem;padding:0.6rem 0;"><div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#43e97b,#38f9d7);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.9rem;">A</div><div style="flex:1;"><div style="font-size:0.85rem;font-weight:600;color:#1a1a2e;">Ahmad Farid</div><div style="font-size:0.75rem;color:#9ca3af;">76 replies</div></div><span>🥉</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- New Post Modal -->
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Create New Discussion</h2>
-            <form onsubmit="handleNewPost(event)">
-                <div class="form-group">
-                    <label for="title">Discussion Title</label>
-                    <input type="text" id="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="content">Your Message</label>
-                    <textarea id="content" rows="5" style="width: 100%; padding: 10px; border-radius: 5px; border: 2px solid #ddd;" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Post Discussion</button>
-                <button type="button" class="btn btn-secondary" onclick="closeModal()" style="margin-left: 10px;">Cancel</button>
-            </form>
-        </div>
+<footer class="edu-footer">
+  <div class="w3-content container-max">
+    <div class="footer-bottom" style="border-top:none;padding:1.5rem 0;">
+      <p>&copy; 2025 EduLearn. All rights reserved. | <a href="dashboard.html">Dashboard</a></p>
     </div>
+  </div>
+</footer>
 
-    <!-- Reply Modal -->
-    <div id="replyModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeReplyModal()">&times;</span>
-            <h2>Reply to Discussion</h2>
-            <form onsubmit="handleReply(event)">
-                <div class="form-group">
-                    <label for="replyContent">Your Reply</label>
-                    <textarea id="replyContent" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 2px solid #ddd;" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Post Reply</button>
-                <button type="button" class="btn btn-secondary" onclick="closeReplyModal()" style="margin-left: 10px;">Cancel</button>
-            </form>
-        </div>
-    </div>
+<script src="db.js"></script>
+<script>
+  /* ── Auth Guard ── */
+  var __sess = EduDB.getSession();
+  if (!__sess) { window.location.href = 'index.html'; }
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About EduHub</h4>
-                    <p>A comprehensive learning platform.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 EduHub. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+  function toggleMobileMenu(){ var m=document.getElementById('mobileMenu'); m.className.indexOf('w3-show')===-1?m.className+=' w3-show':m.className=m.className.replace(' w3-show',''); }
+  window.onscroll=function(){ document.getElementById('mainNav').classList[window.pageYOffset>60?'add':'remove']('scrolled'); };
 
-    <script src="script.js"></script>
-    <script>
-        function openModal() {
-            document.getElementById('postModal').style.display = 'block';
-        }
+  var currentCat = 'all';
 
-        function closeModal() {
-            document.getElementById('postModal').style.display = 'none';
-        }
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!__sess) return;
+    var ng = document.getElementById('navGreet');
+    if (ng) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
+    renderPosts(EduDB.getAllPosts());
+    updateStats();
+  });
 
-        function openReplyModal() {
-            document.getElementById('replyModal').style.display = 'block';
-        }
+  /* ── Render posts ── */
+  function renderPosts(posts) {
+    var container = document.getElementById('postContainer');
+    container.innerHTML = '';
+    var q = document.getElementById('forumSearch') ? document.getElementById('forumSearch').value.toLowerCase() : '';
+    var filtered = posts.filter(function(p){
+      var catOk = currentCat === 'all' || p.category === currentCat;
+      var qOk   = !q || p.title.toLowerCase().includes(q) || p.content.toLowerCase().includes(q);
+      return catOk && qOk;
+    });
+    if (filtered.length === 0) {
+      container.innerHTML = '<p style="color:#9ca3af;text-align:center;padding:2rem;">No posts found.</p>';
+      return;
+    }
+    filtered.forEach(function(p) {
+      var catLabels = {security:'Cyber Security',vision:'Computer Vision',ds:'Data Structures',general:'General'};
+      var div = document.createElement('div');
+      div.className = 'forum-post';
+      div.dataset.cat = p.category;
+      div.innerHTML =
+        '<div class="forum-avatar" style="background:'+p.avatarColor+';">'+p.avatar+'</div>' +
+        '<div style="flex:1;">' +
+          '<div class="forum-post-title"><a href="#">'+p.title+'</a></div>' +
+          '<div style="font-size:0.82rem;color:#4b5563;margin:0.3rem 0 0.5rem;">'+p.content+'</div>' +
+          '<div class="forum-post-meta">' +
+            '<span class="forum-tag-badge">'+(catLabels[p.category]||p.category)+'</span>' +
+            '<span><i class="fas fa-user"></i> '+p.author+'</span>' +
+            '<span><i class="fas fa-clock"></i> '+EduDB.ago(p.createdAt)+'</span>' +
+            '<span><i class="fas fa-reply"></i> '+p.replies+' replies</span>' +
+            '<span><i class="fas fa-eye"></i> '+p.views+' views</span>' +
+          '</div>' +
+        '</div>' +
+        (p.solved ? '<div style="flex-shrink:0;"><span class="badge badge-green"><i class="fas fa-check-circle"></i> Solved</span></div>' : '');
+      container.appendChild(div);
+    });
+  }
 
-        function closeReplyModal() {
-            document.getElementById('replyModal').style.display = 'none';
-        }
+  function updateStats() {
+    var posts = EduDB.getAllPosts();
+    document.getElementById('statPosts').textContent   = posts.length;
+    document.getElementById('statReplies').textContent = posts.reduce(function(s,p){return s+p.replies;},0);
+    document.getElementById('statSolved').textContent  = posts.filter(function(p){return p.solved;}).length;
+  }
 
-        function handleNewPost(e) {
-            e.preventDefault();
-            alert('Your discussion has been posted!');
-            closeModal();
-            document.getElementById('title').value = '';
-            document.getElementById('content').value = '';
-        }
+  /* ── Filter ── */
+  function filterPosts(btn, cat) {
+    if (btn) {
+      document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentCat = cat;
+    }
+    renderPosts(EduDB.getAllPosts());
+  }
 
-        function handleReply(e) {
-            e.preventDefault();
-            alert('Your reply has been posted!');
-            closeReplyModal();
-            document.getElementById('replyContent').value = '';
-        }
+  /* ── New post form ── */
+  function toggleForm() {
+    var f = document.getElementById('newPostForm');
+    f.classList.toggle('open');
+    document.getElementById('newPostBtn').innerHTML = f.classList.contains('open')
+      ? '<i class="fas fa-times"></i> Cancel' : '<i class="fas fa-plus"></i> New Post';
+  }
 
-        window.onclick = function(event) {
-            let modal = document.getElementById('postModal');
-            let replyModal = document.getElementById('replyModal');
-            if (event.target == modal) modal.style.display = 'none';
-            if (event.target == replyModal) replyModal.style.display = 'none';
-        }
-    </script>
+  function submitPost() {
+    var title   = document.getElementById('postTitle').value.trim();
+    var content = document.getElementById('postContent').value.trim();
+    var cat     = document.getElementById('postCategory').value;
+    if (!title || !content) { alert('Please fill in title and content.'); return; }
+    EduDB.addPost(__sess, cat, title, content);
+    document.getElementById('postTitle').value   = '';
+    document.getElementById('postContent').value = '';
+    toggleForm();
+    renderPosts(EduDB.getAllPosts());
+    updateStats();
+  }
+</script>
 </body>
 </html>
