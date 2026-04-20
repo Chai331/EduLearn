@@ -1,350 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal - EduHub</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .portal-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            min-height: calc(100vh - 70px);
-            background: var(--light-color);
-        }
-
-        .portal-sidebar {
-            background: white;
-            padding: 20px;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .portal-sidebar h3 {
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .portal-sidebar ul {
-            list-style: none;
-        }
-
-        .portal-sidebar li {
-            margin-bottom: 10px;
-        }
-
-        .portal-sidebar a {
-            display: block;
-            padding: 10px;
-            color: var(--dark-color);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .portal-sidebar a:hover {
-            background: var(--light-color);
-            color: var(--primary-color);
-        }
-
-        .portal-content {
-            padding: 40px;
-        }
-
-        .portal-content h1 {
-            margin-bottom: 30px;
-            color: var(--dark-color);
-        }
-
-        .auth-form {
-            max-width: 400px;
-            margin: 50px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--dark-color);
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .auth-buttons button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .auth-buttons .btn-primary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .auth-buttons .btn-primary:hover {
-            background: #45a049;
-        }
-
-        .progress-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-color);
-        }
-
-        @media (max-width: 768px) {
-            .portal-container {
-                grid-template-columns: 1fr;
-            }
-
-            .portal-sidebar {
-                display: none;
-            }
-
-            .portal-content {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EduLearn Student Portal – Track progress, view courses, manage resources." />
+  <title>Student Portal – EduLearn</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <h1>🎓 EduHub</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="courses.html" class="nav-link">Courses</a></li>
-                <li><a href="forum.html" class="nav-link">Forum</a></li>
-                <li><a href="bookstore.html" class="nav-link">Bookstore</a></li>
-                <li><a href="portal.html" class="nav-link active">Portal</a></li>
+<nav class="w3-bar edu-navbar w3-top" id="mainNav">
+  <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+  <div class="w3-right w3-hide-small">
+    <a href="dashboard.html"  class="w3-bar-item w3-button nav-link">Home</a>
+    <a href="courses.html"    class="w3-bar-item w3-button nav-link">Courses</a>
+    <a href="portal.html"     class="w3-bar-item w3-button nav-link active">My Portal</a>
+    <a href="forum.html"      class="w3-bar-item w3-button nav-link">Forum</a>
+    <a href="bookstore.html"  class="w3-bar-item w3-button nav-link">Bookstore</a>
+    <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></a>
+</nav>
+<div id="mobileMenu" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium mobile-menu">
+  <a href="dashboard.html"  class="w3-bar-item w3-button">Home</a>
+  <a href="courses.html"    class="w3-bar-item w3-button">Courses</a>
+  <a href="portal.html"     class="w3-bar-item w3-button">My Portal</a>
+  <a href="forum.html"      class="w3-bar-item w3-button">Forum</a>
+  <a href="bookstore.html"  class="w3-bar-item w3-button">Bookstore</a>
+  <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="page-header">
+  <div class="w3-content container-max">
+    <div class="breadcrumb"><a href="dashboard.html">Home</a> &rsaquo; Student Portal</div>
+    <h1><i class="fas fa-user-graduate"></i> Student Portal</h1>
+    <p>Manage your learning journey, track progress, and access resources</p>
+  </div>
+</div>
+
+<section class="section-pad" style="background:#f5f7fa;">
+  <div class="w3-content container-max">
+    <div class="portal-grid">
+
+      <!-- SIDEBAR -->
+      <aside class="portal-sidebar">
+        <div class="portal-avatar" id="sideAvatar">?</div>
+        <div class="portal-name"  id="sideName">Loading…</div>
+        <div class="portal-email" id="sideEmail"></div>
+        <ul class="portal-nav">
+          <li><a href="#" class="active" onclick="showTab('overview',this)"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="#" onclick="showTab('courses',this)"><i class="fas fa-book-open"></i> My Courses</a></li>
+          <li><a href="#" onclick="showTab('resources',this)"><i class="fas fa-bookmark"></i> Resources</a></li>
+          <li><a href="#" onclick="showTab('orders',this)"><i class="fas fa-shopping-bag"></i> My Orders</a></li>
+          <li><a href="#" onclick="showTab('settings',this)"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+        <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid #f3f4f6;">
+          <a onclick="doLogout()" style="display:flex;align-items:center;gap:8px;color:#ef4444;font-size:0.85rem;font-weight:600;cursor:pointer;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="portal-main">
+
+        <!-- OVERVIEW TAB -->
+        <div id="tab-overview">
+          <div class="stat-cards" id="statCards"></div>
+          <div class="progress-section">
+            <h3><i class="fas fa-chart-line" style="color:#667eea;margin-right:8px;"></i>Course Progress</h3>
+            <div id="progressList"></div>
+          </div>
+          <div class="progress-section">
+            <h3><i class="fas fa-history" style="color:#667eea;margin-right:8px;"></i>Recent Activity</h3>
+            <ul style="list-style:none;" id="activityList"></ul>
+          </div>
+        </div>
+
+        <!-- COURSES TAB -->
+        <div id="tab-courses" style="display:none;">
+          <div class="progress-section">
+            <h3><i class="fas fa-book-open" style="color:#667eea;margin-right:8px;"></i>My Enrolled Courses</h3>
+            <div id="coursesList"></div>
+          </div>
+        </div>
+
+        <!-- RESOURCES TAB -->
+        <div id="tab-resources" style="display:none;">
+          <div class="progress-section">
+            <h3><i class="fas fa-bookmark" style="color:#667eea;margin-right:8px;"></i>Saved Resources</h3>
+            <ul style="list-style:none;">
+              <li style="padding:0.8rem 0;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:10px;font-size:0.86rem;color:#374151;">
+                <i class="fas fa-file-pdf" style="color:#ef4444;font-size:1.1rem;width:20px;"></i>
+                <div><div style="font-weight:600;">Cybersecurity Fundamentals – Lecture Notes Week 3</div><div style="font-size:0.75rem;color:#9ca3af;">PDF · 2.4 MB · Saved 3 days ago</div></div>
+                <a href="#" style="margin-left:auto;color:#667eea;font-size:0.8rem;"><i class="fas fa-download"></i></a>
+              </li>
+              <li style="padding:0.8rem 0;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:10px;font-size:0.86rem;color:#374151;">
+                <i class="fas fa-video" style="color:#667eea;font-size:1.1rem;width:20px;"></i>
+                <div><div style="font-weight:600;">Edge Detection Techniques – Computer Vision Lab</div><div style="font-size:0.75rem;color:#9ca3af;">Video · 45 min · Saved 3 days ago</div></div>
+                <a href="#" style="margin-left:auto;color:#667eea;font-size:0.8rem;"><i class="fas fa-play"></i></a>
+              </li>
+              <li style="padding:0.8rem 0;display:flex;align-items:center;gap:10px;font-size:0.86rem;color:#374151;">
+                <i class="fas fa-file-code" style="color:#43e97b;font-size:1.1rem;width:20px;"></i>
+                <div><div style="font-weight:600;">Binary Tree Implementation – Data Structures Lab</div><div style="font-size:0.75rem;color:#9ca3af;">Code · Python · Saved 1 week ago</div></div>
+                <a href="#" style="margin-left:auto;color:#667eea;font-size:0.8rem;"><i class="fas fa-download"></i></a>
+              </li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Portal -->
-    <div class="portal-container">
-        <div class="portal-sidebar" id="sidebar">
-            <h3>📋 Menu</h3>
-            <ul>
-                <li><a href="#dashboard" class="sidebar-link" onclick="showSection('dashboard')">Dashboard</a></li>
-                <li><a href="#enrollment" class="sidebar-link" onclick="showSection('enrollment')">My Courses</a></li>
-                <li><a href="#progress" class="sidebar-link" onclick="showSection('progress')">Progress</a></li>
-                <li><a href="#profile" class="sidebar-link" onclick="showSection('profile')">Profile</a></li>
-                <li><a href="#logout" class="sidebar-link" onclick="logout()">Logout</a></li>
-            </ul>
+          </div>
         </div>
 
-        <div class="portal-content">
-            <!-- Login Form (Initially Visible) -->
-            <div id="loginForm" class="auth-form">
-                <h2 style="text-align: center; margin-bottom: 30px;">Welcome Back</h2>
-                <form onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" required>
-                    </div>
-                    <div class="auth-buttons">
-                        <button type="submit" class="btn-primary">Sign In</button>
-                        <button type="button" class="btn-primary" onclick="toggleForm()">Sign Up</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Registration Form (Hidden) -->
-            <div id="registerForm" class="auth-form" style="display:none;">
-                <h2 style="text-align: center; margin-bottom: 30px;">Create Account</h2>
-                <form onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="regemail">Email Address</label>
-                        <input type="email" id="regemail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="regpassword">Password</label>
-                        <input type="password" id="regpassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm">Confirm Password</label>
-                        <input type="password" id="confirm" required>
-                    </div>
-                    <div class="auth-buttons">
-                        <button type="submit" class="btn-primary">Create Account</button>
-                        <button type="button" class="btn-primary" onclick="toggleForm()">Back to Sign In</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Dashboard (Hidden Initially) -->
-            <div id="dashboard" style="display:none;">
-                <h1>Welcome, <span id="userName">Student</span>!</h1>
-                <div class="progress-card">
-                    <h3>Overall Progress</h3>
-                    <p>You've completed 35% of your learning journey</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 35%;"></div>
-                    </div>
-                </div>
-                <div class="progress-card">
-                    <h3>📚 Enrolled Courses: 4</h3>
-                    <p>Continue your learning with these courses.</p>
-                </div>
-            </div>
-
-            <!-- My Courses (Hidden Initially) -->
-            <div id="enrollment" style="display:none;">
-                <h1>My Courses</h1>
-                <div class="progress-card">
-                    <h3>Mathematics Fundamentals</h3>
-                    <p>Progress: 60%</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 60%;"></div>
-                    </div>
-                </div>
-                <div class="progress-card">
-                    <h3>Web Development</h3>
-                    <p>Progress: 45%</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 45%;"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Profile (Hidden Initially) -->
-            <div id="profile" style="display:none;">
-                <h1>My Profile</h1>
-                <div class="progress-card">
-                    <p><strong>Name:</strong> <span id="profileName">John Doe</span></p>
-                    <p><strong>Email:</strong> <span id="profileEmail">john@example.com</span></p>
-                    <p><strong>Student ID:</strong> EH12345</p>
-                    <p><strong>Member Since:</strong> January 2026</p>
-                </div>
-            </div>
+        <!-- ORDERS TAB -->
+        <div id="tab-orders" style="display:none;">
+          <div class="progress-section">
+            <h3><i class="fas fa-shopping-bag" style="color:#667eea;margin-right:8px;"></i>Purchase History</h3>
+            <div id="ordersList"></div>
+          </div>
         </div>
+
+
+        <!-- SETTINGS TAB -->
+        <div id="tab-settings" style="display:none;">
+          <div class="progress-section">
+            <h3><i class="fas fa-cog" style="color:#667eea;margin-right:8px;"></i>Account Settings</h3>
+            <div class="form-group"><label>Full Name</label><input type="text" id="setName" class="form-control" /></div>
+            <div class="form-group"><label>Email Address</label><input type="email" id="setEmail" class="form-control" /></div>
+            <div class="form-group"><label>New Password</label><input type="password" class="form-control" placeholder="Leave blank to keep current" /></div>
+            <div class="form-group">
+              <label>Programme</label>
+              <select id="setProg" class="form-control">
+                <option>Computer Science</option>
+                <option>Information Technology</option>
+                <option>Software Engineering</option>
+                <option>Cybersecurity</option>
+                <option>Data Science</option>
+              </select>
+            </div>
+            <button class="btn-submit" style="max-width:200px;" onclick="saveSettings()">Save Changes</button>
+            <div id="savedMsg" style="display:none;margin-top:1rem;" class="alert-success"><i class="fas fa-check-circle"></i> Settings saved!</div>
+          </div>
+        </div>
+
+      </main>
     </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About EduHub</h4>
-                    <p>A comprehensive learning platform.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 EduHub. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+<footer class="edu-footer">
+  <div class="w3-content container-max">
+    <div class="footer-bottom" style="border-top:none;padding:1.5rem 0;">
+      <p>&copy; 2025 EduLearn. All rights reserved. | <a href="dashboard.html">Dashboard</a> | <a href="courses.html">Courses</a></p>
+    </div>
+  </div>
+</footer>
 
-    <script src="script.js"></script>
-    <script>
-        function toggleForm() {
-            document.getElementById('loginForm').style.display = 
-                document.getElementById('loginForm').style.display === 'none' ? 'block' : 'none';
-            document.getElementById('registerForm').style.display = 
-                document.getElementById('registerForm').style.display === 'none' ? 'block' : 'none';
-        }
+<script src="db.js"></script>
+<script>
+  /* ── Auth Guard ── */
+  var __sess = EduDB.getSession();
+  if (!__sess) { window.location.href = 'index.html'; }
 
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            localStorage.setItem('userName', email.split('@')[0]);
-            showDashboard();
-        }
+  function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+  function toggleMobileMenu() { var m=document.getElementById('mobileMenu'); m.className.indexOf('w3-show')===-1?m.className+=' w3-show':m.className=m.className.replace(' w3-show',''); }
+  window.onscroll = function(){document.getElementById('mainNav').classList[window.pageYOffset>60?'add':'remove']('scrolled');};
 
-        function handleRegister(e) {
-            e.preventDefault();
-            const fullname = document.getElementById('fullname').value;
-            localStorage.setItem('userName', fullname);
-            alert('Account created successfully! Please sign in.');
-            toggleForm();
-        }
+  /* ── Tab system ── */
+  var tabs = ['overview','courses','resources','orders','settings'];
+  function showTab(name, link) {
+    tabs.forEach(function(t){ document.getElementById('tab-'+t).style.display='none'; });
+    document.querySelectorAll('.portal-nav li a').forEach(function(a){ a.classList.remove('active'); });
+    var tab = document.getElementById('tab-'+name);
+    tab.style.display='flex'; tab.style.flexDirection='column';
+    if (link) link.classList.add('active');
+    if (name==='orders') renderOrders();
+  }
 
-        function showDashboard() {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('sidebar').style.display = 'block';
-            document.getElementById('dashboard').style.display = 'block';
-            document.getElementById('userName').textContent = localStorage.getItem('userName') || 'Student';
-        }
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!__sess) return;
+    /* Navbar */
+    var ng=document.getElementById('navGreet');
+    if(ng) ng.innerHTML='<i class="fas fa-user-circle"></i> '+__sess.firstName;
 
-        function showSection(sectionId) {
-            document.querySelectorAll('.portal-content > div').forEach(el => {
-                if (el.id && el.id !== 'sidebar') el.style.display = 'none';
-            });
-            const section = document.getElementById(sectionId);
-            if (section) section.style.display = 'block';
-        }
+    /* Sidebar */
+    var av=document.getElementById('sideAvatar');
+    av.textContent=__sess.avatar;
+    av.style.background=__sess.avatarColor||'linear-gradient(135deg,#667eea,#764ba2)';
+    document.getElementById('sideName').textContent=__sess.firstName+' '+(__sess.lastName||'');
+    document.getElementById('sideEmail').textContent=__sess.email;
 
-        function logout() {
-            localStorage.removeItem('userName');
-            location.reload();
-        }
+    /* Settings pre-fill */
+    document.getElementById('setName').value=__sess.firstName+' '+(__sess.lastName||'');
+    document.getElementById('setEmail').value=__sess.email;
+    var progSel=document.getElementById('setProg');
+    for(var i=0;i<progSel.options.length;i++){ if(progSel.options[i].value===__sess.programme){ progSel.selectedIndex=i; break; } }
 
-        // Check if user is logged in
-        if (localStorage.getItem('userName')) {
-            showDashboard();
-        }
-    </script>
+    /* Enrollments */
+    var enr=EduDB.getUserEnrollments(__sess.id);
+
+    /* Stat cards */
+    var orders=EduDB.getUserOrders(__sess.id);
+    var avgPct=enr.length>0?Math.round(enr.reduce(function(s,e){return s+e.progress;},0)/enr.length):0;
+    var statData=[
+      {icon:'fa-book-open',bg:'linear-gradient(135deg,#667eea,#764ba2)',num:enr.length,label:'Courses'},
+      {icon:'fa-check-circle',bg:'linear-gradient(135deg,#43e97b,#38f9d7)',num:avgPct+'%',label:'Avg Progress'},
+      {icon:'fa-shopping-bag',bg:'linear-gradient(135deg,#f093fb,#f5576c)',num:orders.length,label:'Orders'},
+      {icon:'fa-comments',bg:'linear-gradient(135deg,#4facfe,#00f2fe)',num:EduDB.getAllPosts().length,label:'Forum Posts'}
+    ];
+    var sc=document.getElementById('statCards');
+    statData.forEach(function(s){
+      var d=document.createElement('div'); d.className='stat-card';
+      d.innerHTML='<div class="stat-card-icon" style="background:'+s.bg+';"><i class="fas '+s.icon+'"></i></div><div><div class="stat-card-num">'+s.num+'</div><div class="stat-card-label">'+s.label+'</div></div>';
+      sc.appendChild(d);
+    });
+
+    /* Progress bars */
+    var pl=document.getElementById('progressList');
+    if(enr.length===0){ pl.innerHTML='<p style="color:#9ca3af;font-size:0.88rem;">No courses enrolled yet. <a href="courses.html" style="color:#667eea;">Browse courses</a></p>'; }
+    enr.forEach(function(e){
+      var pct=e.progress;
+      pl.innerHTML+='<div class="progress-item"><div class="progress-item-header"><span class="progress-item-title">'+e.courseName+'</span><span class="progress-item-pct">'+pct+'%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:'+pct+'%;"></div></div></div>';
+    });
+
+    /* Activity */
+    var al=document.getElementById('activityList');
+    var realActs = EduDB.getActivityLog(__sess.id);
+    if(realActs.length === 0) {
+      al.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;padding:0.5rem 0;">No recent activity.</p>';
+    } else {
+      realActs.forEach(function(a){
+        al.innerHTML+='<li style="padding:0.7rem 0;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:10px;font-size:0.85rem;color:#4b5563;"><span style="width:32px;height:32px;border-radius:50%;background:'+a.bg+';display:flex;align-items:center;justify-content:center;"><i class="fas '+a.icon+'" style="color:'+a.iclr+';"></i></span>'+a.text+'<span style="margin-left:auto;color:#9ca3af;font-size:0.75rem;">'+EduDB.ago(a.createdAt)+'</span></li>';
+      });
+    }
+
+    /* Courses tab content */
+    var cl=document.getElementById('coursesList');
+    if(enr.length===0){ cl.innerHTML='<p style="color:#9ca3af;font-size:0.88rem;text-align:center;padding:1.5rem 0;">No courses enrolled yet. <a href="courses.html" style="color:#667eea;">Browse courses</a></p>'; }
+    enr.forEach(function(e){
+      var detail = (e.completedLectures ? e.completedLectures.length : 0) + ' of ' + (e.weeksTotal || 5) + ' lectures';
+      if (e.quizDone) detail += ' · Quiz passed';
+      cl.innerHTML+='<div style="background:#f9fafb;border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:1rem;border:1px solid #e5e7eb;margin-bottom:0.8rem;"><div style="width:56px;height:56px;border-radius:12px;'+e.color+';display:flex;align-items:center;justify-content:center;"><i class="fas '+e.icon+'" style="color:#fff;font-size:1.3rem;"></i></div><div style="flex:1;"><div style="font-weight:700;color:#1a1a2e;font-size:0.92rem;">'+e.courseName+'</div><div style="font-size:0.78rem;color:#9ca3af;">'+detail+' · '+e.progress+'% complete</div><div class="progress-bar-wrap" style="margin-top:5px;"><div class="progress-bar-fill" style="width:'+e.progress+'%;"></div></div></div><a href="courses.html" style="font-size:0.8rem;color:#667eea;font-weight:600;">Continue &rsaquo;</a></div>';
+    });
+  });
+
+  /* ── Orders ── */
+  function renderOrders() {
+    var orders=EduDB.getUserOrders(__sess.id);
+    var ol=document.getElementById('ordersList');
+    ol.innerHTML='';
+    if(orders.length===0){
+      ol.innerHTML='<p style="color:#9ca3af;font-size:0.88rem;text-align:center;padding:1.5rem 0;">No orders yet. <a href="bookstore.html" style="color:#667eea;">Visit Bookstore</a></p>';
+      return;
+    }
+    orders.forEach(function(o){
+      var items=o.items.map(function(i){return i.name+' ×'+i.qty;}).join(', ');
+      ol.innerHTML+='<div style="background:#f9fafb;border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem;border:1px solid #e5e7eb;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
+        +'<div style="font-weight:700;color:#1a1a2e;font-size:0.88rem;">Order #'+o.orderNum+'</div>'
+        +'<span class="badge badge-green">'+o.status+'</span></div>'
+        +'<div style="font-size:0.8rem;color:#6b7280;margin-bottom:0.3rem;">'+items+'</div>'
+        +'<div style="display:flex;justify-content:space-between;font-size:0.78rem;color:#9ca3af;">'
+        +'<span>'+new Date(o.createdAt).toLocaleDateString()+'</span>'
+        +'<span style="font-weight:700;color:#667eea;">RM '+o.total.toFixed(2)+'</span></div></div>';
+    });
+  }
+
+  function saveSettings(){
+    document.getElementById('savedMsg').style.display='block';
+    setTimeout(function(){document.getElementById('savedMsg').style.display='none';},3000);
+  }
+</script>
 </body>
 </html>
