@@ -1,0 +1,69 @@
+1. What is software engineering primarily concerned with?
+A. Hardware design
+B. Cost-effective high-quality software development
+C. Networking only
+D. Data storage
+Answer: B
+
+2.What is software?
+A. Only code
+B. Programs + documentation
+C. Hardware
+D. OS only
+Answer: B
+
+3.Generic software is?
+A. Custom-made
+B. Sold to many users
+C. Free only
+D. Embedded
+Answer: B
+
+4.Which is NOT a core activity?
+A. Specification
+B. Cooking
+C. Validation
+D. Evolution
+Answer: B
+
+5.Maintainability means?
+A. Hard to change
+B. Easy to modify
+C. Fast only
+D. Secure only
+Answer: B
+
+6.SE vs CS difference?
+A. Same
+B. SE practical, CS theoretical
+C. CS practical
+D. None
+Answer: B
+
+7.Dependability includes?
+A. Speed
+B. Reliability
+C. Color
+D. Size
+Answer: B
+
+8.Efficiency refers to?
+A. Memory use
+B. UI
+C. Ethics
+D. Coding style
+Answer: A
+
+9.Confidentiality means?
+A. Share info
+B. Protect info
+C. Ignore
+D. Publish
+Answer: B
+
+10.Custom software is?
+A. For general users
+B. For specific client
+C. Freeware
+D. OS
+Answer: B

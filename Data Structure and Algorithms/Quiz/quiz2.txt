@@ -1,0 +1,69 @@
+1. An algorithm is defined as a formally defined procedure for performing some calculations in a finite number of:
+A. Seconds
+B. Memory blocks
+C. Steps
+D. Functions
+Answer: C
+
+2. A well-defined algorithm must always provide an answer and be guaranteed to:
+A. Run indefinitely
+B. Terminate
+C. Use minimal memory
+D. Be written in C++
+Answer: B
+
+3. Which characteristic of an algorithm states that each of its steps must be clear and lead to only one meaning?
+A. Finiteness
+B. Feasibility
+C. Unambiguous
+D. Independent
+Answer: C
+
+4. An algorithm must terminate after a finite number of steps. Which characteristic does this describe?
+A. Input
+B. Finiteness
+C. Feasibility
+D. Independent
+Answer: B
+
+5. Which characteristic indicates that an algorithm must be generic enough to be implemented in any programming language?
+A. Unambiguous
+B. Finiteness
+C. Feasibility
+D. Independent
+Answer: D
+
+6. The amount of computer memory required during the program execution as a function of the input size is called:
+A. Time complexity
+B. Space complexity
+C. Code complexity
+D. Algorithmic complexity
+Answer: B
+
+7. Space complexity is divided into two parts: a fixed part and a:
+A. Static part
+B. Variable part
+C. Temporary part
+D. Constant part
+Answer: B
+
+8. Which of the following is included in the fixed part of space complexity?
+A. Recursion stack
+B. Dynamically allocated structured variables
+C. Space needed to store instructions and constants
+D. User input streams
+Answer: C
+
+9. The running time of a program as a function of the input size is known as:
+A. Time complexity
+B. Space complexity
+C. Data complexity
+D. Memory complexity
+Answer: A
+
+10. Which time complexity analysis estimates the running time for typical, random input drawn from a distribution?
+A. Worst-case running time
+B. Best-case running time
+C. Average-case running time
+D. Infinite-case running time
+Answer: C

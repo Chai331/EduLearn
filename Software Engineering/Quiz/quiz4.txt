@@ -1,0 +1,70 @@
+1.Which of the following best describes software project management?
+A.Writing program code efficiently
+B.Ensuring software is delivered on time, within budget, and meets requirements
+C.Testing software for bugs
+D.Designing system architecture
+Answer: B
+
+2.What is a key challenge in software project management? (Slide: Software management distinctions)
+A.Software is tangible
+B.Software projects are repetitive
+C.Progress is not directly visible
+D.Requirements never change
+Answer: C
+
+3.Which is NOT a success criterion of software project management? (Slide: Success criteria)
+A.Deliver on time
+B.Stay within budget
+C.Maximize developer workload
+D.Meet customer expectations
+Answer: C
+
+4.Which activity involves identifying and mitigating risks? (Slide: Project management activities)
+A.Reporting
+B.Risk management
+C.Proposal writing
+D.Scheduling
+Answer: B
+
+5.Which type of risk affects software quality? (Slide: Risk classification)
+A.Project risk
+B.Product risk
+C.Business risk
+D.Financial risk
+Answer: B
+
+6.What is the first step in the risk management process? (Slide: Risk management process)
+A.Risk planning
+B.Risk monitoring
+C.Risk identification
+D.Risk analysis
+Answer: C
+
+7.Which strategy reduces the probability of a risk occurring? (Slide: Risk planning)
+A.Contingency plan
+B.Avoidance strategy
+C.Monitoring
+D.Reporting
+Answer: B
+
+8.Which factor is most important in people management? (Slide: Managing people)
+
+A.Strict rules
+B.Technology
+C.Understanding people
+D.Budget
+Answer: C
+
+9.What does configuration management ensure? (Slide: Configuration management)
+A.Code is bug-free
+B.Software versions and changes are controlled
+C.Faster coding
+D.Better UI design
+Answer: B
+
+10.Which is part of configuration management activities? (Slide: Configuration management activities)
+A.Risk analysis
+B.Version management
+C.Requirement elicitation
+D.Testing
+Answer: B

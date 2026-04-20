@@ -1,0 +1,69 @@
+1. Which type of filter allows low-frequency components to pass and attenuates high-frequency components?
+A. Highpass filter
+B. Bandpass filter
+C. Lowpass filter
+D. Median filter
+Answer: C
+
+2. High-frequency components in an image typically characterize:
+A. Slowly varying background levels
+B. Edges and sharp details
+C. Overall contrast
+D. Uniform illumination
+Answer: B
+
+3. What is the net effect of applying a lowpass filter to an image?
+A. Edge enhancement
+B. Image blurring
+C. Contrast stretching
+D. Thresholding
+Answer: B
+
+4. Which type of filter is nonlinear and computes the middle gray-level value in a neighborhood?
+A. Highpass filter
+B. Spatial lowpass filter
+C. Median filter
+D. Derivative filter
+Answer: C
+
+5. The median filter is particularly effective at eliminating which type of noise?
+A. Gaussian noise
+B. Salt-and-pepper (impulse) noise
+C. Uniform noise
+D. Quantization noise
+Answer: B
+
+6. If a 3x3 neighborhood has the values (10, 20, 20, 20, 15, 20, 20, 25, 100), what is the output of a median filter?
+A. 15
+B. 20
+C. 25
+D. 100
+Answer: B
+
+7. A linear spatial filter operates by summing the products between the mask coefficients and the pixel intensities. This process is generally related to:
+A. Thresholding
+B. Convolution / Correlation
+C. Bit-slicing
+D. Histogram equalization
+Answer: B
+
+8. In a 3x3 spatial lowpass filter (averaging filter) with all coefficients equal to 1, what must the sum be multiplied by to keep the response within the valid gray-level range?
+A. 1/3
+B. 1/8
+C. 1/9
+D. 1/25
+Answer: C
+
+9. What is the sum of the coefficients in a typical 3x3 spatial highpass (sharpening) filter mask?
+A. 0
+B. 1
+C. 8
+D. 9
+Answer: A
+
+10. A high-boost filter can be defined by the equation: High-boost = (A)(Original) - Lowpass. If A = 1, this yields:
+A. A standard lowpass result
+B. A standard highpass result
+C. An unsharpened image
+D. A median filtered image
+Answer: B

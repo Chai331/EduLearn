@@ -1,0 +1,69 @@
+1. What is the primary goal of Computer Vision?
+A. To enhance or modify images at a pixel level
+B. To extract meaning and understanding from images
+C. To produce an image from a 3D model
+D. To compress image files for storage
+Answer: B
+
+2. Which of the following is an example of an application of Computer Vision?
+A. Noise removal
+B. Image compression
+C. 3D reconstruction from 2D images
+D. Contrast enhancement
+Answer: C
+
+3. How does Computer Vision differ from Computer Graphics?
+A. Computer Vision produces images from 3D models.
+B. Computer Graphics reconstructs 3D worlds from images.
+C. Computer Vision is the inverse of Computer Graphics.
+D. Both have the exact same goals and outputs.
+Answer: C
+
+4. Which of the following is NOT a typical component of a computer vision system?
+A. Camera
+B. Lighting
+C. Computer
+D. Audio synthesizer
+Answer: D
+
+5. What was the "ridiculously brief history" milestone for computer vision in 1966?
+A. First autonomous vehicle was built.
+B. Minsky assigned it as an undergraduate summer project.
+C. The first digital camera was invented.
+D. Facial recognition was perfected.
+Answer: B
+
+6. What does OCR stand for in the context of computer vision?
+A. Optical Character Recognition
+B. Object Color Rendering
+C. Optimal Contrast Ratio
+D. Optical Camera Resolution
+Answer: A
+
+7. Which of the following fields is strongly tied to Computer Vision to enable decision-making?
+A. Artificial Intelligence
+B. Database Management
+C. Operating Systems
+D. Web Development
+Answer: A
+
+8. What is the first step in the Computer Vision process?
+A. Segmentation
+B. Preprocessing
+C. Image Acquisition
+D. Recognition & Interpretation
+Answer: C
+
+9. What is the key function of the preprocessing stage in computer vision?
+A. To assign meaning to an object
+B. To digitize the analog signal
+C. To improve the image to increase the chances of success for later processes
+D. To extract individual characters
+Answer: C
+
+10. Which stage partitions an input image into its constituent parts or objects?
+A. Image Acquisition
+B. Preprocessing
+C. Segmentation
+D. Description
+Answer: C

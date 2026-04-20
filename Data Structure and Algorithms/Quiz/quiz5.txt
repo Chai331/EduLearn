@@ -1,0 +1,69 @@
+1. Unlike an array, a Linked List does not store its elements in:
+A. Memory
+B. Nodes
+C. Consecutive memory locations
+D. A linear fashion
+Answer: C
+
+2. Which of the following is true about Linked Lists?
+A. They allow direct random access to any element
+B. Elements can only be accessed sequentially
+C. The size must be declared in advance
+D. Insertions cannot be done in the middle of the list
+Answer: B
+
+3. A node in a singly linked list contains two parts: Data and:
+A. Previous pointer
+B. Next pointer
+C. Index number
+D. Memory block size
+Answer: B
+
+4. The pointer that holds the memory address of the first node in a linked list is called the:
+A. Tail pointer
+B. Next pointer
+C. Null pointer
+D. Head pointer
+Answer: D
+
+5. What marks the end of a singly linked list?
+A. The head pointer
+B. The node data being zero
+C. A pointer field containing NULL
+D. A loop back to the head
+Answer: C
+
+6. A linked list where the last node contains a pointer back to the first node is called a:
+A. Singly linked list
+B. Doubly linked list
+C. Circular linked list
+D. Double circular list
+Answer: C
+
+7. A Stack is a linear data structure that follows which principle?
+A. FIFO (First In First Out)
+B. LIFO (Last In First Out)
+C. Random Access
+D. Priority Access
+Answer: B
+
+8. In a Stack, elements are added and removed from only one end, called the:
+A. Top
+B. Bottom
+C. Front
+D. Rear
+Answer: A
+
+9. The operation to insert a new element into a stack is called:
+A. Pop
+B. Push
+C. Enqueue
+D. Insert
+Answer: B
+
+10. The operation to remove an element from a stack is called:
+A. Push
+B. Pop
+C. Dequeue
+D. Delete
+Answer: B

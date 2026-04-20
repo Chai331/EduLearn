@@ -1,0 +1,69 @@
+1. A pointer is a derived data type that stores the:
+A. Exact value of a variable
+B. Name of a variable
+C. Memory address of another variable
+D. Size of a variable
+Answer: C
+
+2. Which operator is known as the "address of" operator?
+A. *
+B. &
+C. ->
+D. %
+Answer: B
+
+3. Which operator is known as the indirection or dereferencing operator?
+A. &
+B. *
+C. ->
+D. .
+Answer: B
+
+4. What is the general syntax for declaring a pointer variable?
+A. *dataType ptrName;
+B. dataType &ptrName;
+C. dataType ptrName*;
+D. dataType *ptrName;
+Answer: D
+
+5. If int *p; and int a = 10; what does p = &a; do?
+A. Assigns the value 10 to p
+B. Assigns the memory address of a to the pointer p
+C. Assigns the address of p to a
+D. Multiplies p by a
+Answer: B
+
+6. In Call by Value, passing variables to a function passes their:
+A. Memory address
+B. Actual value
+C. Reference
+D. Pointer
+Answer: B
+
+7. In Call by Reference, any change made to the variable inside the called function will:
+A. Not affect the original variable
+B. Cause a memory leak
+C. Also change the value of the original variable
+D. Create a local copy
+Answer: C
+
+8. To achieve Call by Reference in C, arguments are passed using:
+A. Arrays only
+B. The value directly
+C. Pointers
+D. Typedefs
+Answer: C
+
+9. When dealing with an array, the array name acts as a pointer to:
+A. The last element in the array
+B. The first element in the array
+C. The entire array's size
+D. The middle element
+Answer: B
+
+10. If ptr is a pointer pointing to an array, ptr + 1 points to:
+A. The same element, with value increased by 1
+B. The previous element
+C. The next element in the array
+D. A completely random memory address
+Answer: C

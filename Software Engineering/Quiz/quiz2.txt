@@ -1,0 +1,69 @@
+1.SDLC stands for?
+A. System Design Life Cycle
+B. Software Development Life Cycle
+C. Software Design Logic Cycle
+D. None
+Answer: B
+
+2.First SDLC phase?
+A. Testing
+B. Planning
+C. Coding
+D. Maintenance
+Answer: B
+
+3.Waterfall model is?
+A. Iterative
+B. Linear
+C. Random
+D. Agile
+Answer: B
+
+4.Waterfall weakness?
+A. Flexible
+B. Requires fixed requirements
+C. Fast
+D. Cheap
+Answer: B
+
+5.Prototyping is used for?
+A. Final product
+B. Early model
+C. Testing only
+D. Maintenance
+Answer: B
+
+6.RAD focuses on?
+A. Slow dev
+B. Rapid dev
+C. No users
+D. Hardware
+Answer: B
+
+7.Incremental model delivers?
+A. One big system
+B. Parts
+C. Nothing
+D. Docs
+Answer: B
+
+8.Spiral model focuses on?
+A. Speed
+B. Risk
+C. UI
+D. Docs
+Answer: B
+
+9.Agile is?
+A. Rigid
+B. Flexible
+C. Linear
+D. Static
+Answer: B
+
+10.Testing phase ensures?
+A. Code writing
+B. Correctness
+C. Planning
+D. Design
+Answer: B
