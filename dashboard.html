@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EduLearn Dashboard – Your personal learning hub." />
+  <title>Dashboard – EduLearn</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="w3-bar edu-navbar w3-top" id="mainNav">
+  <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+  <div class="w3-right w3-hide-small">
+    <a href="dashboard.html"  class="w3-bar-item w3-button nav-link active">Home</a>
+    <a href="courses.html"    class="w3-bar-item w3-button nav-link">Courses</a>
+    <a href="portal.html"     class="w3-bar-item w3-button nav-link">My Portal</a>
+    <a href="forum.html"      class="w3-bar-item w3-button nav-link">Forum</a>
+    <a href="bookstore.html"  class="w3-bar-item w3-button nav-link">Bookstore</a>
+    <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+  </div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></a>
+</nav>
+<div id="mobileMenu" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium mobile-menu">
+  <a href="dashboard.html"  class="w3-bar-item w3-button">Home</a>
+  <a href="courses.html"    class="w3-bar-item w3-button">Courses</a>
+  <a href="portal.html"     class="w3-bar-item w3-button">My Portal</a>
+  <a href="forum.html"      class="w3-bar-item w3-button">Forum</a>
+  <a href="bookstore.html"  class="w3-bar-item w3-button">Bookstore</a>
+  <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<!-- WELCOME BANNER -->
+<div style="background:linear-gradient(135deg,#0a0a1e,#1a1a3e,#0f3460);padding:50px 16px 40px;">
+  <div class="w3-content container-max">
+    <div style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;">
+      <div id="dashAvatar" style="width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;color:#fff;flex-shrink:0;"></div>
+      <div>
+        <h1 id="dashWelcome" style="font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:0.3rem;"></h1>
+        <p id="dashSub" style="color:#8899cc;font-size:0.95rem;"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STATS -->
+<section style="background:#f5f7fa;padding:30px 16px;">
+  <div class="w3-content container-max">
+    <div class="stat-cards" id="dashStats"></div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section-pad" style="background:#f5f7fa;padding-top:0;">
+  <div class="w3-content container-max">
+    <div class="w3-row-padding">
+
+      <!-- Left: My Courses -->
+      <div class="w3-col m8 s12">
+        <div class="progress-section" style="margin-bottom:1.5rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
+            <h2 style="font-size:1rem;font-weight:800;color:#1a1a2e;"><i class="fas fa-book-open" style="color:#667eea;margin-right:8px;"></i>My Courses</h2>
+            <a href="courses.html" style="color:#667eea;font-size:0.82rem;font-weight:700;">Browse all <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div id="enrolledList"></div>
+          <div id="noEnrolled" style="display:none;text-align:center;padding:2rem 0;">
+            <i class="fas fa-book-open" style="font-size:2.5rem;color:#e5e7eb;display:block;margin-bottom:0.8rem;"></i>
+            <p style="color:#9ca3af;margin-bottom:1rem;">You haven't enrolled in any courses yet.</p>
+            <a href="courses.html" class="btn-primary-lg" style="font-size:0.85rem;padding:0.6rem 1.5rem;"><i class="fas fa-plus"></i> Browse Courses</a>
+          </div>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="w3-row-padding">
+          <div class="w3-col m6 s12" style="margin-bottom:1rem;">
+            <a href="forum.html" style="display:block;text-decoration:none;">
+              <div style="background:#fff;border-radius:14px;padding:1.3rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:4px solid #667eea;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+                <div style="font-size:1.4rem;margin-bottom:0.6rem;">💬</div>
+                <div style="font-weight:700;color:#1a1a2e;margin-bottom:0.3rem;">Discussion Forum</div>
+                <div style="font-size:0.82rem;color:#6b7280;">Ask questions and discuss with peers</div>
+              </div>
+            </a>
+          </div>
+          <div class="w3-col m6 s12" style="margin-bottom:1rem;">
+            <a href="bookstore.html" style="display:block;text-decoration:none;">
+              <div style="background:#fff;border-radius:14px;padding:1.3rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:4px solid #43e97b;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+                <div style="font-size:1.4rem;margin-bottom:0.6rem;">📦</div>
+                <div style="font-weight:700;color:#1a1a2e;margin-bottom:0.3rem;">Academic Bookstore</div>
+                <div style="font-size:0.82rem;color:#6b7280;">Browse &amp; purchase textbooks</div>
+              </div>
+            </a>
+          </div>
+          <div class="w3-col m6 s12" style="margin-bottom:1rem;">
+            <a href="portal.html" style="display:block;text-decoration:none;">
+              <div style="background:#fff;border-radius:14px;padding:1.3rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:4px solid #f5576c;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+                <div style="font-size:1.4rem;margin-bottom:0.6rem;">🎯</div>
+                <div style="font-weight:700;color:#1a1a2e;margin-bottom:0.3rem;">Student Portal</div>
+                <div style="font-size:0.82rem;color:#6b7280;">Progress, resources &amp; quizzes</div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: Sidebar -->
+      <div class="w3-col m4 s12">
+
+        <!-- Recent Forum Posts -->
+        <div class="progress-section" style="margin-bottom:1.5rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+            <h3 style="font-size:0.95rem;font-weight:800;color:#1a1a2e;"><i class="fas fa-fire" style="color:#f59e0b;margin-right:6px;"></i>Hot Topics</h3>
+            <a href="forum.html" style="color:#667eea;font-size:0.78rem;font-weight:700;">View all</a>
+          </div>
+          <div id="recentPosts"></div>
+        </div>
+
+        <!-- Announcements -->
+        <div class="progress-section">
+          <h3 style="font-size:0.95rem;font-weight:800;color:#1a1a2e;margin-bottom:1rem;"><i class="fas fa-bullhorn" style="color:#667eea;margin-right:6px;"></i>Announcements</h3>
+          <div style="font-size:0.83rem;color:#4b5563;padding:0.6rem 0;border-bottom:1px solid #f3f4f6;"><span style="color:#f59e0b;margin-right:6px;">📢</span> Mid-semester exams: <strong>May 15–20</strong></div>
+          <div style="font-size:0.83rem;color:#4b5563;padding:0.6rem 0;border-bottom:1px solid #f3f4f6;"><span style="color:#10b981;margin-right:6px;">📖</span> New course materials uploaded for Cyber Security Week 9</div>
+          <div style="font-size:0.83rem;color:#4b5563;padding:0.6rem 0;"><span style="color:#667eea;margin-right:6px;">🎉</span> Bookstore sale: 20% off with code <strong>SAVE20</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="edu-footer">
+  <div class="w3-content container-max">
+    <div class="w3-row-padding footer-grid">
+      <div class="w3-col m4 s12 footer-brand">
+        <div class="footer-logo"><i class="fas fa-graduation-cap"></i> EduLearn</div>
+        <p>Empowering undergraduate students with quality learning resources.</p>
+      </div>
+      <div class="w3-col m2 s6 footer-links"><h4>Learn</h4><ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="portal.html">My Portal</a></li>
+        <li><a href="forum.html">Forum</a></li>
+      </ul></div>
+      <div class="w3-col m2 s6 footer-links"><h4>Resources</h4><ul>
+        <li><a href="bookstore.html">Bookstore</a></li>
+        <li><a href="cart.html">Cart</a></li>
+
+      </ul></div>
+      <div class="w3-col m4 s12 footer-contact"><h4>Contact</h4>
+        <p><i class="fas fa-envelope"></i> info@edulearn.com</p>
+        <p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 EduLearn. All rights reserved. | Built with <a href="https://www.w3schools.com/w3css/" target="_blank">W3.CSS</a></p></div>
+  </div>
+</footer>
+
+<script src="db.js"></script>
+<script>
+  /* ── Auth Guard ── */
+  var __sess = EduDB.getSession();
+  if (!__sess) { window.location.href = 'index.html'; }
+
+  function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+  function toggleMobileMenu() {
+    var m = document.getElementById('mobileMenu');
+    m.className.indexOf('w3-show') === -1 ? m.className += ' w3-show' : m.className = m.className.replace(' w3-show', '');
+  }
+  window.onscroll = function () { document.getElementById('mainNav').classList[window.pageYOffset > 60 ? 'add' : 'remove']('scrolled'); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!__sess) return;
+
+    /* Nav greeting */
+    var ng = document.getElementById('navGreet');
+    if (ng) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
+
+    /* Welcome banner */
+    var av = document.getElementById('dashAvatar');
+    if (av) { av.textContent = __sess.avatar; av.style.background = __sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)'; }
+    var dw = document.getElementById('dashWelcome');
+    if (dw) dw.textContent = 'Welcome back, ' + __sess.firstName + '! 👋';
+    var ds = document.getElementById('dashSub');
+    if (ds) ds.textContent = __sess.programme + ' · ' + new Date().toLocaleDateString('en-MY', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+    /* Enrolled courses */
+    var enr  = EduDB.getUserEnrollments(__sess.id);
+    var list = document.getElementById('enrolledList');
+    var none = document.getElementById('noEnrolled');
+    var totalPct = 0;
+    if (enr.length === 0) {
+      none.style.display = 'block';
+    } else {
+      enr.forEach(function (e) {
+        totalPct += e.progress;
+        var div = document.createElement('div');
+        div.style.cssText = 'background:#f9fafb;border-radius:12px;padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;border:1px solid #e5e7eb;margin-bottom:0.8rem;';
+        div.innerHTML =
+          '<div style="width:52px;height:52px;border-radius:12px;' + e.color + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+            '<i class="fas ' + e.icon + '" style="color:rgba(255,255,255,0.8);font-size:1.3rem;"></i>' +
+          '</div>' +
+          '<div style="flex:1;min-width:0;">' +
+            '<div style="font-weight:700;color:#1a1a2e;font-size:0.9rem;margin-bottom:2px;">' + e.courseName + '</div>' +
+            '<div style="font-size:0.75rem;color:#9ca3af;margin-bottom:5px;">Week ' + e.weeksCurrent + ' of ' + e.weeksTotal + ' · ' + e.progress + '% complete</div>' +
+            '<div style="background:#f3f4f6;border-radius:10px;height:6px;overflow:hidden;">' +
+              '<div style="height:100%;border-radius:10px;background:linear-gradient(90deg,#667eea,#764ba2);width:' + e.progress + '%;"></div>' +
+            '</div>' +
+          '</div>' +
+          '<a href="courses.html" style="color:#667eea;font-size:0.78rem;font-weight:700;white-space:nowrap;">Continue →</a>';
+        list.appendChild(div);
+      });
+    }
+
+    /* Stat cards */
+    var avg = enr.length > 0 ? Math.round(totalPct / enr.length) : 0;
+    var statData = [
+      { icon:'fa-book-open', bg:'linear-gradient(135deg,#667eea,#764ba2)', num: enr.length, label:'Courses' },
+      { icon:'fa-chart-line', bg:'linear-gradient(135deg,#43e97b,#38f9d7)', num: avg + '%', label:'Avg Progress' },
+      { icon:'fa-comments', bg:'linear-gradient(135deg,#f093fb,#f5576c)', num: EduDB.getAllPosts().length, label:'Forum Posts' },
+      { icon:'fa-shopping-bag', bg:'linear-gradient(135deg,#4facfe,#00f2fe)', num: EduDB.getUserOrders(__sess.id).length, label:'Orders' }
+    ];
+    var sc = document.getElementById('dashStats');
+    statData.forEach(function (s) {
+      var d = document.createElement('div');
+      d.className = 'stat-card';
+      d.innerHTML = '<div class="stat-card-icon" style="background:' + s.bg + ';"><i class="fas ' + s.icon + '"></i></div>' +
+        '<div><div class="stat-card-num">' + s.num + '</div><div class="stat-card-label">' + s.label + '</div></div>';
+      sc.appendChild(d);
+    });
+
+    /* Recent forum posts */
+    var posts = EduDB.getAllPosts().slice(0, 4);
+    var rp    = document.getElementById('recentPosts');
+    posts.forEach(function (p) {
+      var d = document.createElement('div');
+      d.style.cssText = 'padding:0.6rem 0;border-bottom:1px solid #f3f4f6;';
+      d.innerHTML =
+        '<div style="font-size:0.82rem;font-weight:600;color:#1a1a2e;margin-bottom:2px;">' +
+          '<span class="forum-tag-badge" style="font-size:0.65rem;">' + p.category + '</span>' + p.title +
+        '</div>' +
+        '<div style="font-size:0.72rem;color:#9ca3af;">' +
+          '<i class="fas fa-reply"></i> ' + p.replies + ' &nbsp; <i class="fas fa-eye"></i> ' + p.views + ' &nbsp; ' + EduDB.ago(p.createdAt) +
+        '</div>';
+      rp.appendChild(d);
+    });
+  });
+</script>
+</body>
+</html>
