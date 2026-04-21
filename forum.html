@@ -90,10 +90,11 @@
           <div class="form-group">
             <label>Category</label>
             <select id="postCategory" class="form-control">
-              <option value="security">Cyber Security</option>
-              <option value="vision">Computer Vision</option>
-              <option value="ds">Data Structures</option>
-              <option value="general">General</option>
+              <option value="cal">Calculus</option>
+              <option value="security">Computer and Cyber Security</option>
+              <option value="vision">Computer Vision and Image Processing</option>
+              <option value="ds">Data Structures and Algorithms</option>
+              <option value="se">Software Engineering</option>
             </select>
           </div>
           <div class="form-group">
@@ -109,10 +110,11 @@
         <!-- Filter Tabs -->
         <div style="display:flex;gap:0.5rem;margin-bottom:1.2rem;flex-wrap:wrap;">
           <button class="filter-btn active" onclick="filterPosts(this,'all')">All</button>
-          <button class="filter-btn" onclick="filterPosts(this,'security')">Cyber Security</button>
-          <button class="filter-btn" onclick="filterPosts(this,'vision')">Computer Vision</button>
-          <button class="filter-btn" onclick="filterPosts(this,'ds')">Data Structures</button>
-          <button class="filter-btn" onclick="filterPosts(this,'general')">General</button>
+          <button class="filter-btn" onclick="filterPosts(this,'cal')">Calculus</button>
+          <button class="filter-btn" onclick="filterPosts(this,'security')">Computer and Cyber Security</button>
+          <button class="filter-btn" onclick="filterPosts(this,'vision')">Computer Vision and Image Processing</button>
+          <button class="filter-btn" onclick="filterPosts(this,'ds')">Data Structures and Algorithms</button>
+          <button class="filter-btn" onclick="filterPosts(this,'se')">Software Engineering</button>
         </div>
 
         <!-- Post List (rendered by JS from DB) -->
@@ -217,7 +219,7 @@
       return;
     }
     filtered.forEach(function(p) {
-      var catLabels = {security:'Cyber Security',vision:'Computer Vision',ds:'Data Structures',general:'General'};
+      var catLabels = {cal:'Calculus',security:'Computer and Cyber Security',vision:'Computer Vision and Image Processing',ds:'Data Structures',se:'Software Engineering'};
       var div = document.createElement('div');
       div.className = 'forum-post';
       div.dataset.cat = p.category;
@@ -286,7 +288,7 @@
     if (!post) return;
     currentViewPostId = postId;
 
-    var catLabels = {security:'Cyber Security',vision:'Computer Vision',ds:'Data Structures',general:'General'};
+    var catLabels = {cal:'Calculus',security:'Computer and Cyber Security',vision:'Computer Vision and Image Processing',ds:'Data Structures and Algorithms',se:'Software Engineering'};
     var pDiv = document.getElementById('modalOriginalPost');
     pDiv.innerHTML = 
       '<div style="display:flex; gap:1rem;">' +
