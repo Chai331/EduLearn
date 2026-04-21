@@ -422,9 +422,9 @@
       div.onmouseout  = function(){ this.style.transform=''; this.style.boxShadow='0 6px 25px rgba(0,0,0,0.1)'; };
 
       div.innerHTML =
-        '<div style="height:150px;background: linear-gradient(rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(\''+c.bgImage+'\') center/cover;display:flex;align-items:center;justify-content:center;position:relative;">' +
+        '<div style="height:150px; background-image: linear-gradient(135deg, rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(\''+c.bgImage+'\'); background-position: center; background-size: cover; display:flex; align-items:center; justify-content:center; position:relative;">' +
           (isEnrolled ? '<span class="enrolled-badge"><i class="fas fa-check-circle"></i> Enrolled</span>' : '') +
-          '<i class="fas '+c.icon+'" style="font-size:3rem;color:rgba(255,255,255,0.85);"></i>' +
+          '<i class="fas '+c.icon+'" style="font-size:3rem; color:rgba(255,255,255,0.85);"></i>' +
         '</div>' +
         '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">' +
           '<span style="display:inline-block;background:#f0f2ff;color:#667eea;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.5px;">'+c.tag+'</span>' +
@@ -465,7 +465,10 @@
     quizAnswers   = new Array(CONTENT[courseId].quiz.length).fill(null);
 
     /* Hero */
-    document.getElementById('modalHero').style.background = 'linear-gradient(rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(' + currentCourse.bgImage + ') center/cover';
+    var heroEl = document.getElementById('modalHero');
+    heroEl.style.backgroundImage = 'linear-gradient(135deg, rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(\'' + currentCourse.bgImage + '\')';
+    heroEl.style.backgroundPosition = 'center';
+    heroEl.style.backgroundSize = 'cover';
     document.getElementById('modalHeroIcon').className    = 'fas ' + currentCourse.icon + ' modal-hero-icon';
 
     /* Tabs visibility */
