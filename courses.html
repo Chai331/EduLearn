@@ -238,27 +238,27 @@
   var COURSES = [
     { id:'calculus', cat:'calculus', title:'Calculus',
       tag:'Mathematics', weeks:12, level:'Beginner',
-      icon:'fa-calculator', color:'linear-gradient(135deg,#0f3460,#16213e)',
+      icon:'fa-calculator', color:'linear-gradient(135deg,#0f3460,#16213e)', bgImage:'image/calculus.jpg',
       desc:'Master the fundamentals of calculus, from functions and limits to derivatives and integrals. Build a strong mathematical foundation for engineering and science.',
       outcomes:['Understand function properties and composite functions','Apply trigonometric identities and Law of Cosines','Solve exponential and logarithmic equations','Evaluate limits and continuity','Compute derivatives and apply differentiation rules'] },
     { id:'cybersec', cat:'security', title:'Computer and Cyber Security',
       tag:'Security', weeks:12, level:'Intermediate',
-      icon:'fa-shield-alt', color:'linear-gradient(135deg,#1a1a2e,#16213e)',
+      icon:'fa-shield-alt', color:'linear-gradient(135deg,#1a1a2e,#16213e)', bgImage:'image/computer.jpg',
       desc:'Master the fundamentals of securing computer systems and networks. Cover network defence, cryptography, ethical hacking, digital forensics, and industry-standard tools used by cybersecurity professionals.',
       outcomes:['Understand CIA triad and threat models','Configure firewalls and IDS/IPS','Perform basic penetration testing','Apply cryptography concepts','Respond to security incidents'] },
     { id:'vision', cat:'vision', title:'Computer Vision & Image Processing',
       tag:'AI / Vision', weeks:14, level:'Advanced',
-      icon:'fa-eye', color:'linear-gradient(135deg,#0f3460,#533483)',
+      icon:'fa-eye', color:'linear-gradient(135deg,#0f3460,#533483)', bgImage:'image/vision.jpg',
       desc:'Explore the field of computer vision from classical image processing to deep learning approaches. Build practical skills in feature extraction, object detection, and image segmentation using modern frameworks.',
       outcomes:['Apply edge detection and filtering algorithms','Implement CNNs for image classification','Perform object detection with YOLO','Segment images using modern techniques','Use OpenCV for real-world projects'] },
     { id:'ds', cat:'ds', title:'Data Structure and Algorithms',
       tag:'Programming', weeks:10, level:'Intermediate',
-      icon:'fa-sitemap', color:'linear-gradient(135deg,#1b4332,#2d6a4f)',
+      icon:'fa-sitemap', color:'linear-gradient(135deg,#1b4332,#2d6a4f)', bgImage:'image/data.jpg',
       desc:'Build a strong foundation in data structures and algorithms. Understand how data is organised, stored, and manipulated efficiently. Essential knowledge for any software engineering or computer science career.',
       outcomes:['Implement arrays, linked lists, stacks & queues','Build and traverse binary search trees','Apply graph traversal algorithms (BFS/DFS)','Analyse time and space complexity','Solve problems using dynamic programming'] },
     { id:'se', cat:'engineering', title:'Software Engineering',
       tag:'Engineering', weeks:12, level:'Intermediate',
-      icon:'fa-laptop-code', color:'linear-gradient(135deg,#667eea,#764ba2)',
+      icon:'fa-laptop-code', color:'linear-gradient(135deg,#667eea,#764ba2)', bgImage:'image/software.jpg',
       desc:'Learn the principles and practices of professional software development. Cover the software life cycle, development models, project management, and requirements engineering.',
       outcomes:['Apply SDLC models like Waterfall and Agile','Manage software projects and mitigate risks','Elicit and document system requirements','Design and implement software architectures','Enforce software quality and maintainability'] }
   ];
@@ -422,9 +422,9 @@
       div.onmouseout  = function(){ this.style.transform=''; this.style.boxShadow='0 6px 25px rgba(0,0,0,0.1)'; };
 
       div.innerHTML =
-        '<div style="height:150px;'+c.color+';display:flex;align-items:center;justify-content:center;position:relative;">' +
+        '<div style="height:150px;background: linear-gradient(rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(\''+c.bgImage+'\') center/cover;display:flex;align-items:center;justify-content:center;position:relative;">' +
           (isEnrolled ? '<span class="enrolled-badge"><i class="fas fa-check-circle"></i> Enrolled</span>' : '') +
-          '<i class="fas '+c.icon+'" style="font-size:3rem;color:rgba(255,255,255,0.65);"></i>' +
+          '<i class="fas '+c.icon+'" style="font-size:3rem;color:rgba(255,255,255,0.85);"></i>' +
         '</div>' +
         '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">' +
           '<span style="display:inline-block;background:#f0f2ff;color:#667eea;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.5px;">'+c.tag+'</span>' +
@@ -465,7 +465,7 @@
     quizAnswers   = new Array(CONTENT[courseId].quiz.length).fill(null);
 
     /* Hero */
-    document.getElementById('modalHero').style.background = currentCourse.color;
+    document.getElementById('modalHero').style.background = 'linear-gradient(rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(' + currentCourse.bgImage + ') center/cover';
     document.getElementById('modalHeroIcon').className    = 'fas ' + currentCourse.icon + ' modal-hero-icon';
 
     /* Tabs visibility */
