@@ -95,6 +95,7 @@
               <option value="vision">Computer Vision and Image Processing</option>
               <option value="ds">Data Structures and Algorithms</option>
               <option value="se">Software Engineering</option>
+              <option value="general">General</option>
             </select>
           </div>
           <div class="form-group">
@@ -115,6 +116,7 @@
           <button class="filter-btn" onclick="filterPosts(this,'vision')">Computer Vision and Image Processing</button>
           <button class="filter-btn" onclick="filterPosts(this,'ds')">Data Structures and Algorithms</button>
           <button class="filter-btn" onclick="filterPosts(this,'se')">Software Engineering</button>
+          <button class="filter-btn" onclick="filterPosts(this,'general')">General</button>
         </div>
 
         <!-- Post List (rendered by JS from DB) -->
@@ -219,7 +221,7 @@
       return;
     }
     filtered.forEach(function(p) {
-      var catLabels = {cal:'Calculus',security:'Computer and Cyber Security',vision:'Computer Vision and Image Processing',ds:'Data Structures',se:'Software Engineering'};
+      var catLabels = {cal:'Calculus',security:'Computer and Cyber Security',vision:'Computer Vision and Image Processing',ds:'Data Structures',se:'Software Engineering',general:'General'}
       var div = document.createElement('div');
       div.className = 'forum-post';
       div.dataset.cat = p.category;
@@ -288,7 +290,7 @@
     if (!post) return;
     currentViewPostId = postId;
 
-    var catLabels = {cal:'Calculus',security:'Computer and Cyber Security',vision:'Computer Vision and Image Processing',ds:'Data Structures and Algorithms',se:'Software Engineering'};
+    var catLabels = {cal:'Calculus',security:'Computer and Cyber Security',vision:'Computer Vision and Image Processing',ds:'Data Structures and Algorithms',se:'Software Engineering',general:'General'};
     var pDiv = document.getElementById('modalOriginalPost');
     pDiv.innerHTML = 
       '<div style="display:flex; gap:1rem;">' +
