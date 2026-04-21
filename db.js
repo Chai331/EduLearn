@@ -95,27 +95,30 @@ window.EduDB = (function () {
           avatarColor:'linear-gradient(135deg,#667eea,#764ba2)', category:'security',
           title:'How does AES encryption work in practice?',
           content:'Public key vs symmetric key – confused about when to use each. Can someone clarify with an example?',
-          replies:8, views:124, createdAt:'2025-04-12T10:00:00Z', solved:true },
+          replies:1, views:124, createdAt:'2025-04-12T10:00:00Z', solved:true,
+          replyData: [
+            { id:'rp1', userId:'u_seed03', author:'Raj Kumar', avatar:'R', avatarColor:'linear-gradient(135deg,#43e97b,#38f9d7)', content:'AES is symmetric. Both sides use the same key. Public key (like RSA) uses two different keys.', createdAt:'2025-04-12T10:30:00Z' }
+          ] },
         { id:'fp2', userId:'u_seed02', author:'Siti Nurhaliza', avatar:'S',
           avatarColor:'linear-gradient(135deg,#f093fb,#f5576c)', category:'vision',
           title:'Edge detection: Canny vs Sobel – which is better?',
           content:'For my lab assignment I need to pick one. What are the pros and cons of each operator?',
-          replies:5, views:87, createdAt:'2025-04-13T06:00:00Z', solved:false },
+          replies:0, views:87, createdAt:'2025-04-13T06:00:00Z', solved:false, replyData: [] },
         { id:'fp3', userId:'u_seed03', author:'Raj Kumar', avatar:'R',
           avatarColor:'linear-gradient(135deg,#43e97b,#38f9d7)', category:'ds',
           title:'When should I use a linked list over an array?',
           content:'My professor said it depends on use case, need specific examples for assignment.',
-          replies:12, views:210, createdAt:'2025-04-11T08:00:00Z', solved:true },
+          replies:0, views:210, createdAt:'2025-04-11T08:00:00Z', solved:true, replyData: [] },
         { id:'fp4', userId:'u_seed04', author:'Li Wei', avatar:'L',
           avatarColor:'linear-gradient(135deg,#4facfe,#00f2fe)', category:'general',
           title:'Best resources for preparing for tech interviews?',
           content:'Looking for recommendations on platforms, books, and practice strategies.',
-          replies:19, views:345, createdAt:'2025-04-10T08:00:00Z', solved:false },
+          replies:0, views:345, createdAt:'2025-04-10T08:00:00Z', solved:false, replyData: [] },
         { id:'fp5', userId:'u_seed05', author:'Maya Haris', avatar:'M',
           avatarColor:'linear-gradient(135deg,#fa709a,#fee140)', category:'security',
           title:'Understanding SQL injection and how to prevent it',
           content:'Worked through Week 7 material but not clear on parameterised queries.',
-          replies:7, views:158, createdAt:'2025-04-09T09:00:00Z', solved:false }
+          replies:0, views:158, createdAt:'2025-04-09T09:00:00Z', solved:false, replyData: [] }
       ]);
     }
 
@@ -300,11 +303,34 @@ window.EduDB = (function () {
       title:       title,
       content:     content,
       replies:     0,
+      replyData:   [],
       views:       1,
       createdAt:   new Date().toISOString(),
       solved:      false
     };
     posts.unshift(post);
+    writeTable(K.POSTS, posts);
+    return post;
+  }
+
+  function addReply(postId, sess, content) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function(p){ return p.id === postId; });
+    if (!post) return null;
+    
+    if (!post.replyData) post.replyData = [];
+    var reply = {
+      id: uid(),
+      userId: sess.id,
+      author: (sess.firstName + ' ' + (sess.lastName || '')).trim(),
+      avatar: sess.avatar,
+      avatarColor: sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)',
+      content: content,
+      createdAt: new Date().toISOString()
+    };
+    post.replyData.push(reply);
+    post.replies = post.replyData.length;
+    
     writeTable(K.POSTS, posts);
     return post;
   }
@@ -355,8 +381,9 @@ window.EduDB = (function () {
     markQuizDone:        markQuizDone,
     getActivityLog:      getActivityLog,
     /* Forum */
-    getAllPosts:          getAllPosts,
+    getAllPosts:         getAllPosts,
     addPost:             addPost,
+    addReply:            addReply,
     /* Orders */
     addOrder:            addOrder,
     getUserOrders:       getUserOrders,
