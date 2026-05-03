@@ -1,508 +1,879 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="EduLearn – Sign in to access your courses, student portal, discussion forum, and academic bookstore." />
+  <meta name="description"
+    content="EduLearn – Sign in to access your courses, student portal, discussion forum, and academic bookstore." />
   <title>EduLearn – Sign In</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    body { padding-top: 0; background: #07071a; min-height: 100vh; }
+    body {
+      padding-top: 0;
+      background: #07071a;
+      min-height: 100vh;
+    }
 
     /* ── Top bar ── */
     .top-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem; height: 64px;
-      background: rgba(7,7,26,0.95); border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: sticky; top: 0; z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      background: rgba(7, 7, 26, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
+
     .top-bar-logo {
-      font-size: 1.35rem; font-weight: 800;
-      background: linear-gradient(90deg,#667eea,#764ba2);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      font-size: 1.35rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .top-bar-logo i { -webkit-text-fill-color: #667eea; margin-right: 4px; }
-    .top-bar-links { display: flex; align-items: center; gap: 0.3rem; }
+
+    .top-bar-logo i {
+      -webkit-text-fill-color: #667eea;
+      margin-right: 4px;
+    }
+
+    .top-bar-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
     .top-bar-links a {
-      color: #8899cc; font-size: 0.85rem; font-weight: 500; padding: 0.4rem 0.9rem;
-      border-radius: 8px; transition: color 0.2s, background 0.2s;
+      color: #8899cc;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
     }
-    .top-bar-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+
+    .top-bar-links a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
     .top-bar-btn-outline {
-      border: 1.5px solid rgba(102,126,234,0.5) !important; color: #a8b8f8 !important;
+      border: 1.5px solid rgba(102, 126, 234, 0.5) !important;
+      color: #a8b8f8 !important;
     }
-    .top-bar-btn-outline:hover { border-color: #667eea !important; color: #fff !important; background: rgba(102,126,234,0.1) !important; }
+
+    .top-bar-btn-outline:hover {
+      border-color: #667eea !important;
+      color: #fff !important;
+      background: rgba(102, 126, 234, 0.1) !important;
+    }
 
     /* ── Main hero grid ── */
     .hero-grid {
-      display: grid; grid-template-columns: 1fr 420px;
-      gap: 0; min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 0;
+      min-height: calc(100vh - 64px);
     }
+
     /* LEFT */
     .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 4rem 3rem 4rem 5rem;
       background: linear-gradient(145deg, #07071a 0%, #0f0f2d 60%, #0a1a3e 100%);
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
+
     .hero-left::before {
-      content: ''; position: absolute;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(102,126,234,0.12) 0%, transparent 70%);
-      top: -120px; left: -80px; pointer-events: none;
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.12) 0%, transparent 70%);
+      top: -120px;
+      left: -80px;
+      pointer-events: none;
     }
+
     .hero-left::after {
-      content: ''; position: absolute;
-      width: 350px; height: 350px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(118,75,162,0.1) 0%, transparent 70%);
-      bottom: -80px; right: 0; pointer-events: none;
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(118, 75, 162, 0.1) 0%, transparent 70%);
+      bottom: -80px;
+      right: 0;
+      pointer-events: none;
     }
-    .hero-left-content { position: relative; z-index: 1; max-width: 540px; }
+
+    .hero-left-content {
+      position: relative;
+      z-index: 1;
+      max-width: 540px;
+    }
+
     .landing-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(102,126,234,0.15); border: 1px solid rgba(102,126,234,0.4);
-      color: #a8b8f8; padding: 6px 14px; border-radius: 25px;
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px;
-      margin-bottom: 1.5rem; text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(102, 126, 234, 0.15);
+      border: 1px solid rgba(102, 126, 234, 0.4);
+      color: #a8b8f8;
+      padding: 6px 14px;
+      border-radius: 25px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
     }
-    .landing-badge i { color: #667eea; }
+
+    .landing-badge i {
+      color: #667eea;
+    }
+
     .landing-headline {
-      font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800;
-      color: #fff; line-height: 1.12; margin-bottom: 1.2rem;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 1.2rem;
     }
+
     .landing-headline .grad {
-      background: linear-gradient(135deg,#667eea,#a78bfa);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      background: linear-gradient(135deg, #667eea, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
     .landing-sub {
-      color: #6b7fa8; font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; font-weight: 400;
+      color: #6b7fa8;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-weight: 400;
     }
-    .landing-features { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2.5rem; }
+
+    .landing-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 2.5rem;
+    }
+
     .landing-feat {
-      display: flex; align-items: center; gap: 10px;
-      color: #8899cc; font-size: 0.88rem; font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #8899cc;
+      font-size: 0.88rem;
+      font-weight: 500;
     }
-    .landing-feat i { color: #667eea; font-size: 0.9rem; width: 16px; }
+
+    .landing-feat i {
+      color: #667eea;
+      font-size: 0.9rem;
+      width: 16px;
+    }
+
     .landing-stats {
-      display: flex; gap: 2rem; padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      gap: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
     }
-    .l-stat .num { font-size: 1.6rem; font-weight: 800; color: #fff; display: block; }
-    .l-stat .lbl { font-size: 0.72rem; color: #4b5c7e; text-transform: uppercase; letter-spacing: 1px; }
+
+    .l-stat .num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      display: block;
+    }
+
+    .l-stat .lbl {
+      font-size: 0.72rem;
+      color: #4b5c7e;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
     /* RIGHT */
     .hero-right {
-      display: flex; align-items: center; justify-content: center;
-      padding: 2rem 2.5rem; background: #0d0d24;
-      border-left: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 2.5rem;
+      background: #0d0d24;
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
     }
+
     .login-card {
-      width: 100%; max-width: 380px;
+      width: 100%;
+      max-width: 380px;
     }
+
     .auth-tabs-row {
-      display: flex; background: rgba(255,255,255,0.04); border-radius: 12px;
-      padding: 4px; margin-bottom: 1.8rem; border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
+
     .auth-tab-btn {
-      flex: 1; padding: 0.6rem; border: none; border-radius: 9px;
-      font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 700;
-      cursor: pointer; transition: all 0.2s; background: transparent; color: #6b7fa8;
+      flex: 1;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 9px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+      color: #6b7fa8;
     }
-    .auth-tab-btn.active { background: linear-gradient(135deg,#667eea,#764ba2); color: #fff; }
-    .card-head { margin-bottom: 1.5rem; }
-    .card-head h2 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.3rem; }
-    .card-head p  { color: #6b7fa8; font-size: 0.85rem; }
-    .field-lbl { display: block; font-size: 0.8rem; font-weight: 700; color: #8899cc; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.4px; }
+
+    .auth-tab-btn.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+    }
+
+    .card-head {
+      margin-bottom: 1.5rem;
+    }
+
+    .card-head h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-head p {
+      color: #6b7fa8;
+      font-size: 0.85rem;
+    }
+
+    .field-lbl {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #8899cc;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
     .field-input {
-      width: 100%; padding: 0.75rem 1rem; border: 1.5px solid rgba(255,255,255,0.1);
-      border-radius: 10px; font-size: 0.9rem; font-family: 'Inter', sans-serif;
-      color: #fff; background: rgba(255,255,255,0.05);
-      transition: border-color 0.2s, background 0.2s; outline: none;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
       box-sizing: border-box;
     }
-    .field-input:focus { border-color: #667eea; background: rgba(102,126,234,0.08); }
-    .field-input::placeholder { color: #4b5c7e; }
-    .field-wrap { margin-bottom: 1rem; position: relative; }
+
+    .field-input:focus {
+      border-color: #667eea;
+      background: rgba(102, 126, 234, 0.08);
+    }
+
+    .field-input::placeholder {
+      color: #4b5c7e;
+    }
+
+    .field-wrap {
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
     .eye-btn {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; color: #4b5c7e; cursor: pointer; font-size: 0.9rem;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #4b5c7e;
+      cursor: pointer;
+      font-size: 0.9rem;
     }
-    .field-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
-    .field-row label { display: flex; align-items: center; gap: 6px; color: #6b7fa8; font-size: 0.8rem; cursor: pointer; }
-    .field-row a { color: #667eea; font-size: 0.8rem; font-weight: 600; }
+
+    .field-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .field-row label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #6b7fa8;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .field-row a {
+      color: #667eea;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
     .submit-btn {
-      width: 100%; padding: 0.85rem; border: none; border-radius: 10px;
-      background: linear-gradient(135deg,#667eea,#764ba2);
-      color: #fff; font-size: 1rem; font-weight: 700; font-family: 'Inter', sans-serif;
-      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(102,126,234,0.35);
+      width: 100%;
+      padding: 0.85rem;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.35);
     }
-    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(102,126,234,0.5); }
-    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .divider-line { display: flex; align-items: center; gap: 0.8rem; margin: 1.2rem 0; }
-    .divider-line::before, .divider-line::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.07); }
-    .divider-line span { color: #4b5c7e; font-size: 0.75rem; }
-    .social-row { display: flex; gap: 0.6rem; }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(102, 126, 234, 0.5);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .divider-line {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 1.2rem 0;
+    }
+
+    .divider-line::before,
+    .divider-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .divider-line span {
+      color: #4b5c7e;
+      font-size: 0.75rem;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 0.6rem;
+    }
+
     .social-btn {
-      flex: 1; padding: 0.6rem; border: 1.5px solid rgba(255,255,255,0.1);
-      border-radius: 10px; background: rgba(255,255,255,0.04);
-      color: #8899cc; font-family: 'Inter', sans-serif; font-size: 0.82rem;
-      font-weight: 600; cursor: pointer; transition: all 0.2s;
+      flex: 1;
+      padding: 0.6rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #8899cc;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
     }
-    .social-btn:hover { border-color: rgba(102,126,234,0.5); color: #fff; background: rgba(102,126,234,0.08); }
-    .switch-msg { text-align: center; margin-top: 1.2rem; font-size: 0.82rem; color: #4b5c7e; }
-    .switch-msg a { color: #667eea; font-weight: 700; }
+
+    .social-btn:hover {
+      border-color: rgba(102, 126, 234, 0.5);
+      color: #fff;
+      background: rgba(102, 126, 234, 0.08);
+    }
+
+    .switch-msg {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.82rem;
+      color: #4b5c7e;
+    }
+
+    .switch-msg a {
+      color: #667eea;
+      font-weight: 700;
+    }
+
     .demo-hint {
-      margin-top: 1rem; padding: 0.6rem 0.9rem; border-radius: 8px;
-      background: rgba(102,126,234,0.08); border: 1px solid rgba(102,126,234,0.2);
-      font-size: 0.75rem; color: #6b7fa8;
+      margin-top: 1rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      background: rgba(102, 126, 234, 0.08);
+      border: 1px solid rgba(102, 126, 234, 0.2);
+      font-size: 0.75rem;
+      color: #6b7fa8;
     }
-    .demo-hint b { color: #a8b8f8; }
-    .msg-box { border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.83rem; margin-bottom: 0.9rem; display: none; }
-    .msg-error   { background: rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.35); color:#fca5a5; }
-    .msg-success { background: rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.35); color:#6ee7b7; }
+
+    .demo-hint b {
+      color: #a8b8f8;
+    }
+
+    .msg-box {
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.83rem;
+      margin-bottom: 0.9rem;
+      display: none;
+    }
+
+    .msg-error {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+
+    .msg-success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+    }
 
     /* ── Features Section ── */
     .features-section {
-      background: #0a0a1e; padding: 70px 2rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      background: #0a0a1e;
+      padding: 70px 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .features-section h2 { text-align:center; color:#fff; font-size:1.8rem; font-weight:800; margin-bottom:0.5rem; }
-    .features-section p  { text-align:center; color:#6b7fa8; font-size:0.95rem; margin-bottom:2.5rem; }
-    .feat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.2rem; max-width:1000px; margin:0 auto; }
+
+    .features-section h2 {
+      text-align: center;
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .features-section p {
+      text-align: center;
+      color: #6b7fa8;
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
     .feat-box {
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    .feat-box:hover { border-color: rgba(102,126,234,0.4); transform: translateY(-3px); }
-    .feat-box-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
-    .feat-box h3 { color:#fff; font-size:0.95rem; font-weight:700; margin-bottom:0.4rem; }
-    .feat-box p  { color:#4b5c7e; font-size:0.82rem; line-height:1.6; }
+
+    .feat-box:hover {
+      border-color: rgba(102, 126, 234, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .feat-box-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feat-box h3 {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .feat-box p {
+      color: #4b5c7e;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
 
     /* ── Mini footer ── */
-    .mini-footer { background:#07071a; padding:1.5rem 2rem; text-align:center; border-top:1px solid rgba(255,255,255,0.05); }
-    .mini-footer p { color:#4b5c7e; font-size:0.78rem; }
-    .mini-footer a { color:#667eea; }
+    .mini-footer {
+      background: #07071a;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mini-footer p {
+      color: #4b5c7e;
+      font-size: 0.78rem;
+    }
+
+    .mini-footer a {
+      color: #667eea;
+    }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-left { padding: 3rem 1.5rem; }
-      .hero-right { padding: 2rem 1.5rem; border-left:none; border-top:1px solid rgba(255,255,255,0.05); }
-      .landing-stats { gap:1.2rem; }
-      .top-bar-links .hide-sm { display:none; }
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left {
+        padding: 3rem 1.5rem;
+      }
+
+      .hero-right {
+        padding: 2rem 1.5rem;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .landing-stats {
+        gap: 1.2rem;
+      }
+
+      .top-bar-links .hide-sm {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ── TOP BAR ──────────────────────────────────────────────── -->
-<header class="top-bar">
-  <div class="top-bar-logo">
-    <i class="fas fa-graduation-cap"></i> EduLearn
-  </div>
-  <nav class="top-bar-links">
-    <a href="#features" class="hide-sm">Features</a>
-    <a href="#features" class="hide-sm">About</a>
-    <a href="#login" class="top-bar-btn-outline" id="topSignInBtn" onclick="switchTab('login');smoothScroll()">Sign In</a>
-    <a href="#register" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-weight:700;border-radius:8px;" onclick="switchTab('register');smoothScroll()">Create Account</a>
-  </nav>
-</header>
-
-<!-- ── HERO GRID ─────────────────────────────────────────────── -->
-<main class="hero-grid" id="login">
-  <!-- LEFT: marketing -->
-  <div class="hero-left">
-    <div class="hero-left-content w3-animate-opacity">
-      <span class="landing-badge"><i class="fas fa-star"></i> #1 Student Learning Platform</span>
-      <h1 class="landing-headline">
-        The smarter way<br>to <span class="grad">learn &amp; grow</span>
-      </h1>
-      <p class="landing-sub">
-        Access world-class courses, interactive quizzes, peer forums, and an academic
-        bookstore — all in one place for undergraduate students.
-      </p>
-      <div class="landing-features">
-        <div class="landing-feat"><i class="fas fa-book-open"></i> 120+ structured video courses &amp; lecture notes</div>
-        <div class="landing-feat"><i class="fas fa-chart-line"></i> Personalised progress tracking dashboard</div>
-        <div class="landing-feat"><i class="fas fa-comments"></i> Live peer discussion forum &amp; Q&amp;A</div>
-        <div class="landing-feat"><i class="fas fa-shopping-bag"></i> Integrated academic bookstore</div>
-        <div class="landing-feat"><i class="fas fa-mobile-alt"></i> Responsive – works on any device</div>
-      </div>
-      <div class="landing-stats">
-        <div class="l-stat"><span class="num">5,000+</span><span class="lbl">Students</span></div>
-        <div class="l-stat"><span class="num">120+</span><span class="lbl">Courses</span></div>
-        <div class="l-stat"><span class="num">50+</span><span class="lbl">Instructors</span></div>
-        <div class="l-stat"><span class="num">98%</span><span class="lbl">Satisfaction</span></div>
-      </div>
+  <!-- ── TOP BAR ──────────────────────────────────────────────── -->
+  <header class="top-bar">
+    <div class="top-bar-logo">
+      <i class="fas fa-graduation-cap"></i> EduLearn
     </div>
-  </div>
+    <nav class="top-bar-links">
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="#features" class="hide-sm">About</a>
+      <a href="#login" class="top-bar-btn-outline" id="topSignInBtn" onclick="switchTab('login');smoothScroll()">Sign
+        In</a>
+      <a href="#register"
+        style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-weight:700;border-radius:8px;"
+        onclick="switchTab('register');smoothScroll()">Create Account</a>
+    </nav>
+  </header>
 
-  <!-- RIGHT: auth card -->
-  <aside class="hero-right">
-    <div class="login-card w3-animate-bottom">
-      <!-- Tab row -->
-      <div class="auth-tabs-row">
-        <button class="auth-tab-btn active" id="tabLogin"    onclick="switchTab('login')">Sign In</button>
-        <button class="auth-tab-btn"        id="tabRegister" onclick="switchTab('register')">Create Account</button>
-      </div>
-
-      <!-- ── SIGN IN PANEL ── -->
-      <div id="panelLogin">
-        <div class="card-head">
-          <h2>Welcome back 👋</h2>
-          <p>Sign in to access your courses and portal</p>
-        </div>
-
-        <div id="loginErr" class="msg-box msg-error"></div>
-        <div id="loginOk"  class="msg-box msg-success"></div>
-
-        <div class="field-wrap">
-          <label class="field-lbl" for="liEmail">Email Address</label>
-          <input type="email" id="liEmail" class="field-input" placeholder="your@student.edu" autocomplete="email" />
-        </div>
-        <div class="field-wrap">
-          <label class="field-lbl" for="liPass">Password</label>
-          <input type="password" id="liPass" class="field-input" placeholder="Enter your password" autocomplete="current-password" style="padding-right:2.8rem;" />
-          <button type="button" class="eye-btn" onclick="toggleEye('liPass',this)"><i class="fas fa-eye"></i></button>
-        </div>
-        <div class="field-row">
-          <label><input type="checkbox" style="accent-color:#667eea;" /> Remember me</label>
-          <a href="#">Forgot password?</a>
-        </div>
-        <button class="submit-btn" id="loginBtn" onclick="doLogin()">
-          <i class="fas fa-sign-in-alt"></i> Sign In
-        </button>
-
-        <div class="divider-line"><span>or continue with</span></div>
-        <div class="social-row">
-          <button class="social-btn" onclick="demoSocial('Google')"><i class="fab fa-google" style="color:#ea4335;margin-right:5px;"></i>Google</button>
-          <button class="social-btn" onclick="demoSocial('Microsoft')"><i class="fab fa-microsoft" style="color:#00a4ef;margin-right:5px;"></i>Microsoft</button>
-        </div>
-
-        <div class="demo-hint"><i class="fas fa-info-circle" style="color:#667eea;"></i> Demo: <b>student@edu.com</b> / <b>password123</b></div>
-        <div class="switch-msg">New to EduLearn? <a href="#" onclick="switchTab('register')">Create a free account</a></div>
-      </div><!-- /panelLogin -->
-
-      <!-- ── CREATE ACCOUNT PANEL ── -->
-      <div id="panelRegister" style="display:none;">
-        <div class="card-head">
-          <h2>Join EduLearn 🎓</h2>
-          <p>Free student registration — no credit card needed</p>
-        </div>
-
-        <div id="regErr" class="msg-box msg-error"></div>
-        <div id="regOk"  class="msg-box msg-success"></div>
-
-        <div style="display:flex;gap:0.6rem;">
-          <div class="field-wrap" style="flex:1;">
-            <label class="field-lbl" for="rgFirst">First Name</label>
-            <input type="text" id="rgFirst" class="field-input" placeholder="Ahmad" />
+  <!-- ── HERO GRID ─────────────────────────────────────────────── -->
+  <main class="hero-grid" id="login">
+    <!-- LEFT: marketing -->
+    <div class="hero-left">
+      <div class="hero-left-content w3-animate-opacity">
+        <span class="landing-badge"><i class="fas fa-star"></i> #1 Student Learning Platform</span>
+        <h1 class="landing-headline">
+          The smarter way<br>to <span class="grad">learn &amp; grow</span>
+        </h1>
+        <p class="landing-sub">
+          Access world-class courses, interactive quizzes, peer forums, and an academic
+          bookstore — all in one place for undergraduate students.
+        </p>
+        <div class="landing-features">
+          <div class="landing-feat"><i class="fas fa-book-open"></i> 120+ structured video courses &amp; lecture notes
           </div>
-          <div class="field-wrap" style="flex:1;">
-            <label class="field-lbl" for="rgLast">Last Name</label>
-            <input type="text" id="rgLast" class="field-input" placeholder="Farid" />
+          <div class="landing-feat"><i class="fas fa-chart-line"></i> Personalised progress tracking dashboard</div>
+          <div class="landing-feat"><i class="fas fa-comments"></i> Live peer discussion forum &amp; Q&amp;A</div>
+          <div class="landing-feat"><i class="fas fa-shopping-bag"></i> Integrated academic bookstore</div>
+          <div class="landing-feat"><i class="fas fa-mobile-alt"></i> Responsive – works on any device</div>
+        </div>
+        <div class="landing-stats">
+          <div class="l-stat"><span class="num">5,000+</span><span class="lbl">Students</span></div>
+          <div class="l-stat"><span class="num">120+</span><span class="lbl">Courses</span></div>
+          <div class="l-stat"><span class="num">50+</span><span class="lbl">Instructors</span></div>
+          <div class="l-stat"><span class="num">98%</span><span class="lbl">Satisfaction</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: auth card -->
+    <aside class="hero-right">
+      <div class="login-card w3-animate-bottom">
+        <!-- Tab row -->
+        <div class="auth-tabs-row">
+          <button class="auth-tab-btn active" id="tabLogin" onclick="switchTab('login')">Sign In</button>
+          <button class="auth-tab-btn" id="tabRegister" onclick="switchTab('register')">Create Account</button>
+        </div>
+
+        <!-- ── SIGN IN PANEL ── -->
+        <div id="panelLogin">
+          <div class="card-head">
+            <h2>Welcome back 👋</h2>
+            <p>Sign in to access your courses and portal</p>
           </div>
-        </div>
-        <div class="field-wrap">
-          <label class="field-lbl" for="rgEmail">Email Address</label>
-          <input type="email" id="rgEmail" class="field-input" placeholder="your@student.edu" />
-        </div>
-        <div class="field-wrap">
-          <label class="field-lbl" for="rgProg">Programme</label>
-          <select id="rgProg" class="field-input" style="appearance:auto;cursor:pointer;">
-            <option value="">-- Select Programme --</option>
-            <option>Computer Science</option>
-            <option>Information Technology</option>
-            <option>Software Engineering</option>
-            <option>Cybersecurity</option>
-            <option>Data Science</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field-wrap">
-          <label class="field-lbl" for="rgPass">Password</label>
-          <input type="password" id="rgPass" class="field-input" placeholder="Min. 8 characters" style="padding-right:2.8rem;" oninput="strengthCheck(this.value)" />
-          <button type="button" class="eye-btn" onclick="toggleEye('rgPass',this)"><i class="fas fa-eye"></i></button>
-          <div style="margin-top:5px;height:4px;border-radius:4px;background:rgba(255,255,255,0.07);overflow:hidden;">
-            <div id="strengthBar" style="height:100%;width:0%;border-radius:4px;transition:all 0.3s;"></div>
+
+          <div id="loginErr" class="msg-box msg-error"></div>
+          <div id="loginOk" class="msg-box msg-success"></div>
+
+          <div class="field-wrap">
+            <label class="field-lbl" for="liEmail">Email Address</label>
+            <input type="email" id="liEmail" class="field-input" placeholder="your@student.edu" autocomplete="email" />
           </div>
-          <span id="strengthLbl" style="font-size:0.71rem;color:#4b5c7e;"></span>
-        </div>
-        <div class="field-wrap">
-          <label class="field-lbl" for="rgConf">Confirm Password</label>
-          <input type="password" id="rgConf" class="field-input" placeholder="Re-enter password" style="padding-right:2.8rem;" />
-          <button type="button" class="eye-btn" onclick="toggleEye('rgConf',this)"><i class="fas fa-eye"></i></button>
-        </div>
-        <div style="margin-bottom:1rem;">
-          <label style="display:flex;align-items:flex-start;gap:8px;color:#6b7fa8;font-size:0.8rem;cursor:pointer;">
-            <input type="checkbox" id="rgAgree" style="accent-color:#667eea;margin-top:2px;" />
-            I agree to the <a href="#" style="color:#667eea;font-weight:600;">Terms of Service</a> and <a href="#" style="color:#667eea;font-weight:600;">Privacy Policy</a>
-          </label>
-        </div>
-        <button class="submit-btn" id="registerBtn" onclick="doRegister()">
-          <i class="fas fa-user-plus"></i> Create Account
-        </button>
-        <div class="switch-msg">Already have an account? <a href="#" onclick="switchTab('login')">Sign in</a></div>
-      </div><!-- /panelRegister -->
+          <div class="field-wrap">
+            <label class="field-lbl" for="liPass">Password</label>
+            <input type="password" id="liPass" class="field-input" placeholder="Enter your password"
+              autocomplete="current-password" style="padding-right:2.8rem;" />
+            <button type="button" class="eye-btn" onclick="toggleEye('liPass',this)"><i class="fas fa-eye"></i></button>
+          </div>
+          <div class="field-row">
+            <label><input type="checkbox" style="accent-color:#667eea;" /> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+          <button class="submit-btn" id="loginBtn" onclick="doLogin()">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>
 
-    </div><!-- /login-card -->
-  </aside>
-</main>
+          <div class="divider-line"><span>or continue with</span></div>
+          <div class="social-row">
+            <button class="social-btn" onclick="demoSocial('Google')"><i class="fab fa-google"
+                style="color:#ea4335;margin-right:5px;"></i>Google</button>
+            <button class="social-btn" onclick="demoSocial('Microsoft')"><i class="fab fa-microsoft"
+                style="color:#00a4ef;margin-right:5px;"></i>Microsoft</button>
+          </div>
 
-<!-- ── FEATURES ──────────────────────────────────────────────── -->
-<section class="features-section" id="features">
-  <h2>Everything You Need to Succeed</h2>
-  <p>One platform. All your academic tools. Built for undergraduate students.</p>
-  <div class="feat-grid">
-    <div class="feat-box">
-      <div class="feat-box-icon">📚</div>
-      <h3>Structured Courses</h3>
-      <p>Lecture notes, video tutorials, and quizzes organised by subject and module.</p>
+          <div class="demo-hint"><i class="fas fa-info-circle" style="color:#667eea;"></i> Demo: <b>student@edu.com</b>
+            / <b>password123</b></div>
+          <div class="switch-msg">New to EduLearn? <a href="#" onclick="switchTab('register')">Create a free account</a>
+          </div>
+        </div><!-- /panelLogin -->
+
+        <!-- ── CREATE ACCOUNT PANEL ── -->
+        <div id="panelRegister" style="display:none;">
+          <div class="card-head">
+            <h2>Join EduLearn 🎓</h2>
+            <p>Free student registration — no credit card needed</p>
+          </div>
+
+          <div id="regErr" class="msg-box msg-error"></div>
+          <div id="regOk" class="msg-box msg-success"></div>
+
+          <div style="display:flex;gap:0.6rem;">
+            <div class="field-wrap" style="flex:1;">
+              <label class="field-lbl" for="rgFirst">First Name</label>
+              <input type="text" id="rgFirst" class="field-input" placeholder="Ahmad" />
+            </div>
+            <div class="field-wrap" style="flex:1;">
+              <label class="field-lbl" for="rgLast">Last Name</label>
+              <input type="text" id="rgLast" class="field-input" placeholder="Farid" />
+            </div>
+          </div>
+          <div class="field-wrap">
+            <label class="field-lbl" for="rgEmail">Email Address</label>
+            <input type="email" id="rgEmail" class="field-input" placeholder="your@student.edu" />
+          </div>
+
+          <div class="field-wrap">
+            <label class="field-lbl" for="rgPass">Password</label>
+            <input type="password" id="rgPass" class="field-input" placeholder="Min. 8 characters"
+              style="padding-right:2.8rem;" oninput="strengthCheck(this.value)" />
+            <button type="button" class="eye-btn" onclick="toggleEye('rgPass',this)"><i class="fas fa-eye"></i></button>
+            <div style="margin-top:5px;height:4px;border-radius:4px;background:rgba(255,255,255,0.07);overflow:hidden;">
+              <div id="strengthBar" style="height:100%;width:0%;border-radius:4px;transition:all 0.3s;"></div>
+            </div>
+            <span id="strengthLbl" style="font-size:0.71rem;color:#4b5c7e;"></span>
+          </div>
+          <div class="field-wrap">
+            <label class="field-lbl" for="rgConf">Confirm Password</label>
+            <input type="password" id="rgConf" class="field-input" placeholder="Re-enter password"
+              style="padding-right:2.8rem;" />
+            <button type="button" class="eye-btn" onclick="toggleEye('rgConf',this)"><i class="fas fa-eye"></i></button>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <label style="display:flex;align-items:flex-start;gap:8px;color:#6b7fa8;font-size:0.8rem;cursor:pointer;">
+              <input type="checkbox" id="rgAgree" style="accent-color:#667eea;margin-top:2px;" />
+              I agree to the <a href="#" style="color:#667eea;font-weight:600;">Terms of Service</a> and <a href="#"
+                style="color:#667eea;font-weight:600;">Privacy Policy</a>
+            </label>
+          </div>
+          <button class="submit-btn" id="registerBtn" onclick="doRegister()">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+          <div class="switch-msg">Already have an account? <a href="#" onclick="switchTab('login')">Sign in</a></div>
+        </div><!-- /panelRegister -->
+
+      </div><!-- /login-card -->
+    </aside>
+  </main>
+
+  <!-- ── FEATURES ──────────────────────────────────────────────── -->
+  <section class="features-section" id="features">
+    <h2>Everything You Need to Succeed</h2>
+    <p>One platform. All your academic tools. Built for undergraduate students.</p>
+    <div class="feat-grid">
+      <div class="feat-box">
+        <div class="feat-box-icon">📚</div>
+        <h3>Structured Courses</h3>
+        <p>Lecture notes, video tutorials, and quizzes organised by subject and module.</p>
+      </div>
+      <div class="feat-box">
+        <div class="feat-box-icon">📊</div>
+        <h3>Progress Tracking</h3>
+        <p>Visualise your learning journey with real-time progress bars and stats.</p>
+      </div>
+      <div class="feat-box">
+        <div class="feat-box-icon">💬</div>
+        <h3>Discussion Forum</h3>
+        <p>Peer-to-peer Q&amp;A, moderated posts, and category-based discussion threads.</p>
+      </div>
+      <div class="feat-box">
+        <div class="feat-box-icon">🛒</div>
+        <h3>Academic Bookstore</h3>
+        <p>Search, filter, and purchase academic books with a full shopping cart system.</p>
+      </div>
     </div>
-    <div class="feat-box">
-      <div class="feat-box-icon">📊</div>
-      <h3>Progress Tracking</h3>
-      <p>Visualise your learning journey with real-time progress bars and stats.</p>
-    </div>
-    <div class="feat-box">
-      <div class="feat-box-icon">💬</div>
-      <h3>Discussion Forum</h3>
-      <p>Peer-to-peer Q&amp;A, moderated posts, and category-based discussion threads.</p>
-    </div>
-    <div class="feat-box">
-      <div class="feat-box-icon">🛒</div>
-      <h3>Academic Bookstore</h3>
-      <p>Search, filter, and purchase academic books with a full shopping cart system.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── MINI FOOTER ────────────────────────────────────────────── -->
-<footer class="mini-footer">
-  <p>&copy; 2025 EduLearn — Built with <a href="https://www.w3schools.com/w3css/" target="_blank">W3.CSS</a> &nbsp;|&nbsp; <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Terms</a></p>
-</footer>
+  <!-- ── MINI FOOTER ────────────────────────────────────────────── -->
+  <footer class="mini-footer">
+    <p>&copy; 2025 EduLearn — Built with <a href="https://www.w3schools.com/w3css/" target="_blank">W3.CSS</a>
+      &nbsp;|&nbsp; <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Terms</a></p>
+  </footer>
 
-<script src="db.js"></script>
-<script>
-  // If already logged in → go straight to dashboard
-  if (EduDB.isLoggedIn()) { window.location.href = 'dashboard.html'; }
+  <script src="db.js"></script>
+  <script>
+    // If already logged in → go straight to dashboard
+    if (EduDB.isLoggedIn()) { window.location.href = 'dashboard.html'; }
 
-  /* ── Tab switching ── */
-  function switchTab(t) {
-    var isLogin = t === 'login';
-    document.getElementById('panelLogin').style.display    = isLogin ? 'block' : 'none';
-    document.getElementById('panelRegister').style.display = isLogin ? 'none'  : 'block';
-    document.getElementById('tabLogin').classList.toggle('active', isLogin);
-    document.getElementById('tabRegister').classList.toggle('active', !isLogin);
-  }
-  function smoothScroll() {
-    document.getElementById('login').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  /* ── Eye toggle ── */
-  function toggleEye(id, btn) {
-    var inp = document.getElementById(id);
-    inp.type = inp.type === 'password' ? 'text' : 'password';
-    btn.querySelector('i').className = inp.type === 'text' ? 'fas fa-eye-slash' : 'fas fa-eye';
-  }
-
-  /* ── Password strength ── */
-  function strengthCheck(v) {
-    var s = 0;
-    if (v.length >= 8)         s++;
-    if (/[A-Z]/.test(v))       s++;
-    if (/[0-9]/.test(v))       s++;
-    if (/[^A-Za-z0-9]/.test(v)) s++;
-    var cols  = ['#ef4444','#f59e0b','#3b82f6','#10b981'];
-    var lbls  = ['Weak','Fair','Good','Strong'];
-    var bar   = document.getElementById('strengthBar');
-    var lbl   = document.getElementById('strengthLbl');
-    if (!v) { bar.style.width='0%'; lbl.textContent=''; return; }
-    bar.style.width      = (s * 25) + '%';
-    bar.style.background = cols[s - 1] || '#ef4444';
-    lbl.style.color      = cols[s - 1] || '#ef4444';
-    lbl.textContent      = lbls[s - 1] || 'Weak';
-  }
-
-  /* ── Login ── */
-  function doLogin() {
-    var email = document.getElementById('liEmail').value.trim();
-    var pass  = document.getElementById('liPass').value;
-    var errD  = document.getElementById('loginErr');
-    var okD   = document.getElementById('loginOk');
-    var btn   = document.getElementById('loginBtn');
-    errD.style.display = 'none'; okD.style.display = 'none';
-
-    if (!email || !pass) {
-      errD.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter your email and password.';
-      errD.style.display = 'block'; return;
+    /* ── Tab switching ── */
+    function switchTab(t) {
+      var isLogin = t === 'login';
+      document.getElementById('panelLogin').style.display = isLogin ? 'block' : 'none';
+      document.getElementById('panelRegister').style.display = isLogin ? 'none' : 'block';
+      document.getElementById('tabLogin').classList.toggle('active', isLogin);
+      document.getElementById('tabRegister').classList.toggle('active', !isLogin);
     }
-    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…';
-    setTimeout(function () {
-      var result = EduDB.login(email, pass);
-      btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
-      if (result.success) {
-        okD.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message + ' Redirecting…';
-        okD.style.display = 'block';
-        setTimeout(function () { window.location.href = 'dashboard.html'; }, 1200);
-      } else {
-        errD.innerHTML = '<i class="fas fa-times-circle"></i> ' + result.message;
-        errD.style.display = 'block';
-      }
-    }, 900);
-  }
-
-  /* ── Register ── */
-  function doRegister() {
-    var d = {
-      firstName: document.getElementById('rgFirst').value.trim(),
-      lastName:  document.getElementById('rgLast').value.trim(),
-      email:     document.getElementById('rgEmail').value.trim(),
-      programme: document.getElementById('rgProg').value,
-      password:  document.getElementById('rgPass').value,
-      confirm:   document.getElementById('rgConf').value
-    };
-    var errD = document.getElementById('regErr');
-    var okD  = document.getElementById('regOk');
-    var btn  = document.getElementById('registerBtn');
-    errD.style.display = 'none'; okD.style.display = 'none';
-
-    if (!document.getElementById('rgAgree').checked) {
-      errD.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please agree to the Terms of Service.';
-      errD.style.display = 'block'; return;
+    function smoothScroll() {
+      document.getElementById('login').scrollIntoView({ behavior: 'smooth' });
     }
-    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating…';
-    setTimeout(function () {
-      var result = EduDB.register(d);
-      btn.disabled = false; btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
-      if (result.success) {
-        okD.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message + ' Please sign in.';
-        okD.style.display = 'block';
-        setTimeout(function () { switchTab('login'); }, 2000);
-      } else {
-        errD.innerHTML = '<i class="fas fa-times-circle"></i> ' + result.message;
-        errD.style.display = 'block';
+
+    /* ── Eye toggle ── */
+    function toggleEye(id, btn) {
+      var inp = document.getElementById(id);
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+      btn.querySelector('i').className = inp.type === 'text' ? 'fas fa-eye-slash' : 'fas fa-eye';
+    }
+
+    /* ── Password strength ── */
+    function strengthCheck(v) {
+      var s = 0;
+      if (v.length >= 8) s++;
+      if (/[A-Z]/.test(v)) s++;
+      if (/[0-9]/.test(v)) s++;
+      if (/[^A-Za-z0-9]/.test(v)) s++;
+      var cols = ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'];
+      var lbls = ['Weak', 'Fair', 'Good', 'Strong'];
+      var bar = document.getElementById('strengthBar');
+      var lbl = document.getElementById('strengthLbl');
+      if (!v) { bar.style.width = '0%'; lbl.textContent = ''; return; }
+      bar.style.width = (s * 25) + '%';
+      bar.style.background = cols[s - 1] || '#ef4444';
+      lbl.style.color = cols[s - 1] || '#ef4444';
+      lbl.textContent = lbls[s - 1] || 'Weak';
+    }
+
+    /* ── Login ── */
+    function doLogin() {
+      var email = document.getElementById('liEmail').value.trim();
+      var pass = document.getElementById('liPass').value;
+      var errD = document.getElementById('loginErr');
+      var okD = document.getElementById('loginOk');
+      var btn = document.getElementById('loginBtn');
+      errD.style.display = 'none'; okD.style.display = 'none';
+
+      if (!email || !pass) {
+        errD.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter your email and password.';
+        errD.style.display = 'block'; return;
       }
-    }, 900);
-  }
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…';
+      setTimeout(function () {
+        var result = EduDB.login(email, pass);
+        btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        if (result.success) {
+          var target = result.user.role === 'admin' ? 'admin_dashboard.html' : 'dashboard.html';
+          okD.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message + ' Redirecting&hellip;';
+          okD.style.display = 'block';
+          setTimeout(function () { window.location.href = target; }, 1200);
+        } else {
+          errD.innerHTML = '<i class="fas fa-times-circle"></i> ' + result.message;
+          errD.style.display = 'block';
+        }
+      }, 900);
+    }
 
-  /* Allow Enter key to submit */
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Enter') return;
-    var active = document.getElementById('panelLogin').style.display !== 'none';
-    if (active) doLogin(); else doRegister();
-  });
+    /* ── Register ── */
+    function doRegister() {
+      var d = {
+        firstName: document.getElementById('rgFirst').value.trim(),
+        lastName: document.getElementById('rgLast').value.trim(),
+        email: document.getElementById('rgEmail').value.trim(),
+        password: document.getElementById('rgPass').value,
+        confirm: document.getElementById('rgConf').value
+      };
+      var errD = document.getElementById('regErr');
+      var okD = document.getElementById('regOk');
+      var btn = document.getElementById('registerBtn');
+      errD.style.display = 'none'; okD.style.display = 'none';
 
-  function demoSocial(p) {
-    var okD = document.getElementById('loginOk');
-    okD.innerHTML = '<i class="fas fa-info-circle"></i> ' + p + ' login is a demo feature.';
-    okD.style.display = 'block';
-    setTimeout(function () { okD.style.display = 'none'; }, 3000);
-  }
-</script>
+      if (!document.getElementById('rgAgree').checked) {
+        errD.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please agree to the Terms of Service.';
+        errD.style.display = 'block'; return;
+      }
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating…';
+      setTimeout(function () {
+        var result = EduDB.register(d);
+        btn.disabled = false; btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+        if (result.success) {
+          okD.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message + ' Please sign in.';
+          okD.style.display = 'block';
+          setTimeout(function () { switchTab('login'); }, 2000);
+        } else {
+          errD.innerHTML = '<i class="fas fa-times-circle"></i> ' + result.message;
+          errD.style.display = 'block';
+        }
+      }, 900);
+    }
+
+    /* Allow Enter key to submit */
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') return;
+      var active = document.getElementById('panelLogin').style.display !== 'none';
+      if (active) doLogin(); else doRegister();
+    });
+
+    function demoSocial(p) {
+      var okD = document.getElementById('loginOk');
+      okD.innerHTML = '<i class="fas fa-info-circle"></i> ' + p + ' login is a demo feature.';
+      okD.style.display = 'block';
+      setTimeout(function () { okD.style.display = 'none'; }, 3000);
+    }
+  </script>
 </body>
+
 </html>
