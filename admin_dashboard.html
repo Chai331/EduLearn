@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="EduLearn Admin Dashboard – Manage books and courses."/>
+<title>Admin Dashboard – EduLearn</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.admin-tab-row { display:flex; background:#fff; border-bottom:2px solid #e5e7eb; position:sticky; top:65px; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+.admin-tab-btn { padding:1rem 1.5rem; border:none; background:transparent; font-family:Inter,sans-serif; font-size:.9rem; font-weight:700; color:#6b7280; cursor:pointer; border-bottom:3px solid transparent; transition:all .2s; flex:1; text-align:center; }
+.admin-tab-btn:hover { color:#ef4444; }
+.admin-tab-btn.active { color:#ef4444; border-bottom-color:#ef4444; background:#fef2f2; }
+.admin-card { background:#fff; border-radius:12px; padding:1.5rem; box-shadow:0 4px 15px rgba(0,0,0,.05); margin-bottom:1.5rem; }
+.admin-input { width:100%; padding:.8rem 1rem; border:1px solid #d1d5db; border-radius:8px; font-family:Inter,sans-serif; margin-bottom:1rem; outline:none; transition:border-color .2s; }
+.admin-input:focus { border-color:#ef4444; }
+.admin-btn { background:linear-gradient(135deg,#ef4444,#991b1b); color:#fff; border:none; padding:.8rem 1.5rem; border-radius:8px; font-weight:700; cursor:pointer; width:100%; transition:opacity .2s; font-family:Inter,sans-serif;}
+.admin-btn:hover { opacity:.85; }
+.list-item { display:flex; justify-content:space-between; align-items:center; padding:1rem; border:1px solid #e5e7eb; border-radius:8px; margin-bottom:.5rem; background:#f9fafb;}
+.btn-delete { background:#fee2e2; color:#ef4444; border:none; padding:.4rem .8rem; border-radius:6px; cursor:pointer; font-weight:600; font-size:.8rem; }
+.btn-delete:hover { background:#fca5a5; color:#7f1d1d; }
+.toast { position:fixed; bottom:24px; right:24px; z-index:9999; background:#1a1a2e; color:#fff; padding:.8rem 1.2rem; border-radius:12px; font-size:.85rem; font-weight:600; box-shadow:0 8px 24px rgba(0,0,0,.3); display:none; }
+</style>
+</head>
+<body style="background:#f5f7fa;">
+
+<!-- NAVBAR -->
+<nav class="w3-bar edu-navbar w3-top" id="mainNav">
+  <a href="admin_dashboard.html" class="w3-bar-item brand-logo" style="color:#ef4444;"><i class="fas fa-user-shield"></i> EduLearn Admin</a>
+  <div class="w3-right">
+    <span class="w3-bar-item nav-link" id="navGreet" style="color:#fca5a5;cursor:default;"></span>
+    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</nav>
+
+<div class="page-header" style="background:linear-gradient(135deg, #7f1d1d, #450a0a);">
+  <div class="w3-content container-max">
+    <h1><i class="fas fa-cog"></i> Admin Dashboard</h1>
+    <p>Manage bookstore inventory and course materials.</p>
+  </div>
+</div>
+
+<div class="admin-tab-row">
+  <button class="admin-tab-btn active" id="tabBtnBooks" onclick="switchTab('books')"><i class="fas fa-book"></i> Bookstore Management</button>
+  <button class="admin-tab-btn" id="tabBtnCourses" onclick="switchTab('courses')"><i class="fas fa-graduation-cap"></i> Course Management</button>
+</div>
+
+<section class="section-pad w3-content container-max" style="padding-top:2rem;">
+
+  <!-- BOOKSTORE TAB -->
+  <div id="tabBooks">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:2rem;">
+      <!-- Add Form -->
+      <div class="admin-card">
+        <h3 style="font-size:1.1rem;font-weight:800;color:#1a1a2e;margin-top:0;"><i class="fas fa-plus-circle"></i> Add New Book</h3>
+        <label>Book Title</label>
+        <input type="text" id="bTitle" class="admin-input" placeholder="e.g. Mastering Python"/>
+        <label>Category</label>
+        <select id="bCat" class="admin-input">
+          <option value="security">Security</option>
+          <option value="vision">Computer Vision</option>
+          <option value="ds">Data Structures</option>
+          <option value="general">General Programming</option>
+        </select>
+        <label>Description</label>
+        <textarea id="bDesc" class="admin-input" rows="3" placeholder="Brief description..."></textarea>
+        <label>Price (RM)</label>
+        <input type="number" id="bPrice" class="admin-input" placeholder="0.00" step="0.01"/>
+        <label>Cover Image URL</label>
+        <input type="text" id="bImg" class="admin-input" placeholder="e.g. Book/new.jpg or https://..."/>
+        <button class="admin-btn" onclick="uploadBook()"><i class="fas fa-upload"></i> Upload Book</button>
+      </div>
+
+      <!-- List -->
+      <div class="admin-card">
+        <h3 style="font-size:1.1rem;font-weight:800;color:#1a1a2e;margin-top:0;"><i class="fas fa-list"></i> Custom Uploaded Books</h3>
+        <p style="font-size:.85rem;color:#6b7280;margin-top:0;">(Hardcoded default books are not shown here)</p>
+        <div id="bookList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURSES TAB -->
+  <div id="tabCourses" style="display:none;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:2rem;">
+      <!-- Add Form -->
+      <div class="admin-card">
+        <h3 style="font-size:1.1rem;font-weight:800;color:#1a1a2e;margin-top:0;"><i class="fas fa-plus-circle"></i> Upload Material</h3>
+        <label>Select Course</label>
+        <select id="cCourse" class="admin-input">
+          <option value="calculus">Calculus</option>
+          <option value="cybersec">Computer and Cyber Security</option>
+          <option value="vision">Computer Vision & Image Processing</option>
+          <option value="ds">Data Structures and Algorithms</option>
+          <option value="se">Software Engineering</option>
+        </select>
+        <label>Material Type</label>
+        <select id="cTab" class="admin-input" onchange="document.getElementById('cTypeRow').style.display = this.value==='lectures'?'block':'none'">
+          <option value="lectures">Lecture Note</option>
+          <option value="tutorials">Tutorial Worksheet</option>
+        </select>
+        <label>Title</label>
+        <input type="text" id="cTitle" class="admin-input" placeholder="e.g. Week 1: Intro"/>
+        <label>Week Number</label>
+        <input type="number" id="cWeek" class="admin-input" placeholder="1"/>
+        <div id="cTypeRow">
+          <label>File Format</label>
+          <select id="cType" class="admin-input">
+            <option value="pdf">PDF Document</option>
+            <option value="video">Video Lecture</option>
+          </select>
+        </div>
+        <label>File URL</label>
+        <input type="text" id="cFile" class="admin-input" placeholder="e.g. https://example.com/file.pdf"/>
+        <button class="admin-btn" onclick="uploadMaterial()"><i class="fas fa-upload"></i> Upload Material</button>
+      </div>
+
+      <!-- List -->
+      <div class="admin-card">
+        <h3 style="font-size:1.1rem;font-weight:800;color:#1a1a2e;margin-top:0;"><i class="fas fa-list"></i> Custom Uploaded Materials</h3>
+        <p style="font-size:.85rem;color:#6b7280;margin-top:0;">Select a course to view uploaded materials.</p>
+        <select id="viewCourseSel" class="admin-input" style="max-width:300px;margin-bottom:1rem;" onchange="renderMaterials()">
+          <option value="calculus">Calculus</option>
+          <option value="cybersec">Computer and Cyber Security</option>
+          <option value="vision">Computer Vision & Image Processing</option>
+          <option value="ds">Data Structures and Algorithms</option>
+          <option value="se">Software Engineering</option>
+        </select>
+        <div id="materialList"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="toast" id="toast"></div>
+
+<script src="db.js"></script>
+<script>
+  var __sess = EduDB.getSession();
+  if (!__sess || __sess.role !== 'admin') {
+    window.location.href = 'index.html';
+  }
+
+  document.getElementById('navGreet').innerHTML = '<i class="fas fa-user-shield"></i> ' + __sess.firstName;
+
+  function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.innerHTML = msg; t.style.display = 'block';
+    setTimeout(function(){ t.style.display = 'none'; }, 3000);
+  }
+
+  function switchTab(tab) {
+    document.getElementById('tabBooks').style.display = tab === 'books' ? 'block' : 'none';
+    document.getElementById('tabCourses').style.display = tab === 'courses' ? 'block' : 'none';
+    document.getElementById('tabBtnBooks').className = 'admin-tab-btn' + (tab === 'books' ? ' active' : '');
+    document.getElementById('tabBtnCourses').className = 'admin-tab-btn' + (tab === 'courses' ? ' active' : '');
+  }
+
+  /* ── BOOKS ── */
+  function renderBooks() {
+    var books = EduDB.getCustomBooks();
+    var html = '';
+    if (books.length === 0) {
+      html = '<div style="padding:1rem;color:#9ca3af;text-align:center;">No custom books uploaded yet.</div>';
+    } else {
+      books.forEach(function(b) {
+        html += '<div class="list-item">' +
+                '<div>' +
+                  '<div style="font-weight:700;color:#1a1a2e;font-size:.9rem;">' + b.name + '</div>' +
+                  '<div style="font-size:.8rem;color:#6b7280;">RM ' + b.price + ' &middot; ' + b.cat + '</div>' +
+                '</div>' +
+                '<button class="btn-delete" onclick="deleteBook(\''+b.id+'\')"><i class="fas fa-trash"></i></button>' +
+                '</div>';
+      });
+    }
+    document.getElementById('bookList').innerHTML = html;
+  }
+
+  function uploadBook() {
+    var title = document.getElementById('bTitle').value.trim();
+    var cat = document.getElementById('bCat').value;
+    var desc = document.getElementById('bDesc').value.trim();
+    var price = document.getElementById('bPrice').value;
+    var img = document.getElementById('bImg').value.trim();
+
+    if(!title || !price || !img) {
+      showToast('⚠️ Please fill in title, price, and image URL.'); return;
+    }
+
+    EduDB.addCustomBook({ name: title, cat: cat, desc: desc, price: parseFloat(price).toFixed(2), image: img });
+    showToast('✅ Book uploaded successfully!');
+    
+    document.getElementById('bTitle').value = '';
+    document.getElementById('bDesc').value = '';
+    document.getElementById('bPrice').value = '';
+    document.getElementById('bImg').value = '';
+    renderBooks();
+  }
+
+  function deleteBook(id) {
+    if(confirm('Are you sure you want to delete this book?')) {
+      EduDB.deleteCustomBook(id);
+      renderBooks();
+    }
+  }
+
+  /* ── COURSES ── */
+  function renderMaterials() {
+    var courseId = document.getElementById('viewCourseSel').value;
+    var courses = EduDB.getCustomCourseMaterials();
+    var cData = courses[courseId];
+    
+    var html = '';
+    if (!cData || (cData.lectures.length === 0 && cData.tutorials.length === 0)) {
+      html = '<div style="padding:1rem;color:#9ca3af;text-align:center;">No custom materials for this course.</div>';
+    } else {
+      if (cData.lectures.length > 0) {
+        html += '<h4 style="font-size:.85rem;font-weight:700;color:#374151;text-transform:uppercase;margin:1rem 0 .5rem 0;">Lectures</h4>';
+        cData.lectures.forEach(function(m) {
+          html += '<div class="list-item">' +
+                  '<div><div style="font-weight:700;color:#1a1a2e;font-size:.9rem;">' + m.title + ' (Week ' + m.week + ')</div></div>' +
+                  '<button class="btn-delete" onclick="deleteMaterial(\''+courseId+'\', \'lectures\', \''+m.id+'\')"><i class="fas fa-trash"></i></button>' +
+                  '</div>';
+        });
+      }
+      if (cData.tutorials.length > 0) {
+        html += '<h4 style="font-size:.85rem;font-weight:700;color:#374151;text-transform:uppercase;margin:1rem 0 .5rem 0;">Tutorials</h4>';
+        cData.tutorials.forEach(function(m) {
+          html += '<div class="list-item">' +
+                  '<div><div style="font-weight:700;color:#1a1a2e;font-size:.9rem;">' + m.title + ' (Week ' + m.week + ')</div></div>' +
+                  '<button class="btn-delete" onclick="deleteMaterial(\''+courseId+'\', \'tutorials\', \''+m.id+'\')"><i class="fas fa-trash"></i></button>' +
+                  '</div>';
+        });
+      }
+    }
+    document.getElementById('materialList').innerHTML = html;
+  }
+
+  function uploadMaterial() {
+    var courseId = document.getElementById('cCourse').value;
+    var tab = document.getElementById('cTab').value;
+    var title = document.getElementById('cTitle').value.trim();
+    var week = document.getElementById('cWeek').value;
+    var file = document.getElementById('cFile').value.trim();
+    var type = document.getElementById('cType').value;
+
+    if(!title || !week || !file) {
+      showToast('⚠️ Please fill in title, week, and file URL.'); return;
+    }
+
+    var material = { title: title, week: parseInt(week), file: file, size: 'Unknown', type: tab==='lectures'?type:'pdf', tab: tab };
+    EduDB.addCustomCourseMaterial(courseId, material);
+    showToast('✅ Material uploaded successfully!');
+
+    document.getElementById('cTitle').value = '';
+    document.getElementById('cWeek').value = '';
+    document.getElementById('cFile').value = '';
+    document.getElementById('viewCourseSel').value = courseId;
+    renderMaterials();
+  }
+
+  function deleteMaterial(courseId, tab, id) {
+    if(confirm('Delete this material?')) {
+      EduDB.deleteCustomCourseMaterial(courseId, tab, id);
+      renderMaterials();
+    }
+  }
+
+  // Init
+  renderBooks();
+  renderMaterials();
+
+</script>
+</body>
+</html>
