@@ -1,0 +1,2035 @@
+{
+  "calculus": [
+    [
+      {
+        "q": "Given f(x) = 3 - 5x - 2x^2, find the value of f(4).",
+        "opts": [
+          "-49",
+          "-45",
+          "55",
+          "3"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "The difference quotient of a function f(x) is defined as (f(x+h) - f(x)) / h. If f(x) = 2x + 1, what is the result?",
+        "opts": [
+          "2h",
+          "2",
+          "1",
+          "2x"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Find the domain of the function f(x) = 1 / (x - 5).",
+        "opts": [
+          "x > 5",
+          "x < 5",
+          "x \u2260 5",
+          "All real numbers"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Determine the parity of the function f(x) = x^2 + 4.",
+        "opts": [
+          "Odd",
+          "Even",
+          "Neither",
+          "Both Odd and Even"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "What is the domain of the square root function g(x) = sqrt(x - 2)?",
+        "opts": [
+          "x \u2265 2",
+          "x > 2",
+          "x \u2260 2",
+          "x \u2264 2"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "If f(x) = x^2 and g(x) = x - 3, find (f \u2218 g)(x).",
+        "opts": [
+          "x^2 - 3",
+          "x^2 - 9",
+          "x^2 + 9",
+          "x^2 - 6x + 9"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "Which of the following describes the function f(x) = x^3 - x?",
+        "opts": [
+          "Even",
+          "Neither",
+          "Odd",
+          "Constant"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Using the function f(x) = 3 - 5x - 2x^2, what is f(-1)?",
+        "opts": [
+          "0",
+          "10",
+          "6",
+          "-4"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Identify the domain of f(x) = (x + 1) / (x^2 - 9).",
+        "opts": [
+          "x \u2260 3",
+          "x \u2260 -3",
+          "x \u2260 3 and x \u2260 -3",
+          "x > 3"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Given f(x) = 2x and g(x) = 3x + 1, find (g \u2218 f)(x).",
+        "opts": [
+          "6x + 1",
+          "6x + 2",
+          "5x + 1",
+          "6x^2 + x"
+        ],
+        "ans": 0
+      }
+    ],
+    [
+      {
+        "q": "Without using a calculator, find the exact value of sin(30\u00b0).",
+        "opts": [
+          "1/2",
+          "sqrt(2)/2",
+          "sqrt(3)/2",
+          "1"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "If cos(x) = 3/5 and x is in the first quadrant, what is the value of sin(x)?",
+        "opts": [
+          "2/5",
+          "4/5",
+          "3/4",
+          "1/5"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In a right triangle ABC with the right angle at C, if side c = 10 and angle A = 30\u00b0, find the length of side a (opposite to angle A).",
+        "opts": [
+          "5",
+          "5sqrt(3)",
+          "10",
+          "20"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Use the Law of Cosines to find the length of side a if b = 5, c = 8, and angle A = 60\u00b0.",
+        "opts": [
+          "7",
+          "sqrt(129)",
+          "9",
+          "sqrt(39)"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Solve the exponential equation for x: 3^(x+1) = 27.",
+        "opts": [
+          "x = 1",
+          "x = 2",
+          "x = 3",
+          "x = 4"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "You deposit $1500 in an account that pays 5% interest compounded yearly. Which formula represents the balance after 6 years?",
+        "opts": [
+          "1500(1 + 0.05)^6",
+          "1500(0.05)^6",
+          "1500 + (0.05 \u00d7 6)",
+          "1500(1 + 5)^6"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "A mice population of 25,000 is decreasing by 20% each year. What is the population after 3 years?",
+        "opts": [
+          "10,000",
+          "12,800",
+          "15,000",
+          "20,000"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which of the following is the correct double-angle formula for sin(2x)?",
+        "opts": [
+          "sin^2 x \u2212 cos^2 x",
+          "2 sin x cos x",
+          "2 sin x",
+          "sin x + cos x"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "If interest is compounded continuously, which formula is used to find the balance A after t years?",
+        "opts": [
+          "A = P(1 + r/m)^(mt)",
+          "A = Pe^(rt)",
+          "A = P(1 + r)^t",
+          "A = Prt"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Find the equation of the line that passes through the point (1, -1) with a slope of 3.",
+        "opts": [
+          "y = 3x - 4",
+          "y = 3x + 1",
+          "y = 3x - 1",
+          "y = 3x + 4"
+        ],
+        "ans": 0
+      }
+    ],
+    [
+      {
+        "q": "Without using a calculator, find the exact value of sin(30\u00b0).",
+        "opts": [
+          "1/2",
+          "sqrt(2)/2",
+          "sqrt(3)/2",
+          "1"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "If cos(x) = 3/5 and x is in the first quadrant, what is the value of sin(x)?",
+        "opts": [
+          "2/5",
+          "4/5",
+          "3/4",
+          "1/5"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In a right triangle ABC with the right angle at C, if side c = 10 and angle A = 30\u00b0, find the length of side a (opposite to angle A).",
+        "opts": [
+          "5",
+          "5sqrt(3)",
+          "10",
+          "20"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Use the Law of Cosines to find the length of side a if b = 5, c = 8, and angle A = 60\u00b0.",
+        "opts": [
+          "7",
+          "sqrt(129)",
+          "9",
+          "sqrt(39)"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Solve the exponential equation for x: 3^(x+1) = 27.",
+        "opts": [
+          "x = 1",
+          "x = 2",
+          "x = 3",
+          "x = 4"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "You deposit $1500 in an account that pays 5% interest compounded yearly. Which formula represents the balance after 6 years?",
+        "opts": [
+          "1500(1 + 0.05)^6",
+          "1500(0.05)^6",
+          "1500 + (0.05 \u00d7 6)",
+          "1500(1 + 5)^6"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "A mice population of 25,000 is decreasing by 20% each year. What is the population after 3 years?",
+        "opts": [
+          "10,000",
+          "12,800",
+          "15,000",
+          "20,000"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which of the following is the correct double-angle formula for sin(2x)?",
+        "opts": [
+          "sin^2 x \u2212 cos^2 x",
+          "2 sin x cos x",
+          "2 sin x",
+          "sin x + cos x"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "If interest is compounded continuously, which formula is used to find the balance A after t years?",
+        "opts": [
+          "A = P(1 + r/m)^(mt)",
+          "A = Pe^(rt)",
+          "A = P(1 + r)^t",
+          "A = Prt"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Find the equation of the line that passes through the point (1, -1) with a slope of 3.",
+        "opts": [
+          "y = 3x - 4",
+          "y = 3x + 1",
+          "y = 3x - 1",
+          "y = 3x + 4"
+        ],
+        "ans": 0
+      }
+    ],
+    [],
+    [
+      {
+        "q": "Determine the parity of the function f(x) = x^2 + 4",
+        "opts": [
+          "Odd function",
+          "Even function",
+          "Neither even nor odd",
+          "Both even and odd",
+          "2x",
+          "2x + 3",
+          "x + 3",
+          "2x - 1",
+          "f(x)",
+          "The integral of f(x)",
+          "The derivative f'(x) at that point",
+          "The value of x at the y-intercept",
+          "f'(x) * g'(x)",
+          "f'(x) + g'(x)",
+          "f'(x)g(x) + f(x)g'(x)",
+          "f(x)g(x) + f'(x)g'(x)",
+          "cos(x)",
+          "-cos(x)",
+          "sin(x)",
+          "-sin(x)",
+          "Power Rule only",
+          "Implicit differentiation",
+          "Quotient Rule only",
+          "Product Rule only"
+        ],
+        "ans": 1
+      }
+    ]
+  ],
+  "cybersec": [
+    [
+      {
+        "q": "Which of the following is NOT one of the three core goals of the CIA Triad?",
+        "opts": [
+          "Confidentiality",
+          "Integrity",
+          "Availability",
+          "Auditability"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "A security control that relies on human implementation (e.g., policies or training) is categorized as:",
+        "opts": [
+          "Technical Control",
+          "Managerial Control",
+          "Operational Control",
+          "Physical Control"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "In a security exercise, which team is responsible for performing the defensive role?",
+        "opts": [
+          "Red Team",
+          "Blue Team",
+          "White Team",
+          "Purple Team"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In the penetration testing life cycle, establishing a command and control backdoor to reconnect after a reboot is called:",
+        "opts": [
+          "Initial Exploitation",
+          "Persistence",
+          "Lateral Movement",
+          "Pivoting"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which property ensures that a sender cannot deny having sent a message?",
+        "opts": [
+          "Confidentiality",
+          "Non-repudiation",
+          "Availability",
+          "Integrity"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A highly sophisticated, nation-state sponsored attacker characterized by long-term persistence is an:",
+        "opts": [
+          "Script Kiddie",
+          "Hacktivist",
+          "APT (Advanced Persistent Threat)",
+          "Insider Threat"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "The process of identifying which TCP/UDP ports are open on a target system is known as:",
+        "opts": [
+          "Host Discovery",
+          "Port Scanning",
+          "Fingerprinting",
+          "Enumeration"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which Windows command is used to display the IP configuration of the local host?",
+        "opts": [
+          "ping",
+          "netstat",
+          "ipconfig",
+          "nslookup"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "A vulnerability that is unknown to the vendor and has no available patch is called a:",
+        "opts": [
+          "Zero-day",
+          "Legacy vulnerability",
+          "Weak configuration",
+          "Logic bomb"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Which tool is primarily used for packet capture and protocol analysis?",
+        "opts": [
+          "Nessus",
+          "Nmap",
+          "Wireshark",
+          "Metasploit"
+        ],
+        "ans": 2
+      }
+    ],
+    [
+      {
+        "q": "Phishing conducted specifically via voice channels or VoIP is called:",
+        "opts": [
+          "Smishing",
+          "Vishing",
+          "Whaling",
+          "Pharming"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A phishing attack specifically targeted at high-level executives (e.g., CEO) is:",
+        "opts": [
+          "Spear Phishing",
+          "Whaling",
+          "Spim",
+          "Pharming"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Malware that appears to be a legitimate program but contains a hidden malicious function is a:",
+        "opts": [
+          "Worm",
+          "Virus",
+          "Trojan",
+          "Rootkit"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Redirecting a user to a malicious website by corrupting DNS resolution is known as:",
+        "opts": [
+          "Typosquatting",
+          "Pharming",
+          "Watering Hole",
+          "Pretexting"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "An attacker following an authorized person through a secure door without a badge is:",
+        "opts": [
+          "Shoulder Surfing",
+          "Dumpster Diving",
+          "Tailgating",
+          "Piggybacking"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Malware that operates entirely in the system's RAM to avoid detection by disk scanners is:",
+        "opts": [
+          "Macro Virus",
+          "Fileless Malware",
+          "Adware",
+          "Spyware"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which social engineering principle rushes a target into making a decision?",
+        "opts": [
+          "Authority",
+          "Consensus",
+          "Urgency",
+          "Familiarity"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Malware that encrypts a user's files and demands payment for the decryption key is:",
+        "opts": [
+          "Ransomware/Crypto-malware",
+          "Logic Bomb",
+          "Keylogger",
+          "Rootkit"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Malicious code that remains dormant until a specific event or time triggers it is a:",
+        "opts": [
+          "Backdoor",
+          "Logic Bomb",
+          "RAT",
+          "Worm"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Identifying a site frequently visited by a target group and infecting that site is a:",
+        "opts": [
+          "Spear Phishing attack",
+          "Watering Hole attack",
+          "Phishing attack",
+          "Pharming attack"
+        ],
+        "ans": 1
+      }
+    ],
+    [
+      {
+        "q": "Which of the following is considered a \"Something You Know\" factor?",
+        "opts": [
+          "Smart card",
+          "PIN",
+          "Fingerprint",
+          "USB Token"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Multifactor Authentication (MFA) requires at least:",
+        "opts": [
+          "Two different passwords",
+          "Two different types (factors) of authentication",
+          "A password and a recovery email",
+          "A PIN and a pattern"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which authentication protocol is commonly used for Single Sign-On (SSO) in Windows domains?",
+        "opts": [
+          "PAP",
+          "CHAP",
+          "Kerberos",
+          "RADIUS"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "In biometrics, if a legitimate user is incorrectly denied access, it is a:",
+        "opts": [
+          "False Acceptance (Type II)",
+          "False Rejection (Type I)",
+          "Crossover Error",
+          "Throughput Error"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A policy that requires employees to take time off to help uncover potential fraud is:",
+        "opts": [
+          "Job Rotation",
+          "Mandatory Vacation",
+          "Separation of Duties",
+          "Clean Desk"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Managing identities across multiple distinct networks or organizations is called:",
+        "opts": [
+          "Centralized Management",
+          "Federated Identity Management",
+          "Directory Services",
+          "Local Authentication"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which access control model allows the owner of a resource to set permissions?",
+        "opts": [
+          "MAC (Mandatory Access Control)",
+          "DAC (Discretionary Access Control)",
+          "RBAC (Role-based Access Control)",
+          "ABAC (Attribute-based Access Control)"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In Linux, the file that stores encrypted user password hashes is:",
+        "opts": [
+          "/etc/passwd",
+          "/etc/shadow",
+          "/etc/group",
+          "/etc/sudoers"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "An attack using precomputed hash values to crack passwords is called a:",
+        "opts": [
+          "Brute Force attack",
+          "Dictionary attack",
+          "Rainbow Table attack",
+          "Birthday attack"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "A One-Time Password (OTP) sent to a user via SMS or email is an example of:",
+        "opts": [
+          "Knowledge factor",
+          "2-Step Verification",
+          "Biometric factor",
+          "Static code"
+        ],
+        "ans": 1
+      }
+    ],
+    [
+      {
+        "q": "Which OSI layer is responsible for routing data based on IP addresses?",
+        "opts": [
+          "Layer 2 (Data Link)",
+          "Layer 3 (Network)",
+          "Layer 4 (Transport)",
+          "Layer 7 (Application)"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A network switch creates logical segments within a physical network using:",
+        "opts": [
+          "Subnets",
+          "VLANs",
+          "VPNs",
+          "NAT"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A network segment that acts as a buffer between the internal network and the internet is a:",
+        "opts": [
+          "Honeypot",
+          "DMZ (Demilitarized Zone)",
+          "Intranet",
+          "Extranet"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "If a firewall packet does not match any specific rule, it is blocked by the:",
+        "opts": [
+          "Explicit Permit",
+          "Implicit Deny",
+          "Default Allow",
+          "Dynamic ACL"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A firewall that filters packets based only on source/destination IP and port without tracking sessions is:",
+        "opts": [
+          "Stateful",
+          "Stateless",
+          "Application-aware",
+          "Next-Generation"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which wireless security standard improved on WPA with AES encryption and 802.1X support?",
+        "opts": [
+          "WEP",
+          "WPA (TKIP)",
+          "WPA2",
+          "WPA3"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "A massive volume of traffic from multiple compromised hosts intended to crash a service is a:",
+        "opts": [
+          "DoS attack",
+          "DDoS attack",
+          "MITM attack",
+          "Spoofing attack"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which protocol provides secure file transfer over an encrypted SSH connection (Port 22)?",
+        "opts": [
+          "FTP",
+          "SFTP",
+          "FTPS",
+          "HTTP"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In load balancing, \"Persistence\" or \"Source IP Affinity\" is used to:",
+        "opts": [
+          "Distribute load evenly",
+          "Keep a client connected to the same server for a session",
+          "Encrypt the data",
+          "Block DDoS attacks"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A system that monitors network traffic and can actively block malicious packets is an:",
+        "opts": [
+          "IDS",
+          "IPS",
+          "Firewall",
+          "SIEM"
+        ],
+        "ans": 1
+      }
+    ],
+    [
+      {
+        "q": "The hardware chip used to store cryptographic keys and provide a Hardware Root of Trust is:",
+        "opts": [
+          "CPU",
+          "TPM",
+          "BIOS",
+          "HSM"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A feature that prevents unauthorized operating systems or \"rootkits\" from loading during boot is:",
+        "opts": [
+          "Full Disk Encryption",
+          "Secure Boot",
+          "Sandboxing",
+          "Antivirus"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Reducing a system's attack surface by disabling unnecessary services and closing unused ports is:",
+        "opts": [
+          "Patching",
+          "Hardening",
+          "Auditing",
+          "Fuzzing"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "An attack where an input exceeds the allocated memory, allowing the attacker to execute code is:",
+        "opts": [
+          "SQL Injection",
+          "Buffer Overflow",
+          "XSS",
+          "CSRF"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "An attack where malicious scripts are injected into web pages and executed in a victim's browser is:",
+        "opts": [
+          "SQL Injection",
+          "XSS (Cross-Site Scripting)",
+          "CSRF (Cross-Site Request Forgery)",
+          "Directory Traversal"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Manipulating a backend database by inserting malicious commands into an input field is:",
+        "opts": [
+          "Command Injection",
+          "SQL Injection",
+          "LDAP Injection",
+          "XML Injection"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A software development life cycle (SDLC) that focuses on iterative development and frequent updates is:",
+        "opts": [
+          "Waterfall",
+          "Agile",
+          "Sequential",
+          "Spiral"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Reviewing an application's source code without executing the program is called:",
+        "opts": [
+          "Dynamic Analysis",
+          "Static Analysis",
+          "Fuzzing",
+          "Penetration Testing"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "The practice of automatically pushing every code change that passes testing into production is:",
+        "opts": [
+          "Continuous Integration",
+          "Continuous Deployment",
+          "Continuous Delivery",
+          "Version Control"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Providing a program with many different types of random or malformed input to find bugs is:",
+        "opts": [
+          "Regression testing",
+          "Fuzzing",
+          "Unit testing",
+          "Integration testing"
+        ],
+        "ans": 1
+      }
+    ]
+  ],
+  "vision": [
+    [
+      {
+        "q": "What is the primary goal of Computer Vision?",
+        "opts": [
+          "To enhance or modify images at a pixel level",
+          "To extract meaning and understanding from images",
+          "To produce an image from a 3D model",
+          "To compress image files for storage"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which of the following is an example of an application of Computer Vision?",
+        "opts": [
+          "Noise removal",
+          "Image compression",
+          "3D reconstruction from 2D images",
+          "Contrast enhancement"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "How does Computer Vision differ from Computer Graphics?",
+        "opts": [
+          "Computer Vision produces images from 3D models.",
+          "Computer Graphics reconstructs 3D worlds from images.",
+          "Computer Vision is the inverse of Computer Graphics.",
+          "Both have the exact same goals and outputs."
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which of the following is NOT a typical component of a computer vision system?",
+        "opts": [
+          "Camera",
+          "Lighting",
+          "Computer",
+          "Audio synthesizer"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "What was the \"ridiculously brief history\" milestone for computer vision in 1966?",
+        "opts": [
+          "First autonomous vehicle was built.",
+          "Minsky assigned it as an undergraduate summer project.",
+          "The first digital camera was invented.",
+          "Facial recognition was perfected."
+        ],
+        "ans": 1
+      },
+      {
+        "q": "What does OCR stand for in the context of computer vision?",
+        "opts": [
+          "Optical Character Recognition",
+          "Object Color Rendering",
+          "Optimal Contrast Ratio",
+          "Optical Camera Resolution"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Which of the following fields is strongly tied to Computer Vision to enable decision-making?",
+        "opts": [
+          "Artificial Intelligence",
+          "Database Management",
+          "Operating Systems",
+          "Web Development"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "What is the first step in the Computer Vision process?",
+        "opts": [
+          "Segmentation",
+          "Preprocessing",
+          "Image Acquisition",
+          "Recognition & Interpretation"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "What is the key function of the preprocessing stage in computer vision?",
+        "opts": [
+          "To assign meaning to an object",
+          "To digitize the analog signal",
+          "To improve the image to increase the chances of success for later processes",
+          "To extract individual characters"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which stage partitions an input image into its constituent parts or objects?",
+        "opts": [
+          "Image Acquisition",
+          "Preprocessing",
+          "Segmentation",
+          "Description"
+        ],
+        "ans": 2
+      }
+    ],
+    [
+      {
+        "q": "What is the smallest unit of a digital image?",
+        "opts": [
+          "Voxel",
+          "Pixel",
+          "Bit",
+          "Channel"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In an 8-bit grayscale image, what is the intensity range?",
+        "opts": [
+          "0 to 1",
+          "0 to 255",
+          "1 to 256",
+          "0 to 16.7 million"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "How many bits per channel are typically used in a 24-bit true color image?",
+        "opts": [
+          "3 bits",
+          "8 bits",
+          "16 bits",
+          "24 bits"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "The human eye is sensitive to radiation with wavelengths ranging from:",
+        "opts": [
+          "100nm to 300nm",
+          "400nm to 700nm",
+          "800nm to 1000nm",
+          "1mm to 10mm"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which part of the human eye controls the amount of light passing through the lens?",
+        "opts": [
+          "Retina",
+          "Fovea",
+          "Iris",
+          "Cornea"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which area of the retina has a very dense population of color receptors called cones?",
+        "opts": [
+          "Iris",
+          "Pupil",
+          "Fovea",
+          "Lens"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "In the pinhole model, where does the imaging system's center of projection coincide?",
+        "opts": [
+          "The focal length",
+          "The origin of the 3-D coordinate system",
+          "The image plane",
+          "The line of sight"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "The distance between the focal center of the lens and the retina in the human eye varies approximately between:",
+        "opts": [
+          "10 mm to 12 mm",
+          "14 mm to 17 mm",
+          "20 mm to 25 mm",
+          "50 mm to 100 mm"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which technology is a flexible and common input device for machine vision systems that converts light into electrical charge?",
+        "opts": [
+          "CMOS",
+          "CCD",
+          "CRT",
+          "LCD"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Compared to CCD sensors, CMOS sensors traditionally:",
+        "opts": [
+          "Consume much more power",
+          "Have higher light sensitivity",
+          "Are more susceptible to noise",
+          "Cannot be read individually per pixel"
+        ],
+        "ans": 2
+      }
+    ],
+    [
+      {
+        "q": "What is the main objective of image enhancement?",
+        "opts": [
+          "To compress the image size",
+          "To transform an image into a form more suitable for a specific application",
+          "To extract 3D information from 2D images",
+          "To classify objects in an image"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which category of image enhancement is based on direct manipulation of pixels in the image plane?",
+        "opts": [
+          "Frequency domain methods",
+          "Spatial domain methods",
+          "Temporal domain methods",
+          "Transform domain methods"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which of the following is considered a point operation in spatial domain image enhancement?",
+        "opts": [
+          "Neighborhood averaging",
+          "Median filtering",
+          "Contrast stretching",
+          "Spatial lowpass filtering"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "A spatial domain transformation that produces a two-level (binary) image is called:",
+        "opts": [
+          "Contrast stretching",
+          "Bit-plane slicing",
+          "Thresholding",
+          "Image negative"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "What does the x-axis of an image intensity histogram represent?",
+        "opts": [
+          "Frequency of pixel intensities",
+          "Spatial coordinates of pixels",
+          "Gray level intensities",
+          "Number of color channels"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "In a normalized histogram, what does the sum of all components equal?",
+        "opts": [
+          "0",
+          "1",
+          "255",
+          "Total number of pixels"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A dark image typically has a histogram that is concentrated on the:",
+        "opts": [
+          "Left side (lower intensity values)",
+          "Right side (higher intensity values)",
+          "Middle",
+          "Entire range uniformly"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "What type of image enhancement technique increases the dynamic range of gray levels in the image?",
+        "opts": [
+          "Thresholding",
+          "Contrast stretching",
+          "Bit-plane slicing",
+          "Lowpass filtering"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which operation is useful for distinguishing pixels of a higher intensity from pixels with a lower intensity value, separating foreground from background?",
+        "opts": [
+          "Thresholding",
+          "Averaging",
+          "Image negatives",
+          "Integration"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "In adaptive thresholding, the threshold value T depends on:",
+        "opts": [
+          "A single global constant",
+          "Spatial coordinates or local neighborhood properties",
+          "The image's frequency domain",
+          "The bit-plane level"
+        ],
+        "ans": 1
+      }
+    ],
+    [
+      {
+        "q": "Which type of filter allows low-frequency components to pass and attenuates high-frequency components?",
+        "opts": [
+          "Highpass filter",
+          "Bandpass filter",
+          "Lowpass filter",
+          "Median filter"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "High-frequency components in an image typically characterize:",
+        "opts": [
+          "Slowly varying background levels",
+          "Edges and sharp details",
+          "Overall contrast",
+          "Uniform illumination"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "What is the net effect of applying a lowpass filter to an image?",
+        "opts": [
+          "Edge enhancement",
+          "Image blurring",
+          "Contrast stretching",
+          "Thresholding"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which type of filter is nonlinear and computes the middle gray-level value in a neighborhood?",
+        "opts": [
+          "Highpass filter",
+          "Spatial lowpass filter",
+          "Median filter",
+          "Derivative filter"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "The median filter is particularly effective at eliminating which type of noise?",
+        "opts": [
+          "Gaussian noise",
+          "Salt-and-pepper (impulse) noise",
+          "Uniform noise",
+          "Quantization noise"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "If a 3x3 neighborhood has the values (10, 20, 20, 20, 15, 20, 20, 25, 100), what is the output of a median filter?",
+        "opts": [
+          "15",
+          "20",
+          "25",
+          "100"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A linear spatial filter operates by summing the products between the mask coefficients and the pixel intensities. This process is generally related to:",
+        "opts": [
+          "Thresholding",
+          "Convolution / Correlation",
+          "Bit-slicing",
+          "Histogram equalization"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In a 3x3 spatial lowpass filter (averaging filter) with all coefficients equal to 1, what must the sum be multiplied by to keep the response within the valid gray-level range?",
+        "opts": [
+          "1/3",
+          "1/8",
+          "1/9",
+          "1/25"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "What is the sum of the coefficients in a typical 3x3 spatial highpass (sharpening) filter mask?",
+        "opts": [
+          "0",
+          "1",
+          "8",
+          "9"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "A high-boost filter can be defined by the equation: High-boost = (A)(Original) - Lowpass. If A = 1, this yields:",
+        "opts": [
+          "A standard lowpass result",
+          "A standard highpass result",
+          "An unsharpened image",
+          "A median filtered image"
+        ],
+        "ans": 1
+      }
+    ],
+    [
+      {
+        "q": "In computer vision, what is an edge?",
+        "opts": [
+          "A uniform region of constant intensity",
+          "A significant local change or discontinuity in image intensity",
+          "The center point of a digital image",
+          "The lowest intensity pixel in an image"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which type of edge profile represents an instantaneous and abrupt change in intensity?",
+        "opts": [
+          "Step edge",
+          "Ramp edge",
+          "Roof edge",
+          "Line edge"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "In real images, ideal step edges become ramp edges due to:",
+        "opts": [
+          "High resolution sensors",
+          "Image acquisition imperfection and illumination conditions",
+          "Highpass filtering",
+          "Thresholding"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "The three main steps in edge detection algorithms are Filtering, Enhancement, and:",
+        "opts": [
+          "Acquisition",
+          "Digitization",
+          "Detection",
+          "Compression"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which property of the first-order derivative is used to detect the presence of an edge?",
+        "opts": [
+          "Sign",
+          "Magnitude",
+          "Zero-crossing",
+          "Phase"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In a second-order derivative, what feature indicates the midpoint of a ramp edge?",
+        "opts": [
+          "Local maximum",
+          "Local minimum",
+          "Zero-crossing",
+          "Infinite peak"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which operator is the 2D equivalent of the second derivative?",
+        "opts": [
+          "Gradient",
+          "Sobel",
+          "Laplacian",
+          "Prewitt"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Why is the standard Laplacian operator not frequently used alone for edge detection?",
+        "opts": [
+          "It is too slow to compute.",
+          "It is highly sensitive to noise.",
+          "It only detects horizontal edges.",
+          "It produces a blurred output."
+        ],
+        "ans": 1
+      },
+      {
+        "q": "To combat noise sensitivity, the Laplacian of Gaussian (LoG) operator combines the Laplacian with which type of filter?",
+        "opts": [
+          "Highpass filter",
+          "Median filter",
+          "Gaussian smoothing filter",
+          "Contrast stretching"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "The Laplacian of Gaussian (LoG) operator is commonly known as the:",
+        "opts": [
+          "Top-hat operator",
+          "Mexican hat operator",
+          "Bell curve operator",
+          "Step operator"
+        ],
+        "ans": 1
+      }
+    ]
+  ],
+  "ds": [
+    [
+      {
+        "q": "Data structure is a specialized format for organizing and storing data in memory that considers:",
+        "opts": [
+          "Only the elements stored",
+          "Only the memory address",
+          "Both the elements stored and their relationship to each other",
+          "The compiler used to execute the code"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "According to the slides, what is the correct formula representing a program?",
+        "opts": [
+          "Program = Algorithm + Data Structure",
+          "Program = Syntax + Logic",
+          "Program = Input + Output",
+          "Program = Variables + Functions"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Which of the following is an example of a Primitive Data Structure?",
+        "opts": [
+          "Array",
+          "Linked List",
+          "Float",
+          "Graph"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which category of data structure can store data of more than one type and has a size that is not fixed?",
+        "opts": [
+          "Primitive Data Structure",
+          "Non-Primitive Data Structure",
+          "Static Data Structure",
+          "Built-in Data Structure"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which of the following is a Non-Linear Data Structure?",
+        "opts": [
+          "Array",
+          "Stack",
+          "Queue",
+          "Tree"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "Primitive data structures cannot contain which of the following values?",
+        "opts": [
+          "Negative numbers",
+          "Zero",
+          "NULL value",
+          "Floating point values"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "What type of data structure stores elements sequentially or linearly?",
+        "opts": [
+          "Non-Linear Data Structure",
+          "Linear Data Structure",
+          "Primitive Data Structure",
+          "Hierarchical Data Structure"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which of the following is a Linear Data Structure?",
+        "opts": [
+          "Tree",
+          "Graph",
+          "Stack",
+          "Floating point"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which of the following is an advantage of using data structures related to fast data search?",
+        "opts": [
+          "Reusability",
+          "Abstraction",
+          "Efficiency",
+          "Polymorphism"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "When a data structure is compiled into a library and used by different clients, this highlights which advantage?",
+        "opts": [
+          "Efficiency",
+          "Reusability",
+          "Abstraction",
+          "Encapsulation"
+        ],
+        "ans": 1
+      }
+    ],
+    [
+      {
+        "q": "An algorithm is defined as a formally defined procedure for performing some calculations in a finite number of:",
+        "opts": [
+          "Seconds",
+          "Memory blocks",
+          "Steps",
+          "Functions"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "A well-defined algorithm must always provide an answer and be guaranteed to:",
+        "opts": [
+          "Run indefinitely",
+          "Terminate",
+          "Use minimal memory",
+          "Be written in C++"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which characteristic of an algorithm states that each of its steps must be clear and lead to only one meaning?",
+        "opts": [
+          "Finiteness",
+          "Feasibility",
+          "Unambiguous",
+          "Independent"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "An algorithm must terminate after a finite number of steps. Which characteristic does this describe?",
+        "opts": [
+          "Input",
+          "Finiteness",
+          "Feasibility",
+          "Independent"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which characteristic indicates that an algorithm must be generic enough to be implemented in any programming language?",
+        "opts": [
+          "Unambiguous",
+          "Finiteness",
+          "Feasibility",
+          "Independent"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "The amount of computer memory required during the program execution as a function of the input size is called:",
+        "opts": [
+          "Time complexity",
+          "Space complexity",
+          "Code complexity",
+          "Algorithmic complexity"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Space complexity is divided into two parts: a fixed part and a:",
+        "opts": [
+          "Static part",
+          "Variable part",
+          "Temporary part",
+          "Constant part"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which of the following is included in the fixed part of space complexity?",
+        "opts": [
+          "Recursion stack",
+          "Dynamically allocated structured variables",
+          "Space needed to store instructions and constants",
+          "User input streams"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "The running time of a program as a function of the input size is known as:",
+        "opts": [
+          "Time complexity",
+          "Space complexity",
+          "Data complexity",
+          "Memory complexity"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "Which time complexity analysis estimates the running time for typical, random input drawn from a distribution?",
+        "opts": [
+          "Worst-case running time",
+          "Best-case running time",
+          "Average-case running time",
+          "Infinite-case running time"
+        ],
+        "ans": 2
+      }
+    ],
+    [
+      {
+        "q": "What is the primary purpose of functions in a program?",
+        "opts": [
+          "To increase execution time",
+          "To allocate continuous memory",
+          "To structure a program in segments of code to perform individual tasks",
+          "To define new data types"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which of the following is the correct syntax for a function?",
+        "opts": [
+          "type name (parameter1, parameter2) { statements }",
+          "name type (statements) { parameter1 }",
+          "function name (type parameter)",
+          "def name [parameters]"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "What are the two main categories of functions in C?",
+        "opts": [
+          "Predefined functions and User-defined functions",
+          "Internal functions and External functions",
+          "Static functions and Dynamic functions",
+          "Linear functions and Non-linear functions"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "A variable declared inside a function body is known as a:",
+        "opts": [
+          "Global variable",
+          "Local variable",
+          "Static variable",
+          "Constant variable"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "What is a structure in C programming?",
+        "opts": [
+          "A single variable that holds only one data type",
+          "A collection of variables of different types under a single name",
+          "A predefined mathematical function",
+          "A keyword used to loop through arrays"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Variables inside a structure are commonly referred to as:",
+        "opts": [
+          "Methods",
+          "Pointers",
+          "Members",
+          "Classes"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which operator is used to access members of a structure using a regular structure variable?",
+        "opts": [
+          "Arrow operator (->)",
+          "Asterisk operator (*)",
+          "Dot operator (.)",
+          "Ampersand operator (&)"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "What is the purpose of the typedef keyword?",
+        "opts": [
+          "To define a new built-in data type",
+          "To assign a new name or alias to existing data types or structures",
+          "To allocate memory dynamically",
+          "To create a function prototype"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which operator is used to access structure members when using a pointer to a structure?",
+        "opts": [
+          "Dot operator (.)",
+          "Arrow operator (->)",
+          "Address operator (&)",
+          "Indirection operator (*)"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "What is a disadvantage of passing an entire large structure to a function using \"call by value\"?",
+        "opts": [
+          "It cannot be compiled",
+          "It alters the original structure's data unintentionally",
+          "It is very inefficient in terms of memory and performance",
+          "It requires global variables"
+        ],
+        "ans": 2
+      }
+    ],
+    [
+      {
+        "q": "A pointer is a derived data type that stores the:",
+        "opts": [
+          "Exact value of a variable",
+          "Name of a variable",
+          "Memory address of another variable",
+          "Size of a variable"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which operator is known as the \"address of\" operator?",
+        "opts": [
+          "*",
+          "&",
+          "->",
+          "%"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Which operator is known as the indirection or dereferencing operator?",
+        "opts": [
+          "&",
+          "*",
+          "->",
+          "."
+        ],
+        "ans": 1
+      },
+      {
+        "q": "What is the general syntax for declaring a pointer variable?",
+        "opts": [
+          "*dataType ptrName;",
+          "dataType &ptrName;",
+          "dataType ptrName*;",
+          "dataType *ptrName;"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "If int *p; and int a = 10; what does p = &a; do?",
+        "opts": [
+          "Assigns the value 10 to p",
+          "Assigns the memory address of a to the pointer p",
+          "Assigns the address of p to a",
+          "Multiplies p by a"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In Call by Value, passing variables to a function passes their:",
+        "opts": [
+          "Memory address",
+          "Actual value",
+          "Reference",
+          "Pointer"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In Call by Reference, any change made to the variable inside the called function will:",
+        "opts": [
+          "Not affect the original variable",
+          "Cause a memory leak",
+          "Also change the value of the original variable",
+          "Create a local copy"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "To achieve Call by Reference in C, arguments are passed using:",
+        "opts": [
+          "Arrays only",
+          "The value directly",
+          "Pointers",
+          "Typedefs"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "When dealing with an array, the array name acts as a pointer to:",
+        "opts": [
+          "The last element in the array",
+          "The first element in the array",
+          "The entire array's size",
+          "The middle element"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "If ptr is a pointer pointing to an array, ptr + 1 points to:",
+        "opts": [
+          "The same element, with value increased by 1",
+          "The previous element",
+          "The next element in the array",
+          "A completely random memory address"
+        ],
+        "ans": 2
+      }
+    ],
+    [
+      {
+        "q": "Unlike an array, a Linked List does not store its elements in:",
+        "opts": [
+          "Memory",
+          "Nodes",
+          "Consecutive memory locations",
+          "A linear fashion"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "Which of the following is true about Linked Lists?",
+        "opts": [
+          "They allow direct random access to any element",
+          "Elements can only be accessed sequentially",
+          "The size must be declared in advance",
+          "Insertions cannot be done in the middle of the list"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A node in a singly linked list contains two parts: Data and:",
+        "opts": [
+          "Previous pointer",
+          "Next pointer",
+          "Index number",
+          "Memory block size"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "The pointer that holds the memory address of the first node in a linked list is called the:",
+        "opts": [
+          "Tail pointer",
+          "Next pointer",
+          "Null pointer",
+          "Head pointer"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "What marks the end of a singly linked list?",
+        "opts": [
+          "The head pointer",
+          "The node data being zero",
+          "A pointer field containing NULL",
+          "A loop back to the head"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "A linked list where the last node contains a pointer back to the first node is called a:",
+        "opts": [
+          "Singly linked list",
+          "Doubly linked list",
+          "Circular linked list",
+          "Double circular list"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "A Stack is a linear data structure that follows which principle?",
+        "opts": [
+          "FIFO (First In First Out)",
+          "LIFO (Last In First Out)",
+          "Random Access",
+          "Priority Access"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In a Stack, elements are added and removed from only one end, called the:",
+        "opts": [
+          "Top",
+          "Bottom",
+          "Front",
+          "Rear"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "The operation to insert a new element into a stack is called:",
+        "opts": [
+          "Pop",
+          "Push",
+          "Enqueue",
+          "Insert"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "The operation to remove an element from a stack is called:",
+        "opts": [
+          "Push",
+          "Pop",
+          "Dequeue",
+          "Delete"
+        ],
+        "ans": 1
+      }
+    ],
+    [
+      {
+        "q": "A Queue is a linear data structure that follows which principle?",
+        "opts": [
+          "LIFO (Last In First Out)",
+          "FIFO (First In First Out)",
+          "LILO (Last In Last Out)",
+          "Random Access"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "In a Queue, new elements are added at one end called the:",
+        "opts": [
+          "Front",
+          "Top",
+          "Rear",
+          "Bottom"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "In a Queue, elements are removed from the end called the:",
+        "opts": [
+          "Front",
+          "Top",
+          "Rear",
+          "Base"
+        ],
+        "ans": 0
+      },
+      {
+        "q": "A Tree is a non-linear data structure used to represent what kind of relationship?",
+        "opts": [
+          "Sequential",
+          "Circular",
+          "Hierarchical",
+          "Flat"
+        ],
+        "ans": 2
+      },
+      {
+        "q": "The topmost node of a Tree is called the:",
+        "opts": [
+          "Leaf",
+          "Root",
+          "Parent",
+          "Branch"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "Nodes in a tree that have no children are called:",
+        "opts": [
+          "Root nodes",
+          "Parent nodes",
+          "Internal nodes",
+          "Leaf nodes"
+        ],
+        "ans": 3
+      },
+      {
+        "q": "A tree where every node can have a maximum of two children is called a:",
+        "opts": [
+          "General Tree",
+          "Binary Tree",
+          "Tertiary Tree",
+          "Complete Graph"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A Graph consists of two main components:",
+        "opts": [
+          "Nodes and Leaves",
+          "Vertices and Edges",
+          "Roots and Branches",
+          "Front and Rear"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A graph where the edges have a specific direction indicated by arrows is called a:",
+        "opts": [
+          "Undirected graph",
+          "Directed graph",
+          "Complete graph",
+          "Simple graph"
+        ],
+        "ans": 1
+      },
+      {
+        "q": "A graph where all of its nodes are fully connected to every other node is called a:",
+        "opts": [
+          "Complete graph",
+          "Null graph",
+          "Directed graph",
+          "Tree"
+        ],
+        "ans": 0
+      }
+    ]
+  ],
+  "se": [
+    [
+      {
+        "q": "What is software engineering primarily concerned with?",
+        "opts": [
+          "Hardware design",
+          "Cost-effective high-quality software development",
+          "Networking only",
+          "Data storage",
+          "Only code",
+          "Programs + documentation",
+          "Hardware",
+          "OS only",
+          "Custom-made",
+          "Sold to many users",
+          "Free only",
+          "Embedded",
+          "Specification",
+          "Cooking",
+          "Validation",
+          "Evolution",
+          "Hard to change",
+          "Easy to modify",
+          "Fast only",
+          "Secure only",
+          "Same",
+          "SE practical, CS theoretical",
+          "CS practical",
+          "None",
+          "Speed",
+          "Reliability",
+          "Color",
+          "Size",
+          "Memory use",
+          "UI",
+          "Ethics",
+          "Coding style",
+          "Share info",
+          "Protect info",
+          "Ignore",
+          "Publish",
+          "For general users",
+          "For specific client",
+          "Freeware",
+          "OS"
+        ],
+        "ans": 1
+      }
+    ],
+    [],
+    [],
+    [],
+    []
+  ]
+}
