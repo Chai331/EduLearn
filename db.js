@@ -373,6 +373,20 @@ window.EduDB = (function () {
     return post;
   }
 
+  function deletePost(postId, userId, userRole) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function (p) { return p.id === postId; });
+    if (!post) return false;
+
+    // Allow deletion if owner OR admin
+    if (post.userId === userId || userRole === 'admin') {
+      posts = posts.filter(function (p) { return p.id !== postId; });
+      writeTable(K.POSTS, posts);
+      return true;
+    }
+    return false;
+  }
+
   /* ─── ORDERS ────────────────────────────────────────────── */
 
   function addOrder(userId, items, total) {
@@ -491,6 +505,7 @@ window.EduDB = (function () {
     addReply: addReply,
     togglePostLike: togglePostLike,
     toggleReplyLike: toggleReplyLike,
+    deletePost: deletePost,
     /* Orders */
     addOrder: addOrder,
     getUserOrders: getUserOrders,
