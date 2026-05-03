@@ -1,625 +1,564 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="EduLearn Courses – Browse and enrol in Computer Security, Computer Vision, and Data Structures." />
-  <title>Courses – EduLearn</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* ── Course Modal ── */
-    .modal-overlay {
-      display:none; position:fixed; inset:0;
-      background:rgba(5,5,20,0.75); z-index:9000;
-      align-items:center; justify-content:center; padding:1rem;
-    }
-    .modal-overlay.open { display:flex; }
-    .modal-box {
-      background:#fff; border-radius:20px;
-      width:100%; max-width:720px; max-height:90vh;
-      overflow:hidden; display:flex; flex-direction:column;
-      box-shadow:0 20px 60px rgba(0,0,0,0.3);
-      animation:slideUp 0.25s ease;
-    }
-    @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
-    .modal-hero {
-      height:150px; display:flex; align-items:center; justify-content:center;
-      position:relative; flex-shrink:0;
-    }
-    .modal-hero-icon { font-size:2.8rem; color:rgba(255,255,255,0.75); }
-    .modal-close {
-      position:absolute; top:12px; right:14px;
-      background:rgba(255,255,255,0.2); border:none; border-radius:50%;
-      width:34px; height:34px; color:#fff; font-size:1rem; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      transition:background 0.2s;
-    }
-    .modal-close:hover { background:rgba(255,255,255,0.4); }
-    /* Tab row */
-    .modal-tab-row {
-      display:flex; background:#f9fafb; border-bottom:2px solid #e5e7eb;
-      flex-shrink:0; overflow-x:auto;
-    }
-    .modal-tab-btn {
-      padding:0.75rem 1.4rem; border:none; background:transparent;
-      font-family:'Inter',sans-serif; font-size:0.85rem; font-weight:600;
-      color:#6b7280; cursor:pointer; white-space:nowrap;
-      border-bottom:3px solid transparent; margin-bottom:-2px;
-      transition:all 0.2s;
-    }
-    .modal-tab-btn:hover { color:#667eea; }
-    .modal-tab-btn.active { color:#667eea; border-bottom-color:#667eea; background:#fff; }
-    /* Modal body */
-    .modal-body { padding:1.5rem; overflow-y:auto; flex:1; }
-    /* Lecture files */
-    .lecture-file {
-      display:flex; align-items:center; gap:0.9rem;
-      padding:0.75rem 1rem; border-radius:10px; border:1.5px solid #e5e7eb;
-      margin-bottom:0.6rem; transition:all 0.2s; background:#fff;
-    }
-    .lecture-file:hover { border-color:#667eea; background:#f8f9ff; }
-    .file-icon {
-      width:40px; height:40px; border-radius:10px; flex-shrink:0;
-      display:flex; align-items:center; justify-content:center; font-size:1rem;
-    }
-    .file-icon.pdf { background:#fee2e2; color:#ef4444; }
-    .file-icon.video { background:#dbeafe; color:#3b82f6; }
-    .file-meta { flex:1; }
-    .file-title { font-weight:600; color:#1a1a2e; font-size:0.88rem; }
-    .file-sub { font-size:0.75rem; color:#9ca3af; margin-top:2px; }
-    .file-dl-btn {
-      background:linear-gradient(135deg,#667eea,#764ba2); color:#fff;
-      border:none; padding:0.4rem 0.9rem; border-radius:8px;
-      font-size:0.78rem; font-weight:700; cursor:pointer; white-space:nowrap;
-      font-family:'Inter',sans-serif; transition:opacity 0.2s;
-    }
-    .file-dl-btn:hover { opacity:0.85; }
-    /* Lock overlay for unenrolled */
-    .locked-notice {
-      display:flex; flex-direction:column; align-items:center;
-      justify-content:center; padding:2.5rem 1rem; text-align:center;
-    }
-    .locked-icon { font-size:2.5rem; color:#d1d5db; margin-bottom:0.8rem; }
-    /* Quiz */
-    .quiz-question { margin-bottom:1.4rem; }
-    .quiz-q-text { font-weight:700; color:#1a1a2e; font-size:0.9rem; margin-bottom:0.6rem; }
-    .quiz-option {
-      display:flex; align-items:center; gap:8px;
-      padding:0.55rem 0.9rem; border:1.5px solid #e5e7eb;
-      border-radius:8px; margin-bottom:0.35rem; cursor:pointer;
-      font-size:0.85rem; color:#374151; transition:all 0.15s;
-    }
-    .quiz-option:hover { border-color:#667eea; background:#f8f9ff; }
-    .quiz-option input[type=radio] { accent-color:#667eea; }
-    .quiz-option.correct { border-color:#10b981; background:#d1fae5; color:#065f46; }
-    .quiz-option.wrong   { border-color:#ef4444; background:#fee2e2; color:#991b1b; }
-    /* Toast */
-    .toast {
-      position:fixed; bottom:24px; right:24px; z-index:9999;
-      background:#1a1a2e; color:#fff; padding:0.8rem 1.2rem;
-      border-radius:12px; font-size:0.85rem; font-weight:600;
-      box-shadow:0 8px 24px rgba(0,0,0,0.3); display:none;
-      animation:toastIn 0.3s ease;
-    }
-    @keyframes toastIn { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
-    /* Enrolled badge on card */
-    .enrolled-badge {
-      position:absolute; top:12px; left:12px;
-      background:#10b981; color:#fff; font-size:0.68rem;
-      font-weight:800; padding:3px 10px; border-radius:20px;
-      text-transform:uppercase; letter-spacing:0.5px;
-    }
-  </style>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="EduLearn Courses – Browse and enrol in courses."/>
+<title>Courses – EduLearn</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.dtab-row{display:flex;background:#fff;border-bottom:2px solid #e5e7eb;overflow-x:auto;position:sticky;top:65px;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.dtab-btn{padding:.9rem 1.5rem;border:none;background:transparent;font-family:Inter,sans-serif;font-size:.86rem;font-weight:700;color:#6b7280;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;gap:6px}
+.dtab-btn:hover{color:#667eea}.dtab-btn.active{color:#667eea;border-bottom-color:#667eea;background:#f8f9ff}
+.res-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border-radius:12px;border:1.5px solid #e5e7eb;margin-bottom:.7rem;background:#fff;transition:all .2s}
+.res-item:hover{border-color:#667eea;background:#f8f9ff;transform:translateX(4px)}
+.res-ico{width:44px;height:44px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.res-ico.lec{background:#fee2e2;color:#ef4444}.res-ico.tut{background:#e0e7ff;color:#6366f1}
+.res-meta{flex:1}.res-title{font-weight:700;color:#1a1a2e;font-size:.88rem}.res-sub{font-size:.75rem;color:#9ca3af;margin-top:2px}
+.res-btn{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:.4rem .9rem;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:Inter,sans-serif;transition:opacity .2s}
+.res-btn:hover{opacity:.85}.res-btn.tut{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.quiz-q{margin-bottom:1.4rem}
+.quiz-qt{font-weight:700;color:#1a1a2e;font-size:.9rem;margin-bottom:.6rem;line-height:1.5}
+.quiz-opt{display:flex;align-items:center;gap:8px;padding:.55rem .9rem;border:1.5px solid #e5e7eb;border-radius:8px;margin-bottom:.35rem;cursor:pointer;font-size:.85rem;color:#374151;transition:all .15s}
+.quiz-opt:hover{border-color:#667eea;background:#f8f9ff}.quiz-opt input{accent-color:#667eea}
+.quiz-opt.correct{border-color:#10b981;background:#d1fae5;color:#065f46}
+.quiz-opt.wrong{border-color:#ef4444;background:#fee2e2;color:#991b1b}
+.enrolled-badge{position:absolute;top:12px;left:12px;background:#10b981;color:#fff;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:#1a1a2e;color:#fff;padding:.8rem 1.2rem;border-radius:12px;font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.3);display:none}
+.hero-back{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.85);font-size:.85rem;font-weight:700;cursor:pointer;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:.4rem .85rem;transition:background .2s;font-family:Inter,sans-serif;margin-bottom:1rem}
+.hero-back:hover{background:rgba(255,255,255,.25)}
+.detail-card{background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:1.5rem}
+.sec-head{font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.sec-head i{color:#667eea}
+.locked-box{text-align:center;padding:2.5rem 1rem;color:#9ca3af}
+.locked-box i{font-size:2.5rem;display:block;margin-bottom:.8rem;color:#d1d5db}
+@media(max-width:640px){#overviewGrid{grid-template-columns:1fr!important}}
+</style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="w3-bar edu-navbar w3-top" id="mainNav">
   <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
   <div class="w3-right w3-hide-small">
-    <a href="dashboard.html"  class="w3-bar-item w3-button nav-link">Home</a>
-    <a href="courses.html"    class="w3-bar-item w3-button nav-link active">Courses</a>
-    <a href="portal.html"     class="w3-bar-item w3-button nav-link">My Portal</a>
-    <a href="forum.html"      class="w3-bar-item w3-button nav-link">Forum</a>
-    <a href="bookstore.html"  class="w3-bar-item w3-button nav-link">Bookstore</a>
+    <a href="dashboard.html" class="w3-bar-item w3-button nav-link">Home</a>
+    <a href="courses.html" class="w3-bar-item w3-button nav-link active">Courses</a>
+    <a href="portal.html" class="w3-bar-item w3-button nav-link">My Portal</a>
+    <a href="forum.html" class="w3-bar-item w3-button nav-link">Forum</a>
+    <a href="bookstore.html" class="w3-bar-item w3-button nav-link">Bookstore</a>
     <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
-    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></a>
 </nav>
 <div id="mobileMenu" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium mobile-menu">
-  <a href="dashboard.html"  class="w3-bar-item w3-button">Home</a>
-  <a href="courses.html"    class="w3-bar-item w3-button">Courses</a>
-  <a href="portal.html"     class="w3-bar-item w3-button">My Portal</a>
-  <a href="forum.html"      class="w3-bar-item w3-button">Forum</a>
-  <a href="bookstore.html"  class="w3-bar-item w3-button">Bookstore</a>
+  <a href="dashboard.html" class="w3-bar-item w3-button">Home</a>
+  <a href="courses.html" class="w3-bar-item w3-button">Courses</a>
+  <a href="portal.html" class="w3-bar-item w3-button">My Portal</a>
+  <a href="forum.html" class="w3-bar-item w3-button">Forum</a>
+  <a href="bookstore.html" class="w3-bar-item w3-button">Bookstore</a>
   <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</a>
 </div>
 
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="w3-content container-max">
-    <div class="breadcrumb"><a href="dashboard.html">Home</a> &rsaquo; Courses</div>
-    <h1><i class="fas fa-book-open"></i> Courses</h1>
-    <p>Enrol in a course to unlock lecture files and quizzes</p>
+<!-- VIEW 1: COURSE LIST -->
+<div id="viewList">
+  <div class="page-header">
+    <div class="w3-content container-max">
+      <div class="breadcrumb"><a href="dashboard.html">Home</a> &rsaquo; Courses</div>
+      <h1><i class="fas fa-book-open"></i> Courses</h1>
+      <p>Enrol in a course to unlock lecture notes, tutorials, and quizzes</p>
+    </div>
   </div>
+  <section class="section-pad" style="background:#f5f7fa;">
+    <div class="w3-content container-max">
+      <div id="enrolledCount" style="text-align:center;margin-bottom:1.5rem;font-size:.85rem;color:#667eea;font-weight:600;"></div>
+      <div class="course-grid-page" id="courseGrid"></div>
+    </div>
+  </section>
 </div>
 
-<!-- MAIN -->
-<section class="section-pad" style="background:#f5f7fa;">
-  <div class="w3-content container-max">
-
-    <!-- Search -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search courses…" oninput="renderCourses()" />
-      <button onclick="renderCourses()"><i class="fas fa-search"></i> Search</button>
+<!-- VIEW 2: COURSE DETAIL -->
+<div id="viewDetail" style="display:none;">
+  <div id="detailHero" style="min-height:200px;display:flex;align-items:flex-end;padding:2rem;background-size:cover;background-position:center;">
+    <div style="position:relative;z-index:2;width:100%;">
+      <button class="hero-back" onclick="backToList()"><i class="fas fa-arrow-left"></i> All Courses</button>
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <div id="detailIcon" style="width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;flex-shrink:0;"></div>
+        <div>
+          <h2 id="detailTitle" style="font-size:1.6rem;font-weight:800;color:#fff;margin:0;line-height:1.2;"></h2>
+          <div id="detailMeta" style="display:flex;gap:1.2rem;margin-top:.5rem;flex-wrap:wrap;"></div>
+        </div>
+      </div>
     </div>
-
-    <!-- Filter -->
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="setFilter(this,'all')">All Courses</button>
-      <button class="filter-btn" onclick="setFilter(this,'calculus')">Calculus</button>
-      <button class="filter-btn" onclick="setFilter(this,'security')">Cyber Security</button>
-      <button class="filter-btn" onclick="setFilter(this,'vision')">Computer Vision</button>
-      <button class="filter-btn" onclick="setFilter(this,'ds')">Data Structures</button>
-      <button class="filter-btn" onclick="setFilter(this,'engineering')">Software Engineering</button>
-    </div>
-
-    <!-- Enrolled notice -->
-    <div id="enrolledCount" style="text-align:center;margin-bottom:1.5rem;font-size:0.85rem;color:#667eea;font-weight:600;"></div>
-
-    <!-- Course Grid -->
-    <div class="course-grid-page" id="courseGrid"></div>
-
   </div>
-</section>
 
-<!-- ── COURSE MODAL ───────────────────────────────────── -->
-<div class="modal-overlay" id="courseModal" onclick="closeModalOnBg(event)">
-  <div class="modal-box">
-    <div class="modal-hero" id="modalHero">
-      <i class="fas fa-book modal-hero-icon" id="modalHeroIcon"></i>
-      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-    </div>
-
-    <!-- Tabs (hidden if not enrolled) -->
-    <div class="modal-tab-row" id="modalTabs" style="display:none;">
-      <button class="modal-tab-btn active" onclick="switchTab('overview')"><i class="fas fa-info-circle"></i> Overview</button>
-      <button class="modal-tab-btn"        onclick="switchTab('lectures')"><i class="fas fa-file-alt"></i> Lecture Files</button>
-      <button class="modal-tab-btn"        onclick="switchTab('quiz')"><i class="fas fa-question-circle"></i> Quiz</button>
-    </div>
-
-    <!-- Overview -->
-    <div class="modal-body" id="tabOverview">
-      <div id="modalBody"></div>
-    </div>
-
-    <!-- Lectures (hidden default) -->
-    <div class="modal-body" id="tabLectures" style="display:none;">
-      <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i class="fas fa-folder-open" style="color:#667eea;margin-right:6px;"></i>Lecture Files</h3>
-      <div id="lectureList"></div>
-    </div>
-
-    <!-- Quiz (hidden default) -->
-    <div class="modal-body" id="tabQuiz" style="display:none;">
-      <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem;"><i class="fas fa-question-circle" style="color:#667eea;margin-right:6px;"></i>Course Quiz</h3>
-      <p style="font-size:0.82rem;color:#6b7280;margin-bottom:1.2rem;">Answer all questions then click Submit to see your score.</p>
-      <div id="quizList"></div>
-      <button id="quizSubmitBtn" class="btn-submit" style="max-width:180px;padding:0.7rem;" onclick="submitQuiz()"><i class="fas fa-paper-plane"></i> Submit</button>
-      <div id="quizResult" style="display:none;margin-top:1rem;"></div>
-    </div>
-
+  <div class="dtab-row">
+    <button class="dtab-btn active" id="tbOverview" onclick="switchDetailTab('overview')"><i class="fas fa-info-circle"></i> Overview</button>
+    <button class="dtab-btn" id="tbLectures" onclick="switchDetailTab('lectures')"><i class="fas fa-file-alt"></i> Lecture Notes</button>
+    <button class="dtab-btn" id="tbTutorials" onclick="switchDetailTab('tutorials')"><i class="fas fa-tasks"></i> Tutorials</button>
+    <button class="dtab-btn" id="tbQuiz" onclick="switchDetailTab('quiz')"><i class="fas fa-question-circle"></i> Quiz</button>
   </div>
+
+  <section class="section-pad" style="background:#f5f7fa;padding-top:1.5rem;">
+    <div class="w3-content container-max">
+
+      <!-- Overview -->
+      <div id="tabOverview">
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;" id="overviewGrid">
+          <div>
+            <div class="detail-card" id="progressBlock" style="display:none;">
+              <div class="sec-head"><i class="fas fa-chart-line"></i> Your Progress</div>
+              <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px;"><span style="font-weight:600;color:#374151;">Completion</span><span id="progressPct" style="color:#667eea;font-weight:700;">0%</span></div>
+              <div style="background:#f3f4f6;border-radius:10px;height:8px;overflow:hidden;"><div id="progressBar" style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px;width:0%;transition:width .8s;"></div></div>
+              <div id="progressStats" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem;font-size:.78rem;color:#6b7280;"></div>
+            </div>
+            <div class="detail-card">
+              <div class="sec-head"><i class="fas fa-align-left"></i> About This Course</div>
+              <p id="detailDesc" style="font-size:.9rem;color:#4b5563;line-height:1.8;margin:0;"></p>
+            </div>
+            <div class="detail-card">
+              <div class="sec-head"><i class="fas fa-bullseye"></i> Learning Outcomes</div>
+              <div id="detailOutcomes"></div>
+            </div>
+          </div>
+          <div>
+            <div class="detail-card" style="position:sticky;top:130px;">
+              <div class="sec-head"><i class="fas fa-info-circle"></i> Course Info</div>
+              <div id="detailSidebar"></div>
+              <div id="enrolBlock" style="margin-top:1.2rem;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lecture Notes -->
+      <div id="tabLectures" style="display:none;">
+        <div class="detail-card">
+          <div class="sec-head"><i class="fas fa-folder-open"></i> Lecture Notes</div>
+          <div id="lectureList"></div>
+        </div>
+      </div>
+
+      <!-- Tutorials -->
+      <div id="tabTutorials" style="display:none;">
+        <div class="detail-card">
+          <div class="sec-head"><i class="fas fa-tasks"></i> Tutorial Worksheets</div>
+          <p style="font-size:.85rem;color:#6b7280;margin:0 0 1rem 0;">Download and complete these exercises to reinforce your learning.</p>
+          <div class="res-list" id="tutorialList"></div>
+        </div>
+      </div>
+
+      <!-- Quiz -->
+      <div id="tabQuiz" style="display:none;">
+        <div class="detail-card">
+          <div class="sec-head"><i class="fas fa-question-circle"></i> Quizzes</div>
+          <p style="font-size:.85rem;color:#6b7280;margin:0 0 1rem 0;">Test your knowledge after each lecture.</p>
+          <div class="res-list" id="quizIndex"></div>
+
+          <div id="quizActive" style="display:none; border-top:1px solid #e5e7eb; padding-top:1.5rem; margin-top:1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+               <h3 id="activeQuizTitle" style="margin:0;font-size:1.2rem;color:#1a1a2e;"></h3>
+               <button onclick="closeActiveQuiz()" style="background:none;border:none;color:#6b7280;cursor:pointer;font-weight:600;"><i class="fas fa-arrow-left"></i> Back to Quizzes</button>
+            </div>
+            <div id="quizResult" style="display:none;margin-bottom:1.5rem;"></div>
+            <div id="quizList"></div>
+            <button id="quizSubmitBtn" class="submit-btn" style="width:auto;padding:1rem 2rem;margin-top:1rem;display:none;" onclick="submitQuiz()"><i class="fas fa-paper-plane"></i> Submit Quiz</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
-
 <script src="db.js"></script>
+<script src="courses_data.js"></script>
 <script>
-  /* ── Auth Guard ── */
-  var __sess = EduDB.getSession();
-  if (!__sess) { window.location.href = 'index.html'; }
+var __sess = EduDB.getSession();
+if (!__sess) { window.location.href = 'index.html'; }
 
-  function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
-  function toggleMobileMenu() { var m=document.getElementById('mobileMenu'); m.className.indexOf('w3-show')===-1?m.className+=' w3-show':m.className=m.className.replace(' w3-show',''); }
-  window.onscroll = function(){ document.getElementById('mainNav').classList[window.pageYOffset>60?'add':'remove']('scrolled'); };
+function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+function toggleMobileMenu() { var m = document.getElementById('mobileMenu'); m.className.indexOf('w3-show') === -1 ? m.className += ' w3-show' : m.className = m.className.replace(' w3-show', ''); }
+window.onscroll = function () { document.getElementById('mainNav').classList[window.pageYOffset > 60 ? 'add' : 'remove']('scrolled'); };
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var ng=document.getElementById('navGreet');
-    if (ng && __sess) ng.innerHTML='<i class="fas fa-user-circle"></i> '+__sess.firstName;
-    renderCourses();
+document.addEventListener('DOMContentLoaded', function () {
+  var ng = document.getElementById('navGreet');
+  if (ng && __sess) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
+  renderCourses();
+});
+
+var currentFilter = 'all';
+var currentCourse = null;
+var quizAnswers = [];
+
+function setFilter(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentFilter = cat;
+  renderCourses();
+}
+
+function renderCourses() {
+  var grid = document.getElementById('courseGrid');
+  var q = "";
+  var enr = EduDB.getUserEnrollments(__sess.id);
+  var enrIds = enr.map(function (e) { return e.courseId; });
+  var enrolledCount = enrIds.length;
+
+  var notice = document.getElementById('enrolledCount');
+  notice.textContent = enrolledCount > 0
+    ? '✅ You are enrolled in ' + enrolledCount + ' course' + (enrolledCount > 1 ? 's' : '') + '. Click "Continue Learning" to access lecture notes.'
+    : 'Click "View Course" to preview, then enrol to unlock lecture notes.';
+
+  var filtered = COURSES.filter(function (c) {
+    var catOk = currentFilter === 'all' || c.cat === currentFilter;
+    var qOk = !q || c.title.toLowerCase().includes(q) || c.tag.toLowerCase().includes(q);
+    return catOk && qOk;
   });
 
-  /* ── Course data ── */
-  var COURSES = [
-    { id:'calculus', cat:'calculus', title:'Calculus',
-      tag:'Mathematics', weeks:12, level:'Beginner',
-      icon:'fa-calculator', color:'linear-gradient(135deg,#0f3460,#16213e)', bgImage:'image/calculus.jpg',
-      desc:'Master the fundamentals of calculus, from functions and limits to derivatives and integrals. Build a strong mathematical foundation for engineering and science.',
-      outcomes:['Understand function properties and composite functions','Apply trigonometric identities and Law of Cosines','Solve exponential and logarithmic equations','Evaluate limits and continuity','Compute derivatives and apply differentiation rules'] },
-    { id:'cybersec', cat:'security', title:'Computer and Cyber Security',
-      tag:'Security', weeks:12, level:'Intermediate',
-      icon:'fa-shield-alt', color:'linear-gradient(135deg,#1a1a2e,#16213e)', bgImage:'image/computer.jpg',
-      desc:'Master the fundamentals of securing computer systems and networks. Cover network defence, cryptography, ethical hacking, digital forensics, and industry-standard tools used by cybersecurity professionals.',
-      outcomes:['Understand CIA triad and threat models','Configure firewalls and IDS/IPS','Perform basic penetration testing','Apply cryptography concepts','Respond to security incidents'] },
-    { id:'vision', cat:'vision', title:'Computer Vision & Image Processing',
-      tag:'AI / Vision', weeks:14, level:'Advanced',
-      icon:'fa-eye', color:'linear-gradient(135deg,#0f3460,#533483)', bgImage:'image/vision.jpg',
-      desc:'Explore the field of computer vision from classical image processing to deep learning approaches. Build practical skills in feature extraction, object detection, and image segmentation using modern frameworks.',
-      outcomes:['Apply edge detection and filtering algorithms','Implement CNNs for image classification','Perform object detection with YOLO','Segment images using modern techniques','Use OpenCV for real-world projects'] },
-    { id:'ds', cat:'ds', title:'Data Structure and Algorithms',
-      tag:'Programming', weeks:10, level:'Intermediate',
-      icon:'fa-sitemap', color:'linear-gradient(135deg,#1b4332,#2d6a4f)', bgImage:'image/data.jpg',
-      desc:'Build a strong foundation in data structures and algorithms. Understand how data is organised, stored, and manipulated efficiently. Essential knowledge for any software engineering or computer science career.',
-      outcomes:['Implement arrays, linked lists, stacks & queues','Build and traverse binary search trees','Apply graph traversal algorithms (BFS/DFS)','Analyse time and space complexity','Solve problems using dynamic programming'] },
-    { id:'se', cat:'engineering', title:'Software Engineering',
-      tag:'Engineering', weeks:12, level:'Intermediate',
-      icon:'fa-laptop-code', color:'linear-gradient(135deg,#667eea,#764ba2)', bgImage:'image/software.jpg',
-      desc:'Learn the principles and practices of professional software development. Cover the software life cycle, development models, project management, and requirements engineering.',
-      outcomes:['Apply SDLC models like Waterfall and Agile','Manage software projects and mitigate risks','Elicit and document system requirements','Design and implement software architectures','Enforce software quality and maintainability'] }
-  ];
-
-  /* ── Course content (lectures + quiz) ── */
-  var CONTENT = {
-    calculus: {
-      lectures: [
-        { week:1,  title:'Functions and Domain',                   type:'pdf',   size:'1.8 MB', file:'Calculus/Lectures/lecture1.pdf' },
-        { week:2,  title:'Trigonometry and Exponential Equations',  type:'pdf',   size:'1.7 MB', file:'Calculus/Lectures/lecture2.pdf' },
-        { week:3,  title:'Continuous Compounding & Linear Equations', type:'pdf',   size:'1.5 MB', file:'Calculus/Lectures/lecture3.pdf' },
-        { week:4,  title:'Limits and Continuity',                  type:'pdf',   size:'3.9 MB', file:'Calculus/Lectures/lecture4.pdf' },
-        { week:5,  title:'Derivatives and Rules',                  type:'pdf',   size:'2.8 MB', file:'Calculus/Lectures/lecture5.pdf' }
-      ],
-      quiz: [
-        { q:'Given f(x) = 3 - 5x - 2x^2, find the value of f(4).', opts:['-49','-45','55','3'], ans:0 },
-        { q:'If f(x) = 2x + 1, what is the difference quotient (f(x+h) - f(x)) / h?', opts:['2h','2','1','2x'], ans:1 },
-        { q:'Find the domain of the function f(x) = 1 / (x - 5).', opts:['x > 5','x < 5','x != 5','All real numbers'], ans:2 },
-        { q:'Determine the parity of the function f(x) = x^2 + 4.', opts:['Odd','Even','Neither','Both'], ans:1 },
-        { q:'If f(x) = x^2 and g(x) = x - 3, find (f ∘ g)(x).', opts:['x^2 - 3','x^2 - 9','x^2 + 9','x^2 - 6x + 9'], ans:3 },
-        { q:'Find the exact value of sin(30°).', opts:['1/2','sqrt(2)/2','sqrt(3)/2','1'], ans:0 },
-        { q:'In a right triangle, if c = 10 and angle A = 30°, find side a.', opts:['5','5sqrt(3)','10','20'], ans:0 },
-        { q:'Which condition must be met for f(x) to be continuous at x = a?', opts:['f(a) is defined','Limit exists','Limit equals f(a)','All of the above'], ans:3 },
-        { q:'What is the derivative of sin(x)?', opts:['cos(x)','-cos(x)','sin(x)','-sin(x)'], ans:0 },
-        { q:'Find the derivative dy/dx if y = x^2 + 3x - 1.', opts:['2x','2x + 3','x + 3','2x - 1'], ans:1 }
-      ]
-    },
-    cybersec: {
-      lectures: [
-        { week:1,  title:'Introduction to Cyber Security',         type:'pdf',   size:'3.1 MB', file:'Computer and Cyber Security/Lectures/lecture1.pdf' },
-        { week:2,  title:'Network Security Fundamentals',          type:'pdf',   size:'1.7 MB', file:'Computer and Cyber Security/Lectures/lecture2.pdf' },
-        { week:3,  title:'Cyber Threats and Vulnerabilities',      type:'pdf',   size:'1.8 MB', file:'Computer and Cyber Security/Lectures/lecture3.pdf' },
-        { week:4,  title:'Security Controls and Mitigation',        type:'pdf',   size:'3.8 MB', file:'Computer and Cyber Security/Lectures/lecture4.pdf' },
-        { week:5,  title:'Advanced Persistent Threats',            type:'pdf',   size:'1.5 MB', file:'Computer and Cyber Security/Lectures/lecture5.pdf' }
-      ],
-      quiz: [
-        { q:'Which of the following is NOT one of the three core goals of the CIA Triad?', opts:['Confidentiality','Integrity','Availability','Auditability'], ans:3 },
-        { q:'A security control that relies on human implementation (e.g., policies) is:', opts:['Technical','Managerial','Operational','Physical'], ans:2 },
-        { q:'In a security exercise, which team performs the defensive role?', opts:['Red Team','Blue Team','White Team','Purple Team'], ans:1 },
-        { q:'Establishing a command and control backdoor for persistence is called:', opts:['Initial Exploitation','Persistence','Lateral Movement','Pivoting'], ans:1 },
-        { q:'Which property ensures that a sender cannot deny having sent a message?', opts:['Confidentiality','Non-repudiation','Availability','Integrity'], ans:1 },
-        { q:'A sophisticated, nation-state sponsored attacker is an:', opts:['Script Kiddie','Hacktivist','APT','Insider Threat'], ans:2 },
-        { q:'Identifying which TCP/UDP ports are open on a target is:', opts:['Host Discovery','Port Scanning','Fingerprinting','Enumeration'], ans:1 },
-        { q:'Which Windows command displays the IP configuration?', opts:['ping','netstat','ipconfig','nslookup'], ans:2 },
-        { q:'A vulnerability unknown to the vendor with no patch is a:', opts:['Zero-day','Legacy vulnerability','Weak configuration','Logic bomb'], ans:0 },
-        { q:'Which tool is primarily used for packet capture and analysis?', opts:['Nessus','Nmap','Wireshark','Metasploit'], ans:2 }
-      ]
-    },
-    vision: {
-      lectures: [
-        { week:1,  title:'Introduction to Computer Vision',        type:'pdf',   size:'3.1 MB', file:'Computer Vision and Image Processing/Lectures/lecture1.pdf' },
-        { week:2,  title:'Image Sensing and Human Eye',            type:'pdf',   size:'1.6 MB', file:'Computer Vision and Image Processing/Lectures/lecture2.pdf' },
-        { week:3,  title:'Image Enhancement in Spatial Domain',     type:'pdf',   size:'2.1 MB', file:'Computer Vision and Image Processing/Lectures/lecture3.pdf' },
-        { week:4,  title:'Image Filtering and Blurring',           type:'pdf',   size:'1.9 MB', file:'Computer Vision and Image Processing/Lectures/lecture4.pdf' },
-        { week:5,  title:'Edge Detection Fundamentals',            type:'pdf',   size:'1.8 MB', file:'Computer Vision and Image Processing/Lectures/lecture5.pdf' }
-      ],
-      quiz: [
-        { q:'What is the primary goal of Computer Vision?', opts:['Enhance pixels','Extract meaning from images','Produce 3D models','Compress files'], ans:1 },
-        { q:'What is the smallest unit of a digital image?', opts:['Voxel','Pixel','Bit','Channel'], ans:1 },
-        { q:'Which category of enhancement is direct pixel manipulation?', opts:['Frequency domain','Spatial domain','Temporal domain','Transform domain'], ans:1 },
-        { q:'Which filter attenuates high-frequencies?', opts:['Highpass','Bandpass','Lowpass','Median'], ans:2 },
-        { q:'In computer vision, what is an edge?', opts:['Uniform region','Local intensity discontinuity','Center point','Lowest intensity pixel'], ans:1 },
-        { q:'Which sensor converts light into electrical charge?', opts:['CMOS','CCD','CRT','LCD'], ans:1 },
-        { q:'What type of filter is nonlinear and middle-value based?', opts:['Highpass','Spatial lowpass','Median','Derivative'], ans:2 },
-        { q:'The Mexican hat operator is another name for:', opts:['Top-hat','LoG','Bell curve','Step'], ans:1 },
-        { q:'In an 8-bit grayscale image, what is the intensity range?', opts:['0-1','0-255','1-256','0-16.7M'], ans:1 },
-        { q:'Which area of the retina has dense color receptors?', opts:['Iris','Pupil','Fovea','Lens'], ans:2 }
-      ]
-    },
-    ds: {
-      lectures: [
-        { week:1,  title:'Intro to Data Structures',               type:'pdf',   size:'0.6 MB', file:'Data Structure and Algorithms/Lectures/lecture1.pdf' },
-        { week:2,  title:'Algorithm Performance Analysis',         type:'pdf',   size:'0.4 MB', file:'Data Structure and Algorithms/Lectures/lecture2.pdf' },
-        { week:3,  title:'Arrays and Memory Management',           type:'pdf',   size:'0.4 MB', file:'Data Structure and Algorithms/Lectures/lecture3.pdf' },
-        { week:4,  title:'Linked Lists and Nodes',                 type:'pdf',   size:'0.5 MB', file:'Data Structure and Algorithms/Lectures/lecture4.pdf' },
-        { week:5,  title:'Stacks and Queues',                      type:'pdf',   size:'2.3 MB', file:'Data Structure and Algorithms/Lectures/lecture5.pdf' },
-        { week:6,  title:'Advanced Data Structures',               type:'pdf',   size:'0.5 MB', file:'Data Structure and Algorithms/Lectures/lecture6.pdf' }
-      ],
-      quiz: [
-        { q:'Data structure organizes data in memory considering:', opts:['Only elements','Only address','Elements and relationships','Compiler'], ans:2 },
-        { q:'Program is defined as:', opts:['Algorithm + Data Structure','Syntax + Logic','Input + Output','Variables + Functions'], ans:0 },
-        { q:'Which is an example of a Primitive Data Structure?', opts:['Array','Linked List','Float','Graph'], ans:2 },
-        { q:'Which of the following is a Non-Linear Data Structure?', opts:['Array','Stack','Queue','Tree'], ans:3 },
-        { q:'What data structure follows the LIFO principle?', opts:['Queue','Linked List','Stack','Hash Table'], ans:2 },
-        { q:'Binary search has an average time complexity of:', opts:['O(n)','O(log n)','O(n²)','O(1)'], ans:1 },
-        { q:'Which data structure allows O(1) average lookup?', opts:['Array','Linked List','Hash Table','Binary Tree'], ans:2 },
-        { q:'Primitive data structures cannot contain:', opts:['Negative numbers','Zero','NULL value','Floats'], ans:2 },
-        { q:'Linear data structures store elements:', opts:['Randomly','Sequentially','Hierarchically','None'], ans:1 },
-        { q:'Reusability in data structures means:', opts:['Library usage','Abstraction','Fast search','Memory save'], ans:0 }
-      ]
-    },
-    se: {
-      lectures: [
-        { week:1,  title:'Introduction to Software Engineering',   type:'pdf',   size:'0.9 MB', file:'Software Engineering/Lectures/lecture1.pdf' },
-        { week:2,  title:'Software Development Life Cycle',        type:'pdf',   size:'1.2 MB', file:'Software Engineering/Lectures/lecture2.pdf' },
-        { week:3,  title:'Software Processes and Activities',       type:'pdf',   size:'1.2 MB', file:'Software Engineering/Lectures/lecture3.pdf' },
-        { week:4,  title:'Project Management and Risk',            type:'pdf',   size:'1.2 MB', file:'Software Engineering/Lectures/lecture4.pdf' },
-        { week:5,  title:'Requirements Engineering',               type:'pdf',   size:'1.1 MB', file:'Software Engineering/Lectures/lecture5.pdf' }
-      ],
-      quiz: [
-        { q:'What is software engineering primarily concerned with?', opts:['Hardware design','Cost-effective high-quality software','Networking','Data storage'], ans:1 },
-        { q:'SDLC stands for:', opts:['System Design Life Cycle','Software Development Life Cycle','Software Design Logic Cycle','None'], ans:1 },
-        { q:'First SDLC phase is:', opts:['Testing','Planning','Coding','Maintenance'], ans:1 },
-        { q:'Waterfall model is:', opts:['Iterative','Linear','Random','Agile'], ans:1 },
-        { q:'Software process consists of:', opts:['Random acts','Structured activities','Hardware process','None'], ans:1 },
-        { q:'Risk management first step is:', opts:['Planning','Monitoring','Identification','Analysis'], ans:2 },
-        { q:'Functional requirements mainly describe:', opts:['System constraints','System services','UI design','Algorithms'], ans:1 },
-        { q:'Validation checks if software meets:', opts:['Speed needs','Customer needs','UI needs','Memory needs'], ans:1 },
-        { q:'Which strategy reduces risk probability?', opts:['Contingency','Avoidance','Monitoring','Reporting'], ans:1 },
-        { q:'Software project management ensures delivery on:', opts:['One day','Time/Budget/Requirements','Fast speed','UI color'], ans:1 }
-      ]
-    }
-  };
-
-  /* ── State ── */
-  var currentFilter = 'all';
-  var currentCourse = null;
-  var quizAnswers   = [];
-
-  /* ── Filter ── */
-  function setFilter(btn, cat) {
-    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-    currentFilter = cat;
-    renderCourses();
+  grid.innerHTML = '';
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="text-align:center;color:#9ca3af;grid-column:1/-1;padding:2rem;">No courses found.</p>';
+    return;
   }
 
-  /* ── Render cards ── */
-  function renderCourses() {
-    var grid    = document.getElementById('courseGrid');
-    var q       = document.getElementById('searchInput').value.toLowerCase();
-    var enr     = EduDB.getUserEnrollments(__sess.id);
-    var enrIds  = enr.map(function(e){ return e.courseId; });
-    var enrolledCount = enrIds.length;
+  filtered.forEach(function (c) {
+    var isEnrolled = enrIds.includes(c.id);
+    var enrollment = enr.find(function (e) { return e.courseId === c.id; });
+    var pct = enrollment ? enrollment.progress : 0;
 
-    var notice = document.getElementById('enrolledCount');
-    notice.textContent = enrolledCount > 0
-      ? '✅ You are enrolled in ' + enrolledCount + ' course' + (enrolledCount>1?'s':'')+'. Click "Continue Learning" to access lectures and quiz.'
-      : 'Click "View Course" to preview, then enrol to unlock lecture files and quizzes.';
+    var div = document.createElement('div');
+    div.style.cssText = 'background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 25px rgba(0,0,0,0.1);display:flex;flex-direction:column;position:relative;transition:transform 0.25s,box-shadow 0.25s;';
+    div.onmouseover = function () { this.style.transform = 'translateY(-5px)'; this.style.boxShadow = '0 14px 40px rgba(0,0,0,0.18)'; };
+    div.onmouseout = function () { this.style.transform = ''; this.style.boxShadow = '0 6px 25px rgba(0,0,0,0.1)'; };
 
-    var filtered = COURSES.filter(function(c){
-      var catOk = currentFilter==='all' || c.cat===currentFilter;
-      var qOk   = !q || c.title.toLowerCase().includes(q) || c.tag.toLowerCase().includes(q);
-      return catOk && qOk;
-    });
-
-    grid.innerHTML = '';
-    if (filtered.length === 0) {
-      grid.innerHTML = '<p style="text-align:center;color:#9ca3af;grid-column:1/-1;padding:2rem;">No courses found.</p>';
-      return;
-    }
-
-    filtered.forEach(function(c) {
-      var isEnrolled = enrIds.includes(c.id);
-      var enrollment = enr.find(function(e){ return e.courseId === c.id; });
-      var pct        = enrollment ? enrollment.progress : 0;
-
-      var div = document.createElement('div');
-      div.style.cssText = 'background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 25px rgba(0,0,0,0.1);display:flex;flex-direction:column;position:relative;transition:transform 0.25s,box-shadow 0.25s;';
-      div.onmouseover = function(){ this.style.transform='translateY(-5px)'; this.style.boxShadow='0 14px 40px rgba(0,0,0,0.18)'; };
-      div.onmouseout  = function(){ this.style.transform=''; this.style.boxShadow='0 6px 25px rgba(0,0,0,0.1)'; };
-
-      div.innerHTML =
-        '<div style="height:150px; background-image: linear-gradient(135deg, rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(\''+c.bgImage+'\'); background-position: center; background-size: cover; display:flex; align-items:center; justify-content:center; position:relative;">' +
-          (isEnrolled ? '<span class="enrolled-badge"><i class="fas fa-check-circle"></i> Enrolled</span>' : '') +
-          '<i class="fas '+c.icon+'" style="font-size:3rem; color:rgba(255,255,255,0.85);"></i>' +
-        '</div>' +
-        '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">' +
-          '<span style="display:inline-block;background:#f0f2ff;color:#667eea;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.5px;">'+c.tag+'</span>' +
-          '<div style="font-size:0.97rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.4;">'+c.title+'</div>' +
-          '<div style="font-size:0.78rem;color:#6b7280;margin-bottom:0.8rem;flex:1;">'+c.desc.slice(0,90)+'…</div>' +
-          '<div style="display:flex;gap:1rem;font-size:0.75rem;color:#9ca3af;margin-bottom:0.9rem;">' +
-            '<span><i class="fas fa-clock"></i> '+c.weeks+' weeks</span>' +
-            '<span><i class="fas fa-signal"></i> '+c.level+'</span>' +
-            '<span><i class="fas fa-file-alt"></i> '+CONTENT[c.id].lectures.length+' lectures</span>' +
-          '</div>' +
-          (isEnrolled
-            ? '<div style="margin-bottom:0.7rem;">' +
-                '<div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:3px;"><span style="color:#374151;font-weight:600;">Progress</span><span style="color:#667eea;font-weight:700;">'+pct+'%</span></div>' +
-                '<div style="background:#f3f4f6;border-radius:10px;height:6px;overflow:hidden;">' +
-                  '<div style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px;width:'+pct+'%;"></div>' +
-                '</div></div>'
-            : '') +
-          '<button onclick="openModal(\''+c.id+'\')" style="width:100%;border:none;padding:0.65rem;border-radius:8px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;' +
-            (isEnrolled
-              ? 'background:linear-gradient(135deg,#43e97b,#38f9d7);color:#065f46;'
-              : 'background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;') +
-            '" onmouseover="this.style.opacity=\'0.85\'" onmouseout="this.style.opacity=\'1\'">' +
-            (isEnrolled
-              ? '<i class="fas fa-play-circle"></i> Continue Learning'
-              : '<i class="fas fa-eye"></i> View Course') +
-          '</button>' +
-        '</div>';
-
-      grid.appendChild(div);
-    });
-  }
-
-  /* ── Open modal ── */
-  function openModal(courseId) {
-    currentCourse = COURSES.find(function(c){ return c.id === courseId; });
-    var enr       = EduDB.getUserEnrollments(__sess.id);
-    var isEnrolled= enr.some(function(e){ return e.courseId === courseId; });
-    quizAnswers   = new Array(CONTENT[courseId].quiz.length).fill(null);
-
-    /* Hero */
-    var heroEl = document.getElementById('modalHero');
-    heroEl.style.backgroundImage = 'linear-gradient(135deg, rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(\'' + currentCourse.bgImage + '\')';
-    heroEl.style.backgroundPosition = 'center';
-    heroEl.style.backgroundSize = 'cover';
-    document.getElementById('modalHeroIcon').className    = 'fas ' + currentCourse.icon + ' modal-hero-icon';
-
-    /* Tabs visibility */
-    document.getElementById('modalTabs').style.display = isEnrolled ? 'flex' : 'none';
-    switchTab('overview'); // always start on overview
-
-    /* Overview content */
-    var outcomesList = currentCourse.outcomes.map(function(o){ return '<li style="padding:0.3rem 0;font-size:0.85rem;color:#374151;display:flex;align-items:flex-start;gap:8px;"><i class="fas fa-check-circle" style="color:#10b981;margin-top:2px;flex-shrink:0;"></i>'+o+'</li>'; }).join('');
-    document.getElementById('modalBody').innerHTML =
-      '<h2 style="font-size:1.3rem;font-weight:800;color:#1a1a2e;margin-bottom:0.3rem;">'+currentCourse.title+'</h2>' +
-      '<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">' +
-        '<span style="font-size:0.78rem;color:#667eea;font-weight:600;"><i class="fas fa-calendar"></i> '+currentCourse.weeks+' Weeks</span>' +
-        '<span style="font-size:0.78rem;color:#667eea;font-weight:600;"><i class="fas fa-signal"></i> '+currentCourse.level+'</span>' +
-        '<span style="font-size:0.78rem;color:#667eea;font-weight:600;"><i class="fas fa-file-alt"></i> '+CONTENT[courseId].lectures.length+' Lectures</span>' +
-        '<span style="font-size:0.78rem;color:#667eea;font-weight:600;"><i class="fas fa-question-circle"></i> '+CONTENT[courseId].quiz.length+' Quiz Questions</span>' +
+    div.innerHTML =
+      '<div style="height:150px; background-image: linear-gradient(135deg, rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.7)), url(\'' + c.bgImage + '\'); background-position: center; background-size: cover; display:flex; align-items:center; justify-content:center; position:relative;">' +
+      (isEnrolled ? '<span class="enrolled-badge"><i class="fas fa-check-circle"></i> Enrolled</span>' : '') +
+      '<i class="fas ' + c.icon + '" style="font-size:3rem; color:rgba(255,255,255,0.85);"></i>' +
       '</div>' +
-      '<p style="font-size:0.88rem;color:#4b5563;line-height:1.7;margin-bottom:1.2rem;">'+currentCourse.desc+'</p>' +
-      '<h4 style="font-size:0.88rem;font-weight:800;color:#1a1a2e;margin-bottom:0.6rem;">What You\'ll Learn</h4>' +
-      '<ul style="list-style:none;margin-bottom:1.5rem;">'+outcomesList+'</ul>' +
-      (!isEnrolled
-        ? '<button onclick="doEnrol(\''+courseId+'\')" id="enrolBtn" style="width:100%;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:0.85rem;border-radius:10px;font-family:Inter,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(102,126,234,0.4);transition:transform 0.2s;" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'\'"><i class="fas fa-user-plus"></i> Enrol Now – Free</button>'
-        : '<div style="background:#d1fae5;border-radius:10px;padding:0.8rem 1rem;font-size:0.85rem;color:#065f46;font-weight:600;text-align:center;"><i class="fas fa-check-circle"></i> You are enrolled – use the tabs above to access Lectures and Quiz</div>');
+      '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">' +
+      '<div style="font-size:0.97rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.4;">' + c.title + '</div>' +
+      '<div style="font-size:0.78rem;color:#6b7280;margin-bottom:0.8rem;flex:1;">' + c.desc.slice(0, 90) + '&hellip;</div>' +
+      '<div style="display:flex;gap:1rem;font-size:0.75rem;color:#9ca3af;margin-bottom:0.9rem;">' +
+      '<span><i class="fas fa-clock"></i> ' + c.weeks + ' weeks</span>' +
+      '<span><i class="fas fa-signal"></i> ' + c.level + '</span>' +
+      '</div>' +
+      (isEnrolled
+        ? '<div style="margin-bottom:0.7rem;">' +
+        '<div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:3px;"><span style="color:#374151;font-weight:600;">Progress</span><span style="color:#667eea;font-weight:700;">' + pct + '%</span></div>' +
+        '<div style="background:#f3f4f6;border-radius:10px;height:6px;overflow:hidden;">' +
+        '<div style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px;width:' + pct + '%;"></div>' +
+        '</div></div>'
+        : '') +
+      '<button onclick="openCourseDetail(\'' + c.id + '\')" style="width:100%;border:none;padding:0.65rem;border-radius:8px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;' +
+      (isEnrolled
+        ? 'background:linear-gradient(135deg,#43e97b,#38f9d7);color:#065f46;'
+        : 'background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;') +
+      '" onmouseover="this.style.opacity=\'0.85\'" onmouseout="this.style.opacity=\'1\'">' +
+      (isEnrolled
+        ? '<i class="fas fa-play-circle"></i> Continue Learning'
+        : '<i class="fas fa-eye"></i> View Course') +
+      '</button>' +
+      '</div>';
 
-    /* Lectures */
-    var lectures  = CONTENT[courseId].lectures;
-    var lHtml     = '';
-    lectures.forEach(function(l) {
+    grid.appendChild(div);
+  });
+}
+
+function openCourseDetail(courseId) {
+  currentCourse = COURSES.find(function (c) { return c.id === courseId; });
+  var enr = EduDB.getUserEnrollments(__sess.id);
+  var enrollment = enr.find(function (e) { return e.courseId === courseId; });
+  var isEnrolled = !!enrollment;
+
+  document.getElementById('viewList').style.display = 'none';
+  document.getElementById('viewDetail').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'instant' });
+
+  // Hero
+  var heroEl = document.getElementById('detailHero');
+  heroEl.style.backgroundImage = 'linear-gradient(135deg, rgba(15, 32, 40, 0.4), rgba(15, 32, 40, 0.85)), url(\'' + currentCourse.bgImage + '\')';
+  document.getElementById('detailIcon').innerHTML = '<i class="fas ' + currentCourse.icon + '"></i>';
+  document.getElementById('detailTitle').textContent = currentCourse.title;
+
+  document.getElementById('detailMeta').innerHTML = 
+    '<span style="color:rgba(255,255,255,0.85);font-size:.85rem;"><i class="fas fa-clock"></i> ' + currentCourse.weeks + ' Weeks</span>' +
+    '<span style="color:rgba(255,255,255,0.85);font-size:.85rem;"><i class="fas fa-signal"></i> ' + currentCourse.level + '</span>';
+
+  // Overview content
+  document.getElementById('detailDesc').textContent = currentCourse.desc;
+  
+  var outcomesList = currentCourse.outcomes.map(function (o) { return '<li style="padding:0.4rem 0;font-size:.88rem;color:#4b5563;display:flex;align-items:flex-start;gap:10px;"><i class="fas fa-check-circle" style="color:#10b981;margin-top:3px;flex-shrink:0;"></i>' + o + '</li>'; }).join('');
+  document.getElementById('detailOutcomes').innerHTML = '<ul style="list-style:none;margin:0;padding:0;">' + outcomesList + '</ul>';
+
+  var infoHtml = 
+    '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#6b7280;">Lectures</span><span style="font-weight:600;color:#1a1a2e;">' + CONTENT[courseId].lectures.length + ' Notes</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#6b7280;">Tutorials</span><span style="font-weight:600;color:#1a1a2e;">' + (CONTENT[courseId].tutorials ? CONTENT[courseId].tutorials.length : 0) + ' Tasks</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#6b7280;">Quizzes</span><span style="font-weight:600;color:#1a1a2e;">' + CONTENT[courseId].lectures.length + ' Quizzes</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:.7rem 0;font-size:.85rem;"><span style="color:#6b7280;">Certificate</span><span style="font-weight:600;color:#10b981;">Yes</span></div>';
+  document.getElementById('detailSidebar').innerHTML = infoHtml;
+
+  var enrolBlock = document.getElementById('enrolBlock');
+  var pBlock = document.getElementById('progressBlock');
+  
+  if (!isEnrolled) {
+    pBlock.style.display = 'none';
+    enrolBlock.innerHTML = '<button onclick="doEnrol(\'' + courseId + '\')" id="enrolBtn" style="width:100%;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:.9rem;border-radius:10px;font-family:Inter,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(102,126,234,0.4);transition:transform .2s;" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'\'"><i class="fas fa-user-plus"></i> Enrol Now &ndash; Free</button>';
+  } else {
+    pBlock.style.display = 'block';
+    enrolBlock.innerHTML = '<div style="background:#d1fae5;border-radius:10px;padding:.9rem 1rem;font-size:.85rem;color:#065f46;font-weight:600;text-align:center;"><i class="fas fa-check-circle"></i> You are actively enrolled in this course.</div>';
+    
+    var pct = enrollment.progress || 0;
+    document.getElementById('progressPct').textContent = pct + '%';
+    setTimeout(function(){ document.getElementById('progressBar').style.width = pct + '%'; }, 100);
+    
+    var readLecs = enrollment.completedLectures ? enrollment.completedLectures.length : 0;
+    var doneQuizzes = enrollment.completedQuizzes ? enrollment.completedQuizzes.length : 0;
+    
+    document.getElementById('progressStats').innerHTML = 
+      '<span><i class="fas fa-check"></i> ' + readLecs + '/' + CONTENT[courseId].lectures.length + ' Lectures</span>' +
+      '<span style="margin-left:10px;"><i class="fas fa-check"></i> ' + doneQuizzes + '/' + CONTENT[courseId].quizzes.length + ' Quizzes</span>';
+  }
+
+  // Populate Lectures
+  var lectures = CONTENT[courseId].lectures.slice(); // copy array
+  var customData = EduDB.getCustomCourseMaterials()[courseId];
+  if (customData && customData.lectures) {
+    lectures = lectures.concat(customData.lectures);
+  }
+
+  var lHtml = '';
+  if (!isEnrolled) {
+    lHtml = '<div class="locked-box"><i class="fas fa-lock"></i><div>Please enrol to unlock lecture notes.</div></div>';
+  } else {
+    lectures.forEach(function (l) {
       lHtml +=
-        '<div class="lecture-file">' +
-          '<div class="file-icon '+l.type+'"><i class="fas '+(l.type==='pdf'?'fa-file-pdf':'fa-play-circle')+'"></i></div>' +
-          '<div class="file-meta">' +
-            '<div class="file-title">Week '+l.week+': '+l.title+'</div>' +
-            '<div class="file-sub">'+(l.type==='pdf'?'PDF Document':'Video Lecture')+' &nbsp;·&nbsp; '+l.size+'</div>' +
-          '</div>' +
-          '<button class="file-dl-btn" onclick="openFile(\''+l.file+'\', '+l.week+', \''+l.title+'\')">' +
-            (l.type==='pdf'?'<i class="fas fa-eye"></i> View':'<i class="fas fa-play"></i> Watch') +
-          '</button>' +
+        '<div class="res-item">' +
+        '<div class="res-ico lec"><i class="fas ' + (l.type==='video'?'fa-play-circle':'fa-file-pdf') + '"></i></div>' +
+        '<div class="res-meta">' +
+        '<div class="res-title">Week ' + l.week + ': ' + l.title + '</div>' +
+        '<div class="res-sub">' + (l.type==='video'?'Video Lecture':'PDF Document') + ' &nbsp;&middot;&nbsp; ' + (l.size || 'Unknown') + '</div>' +
+        '</div>' +
+        '<button class="res-btn" onclick="openFile(\'' + l.file + '\', ' + l.week + ', \'' + l.title.replace(/'/g,"\\'") + '\')"><i class="fas ' + (l.type==='video'?'fa-play':'fa-eye') + '"></i> View</button>' +
         '</div>';
     });
-    document.getElementById('lectureList').innerHTML = lHtml;
+  }
+  document.getElementById('lectureList').innerHTML = lHtml;
 
-    /* Quiz */
-    var quiz   = CONTENT[courseId].quiz;
-    var qHtml  = '';
-    quiz.forEach(function(q, i) {
-      qHtml += '<div class="quiz-question" id="qq'+i+'">' +
-        '<div class="quiz-q-text">'+(i+1)+'. '+q.q+'</div>';
-      q.opts.forEach(function(opt, j) {
-        qHtml += '<label class="quiz-option" id="qo'+i+'_'+j+'">' +
-          '<input type="radio" name="quiz'+i+'" value="'+j+'" onchange="quizAnswers['+i+']='+j+'" /> '+opt+'</label>';
-      });
-      qHtml += '</div>';
-    });
-    document.getElementById('quizList').innerHTML   = qHtml;
-    document.getElementById('quizResult').style.display = 'none';
-    document.getElementById('quizSubmitBtn').style.display = 'block';
-    var btn = document.getElementById('quizSubmitBtn');
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Quiz';
-
-    document.getElementById('courseModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+  // Populate Tutorials
+  var tutorials = (CONTENT[courseId].tutorials || []).slice();
+  if (customData && customData.tutorials) {
+    tutorials = tutorials.concat(customData.tutorials);
   }
 
-  /* ── Switch modal tab ── */
-  function switchTab(name) {
-    ['overview','lectures','quiz'].forEach(function(t) {
-      document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).style.display = t===name?'block':'none';
+  var tHtml = '';
+  if (!isEnrolled) {
+    tHtml = '<div class="locked-box"><i class="fas fa-lock"></i><div>Please enrol to unlock tutorial exercises.</div></div>';
+  } else if (tutorials.length === 0) {
+    tHtml = '<div style="padding:1rem;color:#6b7280;font-size:.85rem;">No tutorials available yet.</div>';
+  } else {
+    tutorials.forEach(function (t) {
+      tHtml +=
+        '<div class="res-item">' +
+        '<div class="res-ico tut"><i class="fas fa-tasks"></i></div>' +
+        '<div class="res-meta">' +
+        '<div class="res-title">' + t.title + (t.week ? ' (Week '+t.week+')' : '') + '</div>' +
+        '<div class="res-sub">PDF Worksheet &nbsp;&middot;&nbsp; ' + (t.size || 'Unknown') + '</div>' +
+        '</div>' +
+        '<button class="res-btn tut" onclick="openFile(\'' + t.file + '\', null, null)"><i class="fas fa-download"></i> Open</button>' +
+        '</div>';
     });
-    document.querySelectorAll('.modal-tab-btn').forEach(function(b,i) {
-      b.classList.toggle('active', ['overview','lectures','quiz'][i]===name);
-    });
-    if (name==='quiz') { quizAnswers = quizAnswers.map(function(){ return null; }); }
   }
+  document.getElementById('tutorialList').innerHTML = tHtml;
 
-  /* ── Enrol ── */
-  function doEnrol(courseId) {
-    var c   = COURSES.find(function(x){ return x.id===courseId; });
-    var btn = document.getElementById('enrolBtn');
-    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enrolling…';
-    setTimeout(function() {
-      EduDB.enrol(__sess.id, courseId, c.title, c.icon, c.color);
-      showToast('✅ Enrolled in "'+c.title+'"! Lecture files and Quiz are now unlocked.');
-      closeModal();
-      renderCourses();
-    }, 800);
-  }
-
-  /* ── Submit quiz ── */
-  function submitQuiz() {
-    var quiz = CONTENT[currentCourse.id].quiz;
-    var score = 0;
-    var allAnswered = true;
-    quiz.forEach(function(q, i) {
-      if (quizAnswers[i] === null) { allAnswered = false; return; }
-      if (quizAnswers[i] === q.ans) score++;
-      /* Colour options */
-      q.opts.forEach(function(_, j) {
-        var el = document.getElementById('qo'+i+'_'+j);
-        if (el) {
-          el.classList.remove('correct','wrong');
-          if (j === q.ans) el.classList.add('correct');
-          else if (j === quizAnswers[i] && quizAnswers[i] !== q.ans) el.classList.add('wrong');
-        }
-      });
+  // Populate Quiz List
+  var qIndexHtml = '';
+  if (!isEnrolled) {
+    qIndexHtml = '<div class="locked-box"><i class="fas fa-lock"></i><div>Please enrol to access quizzes.</div></div>';
+  } else {
+    var completedQuizzes = enrollment.completedQuizzes || [];
+    CONTENT[courseId].quizzes.forEach(function (q, i) {
+      var isQuizDone = completedQuizzes.indexOf(i+1) !== -1;
+      var doneHtml = isQuizDone ? '<span style="color:#10b981;font-size:0.75rem;margin-left:8px;font-weight:600;"><i class="fas fa-check-circle"></i> Passed</span>' : '';
+      qIndexHtml +=
+        '<div class="res-item">' +
+        '<div class="res-ico" style="background:#e0e7ff;color:#4f46e5;"><i class="fas fa-question"></i></div>' +
+        '<div class="res-meta">' +
+        '<div class="res-title">Quiz ' + (i + 1) + doneHtml + '</div>' +
+        '<div class="res-sub">Multiple Choice Assessment (' + q.length + ' Qs)</div>' +
+        '</div>' +
+        '<button class="res-btn" style="background:#4f46e5;color:#fff;" onclick="openQuizFile(' + (i+1) + ')"><i class="fas fa-play"></i> Start Quiz</button>' +
+        '</div>';
     });
-    if (!allAnswered) { showToast('⚠️ Please answer all questions first.'); return; }
-    var pct   = Math.round(score / quiz.length * 100);
-    var pass  = pct >= 60;
-    var res   = document.getElementById('quizResult');
-    res.style.display = 'block';
-    res.className = pass ? 'alert-success' : 'alert-error';
-    res.innerHTML = (pass ? '<i class="fas fa-trophy"></i>' : '<i class="fas fa-redo"></i>') +
-      ' Score: <strong>'+score+'/'+quiz.length+' ('+pct+'%)</strong> – ' +
-      (pass ? 'Excellent! You passed the quiz 🎉' : 'Keep studying and try again 💪');
-    if (pass) {
-      EduDB.markQuizDone(__sess.id, currentCourse.id, score, quiz.length);
+  }
+  document.getElementById('quizIndex').innerHTML = qIndexHtml;
+  document.getElementById('quizIndex').style.display = 'block';
+  document.getElementById('quizActive').style.display = 'none';
+
+  switchDetailTab('overview');
+}
+
+function backToList() {
+  document.getElementById('viewDetail').style.display = 'none';
+  document.getElementById('viewList').style.display = 'block';
+  renderCourses(); // refresh progress bars
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function switchDetailTab(name) {
+  ['overview', 'lectures', 'tutorials', 'quiz'].forEach(function (t) {
+    var el = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (el) el.style.display = t === name ? 'block' : 'none';
+  });
+  ['Overview', 'Lectures', 'Tutorials', 'Quiz'].forEach(function (t) {
+    var btn = document.getElementById('tb' + t);
+    if (btn) btn.classList.toggle('active', t.toLowerCase() === name);
+  });
+  if (name === 'quiz') {
+     document.getElementById('quizActive').style.display = 'none';
+     document.getElementById('quizIndex').style.display = 'block';
+  }
+}
+function doEnrol(courseId) {
+  var c = COURSES.find(function (x) { return x.id === courseId; });
+  var btn = document.getElementById('enrolBtn');
+  if(!btn) return;
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enrolling&hellip;';
+  setTimeout(function () {
+    EduDB.enrol(__sess.id, courseId, c.title, c.icon, c.color);
+    showToast('✅ Enrolled in "' + c.title + '"! Materials are now unlocked.');
+    openCourseDetail(courseId); // refresh
+  }, 800);
+}
+
+var activeQuizData = null;
+
+function parseQuizText(text) {
+  var lines = text.split('\n').map(function(l) { return l.trim(); }).filter(function(l) { return l; });
+  var questions = [];
+  var currQ = null;
+  
+  for(var i=0; i<lines.length; i++) {
+    var line = lines[i];
+    var qMatch = line.match(/^(\d+)\.\s+(.*)/);
+    var optMatch = line.match(/^([A-D])\.\s+(.*)/i);
+    var ansMatch = line.match(/^Answer:\s+([A-D])/i);
+
+    if(qMatch) {
+      if(currQ) questions.push(currQ);
+      currQ = { q: qMatch[2], opts: [], ans: 0 };
+    } else if(optMatch && currQ) {
+      currQ.opts.push(optMatch[2]);
+    } else if(ansMatch && currQ) {
+      var ansChar = ansMatch[1].toUpperCase();
+      currQ.ans = ansChar.charCodeAt(0) - 65; // A=0, B=1
     }
-    var btn = document.getElementById('quizSubmitBtn');
-    btn.style.display = 'none';
   }
+  if(currQ) questions.push(currQ);
+  return questions;
+}
 
-  /* ── Close modal ── */
-  function closeModal() {
-    document.getElementById('courseModal').classList.remove('open');
-    document.body.style.overflow = '';
-    currentCourse = null;
+function openQuizFile(index) {
+  var quizArray = CONTENT[currentCourse.id].quizzes;
+  if (!quizArray || !quizArray[index-1]) {
+    showToast("⚠️ Quiz data not found.");
+    return;
   }
-  function closeModalOnBg(e) { if (e.target === document.getElementById('courseModal')) closeModal(); }
+  activeQuizData = quizArray[index-1];
+  renderActiveQuiz('Quiz ' + index);
+}
 
-  /* ── Open file ── */
-  function openFile(path, week, title) {
-    if (path) {
-      window.open(path, '_blank');
-      if (week && title && currentCourse) {
-        EduDB.markLectureRead(__sess.id, currentCourse.id, week, title);
+function renderActiveQuiz(title) {
+  document.getElementById('activeQuizTitle').textContent = title;
+  document.getElementById('quizActive').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizIndex').style.display = 'none';
+  
+  var qHtml = '';
+  quizAnswers = new Array(activeQuizData.length).fill(null);
+  
+  activeQuizData.forEach(function (q, i) {
+    qHtml += '<div class="quiz-q" id="qq' + i + '">' +
+      '<div class="quiz-qt">' + (i + 1) + '. ' + q.q + '</div>';
+    q.opts.forEach(function (opt, j) {
+      var letter = String.fromCharCode(65 + j);
+      qHtml += '<label class="quiz-opt" id="qo' + i + '_' + j + '">' +
+        '<input type="radio" name="quiz' + i + '" value="' + j + '" onchange="quizAnswers[' + i + ']=' + j + '" /> <strong>'+letter+'.</strong> ' + opt + '</label>';
+    });
+    qHtml += '</div>';
+  });
+  document.getElementById('quizList').innerHTML = qHtml;
+  
+  var btn = document.getElementById('quizSubmitBtn');
+  btn.style.display = 'block';
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Quiz';
+}
+
+function closeActiveQuiz() {
+  document.getElementById('quizActive').style.display = 'none';
+  document.getElementById('quizIndex').style.display = 'block';
+}
+
+function submitQuiz() {
+  var quiz = activeQuizData;
+  var score = 0;
+  var allAnswered = true;
+  quiz.forEach(function (q, i) {
+    if (quizAnswers[i] === null) { allAnswered = false; return; }
+    if (quizAnswers[i] === q.ans) score++;
+    q.opts.forEach(function (_, j) {
+      var el = document.getElementById('qo' + i + '_' + j);
+      if (el) {
+        el.classList.remove('correct', 'wrong');
+        if (j === q.ans) el.classList.add('correct');
+        else if (j === quizAnswers[i] && quizAnswers[i] !== q.ans) el.classList.add('wrong');
       }
-    } else {
-      showToast('📁 File path not found.');
+    });
+  });
+  if (!allAnswered) { showToast('⚠️ Please answer all questions first.'); return; }
+  var pct = Math.round(score / quiz.length * 100);
+  var pass = score === quiz.length;
+  var res = document.getElementById('quizResult');
+  res.style.display = 'block';
+  res.className = pass ? 'alert-success' : 'alert-error';
+  res.innerHTML = (pass ? '<i class="fas fa-trophy"></i>' : '<i class="fas fa-redo"></i>') +
+    ' Score: <strong>' + score + '/' + quiz.length + ' (' + pct + '%)</strong> &ndash; ' +
+    (pass ? 'Excellent! You passed the quiz 🎉' : 'You must get all answers correct to pass the quiz. Try again! 💪');
+  if (pass) {
+    var totalLecs = CONTENT[currentCourse.id].lectures.length;
+    var totalQuiz = CONTENT[currentCourse.id].quizzes.length;
+    EduDB.markQuizDone(__sess.id, currentCourse.id, activeQuizIndex, score, quiz.length, totalLecs, totalQuiz);
+    openCourseDetail(currentCourse.id);
+  }
+  var btn = document.getElementById('quizSubmitBtn');
+  btn.style.display = 'none';
+}
+
+
+
+function openFile(path, week, title) {
+  if (path) {
+    window.open(path, '_blank');
+    if (week && title && currentCourse) {
+      var totalLecs = CONTENT[currentCourse.id].lectures.length;
+      var totalQuiz = CONTENT[currentCourse.id].quizzes.length;
+      EduDB.markLectureRead(__sess.id, currentCourse.id, week, title, totalLecs, totalQuiz);
+      openCourseDetail(currentCourse.id);
     }
+  } else {
+    showToast('📁 File path not found.');
   }
+}
 
-  /* ── Demo download ── */
-  function demoDownload() { showToast('📁 Demo mode: In a live deployment this file would download.'); }
-
-  /* ── Toast ── */
-  function showToast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg; t.style.display = 'block';
-    setTimeout(function(){ t.style.display='none'; }, 3500);
-  }
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  setTimeout(function () { t.style.display = 'none'; }, 3500);
+}
 </script>
 </body>
 </html>
