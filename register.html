@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,157 +11,173 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    body { padding-top:0; background:linear-gradient(135deg,#0a0a1e 0%,#1a1a3e 50%,#0f3460 100%); min-height:100vh; }
+    body {
+      padding-top: 0;
+      background: linear-gradient(135deg, #0a0a1e 0%, #1a1a3e 50%, #0f3460 100%);
+      min-height: 100vh;
+    }
   </style>
 </head>
+
 <body>
 
-<div style="padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;">
-  <a href="index.html" style="font-size:1.3rem;font-weight:800;background:linear-gradient(90deg,#667eea,#764ba2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
-    <i class="fas fa-graduation-cap" style="-webkit-text-fill-color:#667eea;"></i> EduLearn
-  </a>
-  <a href="index.html" style="color:#a8b8f8;font-size:0.85rem;font-weight:600;">Have an account? <span style="color:#667eea;">Sign In &rsaquo;</span></a>
-</div>
-
-<div style="display:flex;align-items:center;justify-content:center;padding:1rem 1rem 3rem;">
-  <div class="auth-card w3-animate-bottom" style="max-width:520px;">
-
-    <div class="auth-logo">
-      <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;font-size:1.6rem;color:#fff;">
-        <i class="fas fa-user-graduate"></i>
-      </div>
-      <div class="logo-text">Create Account</div>
-    </div>
-
-    <h2 style="font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.3rem;">Join EduLearn</h2>
-    <p class="subtitle">Free registration – no credit card required</p>
-
-    <div id="regError"   class="alert-error"   style="display:none;"></div>
-    <div id="regSuccess" class="alert-success"  style="display:none;"></div>
-
-    <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
-      <div class="w3-row-padding">
-        <div class="w3-col s6 form-group">
-          <label for="rgFirst">First Name</label>
-          <input type="text" id="rgFirst" class="form-control" placeholder="Ahmad" required />
-        </div>
-        <div class="w3-col s6 form-group">
-          <label for="rgLast">Last Name</label>
-          <input type="text" id="rgLast" class="form-control" placeholder="Farid" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="rgEmail">Email Address</label>
-        <input type="email" id="rgEmail" class="form-control" placeholder="your@student.edu" required />
-      </div>
-      <div class="form-group">
-        <label for="rgProg">Programme</label>
-        <select id="rgProg" class="form-control">
-          <option value="">-- Select Programme --</option>
-          <option>Computer Science</option>
-          <option>Information Technology</option>
-          <option>Software Engineering</option>
-          <option>Cybersecurity</option>
-          <option>Data Science</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="rgPass">Password</label>
-        <div style="position:relative;">
-          <input type="password" id="rgPass" class="form-control" placeholder="Minimum 8 characters" required style="padding-right:2.8rem;" oninput="checkStrength(this.value)" />
-          <button type="button" onclick="togglePwd('rgPass','eye1')" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9ca3af;" id="eye1"><i class="fas fa-eye"></i></button>
-        </div>
-        <div style="margin-top:4px;">
-          <div style="height:4px;border-radius:4px;background:#f3f4f6;overflow:hidden;">
-            <div id="strengthBar" style="height:100%;width:0%;border-radius:4px;transition:all 0.3s;"></div>
-          </div>
-          <span id="strengthLbl" style="font-size:0.72rem;color:#9ca3af;"></span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="rgConf">Confirm Password</label>
-        <div style="position:relative;">
-          <input type="password" id="rgConf" class="form-control" placeholder="Re-enter your password" required style="padding-right:2.8rem;" />
-          <button type="button" onclick="togglePwd('rgConf','eye2')" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9ca3af;" id="eye2"><i class="fas fa-eye"></i></button>
-        </div>
-      </div>
-      <div style="margin-bottom:1.2rem;">
-        <label style="display:flex;align-items:flex-start;gap:8px;font-size:0.82rem;color:#4b5563;cursor:pointer;">
-          <input type="checkbox" id="agreeTerms" style="accent-color:#667eea;margin-top:2px;" />
-          I agree to the <a href="#" style="color:#667eea;font-weight:600;">Terms of Service</a> and <a href="#" style="color:#667eea;font-weight:600;">Privacy Policy</a>
-        </label>
-      </div>
-      <button type="submit" class="btn-submit" id="regBtn"><i class="fas fa-user-plus"></i> Create Account</button>
-    </form>
-
-    <div class="auth-footer">Already have an account? <a href="index.html">Sign in</a></div>
+  <div style="padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html"
+      style="font-size:1.3rem;font-weight:800;background:linear-gradient(90deg,#667eea,#764ba2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
+      <i class="fas fa-graduation-cap" style="-webkit-text-fill-color:#667eea;"></i> EduLearn
+    </a>
+    <a href="index.html" style="color:#a8b8f8;font-size:0.85rem;font-weight:600;">Have an account? <span
+        style="color:#667eea;">Sign In &rsaquo;</span></a>
   </div>
-</div>
 
-<script src="db.js"></script>
-<script>
-  /* If already logged in go to dashboard */
-  if (EduDB.isLoggedIn()) { window.location.href = 'dashboard.html'; }
+  <div style="display:flex;align-items:center;justify-content:center;padding:1rem 1rem 3rem;">
+    <div class="auth-card w3-animate-bottom" style="max-width:520px;">
 
-  function togglePwd(id, btnId) {
-    var inp  = document.getElementById(id);
-    var icon = document.getElementById(btnId).querySelector('i');
-    inp.type = inp.type === 'password' ? 'text' : 'password';
-    icon.className = inp.type === 'text' ? 'fas fa-eye-slash' : 'fas fa-eye';
-  }
+      <div class="auth-logo">
+        <div
+          style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;font-size:1.6rem;color:#fff;">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="logo-text">Create Account</div>
+      </div>
 
-  function checkStrength(v) {
-    var s = 0;
-    if (v.length >= 8)          s++;
-    if (/[A-Z]/.test(v))        s++;
-    if (/[0-9]/.test(v))        s++;
-    if (/[^A-Za-z0-9]/.test(v)) s++;
-    var cols = ['#ef4444','#f59e0b','#3b82f6','#10b981'];
-    var lbls = ['Weak','Fair','Good','Strong'];
-    var bar  = document.getElementById('strengthBar');
-    var lbl  = document.getElementById('strengthLbl');
-    if (!v) { bar.style.width='0%'; lbl.textContent=''; return; }
-    bar.style.width      = (s * 25) + '%';
-    bar.style.background = cols[s-1] || '#ef4444';
-    lbl.style.color      = cols[s-1] || '#ef4444';
-    lbl.textContent      = lbls[s-1] || 'Weak';
-  }
+      <h2 style="font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.3rem;">Join EduLearn</h2>
+      <p class="subtitle">Free registration – no credit card required</p>
 
-  function handleRegister(e) {
-    e.preventDefault();
-    var d = {
-      firstName: document.getElementById('rgFirst').value.trim(),
-      lastName:  document.getElementById('rgLast').value.trim(),
-      email:     document.getElementById('rgEmail').value.trim(),
-      programme: document.getElementById('rgProg').value,
-      password:  document.getElementById('rgPass').value,
-      confirm:   document.getElementById('rgConf').value
-    };
-    var errDiv = document.getElementById('regError');
-    var okDiv  = document.getElementById('regSuccess');
-    var btn    = document.getElementById('regBtn');
-    errDiv.style.display = 'none'; okDiv.style.display = 'none';
+      <div id="regError" class="alert-error" style="display:none;"></div>
+      <div id="regSuccess" class="alert-success" style="display:none;"></div>
 
-    if (!document.getElementById('agreeTerms').checked) {
-      errDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please agree to the Terms of Service.';
-      errDiv.style.display = 'block'; return;
+      <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
+        <div class="w3-row-padding">
+          <div class="w3-col s6 form-group">
+            <label for="rgFirst">First Name</label>
+            <input type="text" id="rgFirst" class="form-control" placeholder="Ahmad" required />
+          </div>
+          <div class="w3-col s6 form-group">
+            <label for="rgLast">Last Name</label>
+            <input type="text" id="rgLast" class="form-control" placeholder="Farid" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rgEmail">Email Address</label>
+          <input type="email" id="rgEmail" class="form-control" placeholder="your@student.edu" required />
+        </div>
+        <div class="form-group">
+          <label for="rgProg">Programme</label>
+          <select id="rgProg" class="form-control">
+            <option value="">-- Select Programme --</option>
+            <option>Computer Science</option>
+            <option>Information Technology</option>
+            <option>Software Engineering</option>
+            <option>Cybersecurity</option>
+            <option>Data Science</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rgPass">Password</label>
+          <div style="position:relative;">
+            <input type="password" id="rgPass" class="form-control" placeholder="Minimum 8 characters" required
+              style="padding-right:2.8rem;" oninput="checkStrength(this.value)" />
+            <button type="button" onclick="togglePwd('rgPass','eye1')"
+              style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9ca3af;"
+              id="eye1"><i class="fas fa-eye"></i></button>
+          </div>
+          <div style="margin-top:4px;">
+            <div style="height:4px;border-radius:4px;background:#f3f4f6;overflow:hidden;">
+              <div id="strengthBar" style="height:100%;width:0%;border-radius:4px;transition:all 0.3s;"></div>
+            </div>
+            <span id="strengthLbl" style="font-size:0.72rem;color:#9ca3af;"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rgConf">Confirm Password</label>
+          <div style="position:relative;">
+            <input type="password" id="rgConf" class="form-control" placeholder="Re-enter your password" required
+              style="padding-right:2.8rem;" />
+            <button type="button" onclick="togglePwd('rgConf','eye2')"
+              style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9ca3af;"
+              id="eye2"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <div style="margin-bottom:1.2rem;">
+          <label style="display:flex;align-items:flex-start;gap:8px;font-size:0.82rem;color:#4b5563;cursor:pointer;">
+            <input type="checkbox" id="agreeTerms" style="accent-color:#667eea;margin-top:2px;" />
+            I agree to the <a href="#" style="color:#667eea;font-weight:600;">Terms of Service</a> and <a href="#"
+              style="color:#667eea;font-weight:600;">Privacy Policy</a>
+          </label>
+        </div>
+        <button type="submit" class="btn-submit" id="regBtn"><i class="fas fa-user-plus"></i> Create Account</button>
+      </form>
+
+      <div class="auth-footer">Already have an account? <a href="index.html">Sign in</a></div>
+    </div>
+  </div>
+
+  <script src="db.js"></script>
+  <script>
+    /* If already logged in go to dashboard */
+    if (EduDB.isLoggedIn()) { window.location.href = 'dashboard.html'; }
+
+    function togglePwd(id, btnId) {
+      var inp = document.getElementById(id);
+      var icon = document.getElementById(btnId).querySelector('i');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+      icon.className = inp.type === 'text' ? 'fas fa-eye-slash' : 'fas fa-eye';
     }
 
-    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account…';
-    setTimeout(function () {
-      var result = EduDB.register(d);
-      btn.disabled = false; btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
-      if (result.success) {
-        okDiv.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message + ' Redirecting to sign in…';
-        okDiv.style.display = 'block';
-        setTimeout(function () { window.location.href = 'index.html'; }, 1800);
-      } else {
-        errDiv.innerHTML = '<i class="fas fa-times-circle"></i> ' + result.message;
-        errDiv.style.display = 'block';
+    function checkStrength(v) {
+      var s = 0;
+      if (v.length >= 8) s++;
+      if (/[A-Z]/.test(v)) s++;
+      if (/[0-9]/.test(v)) s++;
+      if (/[^A-Za-z0-9]/.test(v)) s++;
+      var cols = ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'];
+      var lbls = ['Weak', 'Fair', 'Good', 'Strong'];
+      var bar = document.getElementById('strengthBar');
+      var lbl = document.getElementById('strengthLbl');
+      if (!v) { bar.style.width = '0%'; lbl.textContent = ''; return; }
+      bar.style.width = (s * 25) + '%';
+      bar.style.background = cols[s - 1] || '#ef4444';
+      lbl.style.color = cols[s - 1] || '#ef4444';
+      lbl.textContent = lbls[s - 1] || 'Weak';
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      var d = {
+        firstName: document.getElementById('rgFirst').value.trim(),
+        lastName: document.getElementById('rgLast').value.trim(),
+        email: document.getElementById('rgEmail').value.trim(),
+        programme: document.getElementById('rgProg').value,
+        password: document.getElementById('rgPass').value,
+        confirm: document.getElementById('rgConf').value
+      };
+      var errDiv = document.getElementById('regError');
+      var okDiv = document.getElementById('regSuccess');
+      var btn = document.getElementById('regBtn');
+      errDiv.style.display = 'none'; okDiv.style.display = 'none';
+
+      if (!document.getElementById('agreeTerms').checked) {
+        errDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please agree to the Terms of Service.';
+        errDiv.style.display = 'block'; return;
       }
-    }, 900);
-  }
-</script>
+
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account…';
+      setTimeout(function () {
+        var result = EduDB.register(d);
+        btn.disabled = false; btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+        if (result.success) {
+          okDiv.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message + ' Redirecting to sign in…';
+          okDiv.style.display = 'block';
+          setTimeout(function () { window.location.href = 'index.html'; }, 1800);
+        } else {
+          errDiv.innerHTML = '<i class="fas fa-times-circle"></i> ' + result.message;
+          errDiv.style.display = 'block';
+        }
+      }, 900);
+    }
+  </script>
 </body>
+
 </html>
