@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,185 +11,233 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav class="w3-bar edu-navbar w3-top" id="mainNav">
-  <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
-  <div class="w3-right w3-hide-small">
-    <a href="dashboard.html" class="w3-bar-item w3-button nav-link">Home</a>
-    <a href="bookstore.html" class="w3-bar-item w3-button nav-link">Bookstore</a>
-    <a href="cart.html"      class="w3-bar-item w3-button nav-link">Cart</a>
-    <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
-    <button onclick="doLogout()" class="w3-bar-item w3-button" style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
-  </div>
-</nav>
-
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="w3-content container-max">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="bookstore.html">Bookstore</a> &rsaquo; <a href="cart.html">Cart</a> &rsaquo; Checkout</div>
-    <h1><i class="fas fa-credit-card"></i> Checkout</h1>
-    <p>Complete your purchase securely</p>
-  </div>
-</div>
-
-<section class="section-pad" style="background:#f5f7fa;">
-  <div class="w3-content container-max">
-
-    <!-- Steps -->
-    <div class="checkout-steps" style="max-width:500px;margin:0 auto 2.5rem;">
-      <div class="step done"><div class="step-circle"><i class="fas fa-check"></i></div><div class="step-label">Cart</div></div>
-      <div class="step active"><div class="step-circle">2</div><div class="step-label">Details</div></div>
-      <div class="step"><div class="step-circle">3</div><div class="step-label">Payment</div></div>
-      <div class="step"><div class="step-circle">4</div><div class="step-label">Confirm</div></div>
+  <!-- NAVBAR -->
+  <nav class="w3-bar edu-navbar w3-top" id="mainNav">
+    <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+    <div class="w3-right w3-hide-small">
+      <a href="dashboard.html" class="w3-bar-item w3-button nav-link">Home</a>
+      <a href="bookstore.html" class="w3-bar-item w3-button nav-link">Bookstore</a>
+      <a href="cart.html" class="w3-bar-item w3-button nav-link">Cart</a>
+      <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+      <button onclick="doLogout()" class="w3-bar-item w3-button"
+        style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
+          class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
+  </nav>
 
-    <!-- Success Panel (hidden) -->
-    <div id="orderSuccess" style="display:none;max-width:520px;margin:0 auto;text-align:center;background:#fff;border-radius:20px;padding:3rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,0.1);">
-      <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#43e97b,#38f9d7);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;color:#fff;"><i class="fas fa-check"></i></div>
-      <h2 style="font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.6rem;">Order Confirmed! 🎉</h2>
-      <p style="color:#6b7280;margin-bottom:0.5rem;">Thank you for your purchase. Your books will be ready for collection shortly.</p>
-      <p style="font-size:0.85rem;color:#9ca3af;margin-bottom:2rem;">Order #<span id="orderNum"></span></p>
-      <a href="bookstore.html" class="btn-primary-lg"><i class="fas fa-store"></i> Back to Bookstore</a>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="w3-content container-max">
+      <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="bookstore.html">Bookstore</a> &rsaquo; <a
+          href="cart.html">Cart</a> &rsaquo; Checkout</div>
+      <h1><i class="fas fa-credit-card"></i> Checkout</h1>
+      <p>Complete your purchase securely</p>
     </div>
+  </div>
 
-    <!-- Checkout Form -->
-    <div id="checkoutForm">
-      <div class="w3-row-padding">
-        <!-- Left: Form -->
-        <div class="w3-col m7 s12">
+  <section class="section-pad" style="background:#f5f7fa;">
+    <div class="w3-content container-max">
 
-          <!-- Shipping -->
-          <div style="background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:1.5rem;">
-            <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i class="fas fa-map-marker-alt" style="color:#667eea;margin-right:8px;"></i>Shipping Details</h3>
-            <div class="w3-row-padding">
-              <div class="w3-col s6 form-group"><label>First Name</label><input type="text" id="firstName" class="form-control" placeholder="Ahmad" /></div>
-              <div class="w3-col s6 form-group"><label>Last Name</label><input type="text" id="lastName" class="form-control" placeholder="Farid" /></div>
+      <!-- Steps -->
+      <div class="checkout-steps" style="max-width:500px;margin:0 auto 2.5rem;">
+        <div class="step done">
+          <div class="step-circle"><i class="fas fa-check"></i></div>
+          <div class="step-label">Cart</div>
+        </div>
+        <div class="step active">
+          <div class="step-circle">2</div>
+          <div class="step-label">Details</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">Payment</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">4</div>
+          <div class="step-label">Confirm</div>
+        </div>
+      </div>
+
+      <!-- Success Panel (hidden) -->
+      <div id="orderSuccess"
+        style="display:none;max-width:520px;margin:0 auto;text-align:center;background:#fff;border-radius:20px;padding:3rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,0.1);">
+        <div
+          style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#43e97b,#38f9d7);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;color:#fff;">
+          <i class="fas fa-check"></i></div>
+        <h2 style="font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.6rem;">Order Confirmed! 🎉</h2>
+        <p style="color:#6b7280;margin-bottom:0.5rem;">Thank you for your purchase.</p>
+        <p style="font-size:0.95rem;font-weight:700;color:#10b981;margin-bottom:0.5rem;">
+          <i class="fas fa-lock-open" style="margin-right:6px;"></i>Your e-books are now unlocked!
+        </p>
+        <p style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem;">Go to the Bookstore and <strong>click any purchased book cover</strong> to read its PDF.</p>
+        <p style="font-size:0.85rem;color:#9ca3af;margin-bottom:2rem;">Order #<span id="orderNum"></span></p>
+        <a href="bookstore.html" class="btn-primary-lg"><i class="fas fa-book-open"></i> Read My Books</a>
+      </div>
+
+      <!-- Checkout Form -->
+      <div id="checkoutForm">
+        <div class="w3-row-padding">
+          <!-- Left: Form -->
+          <div class="w3-col m7 s12">
+
+            <!-- Shipping -->
+            <div
+              style="background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:1.5rem;">
+              <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i
+                  class="fas fa-map-marker-alt" style="color:#667eea;margin-right:8px;"></i>Shipping Details</h3>
+              <div class="w3-row-padding">
+                <div class="w3-col s6 form-group"><label>First Name</label><input type="text" id="firstName"
+                    class="form-control" placeholder="Ahmad" /></div>
+                <div class="w3-col s6 form-group"><label>Last Name</label><input type="text" id="lastName"
+                    class="form-control" placeholder="Farid" /></div>
+              </div>
+              <div class="form-group"><label>Email Address</label><input type="email" id="chkEmail" class="form-control"
+                  placeholder="ahmad@student.edu" /></div>
+              <div class="form-group"><label>Phone Number</label><input type="tel" id="chkPhone" class="form-control"
+                  placeholder="+60 12-345 6789" /></div>
+              <div class="form-group"><label>Delivery Address</label><input type="text" id="chkAddress"
+                  class="form-control" placeholder="No. 1, Jalan Ilmu, Kuala Lumpur" /></div>
+              <div class="w3-row-padding">
+                <div class="w3-col s6 form-group"><label>City</label><input type="text" id="chkCity"
+                    class="form-control" placeholder="Kuala Lumpur" /></div>
+                <div class="w3-col s6 form-group"><label>Postcode</label><input type="text" id="chkPostcode"
+                    class="form-control" placeholder="50480" /></div>
+              </div>
             </div>
-            <div class="form-group"><label>Email Address</label><input type="email" id="chkEmail" class="form-control" placeholder="ahmad@student.edu" /></div>
-            <div class="form-group"><label>Phone Number</label><input type="tel" id="chkPhone" class="form-control" placeholder="+60 12-345 6789" /></div>
-            <div class="form-group"><label>Delivery Address</label><input type="text" id="chkAddress" class="form-control" placeholder="No. 1, Jalan Ilmu, Kuala Lumpur" /></div>
-            <div class="w3-row-padding">
-              <div class="w3-col s6 form-group"><label>City</label><input type="text" id="chkCity" class="form-control" placeholder="Kuala Lumpur" /></div>
-              <div class="w3-col s6 form-group"><label>Postcode</label><input type="text" id="chkPostcode" class="form-control" placeholder="50480" /></div>
+
+            <!-- Payment -->
+            <div
+              style="background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:1.5rem;">
+              <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i
+                  class="fas fa-credit-card" style="color:#667eea;margin-right:8px;"></i>Payment Method</h3>
+              <div style="display:flex;gap:0.8rem;margin-bottom:1.2rem;flex-wrap:wrap;">
+                <label
+                  style="flex:1;min-width:120px;border:2px solid #667eea;border-radius:10px;padding:0.8rem;cursor:pointer;text-align:center;background:#f0f2ff;">
+                  <input type="radio" name="payMethod" value="card" checked style="margin-right:6px;" /><i
+                    class="fas fa-credit-card" style="color:#667eea;"></i> Card
+                </label>
+                <label
+                  style="flex:1;min-width:120px;border:2px solid #e5e7eb;border-radius:10px;padding:0.8rem;cursor:pointer;text-align:center;">
+                  <input type="radio" name="payMethod" value="fpx" style="margin-right:6px;" /><i
+                    class="fas fa-university"></i> FPX / Bank
+                </label>
+                <label
+                  style="flex:1;min-width:120px;border:2px solid #e5e7eb;border-radius:10px;padding:0.8rem;cursor:pointer;text-align:center;">
+                  <input type="radio" name="payMethod" value="ewallet" style="margin-right:6px;" /><i
+                    class="fas fa-wallet"></i> e-Wallet
+                </label>
+              </div>
+              <div class="form-group"><label>Card Number</label><input type="text" id="cardNum" class="form-control"
+                  placeholder="4242 4242 4242 4242" maxlength="19" /></div>
+              <div class="w3-row-padding">
+                <div class="w3-col s6 form-group"><label>Expiry Date</label><input type="text" id="cardExpiry"
+                    class="form-control" placeholder="MM/YY" maxlength="5" /></div>
+                <div class="w3-col s6 form-group"><label>CVV</label><input type="password" id="cardCvv"
+                    class="form-control" placeholder="123" maxlength="3" /></div>
+              </div>
+              <div class="form-group"><label>Cardholder Name</label><input type="text" id="cardName"
+                  class="form-control" placeholder="AHMAD FARID" /></div>
             </div>
+
           </div>
 
-          <!-- Payment -->
-          <div style="background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:1.5rem;">
-            <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i class="fas fa-credit-card" style="color:#667eea;margin-right:8px;"></i>Payment Method</h3>
-            <div style="display:flex;gap:0.8rem;margin-bottom:1.2rem;flex-wrap:wrap;">
-              <label style="flex:1;min-width:120px;border:2px solid #667eea;border-radius:10px;padding:0.8rem;cursor:pointer;text-align:center;background:#f0f2ff;">
-                <input type="radio" name="payMethod" value="card" checked style="margin-right:6px;" /><i class="fas fa-credit-card" style="color:#667eea;"></i> Card
-              </label>
-              <label style="flex:1;min-width:120px;border:2px solid #e5e7eb;border-radius:10px;padding:0.8rem;cursor:pointer;text-align:center;">
-                <input type="radio" name="payMethod" value="fpx" style="margin-right:6px;" /><i class="fas fa-university"></i> FPX / Bank
-              </label>
-              <label style="flex:1;min-width:120px;border:2px solid #e5e7eb;border-radius:10px;padding:0.8rem;cursor:pointer;text-align:center;">
-                <input type="radio" name="payMethod" value="ewallet" style="margin-right:6px;" /><i class="fas fa-wallet"></i> e-Wallet
-              </label>
+          <!-- Right: Summary -->
+          <div class="w3-col m5 s12">
+            <div class="order-summary-card">
+              <h3>Order Summary</h3>
+              <div id="chkItems" style="margin-bottom:1rem;border-bottom:1px solid #f3f4f6;padding-bottom:1rem;"></div>
+              <div class="summary-row"><span>Subtotal</span><span id="chkSubtotal">RM 0.00</span></div>
+              <div class="summary-row"><span>Shipping</span><span id="chkShipping">RM 8.00</span></div>
+              <div class="summary-row total"><span>Total</span><span id="chkTotal">RM 0.00</span></div>
+              <div id="formError" style="display:none;margin-top:0.8rem;" class="alert-error"></div>
+              <button class="btn-submit" style="margin-top:1rem;" onclick="placeOrder()"><i class="fas fa-lock"></i>
+                Place Order</button>
+              <div style="text-align:center;margin-top:0.8rem;font-size:0.75rem;color:#9ca3af;"><i
+                  class="fas fa-shield-alt" style="color:#10b981;"></i> Secured by 256-bit SSL encryption</div>
             </div>
-            <div class="form-group"><label>Card Number</label><input type="text" id="cardNum" class="form-control" placeholder="4242 4242 4242 4242" maxlength="19" /></div>
-            <div class="w3-row-padding">
-              <div class="w3-col s6 form-group"><label>Expiry Date</label><input type="text" id="cardExpiry" class="form-control" placeholder="MM/YY" maxlength="5" /></div>
-              <div class="w3-col s6 form-group"><label>CVV</label><input type="password" id="cardCvv" class="form-control" placeholder="123" maxlength="3" /></div>
-            </div>
-            <div class="form-group"><label>Cardholder Name</label><input type="text" id="cardName" class="form-control" placeholder="AHMAD FARID" /></div>
           </div>
 
         </div>
-
-        <!-- Right: Summary -->
-        <div class="w3-col m5 s12">
-          <div class="order-summary-card">
-            <h3>Order Summary</h3>
-            <div id="chkItems" style="margin-bottom:1rem;border-bottom:1px solid #f3f4f6;padding-bottom:1rem;"></div>
-            <div class="summary-row"><span>Subtotal</span><span id="chkSubtotal">RM 0.00</span></div>
-            <div class="summary-row"><span>Shipping</span><span id="chkShipping">RM 8.00</span></div>
-            <div class="summary-row total"><span>Total</span><span id="chkTotal">RM 0.00</span></div>
-            <div id="formError" style="display:none;margin-top:0.8rem;" class="alert-error"></div>
-            <button class="btn-submit" style="margin-top:1rem;" onclick="placeOrder()"><i class="fas fa-lock"></i> Place Order</button>
-            <div style="text-align:center;margin-top:0.8rem;font-size:0.75rem;color:#9ca3af;"><i class="fas fa-shield-alt" style="color:#10b981;"></i> Secured by 256-bit SSL encryption</div>
-          </div>
-        </div>
-
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer class="edu-footer">
-  <div class="w3-content container-max">
-    <div class="footer-bottom" style="border-top:none;padding:1.5rem 0;">
-      <p>&copy; 2025 EduLearn. All rights reserved.</p>
+  <!-- FOOTER -->
+  <footer class="edu-footer">
+    <div class="w3-content container-max">
+      <div class="footer-bottom" style="border-top:none;padding:1.5rem 0;">
+        <p>&copy; 2025 EduLearn. All rights reserved.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script src="db.js"></script>
-<script>
-  var __sess = EduDB.getSession();
-  if (!__sess) { window.location.href = 'index.html'; }
-  document.addEventListener('DOMContentLoaded', function() {
-    var ng = document.getElementById('navGreet');
-    if (ng && __sess) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
-  });
-  function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
-  window.onscroll=function(){document.getElementById("mainNav").classList[window.pageYOffset>60?"add":"remove"]("scrolled");};
-  function getCart(){return EduDB.getCart();}
-
-  function renderSummary(){
-    var c=getCart();
-    var html=""; var sub=0;
-    if(c.length===0){ html='<p style="font-size:0.85rem;color:#9ca3af;text-align:center;">Cart is empty. <a href="bookstore.html" style="color:#667eea;">Go shop</a></p>'; }
-    c.forEach(function(item){
-      var lt=item.price*item.qty;
-      sub+=lt;
-      html+='<div style="display:flex;justify-content:space-between;font-size:0.83rem;color:#4b5563;margin-bottom:0.5rem;">'
-        +'<span>'+item.name+' ×'+item.qty+'</span><span style="font-weight:700;">RM '+lt.toFixed(2)+'</span></div>';
+  <script src="db.js"></script>
+  <script>
+    var __sess = EduDB.getSession();
+    if (!__sess) { window.location.href = 'index.html'; }
+    document.addEventListener('DOMContentLoaded', function () {
+      var ng = document.getElementById('navGreet');
+      if (ng && __sess) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
     });
-    document.getElementById("chkItems").innerHTML=html;
-    var shipping=sub>0?8.00:0;
-    document.getElementById("chkSubtotal").textContent="RM "+sub.toFixed(2);
-    document.getElementById("chkShipping").textContent="RM "+shipping.toFixed(2);
-    document.getElementById("chkTotal").textContent="RM "+(sub+shipping).toFixed(2);
-  }
+    function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+    window.onscroll = function () { document.getElementById("mainNav").classList[window.pageYOffset > 60 ? "add" : "remove"]("scrolled"); };
+    function getCart() { return EduDB.getCart(); }
 
-  function placeOrder(){
-    var fn=document.getElementById("firstName").value.trim();
-    var em=document.getElementById("chkEmail").value.trim();
-    var ad=document.getElementById("chkAddress").value.trim();
-    var cn=document.getElementById("cardNum").value.trim();
-    var err=document.getElementById("formError");
-    if(!fn||!em||!ad||!cn){
-      err.style.display="block";
-      err.innerHTML='<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
-      return;
+    function renderSummary() {
+      var c = getCart();
+      var html = ""; var sub = 0;
+      if (c.length === 0) { html = '<p style="font-size:0.85rem;color:#9ca3af;text-align:center;">Cart is empty. <a href="bookstore.html" style="color:#667eea;">Go shop</a></p>'; }
+      c.forEach(function (item) {
+        var lt = item.price * item.qty;
+        sub += lt;
+        html += '<div style="display:flex;justify-content:space-between;font-size:0.83rem;color:#4b5563;margin-bottom:0.5rem;">'
+          + '<span>' + item.name + ' ×' + item.qty + '</span><span style="font-weight:700;">RM ' + lt.toFixed(2) + '</span></div>';
+      });
+      document.getElementById("chkItems").innerHTML = html;
+      var shipping = sub > 0 ? 8.00 : 0;
+      document.getElementById("chkSubtotal").textContent = "RM " + sub.toFixed(2);
+      document.getElementById("chkShipping").textContent = "RM " + shipping.toFixed(2);
+      document.getElementById("chkTotal").textContent = "RM " + (sub + shipping).toFixed(2);
     }
-    err.style.display="none";
-    var items = EduDB.getCart();
-    var sub   = items.reduce(function(s,i){return s+(i.price*i.qty);},0);
-    var total = sub + (sub>0?8:0);
-    var order = EduDB.addOrder(__sess ? __sess.id : 'guest', items, total);
-    EduDB.clearCart();
-    document.getElementById("checkoutForm").style.display="none";
-    document.getElementById("orderNum").textContent = order.orderNum;
-    document.getElementById("orderSuccess").style.display="block";
-    window.scrollTo({top:200,behavior:"smooth"});
-  }
 
-  // Card number formatting
-  document.addEventListener("DOMContentLoaded",function(){
-    renderSummary();
-    document.getElementById("cardNum").addEventListener("input",function(){
-      this.value=this.value.replace(/\D/g,"").replace(/(\d{4})(?=\d)/g,"$1 ").trim();
+    function placeOrder() {
+      var fn = document.getElementById("firstName").value.trim();
+      var em = document.getElementById("chkEmail").value.trim();
+      var ad = document.getElementById("chkAddress").value.trim();
+      var cn = document.getElementById("cardNum").value.trim();
+      var err = document.getElementById("formError");
+      if (!fn || !em || !ad || !cn) {
+        err.style.display = "block";
+        err.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
+        return;
+      }
+      err.style.display = "none";
+      var items = EduDB.getCart();
+      var sub = items.reduce(function (s, i) { return s + (i.price * i.qty); }, 0);
+      var total = sub + (sub > 0 ? 8 : 0);
+      var order = EduDB.addOrder(__sess ? __sess.id : 'guest', items, total);
+      if (__sess) { EduDB.addPurchasedBooks(__sess.id, items); }
+      EduDB.clearCart();
+      document.getElementById("checkoutForm").style.display = "none";
+      document.getElementById("orderNum").textContent = order.orderNum;
+      document.getElementById("orderSuccess").style.display = "block";
+      window.scrollTo({ top: 200, behavior: "smooth" });
+    }
+
+    // Card number formatting
+    document.addEventListener("DOMContentLoaded", function () {
+      renderSummary();
+      document.getElementById("cardNum").addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "").replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+      });
+      document.getElementById("cardExpiry").addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "$1/$2");
+      });
     });
-    document.getElementById("cardExpiry").addEventListener("input",function(){
-      this.value=this.value.replace(/\D/g,"").replace(/(\d{2})(\d)/,"$1/$2");
-    });
-  });
-</script>
+  </script>
 </body>
+
 </html>
