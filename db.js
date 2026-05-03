@@ -111,9 +111,69 @@ window.EduDB = (function () {
       ]);
     }
 
-    /* Forum posts table - Now starts empty for real messages */
+    /* Forum posts table - Seeded with 25 real Q&A sets */
     if (readTable(K.POSTS).length === 0) {
-      writeTable(K.POSTS, []);
+      var seedUsers = [
+        { name: 'Ahmad Farid', avatar: 'A', color: 'linear-gradient(135deg,#667eea,#764ba2)', id: 'u_seed01' },
+        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#43e97b,#38f9d7)', id: 'u_seed03' },
+        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'u_seed02' },
+        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#4facfe,#00f2fe)', id: 'u_seed04' },
+        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#fa709a,#fee140)', id: 'u_seed05' },
+        { name: 'Admin EduLearn', avatar: 'A', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'u_admin' }
+      ];
+
+      var data = [
+        // CALCULUS
+        { cat: 'cal', q: 'What is the fundamental difference between a derivative and an integral?', a: 'A derivative measures the rate of change (slope), while an integral measures the accumulation (area under the curve).', u1: 1, u2: 0 },
+        { cat: 'cal', q: 'When do we use the Chain Rule in differentiation?', a: 'We use the Chain Rule when differentiating composite functions (function within a function), like f(g(x)).', u1: 3, u2: 4 },
+        { cat: 'cal', q: 'What does it mean for a function to be "continuous"?', a: 'A function is continuous if you can draw its graph without lifting your pencil—no holes or jumps.', u1: 0, u2: 2 },
+        { cat: 'cal', q: "What is the significance of L'Hôpital's Rule?", a: "It is used to find the limits of indeterminate forms (like 0/0 or infinity/infinity) using derivatives.", u1: 4, u2: 5 },
+        { cat: 'cal', q: 'How do you find the local maximum or minimum of a curve?', a: 'Find the first derivative, set it to zero for critical points, then use the second derivative test.', u1: 2, u2: 1 },
+        // CYBER SECURITY
+        { cat: 'security', q: 'What is the difference between Symmetric and Asymmetric encryption?', a: 'Symmetric uses one key for both. Asymmetric uses a public key to encrypt and a private key to decrypt.', u1: 1, u2: 3 },
+        { cat: 'security', q: 'What is a "Man-in-the-Middle" (MitM) attack?', a: 'An attacker secretly intercepts and relays communication between two parties who think they are talking directly.', u1: 0, u2: 5 },
+        { cat: 'security', q: 'Why is "Salting" a password important?', a: 'Salting adds random data to a password before hashing, preventing Rainbow Table attacks.', u1: 4, u2: 1 },
+        { cat: 'security', q: 'What does the CIA Triad stand for in security?', a: 'Confidentiality (privacy), Integrity (accuracy), and Availability (accessibility).', u1: 2, u2: 0 },
+        { cat: 'security', q: 'What is the difference between a Virus and a Worm?', a: 'A Virus needs human action to spread. A Worm self-replicates and spreads across networks automatically.', u1: 3, u2: 2 },
+        // DATA STRUCTURES
+        { cat: 'ds', q: 'When should I use a Linked List instead of an Array?', a: 'Use a Linked List if you need frequent insertions or deletions in the middle, as it avoids shifting elements.', u1: 1, u2: 4 },
+        { cat: 'ds', q: 'What is "Big O" notation used for?', a: 'It describes how an algorithm\'s performance (time or space) grows as the input size increases.', u1: 5, u2: 0 },
+        { cat: 'ds', q: 'How does a Stack differ from a Queue?', a: 'Stack is LIFO (Last-In, First-Out). Queue is FIFO (First-In, First-Out).', u1: 2, u2: 3 },
+        { cat: 'ds', q: 'What is the advantage of a Binary Search Tree (BST)?', a: 'A BST allows for very fast searching and sorting, averaging O(log n) time.', u1: 0, u2: 1 },
+        { cat: 'ds', q: 'What is Recursion?', a: 'Recursion is when a function calls itself to solve smaller pieces of a larger problem.', u1: 4, u2: 2 },
+        // SOFTWARE ENGINEERING
+        { cat: 'se', q: 'What is the "Agile" methodology?', a: 'An iterative approach focused on continuous feedback, flexibility, and frequent small releases.', u1: 3, u2: 5 },
+        { cat: 'se', q: 'What is the purpose of Unit Testing?', a: 'To test individual components in isolation to ensure they work correctly before integration.', u1: 0, u2: 4 },
+        { cat: 'se', q: 'What is "Technical Debt"?', a: 'The future cost of rework caused by choosing an easy "quick fix" now instead of a robust solution.', u1: 1, u2: 2 },
+        { cat: 'se', q: 'What is a "Version Control System" (like Git)?', a: 'A tool that tracks changes to code over time, allowing multiple developers to collaborate.', u1: 5, u2: 3 },
+        { cat: 'se', q: 'What is the difference between Front-end and Back-end?', a: 'Front-end is what users see (UI). Back-end is the logic, database, and server behind the scenes.', u1: 2, u2: 0 },
+        // COMPUTER VISION
+        { cat: 'vision', q: 'What is "Image Segmentation"?', a: 'Partitioning an image into segments to make it easier to analyze, like separating objects from background.', u1: 4, u2: 1 },
+        { cat: 'vision', q: 'How does a "Grayscale" conversion work?', a: 'It converts color (RGB) to shades of gray by calculating a weighted average of pixel intensities.', u1: 1, u2: 5 },
+        { cat: 'vision', q: 'What is the purpose of the "Sobel Operator"?', a: 'It is used for edge detection by calculating the intensity gradient at each pixel.', u1: 0, u2: 3 },
+        { cat: 'vision', q: 'What is "OCR" (Optical Character Recognition)?', a: 'Technology that converts text within images (like scanned docs) into machine-readable text.', u1: 5, u2: 4 },
+        { cat: 'vision', q: 'What is a "Convolutional Neural Network" (CNN)?', a: 'A deep learning model specifically designed to process and recognize pixel data/images.', u1: 2, u2: 0 }
+      ];
+
+      var seededPosts = data.map(function (item, index) {
+        var u1 = seedUsers[item.u1];
+        var u2 = seedUsers[item.u2];
+        var postId = 'fp_seed_' + index;
+        return {
+          id: postId, userId: u1.id, author: u1.name, avatar: u1.avatar, avatarColor: u1.color,
+          category: item.cat, title: item.q, content: 'I am looking for a clear explanation for this. Can someone help?',
+          replies: 1, views: Math.floor(Math.random() * 200) + 50, likes: [u2.id], solved: true,
+          createdAt: new Date(Date.now() - (index * 3600000)).toISOString(),
+          replyData: [
+            {
+              id: 'rp_seed_' + index, userId: u2.id, author: u2.name, avatar: u2.avatar, avatarColor: u2.color,
+              content: item.a, likes: [u1.id], createdAt: new Date(Date.now() - (index * 3000000)).toISOString()
+            }
+          ]
+        };
+      });
+
+      writeTable(K.POSTS, seededPosts);
     }
 
     /* Activity table */
