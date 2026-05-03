@@ -17,18 +17,21 @@ window.EduDB = (function () {
 
   /* ─── Table keys ───────────────────────────────────────── */
   var K = {
-    USERS:       'eduDB_users',
-    SESSION:     'eduDB_session',
+    USERS: 'eduDB_users',
+    SESSION: 'eduDB_session',
     ENROLLMENTS: 'eduDB_enrollments',
-    POSTS:       'eduDB_posts',
-    ORDERS:      'eduDB_orders',
-    ACTIVITY:    'eduDB_activity',
-    CART:        'eduCart'
+    POSTS: 'eduDB_posts_real',
+    ORDERS: 'eduDB_orders',
+    ACTIVITY: 'eduDB_activity',
+    CART: 'eduCart',
+    PURCHASED: 'eduDB_purchased',
+    CUSTOM_BOOKS: 'eduDB_custom_books',
+    CUSTOM_COURSES: 'eduDB_custom_courses'
   };
 
   /* ─── Low-level CRUD ───────────────────────────────────── */
-  function readTable(key)   { return JSON.parse(localStorage.getItem(key) || '[]');  }
-  function readOne(key)     { return JSON.parse(localStorage.getItem(key) || 'null'); }
+  function readTable(key) { return JSON.parse(localStorage.getItem(key) || '[]'); }
+  function readOne(key) { return JSON.parse(localStorage.getItem(key) || 'null'); }
   function writeTable(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
 
   /* ─── Utilities ─────────────────────────────────────────── */
@@ -45,9 +48,9 @@ window.EduDB = (function () {
   /** Human-readable time difference */
   function ago(iso) {
     var s = Math.floor((Date.now() - new Date(iso)) / 1000);
-    if (s < 60)    return 'Just now';
-    if (s < 3600)  return Math.floor(s / 60)   + ' min ago';
-    if (s < 86400) return Math.floor(s / 3600)  + 'h ago';
+    if (s < 60) return 'Just now';
+    if (s < 3600) return Math.floor(s / 60) + ' min ago';
+    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
     return Math.floor(s / 86400) + 'd ago';
   }
 
@@ -55,84 +58,79 @@ window.EduDB = (function () {
   function seed() {
     /* Users table */
     if (readTable(K.USERS).length === 0) {
-      writeTable(K.USERS, [{
-        id: 'u_seed01',
-        firstName: 'Ahmad', lastName: 'Farid',
-        email: 'student@edu.com',
-        password: hashPw('password123'),
-        programme: 'Computer Science', year: '2',
-        avatar: 'A',
-        avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
-        createdAt: '2025-01-15T08:00:00Z'
-      }]);
+      writeTable(K.USERS, [
+        {
+          id: 'u_seed01',
+          firstName: 'Ahmad', lastName: 'Farid',
+          email: 'student@edu.com',
+          password: hashPw('password123'),
+          programme: 'Computer Science', year: '2',
+          avatar: 'A',
+          avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
+          createdAt: '2025-01-15T08:00:00Z',
+          role: 'student'
+        },
+        {
+          id: 'u_admin',
+          firstName: 'Admin', lastName: 'EduLearn',
+          email: 'admin@edulearn.com',
+          password: hashPw('admin123'),
+          programme: 'Staff', year: 'N/A',
+          avatar: 'A',
+          avatarColor: 'linear-gradient(135deg,#ef4444,#991b1b)',
+          createdAt: '2025-01-10T08:00:00Z',
+          role: 'admin'
+        }
+      ]);
     }
 
     /* Enrollments table */
     if (readTable(K.ENROLLMENTS).length === 0) {
       writeTable(K.ENROLLMENTS, [
-        { id:'en1', userId:'u_seed01', courseId:'cybersec',
-          courseName:'Computer and Cyber Security',
-          progress:72, weeksTotal:12, weeksCurrent:8,
-          completedLectures: [1,2,3,4,5], quizDone: true,
-          icon:'fa-shield-alt', color:'linear-gradient(135deg,#1a1a2e,#16213e)' },
-        { id:'en2', userId:'u_seed01', courseId:'vision',
-          courseName:'Computer Vision & Image Processing',
-          progress:45, weeksTotal:14, weeksCurrent:6,
-          completedLectures: [1,2], quizDone: false,
-          icon:'fa-eye', color:'linear-gradient(135deg,#0f3460,#533483)' },
-        { id:'en3', userId:'u_seed01', courseId:'ds',
-          courseName:'Introduction to Data Structures',
-          progress:88, weeksTotal:10, weeksCurrent:9,
-          completedLectures: [1,2,3,4,5,6], quizDone: true,
-          icon:'fa-sitemap', color:'linear-gradient(135deg,#1b4332,#2d6a4f)' }
+        {
+          id: 'en1', userId: 'u_seed01', courseId: 'cybersec',
+          courseName: 'Computer and Cyber Security',
+          progress: 72, weeksTotal: 12, weeksCurrent: 8,
+          completedLectures: [1, 2, 3, 4, 5], quizDone: true,
+          icon: 'fa-shield-alt', color: 'linear-gradient(135deg,#1a1a2e,#16213e)'
+        },
+        {
+          id: 'en2', userId: 'u_seed01', courseId: 'vision',
+          courseName: 'Computer Vision & Image Processing',
+          progress: 45, weeksTotal: 14, weeksCurrent: 6,
+          completedLectures: [1, 2], quizDone: false,
+          icon: 'fa-eye', color: 'linear-gradient(135deg,#0f3460,#533483)'
+        },
+        {
+          id: 'en3', userId: 'u_seed01', courseId: 'ds',
+          courseName: 'Introduction to Data Structures',
+          progress: 88, weeksTotal: 10, weeksCurrent: 9,
+          completedLectures: [1, 2, 3, 4, 5, 6], quizDone: true,
+          icon: 'fa-sitemap', color: 'linear-gradient(135deg,#1b4332,#2d6a4f)'
+        }
       ]);
     }
 
-    /* Forum posts table */
+    /* Forum posts table - Now starts empty for real messages */
     if (readTable(K.POSTS).length === 0) {
-      writeTable(K.POSTS, [
-        { id:'fp1', userId:'u_seed01', author:'Ahmad Farid', avatar:'A',
-          avatarColor:'linear-gradient(135deg,#667eea,#764ba2)', category:'security',
-          title:'How does AES encryption work in practice?',
-          content:'Public key vs symmetric key – confused about when to use each. Can someone clarify with an example?',
-          replies:1, views:124, createdAt:'2025-04-12T10:00:00Z', solved:true,
-          replyData: [
-            { id:'rp1', userId:'u_seed03', author:'Raj Kumar', avatar:'R', avatarColor:'linear-gradient(135deg,#43e97b,#38f9d7)', content:'AES is symmetric. Both sides use the same key. Public key (like RSA) uses two different keys.', createdAt:'2025-04-12T10:30:00Z' }
-          ] },
-        { id:'fp2', userId:'u_seed02', author:'Siti Nurhaliza', avatar:'S',
-          avatarColor:'linear-gradient(135deg,#f093fb,#f5576c)', category:'vision',
-          title:'Edge detection: Canny vs Sobel – which is better?',
-          content:'For my lab assignment I need to pick one. What are the pros and cons of each operator?',
-          replies:0, views:87, createdAt:'2025-04-13T06:00:00Z', solved:false, replyData: [] },
-        { id:'fp3', userId:'u_seed03', author:'Raj Kumar', avatar:'R',
-          avatarColor:'linear-gradient(135deg,#43e97b,#38f9d7)', category:'ds',
-          title:'When should I use a linked list over an array?',
-          content:'My professor said it depends on use case, need specific examples for assignment.',
-          replies:0, views:210, createdAt:'2025-04-11T08:00:00Z', solved:true, replyData: [] },
-        { id:'fp4', userId:'u_seed04', author:'Li Wei', avatar:'L',
-          avatarColor:'linear-gradient(135deg,#4facfe,#00f2fe)', category:'general',
-          title:'Best resources for preparing for tech interviews?',
-          content:'Looking for recommendations on platforms, books, and practice strategies.',
-          replies:0, views:345, createdAt:'2025-04-10T08:00:00Z', solved:false, replyData: [] },
-        { id:'fp5', userId:'u_seed05', author:'Maya Haris', avatar:'M',
-          avatarColor:'linear-gradient(135deg,#fa709a,#fee140)', category:'security',
-          title:'Understanding SQL injection and how to prevent it',
-          content:'Worked through Week 7 material but not clear on parameterised queries.',
-          replies:0, views:158, createdAt:'2025-04-09T09:00:00Z', solved:false, replyData: [] }
-      ]);
+      writeTable(K.POSTS, []);
     }
 
     /* Activity table */
     if (readTable(K.ACTIVITY).length === 0) {
       writeTable(K.ACTIVITY, [
-        { id: uid(), userId: 'u_seed01', type: 'lecture', 
-          text: 'Watched: "Functions and Domain" – Calculus Week 1', 
-          icon: 'fa-play-circle', bg: '#f0f2ff', iclr: '#667eea', 
-          createdAt: new Date(Date.now() - 3600000 * 2).toISOString() },
-        { id: uid(), userId: 'u_seed01', type: 'quiz', 
-          text: 'Completed Quiz: Data Structures – Foundation (Score: 90%)', 
-          icon: 'fa-check-circle', bg: '#d1fae5', iclr: '#10b981', 
-          createdAt: new Date(Date.now() - 86400000).toISOString() }
+        {
+          id: uid(), userId: 'u_seed01', type: 'lecture',
+          text: 'Watched: "Functions and Domain" – Calculus Week 1',
+          icon: 'fa-play-circle', bg: '#f0f2ff', iclr: '#667eea',
+          createdAt: new Date(Date.now() - 3600000 * 2).toISOString()
+        },
+        {
+          id: uid(), userId: 'u_seed01', type: 'quiz',
+          text: 'Completed Quiz: Data Structures – Foundation (Score: 90%)',
+          icon: 'fa-check-circle', bg: '#d1fae5', iclr: '#10b981',
+          createdAt: new Date(Date.now() - 86400000).toISOString()
+        }
       ]);
     }
   }
@@ -151,6 +149,8 @@ window.EduDB = (function () {
       return { success: false, message: 'Password must be at least 8 characters.' };
     if (d.password !== d.confirm)
       return { success: false, message: 'Passwords do not match.' };
+    if (d.email.toLowerCase().trim() === 'admin@edulearn.com')
+      return { success: false, message: 'This email is reserved for system administrators.' };
 
     var users = readTable(K.USERS);
     if (users.some(function (u) { return u.email.toLowerCase() === d.email.toLowerCase().trim(); }))
@@ -159,14 +159,15 @@ window.EduDB = (function () {
     var user = {
       id: uid(),
       firstName: d.firstName.trim(),
-      lastName:  (d.lastName  || '').trim(),
-      email:     d.email.toLowerCase().trim(),
-      password:  hashPw(d.password),
+      lastName: (d.lastName || '').trim(),
+      email: d.email.toLowerCase().trim(),
+      password: hashPw(d.password),
       programme: d.programme || 'Computer Science',
-      year:      d.year      || '1',
-      avatar:    d.firstName.charAt(0).toUpperCase(),
+      year: d.year || '1',
+      avatar: d.firstName.charAt(0).toUpperCase(),
       avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      role: 'student'
     };
     users.push(user);
     writeTable(K.USERS, users);
@@ -179,7 +180,7 @@ window.EduDB = (function () {
    */
   function login(email, password) {
     var users = readTable(K.USERS);
-    var user  = users.find(function (u) {
+    var user = users.find(function (u) {
       return u.email.toLowerCase() === email.toLowerCase().trim();
     });
     if (!user)
@@ -190,7 +191,8 @@ window.EduDB = (function () {
     var session = {
       id: user.id, firstName: user.firstName, lastName: user.lastName,
       email: user.email, programme: user.programme,
-      avatar: user.avatar, avatarColor: user.avatarColor
+      avatar: user.avatar, avatarColor: user.avatarColor,
+      role: user.role || 'student'
     };
     writeTable(K.SESSION, session);
     return { success: true, message: 'Login successful!', user: session };
@@ -218,8 +220,8 @@ window.EduDB = (function () {
     enr.push({
       id: uid(), userId: userId, courseId: courseId,
       courseName: courseName, progress: 0,
-      weeksTotal: 12, weeksCurrent: 0, 
-      completedLectures: [], quizDone: false,
+      weeksTotal: 12, weeksCurrent: 0,
+      completedLectures: [], completedQuizzes: [],
       icon: icon, color: color
     });
     writeTable(K.ENROLLMENTS, enr);
@@ -230,48 +232,51 @@ window.EduDB = (function () {
     var enr = readTable(K.ENROLLMENTS);
     enr.forEach(function (e) {
       if (e.id === enrollmentId) {
-        e.progress     = progress;
+        e.progress = progress;
         e.weeksCurrent = weeksCurrent;
       }
     });
     writeTable(K.ENROLLMENTS, enr);
   }
 
-  function markLectureRead(userId, courseId, week, lectureTitle) {
+  function markLectureRead(userId, courseId, week, lectureTitle, totalLecs, totalQuiz) {
     var enr = readTable(K.ENROLLMENTS);
-    var enrollment = enr.find(function(e){ return e.userId === userId && e.courseId === courseId; });
+    var enrollment = enr.find(function (e) { return e.userId === userId && e.courseId === courseId; });
     if (!enrollment) return;
 
     if (!enrollment.completedLectures) enrollment.completedLectures = [];
     if (enrollment.completedLectures.indexOf(week) === -1) {
       enrollment.completedLectures.push(week);
-      // Recalculate progress (total lectures + 1 for quiz)
-      // For simplicity, we assume 5-6 lectures as seen in CONTENT.
-      // We'll use a dynamic estimate or the user can just set it.
-      // Let's assume total = completedLectures.length + 1 (quiz)
-      // Actually, we'll just update the field and let the UI calculate if needed, 
-      // or we do a simple % update here.
-      var totalItems = 5; // simplified assumption
-      enrollment.progress = Math.min(100, Math.round((enrollment.completedLectures.length / (totalItems + 1)) * 100));
-      if (enrollment.weeksCurrent < week) enrollment.weeksCurrent = week;
       
+      var doneLecs = enrollment.completedLectures.length;
+      var doneQuizzes = (enrollment.completedQuizzes || []).length;
+      var totalItems = (totalLecs || 5) + (totalQuiz || 5);
+      
+      enrollment.progress = Math.min(100, Math.round(((doneLecs + doneQuizzes) / totalItems) * 100));
+      if (enrollment.weeksCurrent < week) enrollment.weeksCurrent = week;
+
       writeTable(K.ENROLLMENTS, enr);
       logActivity(userId, 'lecture', 'Watched: "' + lectureTitle + '" – ' + enrollment.courseName + ' Week ' + week, 'fa-play-circle', '#f0f2ff', '#667eea');
     }
   }
 
-  function markQuizDone(userId, courseId, score, total) {
+  function markQuizDone(userId, courseId, quizIndex, score, total, totalLecs, totalQuiz) {
     var enr = readTable(K.ENROLLMENTS);
-    var enrollment = enr.find(function(e){ return e.userId === userId && e.courseId === courseId; });
+    var enrollment = enr.find(function (e) { return e.userId === userId && e.courseId === courseId; });
     if (!enrollment) return;
 
-    enrollment.quizDone = true;
-    var totalLectures = (enrollment.completedLectures || []).length;
-    var itemTotal = 6; // 5 lectures + 1 quiz
-    enrollment.progress = Math.min(100, Math.round(((totalLectures + 1) / itemTotal) * 100));
-    
-    writeTable(K.ENROLLMENTS, enr);
-    logActivity(userId, 'quiz', 'Completed Quiz: ' + enrollment.courseName + ' (Score: ' + score + '/' + total + ')', 'fa-check-circle', '#d1fae5', '#10b981');
+    if (!enrollment.completedQuizzes) enrollment.completedQuizzes = [];
+    if (enrollment.completedQuizzes.indexOf(quizIndex) === -1) {
+      enrollment.completedQuizzes.push(quizIndex);
+      
+      var doneLecs = (enrollment.completedLectures || []).length;
+      var doneQuizzes = enrollment.completedQuizzes.length;
+      var totalItems = (totalLecs || 5) + (totalQuiz || 5);
+      
+      enrollment.progress = Math.min(100, Math.round(((doneLecs + doneQuizzes) / totalItems) * 100));
+      writeTable(K.ENROLLMENTS, enr);
+      logActivity(userId, 'quiz', 'Completed Quiz ' + quizIndex + ': ' + enrollment.courseName + ' (Score: ' + score + '/' + total + ')', 'fa-check-circle', '#d1fae5', '#10b981');
+    }
   }
 
   function logActivity(userId, type, text, icon, bg, iclr) {
@@ -284,7 +289,7 @@ window.EduDB = (function () {
   }
 
   function getActivityLog(userId) {
-    return readTable(K.ACTIVITY).filter(function(a){ return a.userId === userId; });
+    return readTable(K.ACTIVITY).filter(function (a) { return a.userId === userId; });
   }
 
   /* ─── FORUM ─────────────────────────────────────────────── */
@@ -295,18 +300,19 @@ window.EduDB = (function () {
     var posts = readTable(K.POSTS);
     var post = {
       id: uid(),
-      userId:      sess.id,
-      author:      (sess.firstName + ' ' + (sess.lastName || '')).trim(),
-      avatar:      sess.avatar,
+      userId: sess.id,
+      author: (sess.firstName + ' ' + (sess.lastName || '')).trim(),
+      avatar: sess.avatar,
       avatarColor: sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)',
-      category:    category,
-      title:       title,
-      content:     content,
-      replies:     0,
-      replyData:   [],
-      views:       1,
-      createdAt:   new Date().toISOString(),
-      solved:      false
+      category: category,
+      title: title,
+      content: content,
+      replies: 0,
+      replyData: [],
+      views: 1,
+      likes: [],
+      createdAt: new Date().toISOString(),
+      solved: false
     };
     posts.unshift(post);
     writeTable(K.POSTS, posts);
@@ -315,9 +321,9 @@ window.EduDB = (function () {
 
   function addReply(postId, sess, content) {
     var posts = readTable(K.POSTS);
-    var post = posts.find(function(p){ return p.id === postId; });
+    var post = posts.find(function (p) { return p.id === postId; });
     if (!post) return null;
-    
+
     if (!post.replyData) post.replyData = [];
     var reply = {
       id: uid(),
@@ -326,11 +332,43 @@ window.EduDB = (function () {
       avatar: sess.avatar,
       avatarColor: sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)',
       content: content,
+      likes: [],
       createdAt: new Date().toISOString()
     };
     post.replyData.push(reply);
     post.replies = post.replyData.length;
-    
+
+    writeTable(K.POSTS, posts);
+    return post;
+  }
+
+  function togglePostLike(postId, userId) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function (p) { return p.id === postId; });
+    if (!post) return null;
+
+    if (!post.likes) post.likes = [];
+    var idx = post.likes.indexOf(userId);
+    if (idx === -1) post.likes.push(userId);
+    else post.likes.splice(idx, 1);
+
+    writeTable(K.POSTS, posts);
+    return post;
+  }
+
+  function toggleReplyLike(postId, replyId, userId) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function (p) { return p.id === postId; });
+    if (!post) return null;
+
+    var reply = post.replyData.find(function (r) { return r.id === replyId; });
+    if (!reply) return null;
+
+    if (!reply.likes) reply.likes = [];
+    var idx = reply.likes.indexOf(userId);
+    if (idx === -1) reply.likes.push(userId);
+    else reply.likes.splice(idx, 1);
+
     writeTable(K.POSTS, posts);
     return post;
   }
@@ -340,12 +378,12 @@ window.EduDB = (function () {
   function addOrder(userId, items, total) {
     var orders = readTable(K.ORDERS);
     var order = {
-      id:        uid(),
-      userId:    userId,
-      items:     items,
-      total:     total,
-      status:    'Completed',
-      orderNum:  Math.floor(Math.random() * 900000 + 100000),
+      id: uid(),
+      userId: userId,
+      items: items,
+      total: total,
+      status: 'Completed',
+      orderNum: Math.floor(Math.random() * 900000 + 100000),
       createdAt: new Date().toISOString()
     };
     orders.unshift(order);
@@ -357,10 +395,77 @@ window.EduDB = (function () {
     return readTable(K.ORDERS).filter(function (o) { return o.userId === userId; });
   }
 
+  /* ─── PURCHASED BOOKS ──────────────────────────────────── */
+
+  /**
+   * Save the names of books a user has purchased.
+   * @param {string} userId
+   * @param {Array}  items  – cart items [{name, price, qty}, ...]
+   */
+  function addPurchasedBooks(userId, items) {
+    var all = readTable(K.PURCHASED);
+    var record = all.find(function (r) { return r.userId === userId; });
+    if (!record) {
+      record = { userId: userId, books: [] };
+      all.push(record);
+    }
+    items.forEach(function (item) {
+      if (record.books.indexOf(item.name) === -1) {
+        record.books.push(item.name);
+      }
+    });
+    writeTable(K.PURCHASED, all);
+  }
+
+  /**
+   * Return the array of book names purchased by a user.
+   * @param {string} userId
+   * @returns {Array<string>}
+   */
+  function getPurchasedBooks(userId) {
+    var all = readTable(K.PURCHASED);
+    var record = all.find(function (r) { return r.userId === userId; });
+    return record ? record.books : [];
+  }
+
   /* ─── CART ──────────────────────────────────────────────── */
-  function getCart()   { return readTable(K.CART); }
+  function getCart() { return readTable(K.CART); }
   function saveCart(c) { writeTable(K.CART, c); }
   function clearCart() { localStorage.removeItem(K.CART); }
+
+  /* ─── ADMIN: CUSTOM BOOKS ───────────────────────────────── */
+  function addCustomBook(book) {
+    var books = readTable(K.CUSTOM_BOOKS);
+    book.id = uid();
+    book.createdAt = new Date().toISOString();
+    books.push(book);
+    writeTable(K.CUSTOM_BOOKS, books);
+    return book;
+  }
+  function getCustomBooks() { return readTable(K.CUSTOM_BOOKS); }
+  function deleteCustomBook(id) {
+    var books = readTable(K.CUSTOM_BOOKS).filter(function(b) { return b.id !== id; });
+    writeTable(K.CUSTOM_BOOKS, books);
+  }
+
+  /* ─── ADMIN: CUSTOM COURSES ─────────────────────────────── */
+  function addCustomCourseMaterial(courseId, material) {
+    var courses = readTable(K.CUSTOM_COURSES);
+    if (!courses[courseId]) courses[courseId] = { lectures: [], tutorials: [] };
+    material.id = uid();
+    material.createdAt = new Date().toISOString();
+    courses[courseId][material.tab].push(material); // tab is 'lectures' or 'tutorials'
+    writeTable(K.CUSTOM_COURSES, courses);
+    return material;
+  }
+  function getCustomCourseMaterials() { return readTable(K.CUSTOM_COURSES); }
+  function deleteCustomCourseMaterial(courseId, tab, materialId) {
+    var courses = readTable(K.CUSTOM_COURSES);
+    if (courses[courseId] && courses[courseId][tab]) {
+      courses[courseId][tab] = courses[courseId][tab].filter(function(m) { return m.id !== materialId; });
+      writeTable(K.CUSTOM_COURSES, courses);
+    }
+  }
 
   /* ─── Initialisation ────────────────────────────────────── */
   seed();   // populate demo data on first run
@@ -368,30 +473,42 @@ window.EduDB = (function () {
   /* ─── Public API ─────────────────────────────────────────── */
   return {
     /* Auth */
-    register:            register,
-    login:               login,
-    logout:              logout,
-    getSession:          getSession,
-    isLoggedIn:          isLoggedIn,
+    register: register,
+    login: login,
+    logout: logout,
+    getSession: getSession,
+    isLoggedIn: isLoggedIn,
     /* Enrollments */
-    getUserEnrollments:  getUserEnrollments,
-    enrol:               enrol,
-    updateProgress:      updateProgress,
-    markLectureRead:     markLectureRead,
-    markQuizDone:        markQuizDone,
-    getActivityLog:      getActivityLog,
+    getUserEnrollments: getUserEnrollments,
+    enrol: enrol,
+    updateProgress: updateProgress,
+    markLectureRead: markLectureRead,
+    markQuizDone: markQuizDone,
+    getActivityLog: getActivityLog,
     /* Forum */
-    getAllPosts:         getAllPosts,
-    addPost:             addPost,
-    addReply:            addReply,
+    getAllPosts: getAllPosts,
+    addPost: addPost,
+    addReply: addReply,
+    togglePostLike: togglePostLike,
+    toggleReplyLike: toggleReplyLike,
     /* Orders */
-    addOrder:            addOrder,
-    getUserOrders:       getUserOrders,
+    addOrder: addOrder,
+    getUserOrders: getUserOrders,
+    /* Purchased Books */
+    addPurchasedBooks: addPurchasedBooks,
+    getPurchasedBooks: getPurchasedBooks,
     /* Cart */
-    getCart:             getCart,
-    saveCart:            saveCart,
-    clearCart:           clearCart,
+    getCart: getCart,
+    saveCart: saveCart,
+    clearCart: clearCart,
+    /* Admin */
+    addCustomBook: addCustomBook,
+    getCustomBooks: getCustomBooks,
+    deleteCustomBook: deleteCustomBook,
+    addCustomCourseMaterial: addCustomCourseMaterial,
+    getCustomCourseMaterials: getCustomCourseMaterials,
+    deleteCustomCourseMaterial: deleteCustomCourseMaterial,
     /* Utils */
-    ago:                 ago
+    ago: ago
   };
 })();
