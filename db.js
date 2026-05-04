@@ -12,7 +12,7 @@
  *    eduCart            – shopping cart items
  * ============================================================
  */
-window.EduDB = function () {
+window.EduDB = (function () {
   'use strict';
 
   /* ─── Table keys ───────────────────────────────────────── */
@@ -203,7 +203,8 @@ window.EduDB = function () {
    * @param {Object} d – {firstName, lastName, email, password, programme, year}
    * @returns {Object} {success, message, user?}
    */
-  function register(d) {
+)
+function register(d) {
   if (!d.firstName || !d.email || !d.password)
     return { success: false, message: 'Please fill in all required fields.' };
   if (d.password.length < 8)
