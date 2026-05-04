@@ -177,24 +177,24 @@ window.EduDB = (function () {
     }
   }
 
-  /* Activity table */
-  if (readTable(K.ACTIVITY).length === 0) {
-    writeTable(K.ACTIVITY, [
-      {
-        id: uid(), userId: 'u_seed01', type: 'lecture',
-        text: 'Watched: "Functions and Domain" – Calculus Week 1',
-        icon: 'fa-play-circle', bg: '#f0f2ff', iclr: '#667eea',
-        createdAt: new Date(Date.now() - 3600000 * 2).toISOString()
-      },
-      {
-        id: uid(), userId: 'u_seed01', type: 'quiz',
-        text: 'Completed Quiz: Data Structures – Foundation (Score: 90%)',
-        icon: 'fa-check-circle', bg: '#d1fae5', iclr: '#10b981',
-        createdAt: new Date(Date.now() - 86400000).toISOString()
-      }
-    ]);
+    /* Activity table */
+    if (readTable(K.ACTIVITY).length === 0) {
+      writeTable(K.ACTIVITY, [
+        {
+          id: uid(), userId: 'u_seed01', type: 'lecture',
+          text: 'Watched: "Functions and Domain" – Calculus Week 1',
+          icon: 'fa-play-circle', bg: '#f0f2ff', iclr: '#667eea',
+          createdAt: new Date(Date.now() - 3600000 * 2).toISOString()
+        },
+        {
+          id: uid(), userId: 'u_seed01', type: 'quiz',
+          text: 'Completed Quiz: Data Structures – Foundation (Score: 90%)',
+          icon: 'fa-check-circle', bg: '#d1fae5', iclr: '#10b981',
+          createdAt: new Date(Date.now() - 86400000).toISOString()
+        }
+      ]);
+    }
   }
-}
 
   /* ─── AUTH ──────────────────────────────────────────────── */
 
@@ -203,8 +203,7 @@ window.EduDB = (function () {
    * @param {Object} d – {firstName, lastName, email, password, programme, year}
    * @returns {Object} {success, message, user?}
    */
-)
-function register(d) {
+  function register(d) {
   if (!d.firstName || !d.email || !d.password)
     return { success: false, message: 'Please fill in all required fields.' };
   if (d.password.length < 8)
@@ -588,3 +587,4 @@ return {
   /* Utils */
   ago: ago
 };
+})();
