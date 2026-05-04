@@ -30,7 +30,9 @@ window.EduDB = (function () {
   };
 
   /* ─── Low-level CRUD ───────────────────────────────────── */
-  function readTable(key) { return JSON.parse(localStorage.getItem(key) || '[]'); }
+  function readTable(key, defaultVal) { 
+    return JSON.parse(localStorage.getItem(key) || (defaultVal || '[]')); 
+  }
   function readOne(key) { return JSON.parse(localStorage.getItem(key) || 'null'); }
   function writeTable(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
 
@@ -524,7 +526,7 @@ function deleteCustomBook(id) {
 
 /* ─── ADMIN: CUSTOM COURSES ─────────────────────────────── */
 function addCustomCourseMaterial(courseId, material) {
-  var courses = readTable(K.CUSTOM_COURSES);
+  var courses = readTable(K.CUSTOM_COURSES, '{}');
   if (!courses[courseId]) courses[courseId] = { lectures: [], tutorials: [] };
   material.id = uid();
   material.createdAt = new Date().toISOString();
@@ -532,9 +534,9 @@ function addCustomCourseMaterial(courseId, material) {
   writeTable(K.CUSTOM_COURSES, courses);
   return material;
 }
-function getCustomCourseMaterials() { return readTable(K.CUSTOM_COURSES); }
+function getCustomCourseMaterials() { return readTable(K.CUSTOM_COURSES, '{}'); }
 function deleteCustomCourseMaterial(courseId, tab, materialId) {
-  var courses = readTable(K.CUSTOM_COURSES);
+  var courses = readTable(K.CUSTOM_COURSES, '{}');
   if (courses[courseId] && courses[courseId][tab]) {
     courses[courseId][tab] = courses[courseId][tab].filter(function (m) { return m.id !== materialId; });
     writeTable(K.CUSTOM_COURSES, courses);
