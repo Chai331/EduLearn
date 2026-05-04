@@ -388,7 +388,7 @@
   }
 
   function openUploadWidget() {
-    cloudinary.openUploadWidget({ cloudName: 'demo', uploadPreset: 'unsigned_preset', sources: ['local'], multiple: false }, (err, res) => {
+    cloudinary.openUploadWidget({ cloudName: 'dtapgp9oj', uploadPreset: 't7cdnbsg', sources: ['local'], multiple: false }, (err, res) => {
       if (!err && res && res.event === "success") { document.getElementById('cFile').value = res.info.secure_url; showToast('Upload success!'); }
     });
   }
