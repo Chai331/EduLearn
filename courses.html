@@ -172,6 +172,22 @@
   </section>
 </div>
 
+<!-- VIDEO PLAYER MODAL -->
+<div id="videoModal" class="w3-modal" style="z-index:9999;background:rgba(0,0,0,0.9);display:none;">
+  <div class="w3-modal-content" style="background:transparent;width:95%;max-width:900px;top:50%;transform:translateY(-50%);">
+    <div style="background:#1a1a2e;border-radius:16px 16px 0 0;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+      <h3 id="videoModalTitle" style="color:#fff;margin:0;font-size:1.1rem;font-weight:700;">Video Tutorial</h3>
+      <button onclick="closeVideo()" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="background:#000;aspect-ratio:16/9;position:relative;" id="videoContainer">
+      <!-- Player will be injected here -->
+    </div>
+    <div style="background:#1a1a2e;border-radius:0 0 16px 16px;padding:1rem;text-align:center;">
+      <p id="videoModalDesc" style="color:#9ca3af;font-size:0.85rem;margin:0;">EduLearn Video Tutorial Player</p>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <script src="db.js"></script>
 <script src="courses_data.js"></script>
@@ -541,17 +557,51 @@ function submitQuiz() {
 
 
 function openFile(path, week, title) {
-  if (path) {
-    window.open(path, '_blank');
-    if (week && title && currentCourse) {
-      var totalLecs = CONTENT[currentCourse.id].lectures.length;
-      var totalQuiz = CONTENT[currentCourse.id].quizzes.length;
-      EduDB.markLectureRead(__sess.id, currentCourse.id, week, title, totalLecs, totalQuiz);
-      openCourseDetail(currentCourse.id);
-    }
+  if (!path) { showToast('📁 File path not found.'); return; }
+
+  // Check if it's a video
+  var isVideo = path.toLowerCase().match(/\.(mp4|webm|ogg)$/) || path.includes('youtube.com') || path.includes('youtu.be') || path.includes('cloudinary.com');
+
+  if (isVideo) {
+    playVideo(path, title || 'Video Tutorial');
   } else {
-    showToast('📁 File path not found.');
+    window.open(path, '_blank');
   }
+
+  // Mark as read
+  if (week && title && currentCourse) {
+    var totalLecs = CONTENT[currentCourse.id].lectures.length;
+    var totalQuiz = CONTENT[currentCourse.id].quizzes.length;
+    EduDB.markLectureRead(__sess.id, currentCourse.id, week, title, totalLecs, totalQuiz);
+    openCourseDetail(currentCourse.id);
+  }
+}
+
+function playVideo(url, title) {
+  var container = document.getElementById('videoContainer');
+  var modal = document.getElementById('videoModal');
+  var titleEl = document.getElementById('videoModalTitle');
+  
+  titleEl.textContent = title;
+  modal.style.display = 'block';
+  container.innerHTML = '';
+
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    // YouTube Embed
+    var vidId = "";
+    if(url.includes('v=')) vidId = url.split('v=')[1].split('&')[0];
+    else vidId = url.split('/').pop();
+    
+    container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + vidId + '?autoplay=1" style="width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+  } else {
+    // Direct link or Cloudinary
+    container.innerHTML = '<video src="' + url + '" controls autoplay style="width:100%;height:100%;object-fit:contain;"></video>';
+  }
+}
+
+function closeVideo() {
+  document.getElementById('videoModal').style.display = 'none';
+  document.getElementById('videoContainer').innerHTML = ''; // Stop playback
 }
 
 function showToast(msg) {
