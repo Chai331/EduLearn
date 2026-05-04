@@ -66,7 +66,7 @@ window.EduDB = (function () {
           password: hashPw('password123'),
           programme: 'Computer Science', year: '2',
           avatar: 'A',
-          avatarColor: 'linear-gradient(135deg,#4a7c59,#334155)',
+          avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
           createdAt: '2025-01-15T08:00:00Z',
           role: 'student'
         },
@@ -92,21 +92,21 @@ window.EduDB = (function () {
           courseName: 'Computer and Cyber Security',
           progress: 72, weeksTotal: 12, weeksCurrent: 8,
           completedLectures: [1, 2, 3, 4, 5], quizDone: true,
-          icon: 'fa-shield-alt', color: 'linear-gradient(135deg,#064e3b,#065f46)'
+          icon: 'fa-shield-alt', color: 'linear-gradient(135deg,#1a1a2e,#16213e)'
         },
         {
           id: 'en2', userId: 'u_seed01', courseId: 'vision',
           courseName: 'Computer Vision & Image Processing',
           progress: 45, weeksTotal: 14, weeksCurrent: 6,
           completedLectures: [1, 2], quizDone: false,
-          icon: 'fa-eye', color: 'linear-gradient(135deg,#0369a1,#075985)'
+          icon: 'fa-eye', color: 'linear-gradient(135deg,#0f3460,#533483)'
         },
         {
           id: 'en3', userId: 'u_seed01', courseId: 'ds',
           courseName: 'Introduction to Data Structures',
           progress: 88, weeksTotal: 10, weeksCurrent: 9,
           completedLectures: [1, 2, 3, 4, 5, 6], quizDone: true,
-          icon: 'fa-sitemap', color: 'linear-gradient(135deg,#166534,#14532d)'
+          icon: 'fa-sitemap', color: 'linear-gradient(135deg,#1b4332,#2d6a4f)'
         }
       ]);
     }
@@ -114,12 +114,12 @@ window.EduDB = (function () {
     /* Forum posts table - Seeded with 25 real Q&A sets */
     if (readTable(K.POSTS).length === 0) {
       var seedUsers = [
-        { name: 'Ahmad Farid', avatar: 'A', color: 'linear-gradient(135deg,#4a7c59,#334155)', id: 'u_seed01' },
-        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#8da08e,#4a7c59)', id: 'u_seed03' },
-        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#cc7a5c,#a8624d)', id: 'u_seed02' },
-        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#64748b,#475569)', id: 'u_seed04' },
-        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#94a3b8,#64748b)', id: 'u_seed05' },
-        { name: 'Admin EduLearn', avatar: 'A', color: 'linear-gradient(135deg,#1e293b,#0f172a)', id: 'u_admin' }
+        { name: 'Ahmad Farid', avatar: 'A', color: 'linear-gradient(135deg,#667eea,#764ba2)', id: 'u_seed01' },
+        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#43e97b,#38f9d7)', id: 'u_seed03' },
+        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'u_seed02' },
+        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#4facfe,#00f2fe)', id: 'u_seed04' },
+        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#fa709a,#fee140)', id: 'u_seed05' },
+        { name: 'Admin EduLearn', avatar: 'A', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'u_admin' }
       ];
 
       var data = [
@@ -225,7 +225,7 @@ window.EduDB = (function () {
     programme: d.programme || 'Computer Science',
     year: d.year || '1',
     avatar: d.firstName.charAt(0).toUpperCase(),
-    avatarColor: 'linear-gradient(135deg,#4a7c59,#334155)',
+    avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
     createdAt: new Date().toISOString(),
     role: 'student'
   };
