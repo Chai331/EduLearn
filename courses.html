@@ -377,14 +377,15 @@ function openCourseDetail(courseId) {
     tHtml = '<div style="padding:1rem;color:#6b7280;font-size:.85rem;">No tutorials available yet.</div>';
   } else {
     tutorials.forEach(function (t) {
+      var isVid = t.type === 'video' || (t.file && (t.file.includes('cloudinary') || t.file.includes('youtube') || t.file.includes('mp4')));
       tHtml +=
         '<div class="res-item">' +
-        '<div class="res-ico tut"><i class="fas fa-tasks"></i></div>' +
+        '<div class="res-ico tut"><i class="fas ' + (isVid ? 'fa-play-circle' : 'fa-tasks') + '"></i></div>' +
         '<div class="res-meta">' +
-        '<div class="res-title">' + t.title + (t.week ? ' (Week '+t.week+')' : '') + '</div>' +
-        '<div class="res-sub">PDF Worksheet &nbsp;&middot;&nbsp; ' + (t.size || 'Unknown') + '</div>' +
+        '<div class="res-title">' + t.title + (t.week ? ' (Week ' + t.week + ')' : '') + '</div>' +
+        '<div class="res-sub">' + (isVid ? 'Video Tutorial' : 'PDF Worksheet') + ' &nbsp;&middot;&nbsp; ' + (t.size || 'Unknown') + '</div>' +
         '</div>' +
-        '<button class="res-btn tut" onclick="openFile(\'' + t.file + '\', null, null)"><i class="fas fa-download"></i> Open</button>' +
+        '<button class="res-btn tut" onclick="openFile(\'' + t.file + '\', null, \'' + t.title.replace(/'/g, "\\'") + '\')"><i class="fas ' + (isVid ? 'fa-play' : 'fa-eye') + '"></i> ' + (isVid ? 'Watch' : 'Open') + '</button>' +
         '</div>';
     });
   }
