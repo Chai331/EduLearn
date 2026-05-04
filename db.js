@@ -175,7 +175,6 @@ window.EduDB = (function () {
 
       writeTable(K.POSTS, seededPosts);
     }
-  }
 
     /* Activity table */
     if (readTable(K.ACTIVITY).length === 0) {
