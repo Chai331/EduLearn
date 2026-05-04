@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="EduLearn Admin Dashboard – Manage books, courses, and forum."/>
-<title>Admin Dashboard – EduLearn</title>
+<meta name="description" content="EduLearn Admin Command Center – Manage everything."/>
+<title>Admin Command Center – EduLearn</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -11,22 +11,26 @@
 <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 <style>
   :root { --admin-primary: #ef4444; --admin-bg: #fef2f2; }
-  .portal-sidebar { border-right: 1px solid #fecaca; }
-  .portal-nav li a.active { background: var(--admin-bg); color: var(--admin-primary); }
-  .portal-nav li a:hover { color: var(--admin-primary); }
-  .stat-card-icon { background: linear-gradient(135deg, #ef4444, #991b1b); }
-  .admin-input { width:100%; padding:.8rem 1rem; border:1px solid #d1d5db; border-radius:8px; font-family:Inter,sans-serif; margin-bottom:1rem; outline:none; transition:border-color .2s; }
+  .portal-sidebar { border-right: 1px solid #fee2e2; }
+  .portal-nav li a.active { background: var(--admin-bg); color: var(--admin-primary); border-right: 3px solid var(--admin-primary); }
+  .portal-nav li a:hover { background: var(--admin-bg); color: var(--admin-primary); }
+  .stat-card-icon { background: linear-gradient(135deg, #ef4444, #991b1b) !important; }
+  .admin-card { background:#fff; border-radius:12px; padding:1.5rem; box-shadow:0 4px 15px rgba(0,0,0,.05); margin-bottom:1.5rem; border:1px solid #f3f4f6; }
+  .admin-input { width:100%; padding:.8rem 1rem; border:1px solid #d1d5db; border-radius:8px; font-family:Inter,sans-serif; margin-bottom:1rem; outline:none; transition:border-color .2s; font-size:0.88rem; }
   .admin-input:focus { border-color:var(--admin-primary); }
-  .admin-btn { background:linear-gradient(135deg,#ef4444,#991b1b); color:#fff; border:none; padding:.8rem 1.5rem; border-radius:8px; font-weight:700; cursor:pointer; width:100%; transition:opacity .2s; font-family:Inter,sans-serif; }
+  .admin-btn { background:linear-gradient(135deg,#ef4444,#991b1b); color:#fff; border:none; padding:.8rem 1.5rem; border-radius:8px; font-weight:700; cursor:pointer; transition:opacity .2s; font-family:Inter,sans-serif; font-size:0.88rem; }
   .admin-btn:hover { opacity:.85; }
-  .list-item { display:flex; justify-content:space-between; align-items:center; padding:1rem; border:1px solid #e5e7eb; border-radius:8px; margin-bottom:.5rem; background:#fff; }
-  .btn-delete { background:#fee2e2; color:#ef4444; border:none; padding:.4rem .8rem; border-radius:6px; cursor:pointer; font-weight:600; font-size:.8rem; }
-  .btn-delete:hover { background:#fca5a5; color:#7f1d1d; }
-  .admin-card { background:#fff; border-radius:12px; padding:1.5rem; box-shadow:0 4px 15px rgba(0,0,0,.05); margin-bottom:1.5rem; }
-  .forum-row { border-bottom: 1px solid #f3f4f6; padding: 1rem 0; display:flex; justify-content:space-between; align-items:center; }
+  .table-res { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  .table-res th { text-align:left; padding:12px; background:#f9fafb; color:#6b7280; font-weight:700; border-bottom:2px solid #f3f4f6; }
+  .table-res td { padding:12px; border-bottom:1px solid #f3f4f6; color:#374151; }
+  .badge-role { padding:2px 8px; border-radius:12px; font-size:0.7rem; font-weight:800; text-transform:uppercase; }
+  .role-admin { background:#fee2e2; color:#ef4444; }
+  .role-student { background:#e0e7ff; color:#4361ee; }
+  .forum-item { padding:1rem; border:1px solid #f3f4f6; border-radius:10px; margin-bottom:1rem; background:#fff; }
+  .forum-item:hover { border-color:var(--admin-primary); }
 </style>
 </head>
-<body style="background:#fcfcfc;">
+<body style="background:#f9fafb;">
 
 <nav class="w3-bar edu-navbar w3-top" id="mainNav">
   <a href="admin_dashboard.html" class="w3-bar-item brand-logo" style="color:var(--admin-primary);"><i class="fas fa-user-shield"></i> EduLearn Admin</a>
@@ -38,8 +42,9 @@
 
 <div class="page-header" style="background:linear-gradient(135deg, #7f1d1d, #450a0a);">
   <div class="w3-content container-max">
-    <h1><i class="fas fa-cog"></i> System Administration</h1>
-    <p>Manage courses, bookstore inventory, forum content, and users.</p>
+    <div class="breadcrumb">Admin &rsaquo; Control Center</div>
+    <h1><i class="fas fa-cog"></i> Admin Command Center</h1>
+    <p>Manage users, content, and track student performance across the platform.</p>
   </div>
 </div>
 
@@ -50,87 +55,87 @@
       <!-- SIDEBAR -->
       <aside class="portal-sidebar">
         <div class="portal-avatar" id="sideAvatar" style="background:linear-gradient(135deg,#ef4444,#991b1b);">A</div>
-        <div class="portal-name">System Administrator</div>
+        <div class="portal-name" id="sideName">Admin</div>
         <div class="portal-email" id="sideEmail">admin@edulearn.com</div>
         <ul class="portal-nav">
-          <li><a href="#" class="active" onclick="showTab('overview',this)"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
-          <li><a href="#" onclick="showTab('books',this)"><i class="fas fa-book"></i> Bookstore</a></li>
-          <li><a href="#" onclick="showTab('courses',this)"><i class="fas fa-graduation-cap"></i> Courses</a></li>
-          <li><a href="#" onclick="showTab('forum',this)"><i class="fas fa-comments"></i> Forum</a></li>
-          <li><a href="#" onclick="showTab('users',this)"><i class="fas fa-users"></i> Users</a></li>
+          <li><a href="#" class="active" onclick="showTab('overview',this)"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="#" onclick="showTab('students',this)"><i class="fas fa-users"></i> Students Status</a></li>
+          <li><a href="#" onclick="showTab('courses',this)"><i class="fas fa-graduation-cap"></i> Course Content</a></li>
+          <li><a href="#" onclick="showTab('bookstore',this)"><i class="fas fa-book"></i> Bookstore</a></li>
+          <li><a href="#" onclick="showTab('forum',this)"><i class="fas fa-comments"></i> Forum Moderation</a></li>
         </ul>
       </aside>
 
-      <!-- MAIN CONTENT -->
+      <!-- MAIN -->
       <main class="portal-main">
         
-        <!-- OVERVIEW -->
+        <!-- DASHBOARD -->
         <div id="tab-overview">
-          <div class="stat-cards" id="statCards"></div>
-          <div class="progress-section">
-            <h3><i class="fas fa-history" style="color:var(--admin-primary);margin-right:8px;"></i>System Activity</h3>
-            <ul id="activityList" style="list-style:none;padding:0;"></ul>
+          <div class="stat-cards" id="adminStats"></div>
+          <div class="admin-card">
+            <h3><i class="fas fa-chart-line" style="color:var(--admin-primary);margin-right:8px;"></i>Platform Overview</h3>
+            <p style="color:#6b7280;font-size:0.88rem;">Welcome back, Admin. Here is the latest activity across the EduLearn platform.</p>
+            <div id="recentActivityList"></div>
           </div>
         </div>
 
-        <!-- BOOKSTORE -->
-        <div id="tab-books" style="display:none;">
-          <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:1.5rem;">
-            <div class="admin-card">
-              <h3 style="font-size:1.1rem;font-weight:800;margin-top:0;"><i class="fas fa-plus-circle"></i> Add New Book</h3>
-              <input type="text" id="bTitle" class="admin-input" placeholder="Book Title"/>
-              <select id="bCat" class="admin-input">
-                <option value="security">Security</option>
-                <option value="vision">Computer Vision</option>
-                <option value="ds">Data Structures</option>
-                <option value="general">General Programming</option>
-              </select>
-              <textarea id="bDesc" class="admin-input" rows="3" placeholder="Description..."></textarea>
-              <input type="number" id="bPrice" class="admin-input" placeholder="Price (RM)"/>
-              <input type="text" id="bImg" class="admin-input" placeholder="Cover Image URL"/>
-              <button class="admin-btn" onclick="uploadBook()">Upload Book</button>
-            </div>
-            <div class="admin-card">
-              <h3 style="font-size:1.1rem;font-weight:800;margin-top:0;"><i class="fas fa-list"></i> Custom Books</h3>
-              <div id="bookList"></div>
+        <!-- STUDENTS STATUS -->
+        <div id="tab-students" style="display:none;">
+          <div class="admin-card">
+            <h3><i class="fas fa-users" style="color:var(--admin-primary);margin-right:8px;"></i>Student Progress Tracking</h3>
+            <div style="overflow-x:auto;">
+              <table class="table-res" id="studentTable">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Email</th>
+                    <th>Programme</th>
+                    <th>Enrolled Courses</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="studentList"></tbody>
+              </table>
             </div>
           </div>
         </div>
 
-        <!-- COURSES -->
+        <!-- COURSE CONTENT -->
         <div id="tab-courses" style="display:none;">
-          <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:1.5rem;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
             <div class="admin-card">
-              <h3 style="font-size:1.1rem;font-weight:800;margin-top:0;"><i class="fas fa-file-upload"></i> Upload Material</h3>
-              <label>Course</label>
+              <h3><i class="fas fa-plus-circle" style="color:var(--admin-primary);margin-right:8px;"></i>Add Lecture/Video</h3>
+              <label>Target Course</label>
               <select id="cCourse" class="admin-input">
                 <option value="calculus">Calculus</option>
-                <option value="cybersec">Cyber Security</option>
-                <option value="vision">Computer Vision</option>
-                <option value="ds">Data Structures</option>
+                <option value="cybersec">Computer and Cyber Security</option>
+                <option value="vision">Computer Vision & Image Processing</option>
+                <option value="ds">Data Structures and Algorithms</option>
                 <option value="se">Software Engineering</option>
               </select>
-              <label>Type</label>
+              <label>Material Type</label>
               <select id="cTab" class="admin-input">
-                <option value="lectures">Lecture Note</option>
-                <option value="tutorials">Tutorial</option>
+                <option value="lectures">Lecture Note / Video</option>
+                <option value="tutorials">Tutorial Worksheet</option>
               </select>
-              <input type="text" id="cTitle" class="admin-input" placeholder="Material Title (e.g. Week 1 Intro)"/>
-              <input type="number" id="cWeek" class="admin-input" placeholder="Week Number"/>
-              <label>File URL</label>
-              <div style="display:flex;gap:8px;margin-bottom:1rem;">
-                <input type="text" id="cFile" class="admin-input" style="margin-bottom:0;" placeholder="https://..."/>
-                <button class="admin-btn" style="width:auto;white-space:nowrap;padding:0 1rem;background:#6366f1;" onclick="openUploadWidget()">Upload</button>
+              <label>Title</label>
+              <input type="text" id="cTitle" class="admin-input" placeholder="e.g. Week 4: Logic Gates"/>
+              <label>Week #</label>
+              <input type="number" id="cWeek" class="admin-input" placeholder="4"/>
+              <label>File URL (or use Upload button)</label>
+              <div style="display:flex;gap:8px;">
+                <input type="text" id="cFile" class="admin-input" placeholder="https://..."/>
+                <button class="admin-btn" style="background:#6366f1;white-space:nowrap;" onclick="openUploadWidget()"><i class="fas fa-upload"></i> Upload</button>
               </div>
-              <button class="admin-btn" onclick="uploadMaterial()">Add to Course</button>
+              <button class="admin-btn" style="width:100%;margin-top:10px;" onclick="uploadMaterial()">Add to Course</button>
             </div>
             <div class="admin-card">
-              <h3 style="font-size:1.1rem;font-weight:800;margin-top:0;"><i class="fas fa-folder-open"></i> Manage Materials</h3>
+              <h3><i class="fas fa-list" style="color:var(--admin-primary);margin-right:8px;"></i>Current Content</h3>
               <select id="viewCourseSel" class="admin-input" onchange="renderMaterials()">
                 <option value="calculus">Calculus</option>
-                <option value="cybersec">Cyber Security</option>
-                <option value="vision">Computer Vision</option>
-                <option value="ds">Data Structures</option>
+                <option value="cybersec">Computer and Cyber Security</option>
+                <option value="vision">Computer Vision & Image Processing</option>
+                <option value="ds">Data Structures and Algorithms</option>
                 <option value="se">Software Engineering</option>
               </select>
               <div id="materialList"></div>
@@ -138,20 +143,55 @@
           </div>
         </div>
 
+        <!-- BOOKSTORE -->
+        <div id="tab-bookstore" style="display:none;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <div class="admin-card">
+              <h3><i class="fas fa-plus-circle" style="color:var(--admin-primary);margin-right:8px;"></i>Add Book</h3>
+              <label>Book Title</label>
+              <input type="text" id="bTitle" class="admin-input" placeholder="e.g. Python Deep Dive"/>
+              <label>Category</label>
+              <select id="bCat" class="admin-input">
+                <option value="security">Security</option>
+                <option value="vision">Computer Vision</option>
+                <option value="ds">Data Structures</option>
+                <option value="general">General Programming</option>
+              </select>
+              <label>Price (RM)</label>
+              <input type="number" id="bPrice" class="admin-input" placeholder="120.00"/>
+              <label>Cover Image URL</label>
+              <input type="text" id="bImg" class="admin-input" placeholder="Book/new.jpg"/>
+              <label>Description</label>
+              <textarea id="bDesc" class="admin-input" rows="3"></textarea>
+              <button class="admin-btn" style="width:100%;" onclick="uploadBook()">Add Book</button>
+            </div>
+            <div class="admin-card">
+              <h3><i class="fas fa-store" style="color:var(--admin-primary);margin-right:8px;"></i>Inventory</h3>
+              <div id="bookList"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- FORUM -->
         <div id="tab-forum" style="display:none;">
           <div class="admin-card">
-            <h3 style="font-size:1.1rem;font-weight:800;margin-top:0;"><i class="fas fa-comments"></i> Forum Moderation</h3>
-            <p style="font-size:.85rem;color:#6b7280;margin-bottom:1.5rem;">View and delete any forum posts or comments.</p>
+            <h3><i class="fas fa-comments" style="color:var(--admin-primary);margin-right:8px;"></i>Forum Moderation</h3>
+            <p style="font-size:0.85rem;color:#6b7280;margin-bottom:1.5rem;">Review and respond to student discussions.</p>
             <div id="forumList"></div>
           </div>
         </div>
 
-        <!-- USERS -->
-        <div id="tab-users" style="display:none;">
-          <div class="admin-card">
-            <h3 style="font-size:1.1rem;font-weight:800;margin-top:0;"><i class="fas fa-users"></i> Registered Users</h3>
-            <div id="userList"></div>
+        <!-- FORUM REPLY MODAL -->
+        <div id="replyModal" class="w3-modal" style="z-index:10000;display:none;">
+          <div class="w3-modal-content admin-card" style="max-width:600px;margin-top:50px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+              <h3 style="margin:0;font-size:1.1rem;font-weight:800;">Replies to Post</h3>
+              <button onclick="document.getElementById('replyModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">&times;</button>
+            </div>
+            <div id="modalRepliesList" style="max-height:300px;overflow-y:auto;margin-bottom:1rem;border-bottom:1px solid #f3f4f6;padding-bottom:1rem;"></div>
+            <label style="font-weight:700;font-size:0.85rem;">Post Admin Reply</label>
+            <textarea id="adminReplyText" class="admin-input" rows="3" placeholder="Type your answer here..."></textarea>
+            <button class="admin-btn" style="width:100%;" onclick="submitAdminReply()">Post Reply</button>
           </div>
         </div>
 
@@ -160,138 +200,198 @@
   </div>
 </section>
 
-<div id="toast" style="display:none;position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:1rem 1.5rem;border-radius:12px;z-index:9999;box-shadow:0 8px 25px rgba(0,0,0,0.3);border-left:4px solid #ef4444;"></div>
+<div id="toast" class="toast" style="display:none;position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:1rem 1.5rem;border-radius:12px;z-index:9999;box-shadow:0 8px 25px rgba(0,0,0,0.3);border-left:4px solid var(--admin-primary);">
+  <i class="fas fa-info-circle" style="color:var(--admin-primary);margin-right:8px;"></i><span id="toastMsg"></span>
+</div>
 
 <script src="db.js"></script>
 <script>
   var __sess = EduDB.getSession();
   if (!__sess || __sess.role !== 'admin') { window.location.href = 'index.html'; }
 
-  document.getElementById('navGreet').innerHTML = '<i class="fas fa-user-shield"></i> ' + __sess.firstName;
-  document.getElementById('sideEmail').textContent = __sess.email;
-
   function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
   function showToast(msg) {
-    var t = document.getElementById('toast');
-    t.innerHTML = msg; t.style.display = 'block';
+    document.getElementById('toastMsg').textContent = msg;
+    var t = document.getElementById('toast'); t.style.display = 'block';
     setTimeout(function(){ t.style.display = 'none'; }, 3000);
   }
 
+  /* ── Tab System ── */
   function showTab(name, link) {
-    ['overview', 'books', 'courses', 'forum', 'users'].forEach(function(t){
+    ['overview', 'students', 'courses', 'bookstore', 'forum'].forEach(function(t) {
       document.getElementById('tab-' + t).style.display = 'none';
     });
-    document.querySelectorAll('.portal-nav li a').forEach(function(a){ a.classList.remove('active'); });
+    document.querySelectorAll('.portal-nav li a').forEach(function(a) { a.classList.remove('active'); });
     document.getElementById('tab-' + name).style.display = 'block';
     if(link) link.classList.add('active');
     
-    if(name === 'overview') renderStats();
+    if(name === 'overview') renderDashboard();
+    if(name === 'students') renderStudents();
     if(name === 'forum') renderForum();
-    if(name === 'users') renderUsers();
   }
 
-  /* ── OVERVIEW ── */
-  function renderStats() {
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('navGreet').innerHTML = '<i class="fas fa-user-shield"></i> Admin';
+    renderDashboard();
+    renderBooks();
+    renderMaterials();
+  });
+
+  function renderDashboard() {
     var users = EduDB.getAllUsers();
+    var posts = EduDB.getAllForumPosts();
     var orders = EduDB.getAllOrders();
-    var posts = EduDB.getAllPosts();
-    var revenue = orders.reduce(function(s,o){ return s + o.total; }, 0);
+    var totalRev = orders.reduce(function(s,o){ return s + o.total; }, 0);
 
     var stats = [
-      { icon: 'fa-users', label: 'Total Users', val: users.length },
-      { icon: 'fa-shopping-cart', label: 'Total Sales', val: 'RM ' + revenue.toFixed(2) },
-      { icon: 'fa-comments', label: 'Forum Posts', val: posts.length },
-      { icon: 'fa-book', label: 'Orders', val: orders.length }
+      { num: users.length, label: 'Total Students', icon: 'fa-users' },
+      { num: posts.length, label: 'Forum Posts', icon: 'fa-comments' },
+      { num: 'RM ' + totalRev.toFixed(0), label: 'Total Revenue', icon: 'fa-dollar-sign' },
+      { num: orders.length, label: 'Book Orders', icon: 'fa-shopping-bag' }
     ];
 
-    var sc = document.getElementById('statCards');
-    sc.innerHTML = '';
-    stats.forEach(function(s){
-      sc.innerHTML += '<div class="stat-card"><div class="stat-card-icon"><i class="fas '+s.icon+'"></i></div><div><div class="stat-card-num">'+s.val+'</div><div class="stat-card-label">'+s.label+'</div></div></div>';
-    });
-
-    var acts = EduDB.getAllActivity();
-    var al = document.getElementById('activityList');
-    al.innerHTML = '';
-    acts.slice(0, 10).forEach(function(a){
-      al.innerHTML += '<li style="padding:.8rem;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:10px;font-size:.85rem;color:#4b5563;"><span style="width:32px;height:32px;border-radius:50%;background:'+a.bg+';display:flex;align-items:center;justify-content:center;"><i class="fas '+a.icon+'" style="color:'+a.iclr+';"></i></span>'+a.text+'<span style="margin-left:auto;color:#9ca3af;font-size:.75rem;">'+EduDB.ago(a.createdAt)+'</span></li>';
+    var container = document.getElementById('adminStats');
+    container.innerHTML = '';
+    stats.forEach(function(s) {
+      container.innerHTML += '<div class="stat-card"><div class="stat-card-icon"><i class="fas '+s.icon+'"></i></div><div><div class="stat-card-num">'+s.num+'</div><div class="stat-card-label">'+s.label+'</div></div></div>';
     });
   }
 
-  /* ── BOOKSTORE ── */
+  function renderStudents() {
+    var users = EduDB.getAllUsers().filter(function(u){ return u.role !== 'admin'; });
+    var enrs = EduDB.getAllEnrollments();
+    var list = document.getElementById('studentList');
+    list.innerHTML = '';
+    
+    users.forEach(function(u) {
+      var uEnrs = enrs.filter(function(e){ return e.userId === u.id; });
+      var courseNames = uEnrs.map(function(e){ return e.courseName + ' ('+e.progress+'%)'; }).join('<br>');
+      
+      list.innerHTML += '<tr>' +
+        '<td><strong>'+u.firstName+' '+u.lastName+'</strong></td>' +
+        '<td>'+u.email+'</td>' +
+        '<td>'+u.programme+'</td>' +
+        '<td>'+(courseNames || '<span style="color:#9ca3af;">None</span>')+'</td>' +
+        '<td><span class="badge-role role-student">Active</span></td>' +
+        '</tr>';
+    });
+  }
+
+  function renderForum() {
+    var posts = EduDB.getAllForumPosts();
+    var list = document.getElementById('forumList');
+    list.innerHTML = '';
+    
+    posts.forEach(function(p) {
+      list.innerHTML += '<div class="forum-item">' +
+        '<div style="display:flex;justify-content:space-between;">' +
+        '<strong>' + p.title + '</strong>' +
+        '<div>' +
+          '<button class="admin-btn" style="padding:4px 10px;font-size:0.7rem;margin-right:5px;background:#6366f1;" onclick="viewReplies(\''+p.id+'\')">View/Reply</button>' +
+          '<button class="btn-delete" onclick="deleteForumPost(\''+p.id+'\')">Delete</button>' +
+        '</div>' +
+        '</div>' +
+        '<div style="font-size:0.8rem;color:#6b7280;margin:5px 0;">By '+p.author+' &bull; '+EduDB.ago(p.createdAt)+'</div>' +
+        '<p style="font-size:0.85rem;margin:10px 0;">'+p.content.slice(0,100)+'...</p>' +
+        '<div style="font-size:0.75rem;color:var(--admin-primary);font-weight:700;">'+p.replies+' Replies</div>' +
+        '</div>';
+    });
+  }
+
+  var currentActivePostId = null;
+  function viewReplies(postId) {
+    currentActivePostId = postId;
+    var posts = EduDB.getAllForumPosts();
+    var post = posts.find(function(p){ return p.id === postId; });
+    var list = document.getElementById('modalRepliesList');
+    list.innerHTML = '';
+    
+    if(post.replyData && post.replyData.length > 0) {
+      post.replyData.forEach(function(r) {
+        list.innerHTML += '<div style="padding:8px;border-bottom:1px solid #f9fafb;font-size:0.8rem;">' +
+          '<strong>' + r.author + ':</strong> ' + r.content + 
+          '<div style="font-size:0.7rem;color:#9ca3af;">'+EduDB.ago(r.createdAt)+'</div></div>';
+      });
+    } else {
+      list.innerHTML = '<p style="color:#9ca3af;font-size:0.8rem;text-align:center;">No replies yet.</p>';
+    }
+    document.getElementById('replyModal').style.display = 'block';
+  }
+
+  function submitAdminReply() {
+    var text = document.getElementById('adminReplyText').value.trim();
+    if(!text) return showToast('Please type a reply.');
+    
+    EduDB.addReply(currentActivePostId, __sess, text);
+    document.getElementById('adminReplyText').value = '';
+    viewReplies(currentActivePostId); // Refresh modal
+    renderForum(); // Refresh main list
+    showToast('Reply posted successfully!');
+  }
+
+  function deleteForumPost(id) {
+    if(confirm('Delete this post and all its replies?')) {
+      EduDB.deletePost(id, __sess.id, 'admin');
+      renderForum();
+      showToast('Post deleted.');
+    }
+  }
+
+  /* ── Content Management ── */
+  function renderMaterials() {
+    var cid = document.getElementById('viewCourseSel').value;
+    var mats = EduDB.getCustomCourseMaterials()[cid];
+    var list = document.getElementById('materialList');
+    list.innerHTML = '';
+    if(!mats || (mats.lectures.length===0 && mats.tutorials.length===0)) {
+      list.innerHTML = '<p style="color:#9ca3af;text-align:center;padding:1rem;">No custom materials.</p>';
+      return;
+    }
+    mats.lectures.forEach(function(m) {
+      list.innerHTML += '<div class="list-item"><div><strong>'+m.title+'</strong><br><small>Week '+m.week+' (Lecture)</small></div><button class="btn-delete" onclick="delMat(\''+cid+'\',\'lectures\',\''+m.id+'\')">Del</button></div>';
+    });
+    mats.tutorials.forEach(function(m) {
+      list.innerHTML += '<div class="list-item"><div><strong>'+m.title+'</strong><br><small>Week '+m.week+' (Tutorial)</small></div><button class="btn-delete" onclick="delMat(\''+cid+'\',\'tutorials\',\''+m.id+'\')">Del</button></div>';
+    });
+  }
+  function delMat(cid, tab, id) { EduDB.deleteCustomCourseMaterial(cid, tab, id); renderMaterials(); }
+  function uploadMaterial() {
+    var cid = document.getElementById('cCourse').value;
+    var tab = document.getElementById('cTab').value;
+    var tit = document.getElementById('cTitle').value;
+    var wk = document.getElementById('cWeek').value;
+    var url = document.getElementById('cFile').value;
+    if(!tit || !wk || !url) return showToast('Fill all fields.');
+    var isVid = url.includes('youtube') || url.includes('mp4') || url.includes('cloudinary');
+    EduDB.addCustomCourseMaterial(cid, { title: tit, week: parseInt(wk), file: url, type: isVid?'video':'pdf', tab: tab });
+    showToast('Material added!');
+    renderMaterials();
+  }
+
   function renderBooks() {
     var books = EduDB.getCustomBooks();
-    var html = '';
-    books.forEach(function(b){
-      html += '<div class="list-item"><div><div style="font-weight:700;">'+b.name+'</div><div style="font-size:.75rem;color:#6b7280;">RM '+b.price+'</div></div><button class="btn-delete" onclick="deleteBook(\''+b.id+'\')">Delete</button></div>';
+    var list = document.getElementById('bookList');
+    list.innerHTML = '';
+    books.forEach(function(b) {
+      list.innerHTML += '<div class="list-item"><div><strong>'+b.name+'</strong><br><small>RM '+b.price+'</small></div><button class="btn-delete" onclick="delBook(\''+b.id+'\')">Del</button></div>';
     });
-    document.getElementById('bookList').innerHTML = html || '<p style="text-align:center;color:#9ca3af;">No custom books.</p>';
   }
+  function delBook(id) { EduDB.deleteCustomBook(id); renderBooks(); }
   function uploadBook() {
-    var title = document.getElementById('bTitle').value;
-    var price = document.getElementById('bPrice').value;
+    var tit = document.getElementById('bTitle').value;
+    var pr = document.getElementById('bPrice').value;
     var img = document.getElementById('bImg').value;
-    if(!title || !price) return showToast('Please fill title and price.');
-    EduDB.addCustomBook({ name: title, price: parseFloat(price).toFixed(2), image: img, cat: document.getElementById('bCat').value, desc: document.getElementById('bDesc').value });
-    showToast('Book Added!'); renderBooks();
-  }
-  function deleteBook(id) { if(confirm('Delete book?')) { EduDB.deleteCustomBook(id); renderBooks(); } }
-
-  /* ── COURSES ── */
-  function renderMaterials() {
-    var cId = document.getElementById('viewCourseSel').value;
-    var data = EduDB.getCustomCourseMaterials()[cId] || {lectures:[], tutorials:[]};
-    var html = '';
-    ['lectures', 'tutorials'].forEach(function(tab){
-      data[tab].forEach(function(m){
-        html += '<div class="list-item"><div><strong>'+m.title+'</strong> (Week '+m.week+')</div><button class="btn-delete" onclick="deleteMaterial(\''+cId+'\',\''+tab+'\',\''+m.id+'\')">Delete</button></div>';
-      });
-    });
-    document.getElementById('materialList').innerHTML = html || '<p style="text-align:center;color:#9ca3af;">No custom materials.</p>';
-  }
-  function uploadMaterial() {
-    var courseId = document.getElementById('cCourse').value;
-    var tab = document.getElementById('cTab').value;
-    var title = document.getElementById('cTitle').value;
-    var file = document.getElementById('cFile').value;
-    if(!title || !file) return showToast('Fill all fields.');
-    EduDB.addCustomCourseMaterial(courseId, { title: title, week: parseInt(document.getElementById('cWeek').value), file: file, tab: tab });
-    showToast('Material Added!'); renderMaterials();
-  }
-  function deleteMaterial(cid, tab, id) { if(confirm('Delete?')) { EduDB.deleteCustomCourseMaterial(cid, tab, id); renderMaterials(); } }
-
-  /* ── FORUM ── */
-  function renderForum() {
-    var posts = EduDB.getAllPosts();
-    var html = '';
-    posts.forEach(function(p){
-      html += '<div class="forum-row"><div><div style="font-weight:700;">'+p.title+'</div><div style="font-size:.78rem;color:#6b7280;">By '+p.author+' &bull; '+p.category+'</div></div><button class="btn-delete" onclick="deletePost(\''+p.id+'\')">Delete Post</button></div>';
-    });
-    document.getElementById('forumList').innerHTML = html || '<p>No posts.</p>';
-  }
-  function deletePost(id) { if(confirm('Delete this post?')) { EduDB.deletePost(id, __sess.id, 'admin'); renderForum(); } }
-
-  /* ── USERS ── */
-  function renderUsers() {
-    var users = EduDB.getAllUsers();
-    var html = '';
-    users.forEach(function(u){
-      html += '<div class="list-item"><div><strong>'+u.firstName+' '+u.lastName+'</strong><div style="font-size:.75rem;">'+u.email+' ('+u.role+')</div></div><div style="font-size:.75rem;color:#9ca3af;">Joined '+new Date(u.createdAt).toLocaleDateString()+'</div></div>';
-    });
-    document.getElementById('userList').innerHTML = html;
+    if(!tit || !pr || !img) return showToast('Fill all fields.');
+    EduDB.addCustomBook({ name: tit, cat: document.getElementById('bCat').value, price: parseFloat(pr).toFixed(2), image: img, desc: document.getElementById('bDesc').value });
+    showToast('Book added!');
+    renderBooks();
   }
 
-  /* ── CLOUDINARY ── */
   function openUploadWidget() {
-    cloudinary.openUploadWidget({ cloudName: 'demo', uploadPreset: 'unsigned_preset', sources: ['local', 'url'], multiple: false }, (err, res) => {
-      if (!err && res && res.event === "success") { document.getElementById('cFile').value = res.info.secure_url; showToast('Upload Success!'); }
+    cloudinary.openUploadWidget({ cloudName: 'demo', uploadPreset: 'unsigned_preset', sources: ['local'], multiple: false }, (err, res) => {
+      if (!err && res && res.event === "success") { document.getElementById('cFile').value = res.info.secure_url; showToast('Upload success!'); }
     });
   }
-
-  // Init
-  renderStats();
-  renderBooks();
-  renderMaterials();
 </script>
 </body>
 </html>
