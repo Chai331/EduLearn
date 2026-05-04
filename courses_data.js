@@ -51,13 +51,7 @@ var CONTENT = {
       {week:4,title:'Limits and Continuity',type:'pdf',size:'3.9 MB',file:'Calculus/Lectures/lecture4.pdf'},
       {week:5,title:'Derivatives and Rules',type:'pdf',size:'2.8 MB',file:'Calculus/Lectures/lecture5.pdf'}
     ],
-    tutorials:[
-      {week:1,title:'Tutorial 1: Functions & Composite Functions',size:'0.8 MB',file:'Calculus/Tutorials/tutorial1.pdf'},
-      {week:2,title:'Tutorial 2: Trigonometric Identities Practice',size:'0.7 MB',file:'Calculus/Tutorials/tutorial2.pdf'},
-      {week:3,title:'Tutorial 3: Exponential & Logarithm Exercises',size:'0.6 MB',file:'Calculus/Tutorials/tutorial3.pdf'},
-      {week:4,title:'Tutorial 4: Limits & Continuity Problems',size:'0.9 MB',file:'Calculus/Tutorials/tutorial4.pdf'},
-      {week:5,title:'Tutorial 5: Differentiation Exercises',size:'1.1 MB',file:'Calculus/Tutorials/tutorial5.pdf'}
-    ],
+    tutorials:[],
     quiz:[
       {q:'Given f(x)=3-5x-2x², find f(4).',opts:['-49','-45','55','3'],ans:0},
       {q:'If f(x)=2x+1, what is the difference quotient (f(x+h)-f(x))/h?',opts:['2h','2','1','2x'],ans:1},
@@ -79,13 +73,7 @@ var CONTENT = {
       {week:4,title:'Security Controls and Mitigation',type:'pdf',size:'3.8 MB',file:'Computer and Cyber Security/Lectures/lecture4.pdf'},
       {week:5,title:'Advanced Persistent Threats',type:'pdf',size:'1.5 MB',file:'Computer and Cyber Security/Lectures/lecture5.pdf'}
     ],
-    tutorials:[
-      {week:1,title:'Tutorial 1: CIA Triad Case Studies',size:'0.9 MB',file:'Computer and Cyber Security/Tutorials/tutorial1.pdf'},
-      {week:2,title:'Tutorial 2: Firewall & IDS Configuration Lab',size:'1.1 MB',file:'Computer and Cyber Security/Tutorials/tutorial2.pdf'},
-      {week:3,title:'Tutorial 3: Threat Modelling Exercises',size:'0.8 MB',file:'Computer and Cyber Security/Tutorials/tutorial3.pdf'},
-      {week:4,title:'Tutorial 4: Penetration Testing Basics',size:'1.2 MB',file:'Computer and Cyber Security/Tutorials/tutorial4.pdf'},
-      {week:5,title:'Tutorial 5: Incident Response Scenarios',size:'0.7 MB',file:'Computer and Cyber Security/Tutorials/tutorial5.pdf'}
-    ],
+    tutorials:[],
     quiz:[
       {q:'Which of the following is NOT one of the three core goals of the CIA Triad?',opts:['Confidentiality','Integrity','Availability','Auditability'],ans:3},
       {q:'A security control that relies on human implementation (e.g., policies) is:',opts:['Technical','Managerial','Operational','Physical'],ans:2},
@@ -107,13 +95,7 @@ var CONTENT = {
       {week:4,title:'Image Filtering and Blurring',type:'pdf',size:'1.9 MB',file:'Computer Vision and Image Processing/Lectures/lecture4.pdf'},
       {week:5,title:'Edge Detection Fundamentals',type:'pdf',size:'1.8 MB',file:'Computer Vision and Image Processing/Lectures/lecture5.pdf'}
     ],
-    tutorials:[
-      {week:1,title:'Tutorial 1: Image Basics & Pixel Manipulation',size:'0.9 MB',file:'Computer Vision and Image Processing/Tutorials/tutorial1.pdf'},
-      {week:2,title:'Tutorial 2: Brightness & Contrast Exercises',size:'0.8 MB',file:'Computer Vision and Image Processing/Tutorials/tutorial2.pdf'},
-      {week:3,title:'Tutorial 3: Spatial Filtering Lab',size:'1.0 MB',file:'Computer Vision and Image Processing/Tutorials/tutorial3.pdf'},
-      {week:4,title:'Tutorial 4: Gaussian & Median Filter Practice',size:'0.9 MB',file:'Computer Vision and Image Processing/Tutorials/tutorial4.pdf'},
-      {week:5,title:'Tutorial 5: Edge Detection with Canny & Sobel',size:'1.2 MB',file:'Computer Vision and Image Processing/Tutorials/tutorial5.pdf'}
-    ],
+    tutorials:[],
     quiz:[
       {q:'What is the primary goal of Computer Vision?',opts:['Enhance pixels','Extract meaning from images','Produce 3D models','Compress files'],ans:1},
       {q:'What is the smallest unit of a digital image?',opts:['Voxel','Pixel','Bit','Channel'],ans:1},
@@ -136,13 +118,7 @@ var CONTENT = {
       {week:5,title:'Stacks and Queues',type:'pdf',size:'2.3 MB',file:'Data Structure and Algorithms/Lectures/lecture5.pdf'},
       {week:6,title:'Advanced Data Structures',type:'pdf',size:'0.5 MB',file:'Data Structure and Algorithms/Lectures/lecture6.pdf'}
     ],
-    tutorials:[
-      {week:1,title:'Tutorial 1: Array & Linked List Exercises',size:'0.5 MB',file:'Data Structure and Algorithms/Tutorials/tutorial1.pdf'},
-      {week:2,title:'Tutorial 2: Big-O Notation Problems',size:'0.4 MB',file:'Data Structure and Algorithms/Tutorials/tutorial2.pdf'},
-      {week:3,title:'Tutorial 3: Stack & Queue Implementation',size:'0.6 MB',file:'Data Structure and Algorithms/Tutorials/tutorial3.pdf'},
-      {week:4,title:'Tutorial 4: Binary Tree Traversal Lab',size:'0.7 MB',file:'Data Structure and Algorithms/Tutorials/tutorial4.pdf'},
-      {week:5,title:'Tutorial 5: Graph BFS & DFS Practice',size:'0.8 MB',file:'Data Structure and Algorithms/Tutorials/tutorial5.pdf'}
-    ],
+    tutorials:[],
     quiz:[
       {q:'Data structure organizes data in memory considering:',opts:['Only elements','Only address','Elements and relationships','Compiler'],ans:2},
       {q:'Program is defined as:',opts:['Algorithm + Data Structure','Syntax + Logic','Input + Output','Variables + Functions'],ans:0},
@@ -164,13 +140,7 @@ var CONTENT = {
       {week:4,title:'Project Management and Risk',type:'pdf',size:'1.2 MB',file:'Software Engineering/Lectures/lecture4.pdf'},
       {week:5,title:'Requirements Engineering',type:'pdf',size:'1.1 MB',file:'Software Engineering/Lectures/lecture5.pdf'}
     ],
-    tutorials:[
-      {week:1,title:'Tutorial 1: SDLC Model Comparison',size:'0.6 MB',file:'Software Engineering/Tutorials/tutorial1.pdf'},
-      {week:2,title:'Tutorial 2: Agile & Scrum Exercises',size:'0.7 MB',file:'Software Engineering/Tutorials/tutorial2.pdf'},
-      {week:3,title:'Tutorial 3: Risk Identification Lab',size:'0.5 MB',file:'Software Engineering/Tutorials/tutorial3.pdf'},
-      {week:4,title:'Tutorial 4: Requirements Elicitation Practice',size:'0.8 MB',file:'Software Engineering/Tutorials/tutorial4.pdf'},
-      {week:5,title:'Tutorial 5: Use Case Diagram Exercises',size:'0.9 MB',file:'Software Engineering/Tutorials/tutorial5.pdf'}
-    ],
+    tutorials:[],
     quiz:[
       {q:'What is software engineering primarily concerned with?',opts:['Hardware design','Cost-effective high-quality software','Networking','Data storage'],ans:1},
       {q:'SDLC stands for:',opts:['System Design Life Cycle','Software Development Life Cycle','Software Design Logic Cycle','None'],ans:1},
