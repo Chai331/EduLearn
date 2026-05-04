@@ -267,9 +267,6 @@ function getSession() { return readOne(K.SESSION); }
 /** Return true if a user is logged in. */
 function isLoggedIn() { return getSession() !== null; }
 
-/** Return all registered users (Admin only) */
-function getAllUsers() { return readTable(K.USERS); }
-
 /* ─── ENROLLMENTS ───────────────────────────────────────── */
 
 function getUserEnrollments(userId) {
@@ -472,8 +469,6 @@ function getUserOrders(userId) {
   return readTable(K.ORDERS).filter(function (o) { return o.userId === userId; });
 }
 
-function getAllOrders() { return readTable(K.ORDERS); }
-
 /* ─── PURCHASED BOOKS ──────────────────────────────────── */
 
 /**
@@ -546,6 +541,13 @@ function deleteCustomCourseMaterial(courseId, tab, materialId) {
   }
 }
 
+/* ─── ADMIN: MONITORING ────────────────────────────────── */
+function getAllUsers() { return readTable(K.USERS); }
+function getAllEnrollments() { return readTable(K.ENROLLMENTS); }
+function getAllOrders() { return readTable(K.ORDERS); }
+function getAllForumPosts() { return readTable(K.POSTS); }
+
+
 /* ─── Initialisation ────────────────────────────────────── */
 seed();   // populate demo data on first run
 
@@ -557,7 +559,6 @@ return {
   logout: logout,
   getSession: getSession,
   isLoggedIn: isLoggedIn,
-  getAllUsers: getAllUsers,
   /* Enrollments */
   getUserEnrollments: getUserEnrollments,
   enrol: enrol,
@@ -565,7 +566,6 @@ return {
   markLectureRead: markLectureRead,
   markQuizDone: markQuizDone,
   getActivityLog: getActivityLog,
-  getAllActivity: getAllActivity,
   /* Forum */
   getAllPosts: getAllPosts,
   addPost: addPost,
@@ -576,7 +576,6 @@ return {
   /* Orders */
   addOrder: addOrder,
   getUserOrders: getUserOrders,
-  getAllOrders: getAllOrders,
   /* Purchased Books */
   addPurchasedBooks: addPurchasedBooks,
   getPurchasedBooks: getPurchasedBooks,
@@ -591,6 +590,11 @@ return {
   addCustomCourseMaterial: addCustomCourseMaterial,
   getCustomCourseMaterials: getCustomCourseMaterials,
   deleteCustomCourseMaterial: deleteCustomCourseMaterial,
+  /* Admin Monitoring */
+  getAllUsers: getAllUsers,
+  getAllEnrollments: getAllEnrollments,
+  getAllOrders: getAllOrders,
+  getAllForumPosts: getAllForumPosts,
   /* Utils */
   ago: ago
 };
