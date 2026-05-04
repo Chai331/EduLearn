@@ -66,7 +66,7 @@ window.EduDB = (function () {
           password: hashPw('password123'),
           programme: 'Computer Science', year: '2',
           avatar: 'A',
-          avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
+          avatarColor: 'linear-gradient(135deg,#3b82f6,#1e40af)',
           createdAt: '2025-01-15T08:00:00Z',
           role: 'student'
         },
@@ -114,12 +114,12 @@ window.EduDB = (function () {
     /* Forum posts table - Seeded with 25 real Q&A sets */
     if (readTable(K.POSTS).length === 0) {
       var seedUsers = [
-        { name: 'Ahmad Farid', avatar: 'A', color: 'linear-gradient(135deg,#667eea,#764ba2)', id: 'u_seed01' },
-        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#43e97b,#38f9d7)', id: 'u_seed03' },
-        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'u_seed02' },
-        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#4facfe,#00f2fe)', id: 'u_seed04' },
-        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#fa709a,#fee140)', id: 'u_seed05' },
-        { name: 'Admin EduLearn', avatar: 'A', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'u_admin' }
+        { name: 'Ahmad Farid', avatar: 'A', color: 'linear-gradient(135deg,#3b82f6,#1e40af)', id: 'u_seed01' },
+        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#10b981,#059669)', id: 'u_seed03' },
+        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#f97316,#ea580c)', id: 'u_seed02' },
+        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#06b6d4,#0891b2)', id: 'u_seed04' },
+        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#f43f5e,#e11d48)', id: 'u_seed05' },
+        { name: 'Admin EduLearn', avatar: 'A', color: 'linear-gradient(135deg,#1e293b,#0f172a)', id: 'u_admin' }
       ];
 
       var data = [
