@@ -66,7 +66,7 @@ window.EduDB = (function () {
           password: hashPw('password123'),
           programme: 'Computer Science', year: '2',
           avatar: 'A',
-          avatarColor: 'linear-gradient(135deg,#166534,#0369a1)',
+          avatarColor: 'linear-gradient(135deg,#4a7c59,#334155)',
           createdAt: '2025-01-15T08:00:00Z',
           role: 'student'
         },
@@ -114,12 +114,12 @@ window.EduDB = (function () {
     /* Forum posts table - Seeded with 25 real Q&A sets */
     if (readTable(K.POSTS).length === 0) {
       var seedUsers = [
-        { name: 'Ahmad Farid', avatar: 'A', color: 'linear-gradient(135deg,#166534,#0369a1)', id: 'u_seed01' },
-        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#22c55e,#16a34a)', id: 'u_seed03' },
-        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#f59e0b,#d97706)', id: 'u_seed02' },
-        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#0ea5e9,#0284c7)', id: 'u_seed04' },
-        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#f43f5e,#e11d48)', id: 'u_seed05' },
-        { name: 'Admin EduLearn', avatar: 'A', color: 'linear-gradient(135deg,#064e3b,#022c22)', id: 'u_admin' }
+        { name: 'Ahmad Farid', avatar: 'A', color: 'linear-gradient(135deg,#4a7c59,#334155)', id: 'u_seed01' },
+        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#8da08e,#4a7c59)', id: 'u_seed03' },
+        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#cc7a5c,#a8624d)', id: 'u_seed02' },
+        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#64748b,#475569)', id: 'u_seed04' },
+        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#94a3b8,#64748b)', id: 'u_seed05' },
+        { name: 'Admin EduLearn', avatar: 'A', color: 'linear-gradient(135deg,#1e293b,#0f172a)', id: 'u_admin' }
       ];
 
       var data = [
@@ -225,7 +225,7 @@ window.EduDB = (function () {
     programme: d.programme || 'Computer Science',
     year: d.year || '1',
     avatar: d.firstName.charAt(0).toUpperCase(),
-    avatarColor: 'linear-gradient(135deg,#166534,#0369a1)',
+    avatarColor: 'linear-gradient(135deg,#4a7c59,#334155)',
     createdAt: new Date().toISOString(),
     role: 'student'
   };
