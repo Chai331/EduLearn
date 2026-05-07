@@ -1,0 +1,69 @@
+1. What is the primary purpose of functions in a program?
+A. To increase execution time
+B. To allocate continuous memory
+C. To structure a program in segments of code to perform individual tasks
+D. To define new data types
+Answer: C
+
+2. Which of the following is the correct syntax for a function?
+A. type name (parameter1, parameter2) { statements }
+B. name type (statements) { parameter1 }
+C. function name (type parameter)
+D. def name [parameters]
+Answer: A
+
+3. What are the two main categories of functions in C?
+A. Predefined functions and User-defined functions
+B. Internal functions and External functions
+C. Static functions and Dynamic functions
+D. Linear functions and Non-linear functions
+Answer: A
+
+4. A variable declared inside a function body is known as a:
+A. Global variable
+B. Local variable
+C. Static variable
+D. Constant variable
+Answer: B
+
+5. What is a structure in C programming?
+A. A single variable that holds only one data type
+B. A collection of variables of different types under a single name
+C. A predefined mathematical function
+D. A keyword used to loop through arrays
+Answer: B
+
+6. Variables inside a structure are commonly referred to as:
+A. Methods
+B. Pointers
+C. Members
+D. Classes
+Answer: C
+
+7. Which operator is used to access members of a structure using a regular structure variable?
+A. Arrow operator (->)
+B. Asterisk operator (*)
+C. Dot operator (.)
+D. Ampersand operator (&)
+Answer: C
+
+8. What is the purpose of the typedef keyword?
+A. To define a new built-in data type
+B. To assign a new name or alias to existing data types or structures
+C. To allocate memory dynamically
+D. To create a function prototype
+Answer: B
+
+9. Which operator is used to access structure members when using a pointer to a structure?
+A. Dot operator (.)
+B. Arrow operator (->)
+C. Address operator (&)
+D. Indirection operator (*)
+Answer: B
+
+10. What is a disadvantage of passing an entire large structure to a function using "call by value"?
+A. It cannot be compiled
+B. It alters the original structure's data unintentionally
+C. It is very inefficient in terms of memory and performance
+D. It requires global variables
+Answer: C

@@ -1,0 +1,839 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EduLearn Bookstore – Browse and purchase academic books for your courses." />
+  <title>Bookstore – EduLearn</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="w3-bar edu-navbar w3-top" id="mainNav">
+    <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+    <div class="w3-right w3-hide-small">
+      <a href="dashboard.html" class="w3-bar-item w3-button nav-link">Home</a>
+      <a href="courses.html" class="w3-bar-item w3-button nav-link">Courses</a>
+      <a href="portal.html" class="w3-bar-item w3-button nav-link">My Portal</a>
+      <a href="forum.html" class="w3-bar-item w3-button nav-link">Forum</a>
+      <a href="bookstore.html" class="w3-bar-item w3-button nav-link active">Bookstore</a>
+      <a href="admin_dashboard.html" class="w3-bar-item w3-button nav-link" id="adminLink" style="display:none;color:#f87171 !important;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+      <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+      <a href="cart.html" class="w3-bar-item w3-button nav-link" style="position:relative;">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartBadge"
+          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size:0.6rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
+      </a>
+      <button onclick="doLogout()" class="w3-bar-item w3-button"
+        style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
+          class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+      onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></a>
+  </nav>
+  <div id="mobileMenu" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium mobile-menu">
+    <a href="dashboard.html" class="w3-bar-item w3-button">Home</a>
+    <a href="courses.html" class="w3-bar-item w3-button">Courses</a>
+    <a href="portal.html" class="w3-bar-item w3-button">My Portal</a>
+    <a href="forum.html" class="w3-bar-item w3-button">Forum</a>
+    <a href="bookstore.html" class="w3-bar-item w3-button">Bookstore</a>
+    <a href="admin_dashboard.html" class="w3-bar-item w3-button" id="adminLinkMob" style="display:none;color:#ef4444;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+    <a href="cart.html" class="w3-bar-item w3-button"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i
+        class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="w3-content container-max">
+      <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Bookstore</div>
+      <h1><i class="fas fa-store"></i> Academic Bookstore</h1>
+      <p>Discover and purchase academic books for all your courses</p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast"
+    style="display:none;position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:1rem 1.5rem;border-radius:12px;z-index:9999;font-size:0.88rem;font-weight:600;box-shadow:0 8px 25px rgba(0,0,0,0.3);border-left:4px solid #43e97b;">
+    <i class="fas fa-check-circle" style="color:#43e97b;margin-right:8px;"></i><span id="toastMsg"></span>
+  </div>
+
+  <!-- BOOKSTORE CONTENT -->
+  <section class="section-pad" style="background:#f5f7fa;">
+    <div class="w3-content container-max">
+      <div class="w3-row-padding">
+
+        <!-- LEFT SIDEBAR: Filters -->
+        <div class="w3-col m3 s12" style="margin-bottom:1.5rem;">
+          <div class="progress-section">
+            <h3 style="font-size:0.92rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i class="fas fa-filter"
+                style="color:#667eea;margin-right:6px;"></i>Filter Books</h3>
+
+            <div class="search-bar" style="max-width:100%;margin:0 0 1rem;padding:0.35rem 0.35rem 0.35rem 0.8rem;">
+              <input type="text" id="bookSearch" placeholder="Search books…" onkeyup="filterBooks()"
+                style="font-size:0.82rem;" />
+              <button onclick="filterBooks()" style="padding:0.4rem 0.9rem;font-size:0.8rem;"><i
+                  class="fas fa-search"></i></button>
+            </div>
+
+            <div style="margin-bottom:1rem;">
+              <div
+                style="font-size:0.8rem;font-weight:700;color:#374151;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;">
+                Category</div>
+              <label
+                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                  type="radio" name="bookCat" value="all" onchange="filterBooks()" checked /> All Categories</label>
+              <label
+                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                  type="radio" name="bookCat" value="security" onchange="filterBooks()" /> Cyber Security</label>
+              <label
+                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                  type="radio" name="bookCat" value="vision" onchange="filterBooks()" /> Computer Vision</label>
+              <label
+                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                  type="radio" name="bookCat" value="ds" onchange="filterBooks()" /> Data Structures</label>
+              <label
+                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                  type="radio" name="bookCat" value="general" onchange="filterBooks()" /> General CS</label>
+            </div>
+
+            <div>
+              <div
+                style="font-size:0.8rem;font-weight:700;color:#374151;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;">
+                Sort By</div>
+              <select class="form-control" onchange="filterBooks()" id="sortSelect"
+                style="font-size:0.82rem;padding:0.5rem;">
+                <option value="default">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name">Name A–Z</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Cart Summary -->
+          <div class="progress-section" style="margin-top:1rem;">
+            <h3 style="font-size:0.92rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i
+                class="fas fa-shopping-cart" style="color:#667eea;margin-right:6px;"></i>Cart Summary</h3>
+            <div id="cartSidebarCount" style="font-size:0.85rem;color:#4b5563;margin-bottom:0.8rem;">0 item(s)</div>
+            <a href="cart.html" class="btn-primary-lg"
+              style="display:block;text-align:center;font-size:0.85rem;padding:0.65rem;">View Cart</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Book Grid -->
+        <div class="w3-col m9 s12">
+          <div
+            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap;gap:0.5rem;">
+            <span id="bookCount" style="font-size:0.85rem;color:#6b7280;font-weight:600;">Showing 24 books</span>
+          </div>
+          <div class="book-grid" id="bookGrid">
+            <!-- Book 1 -->
+            <div class="book-card" data-cat="security" data-price="120.00"
+              data-name="Handbook of Software Engineering Methods">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/1.jpg" alt="Handbook of Software Engineering Methods"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Handbook of Software Engineering Methods</div>
+                <div class="book-desc">This book focuses on structured approaches and methodologies used in software
+                  engineering, including development models, best practices, and process improvement techniques. It
+                  provides guidance on selecting appropriate methods for different types of software projects, aiming to
+                  improve efficiency, quality, and maintainability in system development. The book is especially useful
+                  for students and practitioners who want to understand how theoretical methods are applied in
+                  real-world software engineering environments.</div>
+                <div class="book-price">RM 120.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('Handbook of Software Engineering Methods', 120.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="book-card" data-cat="security" data-price="100.00" data-name="Clean Code">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/2.jpg" alt="Clean Code"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Clean Code</div>
+                <div class="book-desc">A must-read for developers, this book teaches the principles of writing clean,
+                  readable, and maintainable code. It includes real-world examples and refactoring techniques.</div>
+                <div class="book-price">RM 100.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Clean Code', 100.00)"><i class="fas fa-cart-plus"></i>
+                  Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="book-card" data-cat="vision" data-price="140.00"
+              data-name="Design Patterns: Elements of Reusable Object-Oriented Software">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/3.jpg" alt="Design Patterns: Elements of Reusable Object-Oriented Software"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Design Patterns: Elements of Reusable Object-Oriented Software</div>
+                <div class="book-desc">This book introduces 23 classic design patterns that provide reusable solutions
+                  to common object-oriented design problems, making it essential for advanced developers.</div>
+                <div class="book-price">RM 140.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('Design Patterns: Elements of Reusable Object-Oriented Software', 140.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="book-card" data-cat="vision" data-price="120.00"
+              data-name="Refactoring: Improving the Design of Existing Code">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/4.jpg" alt="Refactoring: Improving the Design of Existing Code"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Refactoring: Improving the Design of Existing Code</div>
+                <div class="book-desc">This book focuses on improving existing codebases through refactoring techniques
+                  without changing functionality. It provides practical examples and best practices.</div>
+                <div class="book-price">RM 130.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('Refactoring: Improving the Design of Existing Code', 130.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 5 -->
+            <div class="book-card" data-cat="ds" data-price="120.00" data-name="Software Engineering">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/5.jpeg" alt="Software Engineering"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Software Engineering</div>
+                <div class="book-desc">This book provides a comprehensive introduction to software engineering, covering
+                  requirements engineering, system modeling, architecture, and maintenance. It is widely used in
+                  universities and emphasizes practical, real-world development approaches.</div>
+                <div class="book-price">RM 120.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Software Engineering', 120.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 6 -->
+            <div class="book-card" data-cat="ds" data-price="90.00" data-name="The Mythical Man-Month">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/6.jpg" alt="The Mythical Man-Month"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">The Mythical Man-Month</div>
+                <div class="book-desc">A classic in software engineering literature, this book explores project
+                  management challenges and introduces concepts like Brooks' Law, emphasizing the complexity of team
+                  coordination.</div>
+                <div class="book-price">RM 90.00</div>
+                <button class="btn-add-cart" onclick="addToCart('The Mythical Man-Month', 90.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 7 -->
+            <div class="book-card" data-cat="general" data-price="143.00" data-name="Cyber Security Policy Guidebook">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/7.jpg" alt="Cyber Security Policy Guidebook"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Cyber Security Policy Guidebook</div>
+                <div class="book-desc">This book draws on expertise from academia, industry, and government to break
+                  down global cyber security policy in plain language. It covers the history and current state of
+                  cyberspace security, examines key issues with balanced pros and cons, and explores policy alternatives
+                  and their real-world organizational impacts.</div>
+                <div class="book-price">RM 143.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Cyber Security Policy Guidebook', 143.00)"><i
+                    class="fas fa-cart-plus"></i>
+                  Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 8 -->
+            <div class="book-card" data-cat="general" data-price="260.00" data-name="Database Internals">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/8.jpg" alt="Database Internals"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Database Internals</div>
+                <div class="book-desc">Throughout the book, you'll explore relevant material gleaned from numerous
+                  books, papers, blog posts, and the source code of several open source databases. These resources are
+                  listed at the end of parts one and two. You'll discover that the most significant distinctions among
+                  many modern databases reside in subsystems that determine how storage is organized and how data is
+                  distributed.</div>
+                <div class="book-price">RM 260.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Database Internals', 260.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 9 -->
+            <div class="book-card" data-cat="security" data-price="118.00"
+              data-name="HTML & CSS: Design and Build Websites">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/9.jpg" alt="HTML & CSS: Design and Build Websites"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">HTML & CSS: Design and Build Websites</div>
+                <div class="book-desc">This book offers a fresh, visual approach to learning HTML and CSS, making web
+                  design accessible to hobbyists and professionals alike. Using high-quality infographics and
+                  photography, it breaks down complex topics into engaging, easy-to-digest lessons that you can read
+                  from cover to cover or use as a handy reference.</div>
+                <div class="book-price">RM 118.00</div>
+                <button class="btn-add-cart" onclick="addToCart('HTML & CSS: Design and Build Websites', 118.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 10 -->
+            <div class="book-card" data-cat="vision" data-price="395.00"
+              data-name="5G NR: The Next Generation Wireless Access Technology">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/10.jpg" alt="5G NR: The Next Generation Wireless Access Technology"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">5G NR: The Next Generation Wireless Access Technology</div>
+                <div class="book-desc">This book offers an in-depth look at 5G NR, covering its background,
+                  requirements, spectrum, and standardization timeline. It details the first phase of NR's
+                  physical-layer structure, higher-layer protocols, RF and spectrum aspects, and LTE interworking —
+                  explaining not just what each solution is, but why it was chosen.</div>
+                <div class="book-price">RM 395.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('5G NR: The Next Generation Wireless Access Technology', 395.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 11 -->
+            <div class="book-card" data-cat="ds" data-price="103.00"
+              data-name="Deep Learning for Computer Vision with SAS">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/11.jpg" alt="Deep Learning for Computer Vision with SAS"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Deep Learning for Computer Vision with SAS</div>
+                <div class="book-desc">This book introduces the core components of deep learning for computer vision,
+                  covering feedforward and convolutional neural networks, denoising autoencoders, and transfer learning.
+                  Blending theory with practice, it also shows how to customize models for real-world business and
+                  research problems, with SAS programs and data included throughout.</div>
+                <div class="book-price">RM 103.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('Deep Learning for Computer Vision with SAS', 103.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 12 -->
+            <div class="book-card" data-cat="general" data-price="315.00"
+              data-name="Python for Data Analysis, 3rd Edition">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/12.jpg" alt="Python for Data Analysis, 3rd Edition"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Python for Data Analysis, 3rd Edition</div>
+                <div class="book-desc">Get the definitive handbook for manipulating, processing, cleaning, and crunching
+                  datasets in Python. Updated for Python 3.10 and pandas 1.4, the third edition of this hands-on guide
+                  is packed with practical case studies that show you how to solve a broad set of data analysis problems
+                  effectively. You'll learn the latest versions of pandas, NumPy, and Jupiter in the process.</div>
+                <div class="book-price">RM 315.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Python for Data Analysis, 3rd Edition', 315.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 13 -->
+            <div class="book-card" data-cat="general" data-price="280.00" data-name="Calculus">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/13.jpg" alt="Calculus"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Calculus</div>
+                <div class="book-desc">This book explains calculus in an intuitive and easy-to-understand way, through
+                  examples, emphasizing the relationship between change and motion rather than formula memorization. It
+                  covers derivatives, integrals, limits, applications, and multivariable calculus, explained through
+                  clear geometric interpretations and real-world physics problems. Widely used in MIT's first-year
+                  mathematics courses and self-study projects, this book cultivates the mathematical intuition needed
+                  for engineering, data science, and computational modeling. Free video lectures by Gilbert Strong are
+                  included for learners worldwide.</div>
+                <div class="book-price">RM 280.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Calculus', 280.00)"><i class="fas fa-cart-plus"></i>
+                  Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 14 -->
+            <div class="book-card" data-cat="general" data-price="380.00"
+              data-name="Computer Systems: A Programmer's Perspective (CS:APP)">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/14.jpg" alt="Computer Systems: A Programmer's Perspective (CS:APP)"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Computer Systems: A Programmer's Perspective (CS:APP)</div>
+                <div class="book-desc">This book teaches how computers really work from a programmer's point of view. It
+                  bridges the gap between high-level programming and low-level hardware, covering data representation,
+                  assembly language, memory hierarchy, linking, and concurrency. Hands-on labs help students understand
+                  performance, debugging, and system-level programming</div>
+                <div class="book-price">RM 380.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('Computer Systems: A Programmer\'s Perspective (CS:APP)', 380.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 15 -->
+            <div class="book-card" data-cat="general" data-price="370.00" data-name="Database System Concepts">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/15.jpg" alt="Database System Concepts"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Database System Concepts</div>
+                <div class="book-desc">This book offers a clear introduction to database design and query languages,
+                  including SQL, relational algebra, normalization, indexing, and transaction management. It balances
+                  theory with practical application, covering data modeling, database programming, and emerging topics
+                  like big data and NoSQL. Widely used in undergraduate CS courses for building data-intensive
+                  applications</div>
+                <div class="book-price">RM 370.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Database System Concepts', 370.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 16 -->
+            <div class="book-card" data-cat="general" data-price="280.00" data-name="Thomas' Calculus">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/16.jpg" alt="Discrete Mathematics and Its Applications"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Thomas' Calculus</div>
+                <div class="book-desc">This book provides a rigorous yet accessible introduction to calculus,
+                  emphasizing conceptual understanding and problem-solving. It covers limits, derivatives, integrals,
+                  infinite sequences and series, and multivariable calculus, with clear explanations and thousands of
+                  worked examples. Widely used in first-year engineering, mathematics, and computer science programs, it
+                  builds the mathematical foundation needed for algorithms, physics modeling, graphics, and data
+                  analysis.</div>
+                <div class="book-price">RM 280.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Thomas\' Calculus', 280.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 17 -->
+            <div class="book-card" data-cat="general" data-price="520.00" data-name="Introduction to Algorithms (CLRS)">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/17.jpg" alt="Introduction to Algorithms (CLRS)"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Introduction to Algorithms (CLRS)</div>
+                <div class="book-desc">Often called the “bible of algorithms,” this book covers the full range of
+                  algorithms and data structures, from sorting and searching to graph algorithms, dynamic programming,
+                  and NP-completeness. Each algorithm is presented with pseudocode, rigorous analysis, and mathematical
+                  correctness proofs, making it the standard reference for undergraduate CS students worldwide.</div>
+                <div class="book-price">RM 520.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Introduction to Algorithms (CLRS)', 520.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 18 -->
+            <div class="book-card" data-cat="general" data-price="390.00"
+              data-name="Operating System Concepts (The “Dinosaur Book”)">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/18.jpg" alt="Operating System Concepts (The “Dinosaur Book”)"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Operating System Concepts (The “Dinosaur Book”)</div>
+                <div class="book-desc">This classic textbook explains how operating systems manage processes, memory,
+                  file systems, and I/O. It covers scheduling, synchronization, deadlocks, virtualization, and security,
+                  using real-world examples from Linux, Windows, and macOS. The “dinosaur book” remains the go-to
+                  resource for understanding the software layer that runs every computer.</div>
+                <div class="book-price">RM 390.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('Operating System Concepts (The “Dinosaur Book”)', 390.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 19 -->
+            <div class="book-card" data-cat="general" data-price="115.00" data-name="AI Snake Oil">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/19.jpg" alt="AI Snake Oil"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">AI Snake Oil</div>
+                <div class="book-desc">Based on a popular blog and course, this sharp, example-rich book debunks the
+                  hype surrounding artificial intelligence. Authors Arvind Narayanan and Sayash Kapoor help readers spot
+                  genuine AI solutions versus marketing fluff, offering a critical framework for evaluating AI claims.
+                  From predictive algorithms to large language models, they separate realistic capabilities from
+                  overpromised fantasies. Perfect for investors, managers, students, and curious minds who want to
+                  navigate the AI landscape with clarity rather than being swept away by breathless headlines.</div>
+                <div class="book-price">RM 115.00</div>
+                <button class="btn-add-cart" onclick="addToCart('AI Snake Oil', 115.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 20 -->
+            <div class="book-card" data-cat="general" data-price="135.00" data-name="Impractical Python Projects">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/20.jpg" alt="Impractical Python Projects"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Impractical Python Projects</div>
+                <div class="book-desc">This book is a collection of imaginative programming projects designed to
+                  entertain while enhancing your Python skills. Instead of standard tutorials, it challenges readers to
+                  use Python to solve unusual problems, such as simulating a galactic evolution, mapping Mars, or
+                  cracking ciphers. It is perfect for intermediate-level coders who want to apply their knowledge in
+                  creative ways, moving beyond basic syntax to master data visualization, simulation, and
+                  professional-grade libraries.
+                </div>
+                <div class="book-price">RM 135.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Impractical Python Projects', 135.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 21 -->
+            <div class="book-card" data-cat="general" data-price="220.00" data-name="Ethics and Professionalism">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/21.jpg" alt="Ethics and Professionalism"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Ethics and Professionalism</div>
+                <div class="book-desc">This scholarly work explores the moral foundations of professional life and the
+                  ethical responsibilities that come with specialized knowledge. John Kultgen examines the concept of
+                  “professionalism” itself, questioning whether professional associations serve the public good or
+                  merely their own interests. The book provides a philosophical analysis of the codes of ethics across
+                  various fields, challenging readers to think critically about honesty, autonomy, and social justice in
+                  a professional context. It is an ideal text for advanced students of philosophy, sociology, and those
+                  preparing for careers in law, medicine, or engineering.</div>
+                <div class="book-price">RM 220.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Ethics and Professionalism', 220.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 22 -->
+            <div class="book-card" data-cat="general" data-price="180.00" data-name="Numbers and Computers">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/22.jpg" alt="Numbers and Computers"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Numbers and Computers</div>
+                <div class="book-desc">This book provides a fundamental look at how computers represent and manipulate
+                  numbers, a core concept often overlooked by modern programmers. It explains the mechanics behind
+                  integer and floating-point arithmetic, the limitations of digital precision, and how these factors
+                  influence software performance and reliability. By bridging the gap between high-level programming and
+                  low-level hardware constraints, it serves as a vital resource for computer science students and
+                  engineers who want to write more robust and mathematically accurate code.</div>
+                <div class="book-price">RM 180.00</div>
+                <button class="btn-add-cart" onclick="addToCart('Numbers and Computers', 180.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 23 -->
+            <div class="book-card" data-cat="general" data-price="150.00"
+              data-name="The Hidden Language of Computer Hardware and Software">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/23.jpg" alt="The Hidden Language of Computer Hardware and Software"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">The Hidden Language of Computer Hardware and Software</div>
+                <div class="book-desc">This classic, newly updated for its second edition, is a deep dive into the
+                  secret life of computers. Charles Petzold uses everyday objects like flashlights and telegraphs to
+                  explain how humans have created ingenious ways to communicate and build complex systems using simple
+                  logic. It traces the history of computing from the ground up—from vacuum tubes to the modern
+                  internet—making the complex "magic" of hardware and software accessible to everyone. It is widely
+                  considered a must-read for anyone who wants to truly understand the soul of the machine.</div>
+                <div class="book-price">RM 150.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('The Hidden Language of Computer Hardware and Software', 150.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Book 24 -->
+            <div class="book-card" data-cat="general" data-price="135.00"
+              data-name="Professional Ethics: A Trust-Based Approach">
+              <div class="book-cover"
+                style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">
+                <img src="Book/24.jpg" alt="Professional Ethics: A Trust-Based Approach"
+                  style="max-width:100%;max-height:100%;object-fit:contain;display:block;" />
+              </div>
+              <div class="book-body">
+                <div class="book-title">Professional Ethics: A Trust-Based Approach</div>
+                <div class="book-desc">This book is a collection of imaginative programming projects designed to
+                  entertain while enhancing your Python skills. Instead of standard tutorials, it challenges readers to
+                  use Python to solve unusual problems, such as simulating a galactic evolution, mapping Mars, or
+                  cracking ciphers. It is perfect for intermediate-level coders who want to apply their knowledge in
+                  creative ways, moving beyond basic syntax to master data visualization, simulation, and
+                  professional-grade libraries.</div>
+                <div class="book-price">RM 140.00</div>
+                <button class="btn-add-cart"
+                  onclick="addToCart('Professional Ethics: A Trust-Based Approach', 140.00)"><i
+                    class="fas fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+
+          </div><!-- /book-grid -->
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="edu-footer">
+    <div class="w3-content container-max">
+      <div class="w3-row-padding footer-grid">
+        <div class="w3-col m4 s12 footer-brand">
+          <div class="footer-logo"><i class="fas fa-graduation-cap"></i> EduLearn</div>
+          <p>Empowering undergraduate students with quality learning resources.</p>
+        </div>
+        <div class="w3-col m2 s6 footer-links">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="portal.html">Student Portal</a></li>
+            <li><a href="forum.html">Forum</a></li>
+          </ul>
+        </div>
+        <div class="w3-col m2 s6 footer-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="bookstore.html">Bookstore</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="w3-col m4 s12 footer-contact">
+          <h4>Contact</h4>
+          <p><i class="fas fa-envelope"></i> info@edulearn.com</p>
+          <p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 EduLearn. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="db.js"></script>
+  <script>
+    var __sess = EduDB.getSession();
+    if (!__sess) { window.location.href = 'index.html'; }
+    document.addEventListener('DOMContentLoaded', function () {
+      /* Nav greeting & Admin link */
+      var ng = document.getElementById('navGreet');
+      if (ng && __sess) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
+      if (__sess && __sess.role === 'admin') {
+        var al = document.getElementById('adminLink');
+        if (al) al.style.display = 'block';
+        var alm = document.getElementById('adminLinkMob');
+        if (alm) alm.style.display = 'block';
+      }
+      
+      // Inject custom books
+      var customBooks = EduDB.getCustomBooks() || [];
+      var grid = document.getElementById("bookGrid");
+      customBooks.forEach(function(b) {
+        var c = document.createElement('div');
+        c.className = 'book-card';
+        c.setAttribute('data-cat', b.cat);
+        c.setAttribute('data-price', b.price);
+        c.setAttribute('data-name', b.name);
+        if (b.pdf) c.setAttribute('data-pdf', b.pdf);
+        
+        var imgUrl = b.image;
+        c.innerHTML = 
+          '<div class="book-cover" style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">' +
+            '<img src="' + imgUrl + '" alt="' + b.name + '" style="max-width:100%;max-height:100%;object-fit:contain;display:block;"/>' +
+          '</div>' +
+          '<div class="book-body">' +
+            '<div class="book-title">' + b.name + '</div>' +
+            '<div class="book-desc">' + b.desc + '</div>' +
+            '<div class="book-price">RM ' + b.price + '</div>' +
+            '<button class="btn-add-cart" onclick="addToCart(\'' + b.name.replace(/'/g,"\\'") + '\', ' + b.price + ')"><i class="fas fa-cart-plus"></i> Add to Cart</button>' +
+          '</div>';
+        grid.appendChild(c);
+      });
+
+      updateBadge();
+      unlockPurchased();
+    });
+    function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+    function toggleMobileMenu() { var m = document.getElementById("mobileMenu"); m.className.indexOf("w3-show") === -1 ? m.className += " w3-show" : m.className = m.className.replace(" w3-show", ""); }
+    window.onscroll = function () { document.getElementById("mainNav").classList[window.pageYOffset > 60 ? "add" : "remove"]("scrolled"); };
+
+    // --- Cart (EduDB) ---
+    function getCart() { return EduDB.getCart(); }
+    function saveCart(c) { EduDB.saveCart(c); }
+    function updateBadge() {
+      var c = getCart(); var total = c.reduce(function (s, i) { return s + i.qty; }, 0);
+      document.getElementById("cartBadge").textContent = total;
+      document.getElementById("cartSidebarCount").textContent = total + " item(s)";
+    }
+    function addToCart(name, price) {
+      var c = getCart();
+      var existing = c.find(function (i) { return i.name === name; });
+      if (existing) { existing.qty += 1; } else { c.push({ name: name, price: price, qty: 1 }); }
+      saveCart(c); updateBadge();
+      showToast(name + " added to cart!");
+    }
+    function showToast(msg) {
+      document.getElementById("toastMsg").textContent = msg;
+      var t = document.getElementById("toast"); t.style.display = "block";
+      setTimeout(function () { t.style.display = "none"; }, 2500);
+    }
+    updateBadge();
+    unlockPurchased();
+
+    // --- Filter & Sort ---
+    function filterBooks() {
+      var q = document.getElementById("bookSearch").value.toLowerCase();
+      var cat = document.querySelector('input[name="bookCat"]:checked').value;
+      var sort = document.getElementById("sortSelect").value;
+      var cards = Array.from(document.querySelectorAll(".book-card"));
+      var visible = [];
+      cards.forEach(function (c) {
+        var n = c.dataset.name.toLowerCase();
+        var catOk = cat === "all" || c.dataset.cat === cat;
+        var qOk = q === "" || n.includes(q);
+        c.style.display = (catOk && qOk) ? "flex" : "none";
+        if (catOk && qOk) visible.push(c);
+      });
+      document.getElementById("bookCount").textContent = "Showing " + visible.length + " books";
+      var grid = document.getElementById("bookGrid");
+      
+      var purchased = __sess ? EduDB.getPurchasedBooks(__sess.id) : [];
+      var isPurchased = function(c) {
+        return purchased.indexOf(c.dataset.name) !== -1;
+      };
+
+      visible.sort(function(a, b) {
+        var aPurchased = isPurchased(a);
+        var bPurchased = isPurchased(b);
+        
+        // Always put purchased books first
+        if (aPurchased && !bPurchased) return -1;
+        if (!aPurchased && bPurchased) return 1;
+        
+        // Otherwise use the selected sort logic
+        if (sort === "price-asc") return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+        if (sort === "price-desc") return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+        if (sort === "name") return a.dataset.name.localeCompare(b.dataset.name);
+        return 0; // Default featured sort within same group
+      });
+      
+      visible.forEach(function (c) { grid.appendChild(c); });
+    }
+
+    // --- Purchased e-book unlock ---
+    function unlockPurchased() {
+      if (!__sess) return;
+      var purchased = EduDB.getPurchasedBooks(__sess.id);
+      if (!purchased || purchased.length === 0) return;
+      var cards = document.querySelectorAll('.book-card');
+      for (var i = 0; i < cards.length; i++) {
+        (function (card) {
+          var name = card.dataset.name;
+          if (purchased.indexOf(name) === -1) return;
+          
+          var pdfPath = card.dataset.pdf; // Try data-pdf first
+          if (!pdfPath) {
+            // Fallback for hardcoded books
+            var img = card.querySelector('.book-cover img');
+            var imgUrl = img ? img.getAttribute('src') : '';
+            pdfPath = imgUrl;
+            if(pdfPath.indexOf('.pdf') === -1) {
+              pdfPath = pdfPath.replace(/\.(jpg|jpeg|png)$/i, '.pdf');
+            }
+          }
+          
+          var cover = card.querySelector('.book-cover');
+          if (cover) {
+            cover.style.position = 'relative';
+            cover.style.cursor = 'pointer';
+            var badge = document.createElement('div');
+            badge.innerHTML = '<i class="fas fa-lock-open" style="margin-right:4px;"></i> Purchased – Click to Read';
+            badge.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e;font-size:0.72rem;font-weight:800;text-align:center;padding:0.5rem;z-index:2;border-radius:0 0 4px 4px;';
+            cover.appendChild(badge);
+            
+            var pdfForCover = pdfPath;
+            cover.addEventListener('click', function () { window.open(pdfForCover, '_blank'); });
+            card.style.boxShadow = '0 0 0 3px #43e97b, 0 8px 25px rgba(67,233,123,0.2)';
+          }
+          var btn = card.querySelector('.btn-add-cart');
+          if (btn) {
+            btn.innerHTML = '<i class="fas fa-book-open"></i> Read E-Book';
+            btn.style.background = 'linear-gradient(135deg,#43e97b,#38f9d7)';
+            btn.style.color = '#1a1a2e';
+            var pdfForBtn = pdfPath;
+            btn.onclick = function () { window.open(pdfForBtn, '_blank'); };
+          }
+          
+          // Move purchased book to the front by forcing it to the top of the grid
+          card.style.order = "-1";
+          
+        })(cards[i]);
+      }
+    }
+  </script>
+</body>
+
+</html>

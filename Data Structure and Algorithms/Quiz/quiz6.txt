@@ -1,0 +1,69 @@
+1. A Queue is a linear data structure that follows which principle?
+A. LIFO (Last In First Out)
+B. FIFO (First In First Out)
+C. LILO (Last In Last Out)
+D. Random Access
+Answer: B
+
+2. In a Queue, new elements are added at one end called the:
+A. Front
+B. Top
+C. Rear
+D. Bottom
+Answer: C
+
+3. In a Queue, elements are removed from the end called the:
+A. Front
+B. Top
+C. Rear
+D. Base
+Answer: A
+
+4. A Tree is a non-linear data structure used to represent what kind of relationship?
+A. Sequential
+B. Circular
+C. Hierarchical
+D. Flat
+Answer: C
+
+5. The topmost node of a Tree is called the:
+A. Leaf
+B. Root
+C. Parent
+D. Branch
+Answer: B
+
+6. Nodes in a tree that have no children are called:
+A. Root nodes
+B. Parent nodes
+C. Internal nodes
+D. Leaf nodes
+Answer: D
+
+7. A tree where every node can have a maximum of two children is called a:
+A. General Tree
+B. Binary Tree
+C. Tertiary Tree
+D. Complete Graph
+Answer: B
+
+8. A Graph consists of two main components:
+A. Nodes and Leaves
+B. Vertices and Edges
+C. Roots and Branches
+D. Front and Rear
+Answer: B
+
+9. A graph where the edges have a specific direction indicated by arrows is called a:
+A. Undirected graph
+B. Directed graph
+C. Complete graph
+D. Simple graph
+Answer: B
+
+10. A graph where all of its nodes are fully connected to every other node is called a:
+A. Complete graph
+B. Null graph
+C. Directed graph
+D. Tree
+Answer: A

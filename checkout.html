@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EduLearn Checkout – Complete your book order securely." />
+  <title>Checkout – EduLearn</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="w3-bar edu-navbar w3-top" id="mainNav">
+    <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+    <div class="w3-right w3-hide-small">
+      <a href="dashboard.html" class="w3-bar-item w3-button nav-link">Home</a>
+      <a href="bookstore.html" class="w3-bar-item w3-button nav-link">Bookstore</a>
+      <a href="cart.html" class="w3-bar-item w3-button nav-link">Cart</a>
+      <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+      <button onclick="doLogout()" class="w3-bar-item w3-button"
+        style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
+          class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="w3-content container-max">
+      <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="bookstore.html">Bookstore</a> &rsaquo; <a
+          href="cart.html">Cart</a> &rsaquo; Checkout</div>
+      <h1><i class="fas fa-credit-card"></i> Checkout</h1>
+      <p>Complete your purchase securely</p>
+    </div>
+  </div>
+
+  <section class="section-pad" style="background:#f5f7fa;">
+    <div class="w3-content container-max">
+
+      <!-- Steps -->
+      <div class="checkout-steps" style="max-width:400px;margin:0 auto 2.5rem;">
+        <div class="step done">
+          <div class="step-circle"><i class="fas fa-check"></i></div>
+          <div class="step-label">Cart</div>
+        </div>
+        <div class="step active">
+          <div class="step-circle">2</div>
+          <div class="step-label">Details &amp; Payment</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">Confirm</div>
+        </div>
+      </div>
+
+      <!-- Success Panel (hidden) -->
+      <div id="orderSuccess"
+        style="display:none;max-width:520px;margin:0 auto;text-align:center;background:#fff;border-radius:20px;padding:3rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,0.1);">
+        <div
+          style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#43e97b,#38f9d7);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;color:#fff;">
+          <i class="fas fa-check"></i>
+        </div>
+        <h2 style="font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.6rem;">Order Confirmed! 🎉</h2>
+        <p style="color:#6b7280;margin-bottom:0.5rem;">Thank you for your purchase.</p>
+        <p style="font-size:0.95rem;font-weight:700;color:#10b981;margin-bottom:0.5rem;">
+          <i class="fas fa-lock-open" style="margin-right:6px;"></i>Your e-books are now unlocked!
+        </p>
+        <p style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem;">Go to the Bookstore and <strong>click any
+            purchased book cover</strong> to read its PDF.</p>
+        <p style="font-size:0.85rem;color:#9ca3af;margin-bottom:2rem;">Order #<span id="orderNum"></span></p>
+        <a href="bookstore.html" class="btn-primary-lg"><i class="fas fa-book-open"></i> Read My Books</a>
+      </div>
+
+      <!-- Checkout Form -->
+      <div id="checkoutForm">
+        <div class="w3-row-padding">
+          <!-- Left: Form -->
+          <div class="w3-col m7 s12">
+
+            <!-- User Details -->
+            <div
+              style="background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:1.5rem;">
+              <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i
+                  class="fas fa-user-circle" style="color:#667eea;margin-right:8px;"></i>User Details</h3>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
+                <div class="form-group"><label>First Name</label><input type="text" id="firstName"
+                    class="form-control" placeholder="Ahmad" /></div>
+                <div class="form-group"><label>Last Name</label><input type="text" id="lastName"
+                    class="form-control" placeholder="bin Ali" /></div>
+              </div>
+              <div class="form-group"><label>Email Address</label><input type="email" id="chkEmail"
+                  class="form-control" placeholder="student@edulearn.com" /></div>
+              <div class="form-group"><label>Phone Number</label><input type="tel" id="chkPhone"
+                  class="form-control" placeholder="+60 12-345 6789" /></div>
+              <div
+                style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;padding:0.8rem 1rem;margin-top:0.5rem;font-size:0.83rem;color:#065f46;">
+                <i class="fas fa-bolt" style="margin-right:6px;"></i><strong>Instant Delivery!</strong> Your e-books
+                will be available immediately after payment — no shipping required.
+              </div>
+            </div>
+
+            <!-- Payment -->
+            <div
+              style="background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:1.5rem;">
+              <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i
+                  class="fas fa-credit-card" style="color:#667eea;margin-right:8px;"></i>Payment Method</h3>
+
+              <!-- Active badge -->
+              <div
+                style="display:inline-flex;align-items:center;gap:8px;background:#f0f2ff;border:1.5px solid #c7d2fe;border-radius:10px;padding:0.6rem 1rem;margin-bottom:1.4rem;">
+                <i class="fas fa-credit-card" style="color:#667eea;"></i>
+                <strong style="color:#4338ca;font-size:0.88rem;">Credit / Debit Card</strong>
+                <span
+                  style="background:#667eea;color:#fff;font-size:0.65rem;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:0.5px;">SELECTED</span>
+              </div>
+
+              <div class="form-group"><label>Card Number</label><input type="text" id="cardNum" class="form-control"
+                  placeholder="4242 4242 4242 4242" maxlength="19" /></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
+                <div class="form-group"><label>Expiry Date</label><input type="text" id="cardExpiry"
+                    class="form-control" placeholder="MM/YY" maxlength="5" /></div>
+                <div class="form-group"><label>CVV</label><input type="password" id="cardCvv"
+                    class="form-control" placeholder="•••" maxlength="3" /></div>
+              </div>
+              <div class="form-group"><label>Cardholder Name</label><input type="text" id="cardName"
+                  class="form-control" placeholder="FULL NAME AS ON CARD" /></div>
+
+              <div
+                style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:0.8rem 1rem;font-size:0.82rem;color:#166534;margin-top:0.5rem;">
+                <i class="fas fa-shield-alt" style="margin-right:6px;"></i>Your payment is secured with 256-bit SSL
+                encryption.
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- Right: Summary -->
+          <div class="w3-col m5 s12">
+            <div class="order-summary-card">
+              <h3>Order Summary</h3>
+              <div id="chkItems" style="margin-bottom:1rem;border-bottom:1px solid #f3f4f6;padding-bottom:1rem;"></div>
+              <div class="summary-row"><span>Subtotal</span><span id="chkSubtotal">RM 0.00</span></div>
+              <div class="summary-row"><span style="color:#10b981;"><i class="fas fa-bolt"></i> Digital
+                  Delivery</span><span style="color:#10b981;font-weight:700;">Free</span></div>
+              <div class="summary-row total"><span>Total</span><span id="chkTotal">RM 0.00</span></div>
+              <div id="formError" style="display:none;margin-top:0.8rem;" class="alert-error"></div>
+              <button class="btn-submit" style="margin-top:1rem;" onclick="placeOrder()"><i class="fas fa-lock"></i>
+                Place Order</button>
+              <div style="text-align:center;margin-top:0.8rem;font-size:0.75rem;color:#9ca3af;"><i
+                  class="fas fa-shield-alt" style="color:#10b981;"></i> Secured by 256-bit SSL encryption</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="edu-footer">
+    <div class="w3-content container-max">
+      <div class="footer-bottom" style="border-top:none;padding:1.5rem 0;">
+        <p>&copy; 2025 EduLearn. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="db.js"></script>
+  <script>
+    var __sess = EduDB.getSession();
+    if (!__sess) { window.location.href = 'index.html'; }
+    document.addEventListener('DOMContentLoaded', function () {
+      var ng = document.getElementById('navGreet');
+      if (ng && __sess) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
+    });
+    function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+    window.onscroll = function () { document.getElementById("mainNav").classList[window.pageYOffset > 60 ? "add" : "remove"]("scrolled"); };
+    function getCart() { return EduDB.getCart(); }
+
+    function renderSummary() {
+      var c = getCart();
+      var html = ""; var sub = 0;
+      if (c.length === 0) { html = '<p style="font-size:0.85rem;color:#9ca3af;text-align:center;">Cart is empty. <a href="bookstore.html" style="color:#667eea;">Go shop</a></p>'; }
+      c.forEach(function (item) {
+        var lt = item.price * item.qty;
+        sub += lt;
+        html += '<div style="display:flex;justify-content:space-between;font-size:0.83rem;color:#4b5563;margin-bottom:0.5rem;">'
+          + '<span>' + item.name + ' ×' + item.qty + '</span><span style="font-weight:700;">RM ' + lt.toFixed(2) + '</span></div>';
+      });
+      document.getElementById("chkItems").innerHTML = html;
+      document.getElementById("chkSubtotal").textContent = "RM " + sub.toFixed(2);
+      document.getElementById("chkTotal").textContent = "RM " + sub.toFixed(2);
+    }
+
+    var selectedWallet = '';
+
+    function placeOrder() {
+      var fn = document.getElementById("firstName").value.trim();
+      var em = document.getElementById("chkEmail").value.trim();
+      var cn = document.getElementById("cardNum").value.trim();
+      var ce = document.getElementById("cardExpiry").value.trim();
+      var cv = document.getElementById("cardCvv").value.trim();
+      var cname = document.getElementById("cardName").value.trim();
+      var err = document.getElementById("formError");
+
+      if (!fn || !em || !cn || !ce || !cv || !cname) {
+        err.style.display = "block";
+        err.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
+        return;
+      }
+      
+      var items = EduDB.getCart();
+      if (!items || items.length === 0) {
+        err.style.display = "block";
+        err.innerHTML = '<i class="fas fa-exclamation-circle"></i> Your cart is empty. Please add books before checking out.';
+        return;
+      }
+      
+      err.style.display = "none";
+      var total = items.reduce(function (s, i) { return s + (i.price * i.qty); }, 0);
+      var order = EduDB.addOrder(__sess ? __sess.id : 'guest', items, total);
+      if (__sess) { EduDB.addPurchasedBooks(__sess.id, items); }
+      EduDB.clearCart();
+      // Advance steps: mark step 2 done, step 3 active
+      var steps = document.querySelectorAll(".checkout-steps .step");
+      if (steps.length >= 3) {
+        steps[1].className = "step done";
+        steps[1].querySelector(".step-circle").innerHTML = "<i class='fas fa-check'></i>";
+        steps[2].className = "step active";
+      }
+      document.getElementById("checkoutForm").style.display = "none";
+      document.getElementById("orderNum").textContent = order.orderNum;
+      document.getElementById("orderSuccess").style.display = "block";
+      window.scrollTo({ top: 200, behavior: "smooth" });
+    }
+
+    // Init on load
+    document.addEventListener("DOMContentLoaded", function () {
+      renderSummary();
+      document.getElementById("cardNum").addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "").replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+      });
+      document.getElementById("cardExpiry").addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "$1/$2");
+      });
+    });
+  </script>
+</body>
+
+</html>

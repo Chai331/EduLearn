@@ -1,0 +1,60 @@
+1.Given the function f(x) = 3 - 5x - 2x^2, what is the value of f(4)
+A. -49
+B. -45
+C. 55
+D. 3
+Answer: A
+2.The difference quotient of a function f(x) is defined as (f(x+h) - f(x)) / h. If f(x) = 2x + 1, what is its difference quotient
+A. 1
+B. 2
+C. 2h
+D. 2x
+Answer: B
+3.Which of the following is the correct domain for the function f(x) = 1 / (x - 5)
+A. x > 5
+B. x < 5
+C. x != 5
+D. All real numbers
+Answer: C
+4.If f(x) = x^2 and g(x) = x - 3, find the composite function (f ∘ g)(x)
+A. x^2 - 3
+B. x^2 - 9
+C. x^2 - 6x + 9
+D. x^2 + 6x + 9
+Answer: C
+5. Determine the parity of the function f(x) = x^2 + 4
+A. Odd function
+B. Even function
+C. Neither even nor odd
+D. Both even and odd
+Answer: B
+6.If y = x^2 + 3x - 1, find the derivative dy/dx
+A. 2x
+B. 2x + 3
+C. x + 3
+D. 2x - 1
+Answer: B
+7.Find the slope of the tangent line to the curve y = f(x) at a given point
+A. f(x)
+B. The integral of f(x)
+C. The derivative f'(x) at that point
+D. The value of x at the y-intercept
+Answer: C
+8.According to the Product Rule, the derivative of f(x) * g(x) is
+A. f'(x) * g'(x)
+B. f'(x) + g'(x)
+C. f'(x)g(x) + f(x)g'(x)
+D. f(x)g(x) + f'(x)g'(x)
+Answer: C
+9.What is the derivative of sin(x)
+A. cos(x)
+B. -cos(x)
+C. sin(x)
+D. -sin(x)
+Answer: A
+10.When a function is defined by an equation such as x^2 + y^2 = 25, which method is used to find dy/dx
+A. Power Rule only
+B. Implicit differentiation
+C. Quotient Rule only
+D. Product Rule only
+Answer: B

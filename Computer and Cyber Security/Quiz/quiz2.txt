@@ -1,0 +1,69 @@
+1. Phishing conducted specifically via voice channels or VoIP is called:
+A. Smishing
+B. Vishing
+C. Whaling
+D. Pharming
+Answer: B
+
+2. A phishing attack specifically targeted at high-level executives (e.g., CEO) is:
+A. Spear Phishing
+B. Whaling
+C. Spim
+D. Pharming
+Answer: B
+
+3. Malware that appears to be a legitimate program but contains a hidden malicious function is a:
+A. Worm
+B. Virus
+C. Trojan
+D. Rootkit
+Answer: C
+
+4. Redirecting a user to a malicious website by corrupting DNS resolution is known as:
+A. Typosquatting
+B. Pharming
+C. Watering Hole
+D. Pretexting
+Answer: B
+
+5. An attacker following an authorized person through a secure door without a badge is:
+A. Shoulder Surfing
+B. Dumpster Diving
+C. Tailgating
+D. Piggybacking
+Answer: C
+
+6. Malware that operates entirely in the system's RAM to avoid detection by disk scanners is:
+A. Macro Virus
+B. Fileless Malware
+C. Adware
+D. Spyware
+Answer: B
+
+7. Which social engineering principle rushes a target into making a decision?
+A. Authority
+B. Consensus
+C. Urgency
+D. Familiarity
+Answer: C
+
+8. Malware that encrypts a user's files and demands payment for the decryption key is:
+A. Ransomware/Crypto-malware
+B. Logic Bomb
+C. Keylogger
+D. Rootkit
+Answer: A
+
+9. Malicious code that remains dormant until a specific event or time triggers it is a:
+A. Backdoor
+B. Logic Bomb
+C. RAT
+D. Worm
+Answer: B
+
+10. Identifying a site frequently visited by a target group and infecting that site is a:
+A. Spear Phishing attack
+B. Watering Hole attack
+C. Phishing attack
+D. Pharming attack
+Answer: B

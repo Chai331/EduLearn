@@ -1,0 +1,69 @@
+1. Without using a calculator, find the exact value of sin(30°).
+A. 1/2
+B. sqrt(2)/2
+C. sqrt(3)/2
+D. 1
+Answer: A
+
+2. If cos(x) = 3/5 and x is in the first quadrant, what is the value of sin(x)?
+A. 2/5
+B. 4/5
+C. 3/4
+D. 1/5
+Answer: B
+
+3. In a right triangle ABC with the right angle at C, if side c = 10 and angle A = 30°, find the length of side a (opposite to angle A).
+A. 5
+B. 5sqrt(3)
+C. 10
+D. 20
+Answer: A
+
+4. Use the Law of Cosines to find the length of side a if b = 5, c = 8, and angle A = 60°.
+A. 7
+B. sqrt(129)
+C. 9
+D. sqrt(39)
+Answer: A
+
+5. Solve the exponential equation for x: 3^(x+1) = 27.
+A. x = 1
+B. x = 2
+C. x = 3
+D. x = 4
+Answer: B
+
+6. You deposit $1500 in an account that pays 5% interest compounded yearly. Which formula represents the balance after 6 years?
+A. 1500(1 + 0.05)^6
+B. 1500(0.05)^6
+C. 1500 + (0.05 × 6)
+D. 1500(1 + 5)^6
+Answer: A
+
+7. A mice population of 25,000 is decreasing by 20% each year. What is the population after 3 years?
+A. 10,000
+B. 12,800
+C. 15,000
+D. 20,000
+Answer: B
+
+8. Which of the following is the correct double-angle formula for sin(2x)?
+A. sin^2 x − cos^2 x
+B. 2 sin x cos x
+C. 2 sin x
+D. sin x + cos x
+Answer: B
+
+9. If interest is compounded continuously, which formula is used to find the balance A after t years?
+A. A = P(1 + r/m)^(mt)
+B. A = Pe^(rt)
+C. A = P(1 + r)^t
+D. A = Prt
+Answer: B
+
+10. Find the equation of the line that passes through the point (1, -1) with a slope of 3.
+A. y = 3x - 4
+B. y = 3x + 1
+C. y = 3x - 1
+D. y = 3x + 4
+Answer: A

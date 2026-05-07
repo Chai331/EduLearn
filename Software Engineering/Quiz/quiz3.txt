@@ -1,0 +1,69 @@
+1.Software process is?
+A. Random
+B. Structured activities
+C. Hardware process
+D. None
+Answer: B
+
+2.Specification means?
+A. Coding
+B. Defining requirements
+C. Testing
+D. Debugging
+Answer: B
+
+3.Validation checks?
+A. Speed
+B. Customer needs
+C. UI
+D. Memory
+Answer: B
+
+4.Evolution means?
+A. No change
+B. Updating software
+C. Deleting
+D. Coding
+Answer: B
+
+5.Feasibility study checks?
+A. UI
+B. Technical & financial viability
+C. Code
+D. Testing
+Answer: B
+
+6.Design includes?
+A. Cooking
+B. Architecture
+C. Driving
+D. Typing
+Answer: B
+
+7.Implementation means?
+A. Planning
+B. Coding
+C. Testing
+D. Design
+Answer: B
+
+8.Component testing?
+A. Whole system
+B. Individual parts
+C. Users
+D. Docs
+Answer: B
+
+9.System testing?
+A. Parts
+B. Entire system
+C. UI
+D. Docs
+Answer: B
+
+10.Prototyping benefit?
+A. Worse design
+B. Better usability
+C. Slow dev
+D. Costly
+Answer: B

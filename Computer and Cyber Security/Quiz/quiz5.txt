@@ -1,0 +1,69 @@
+1. The hardware chip used to store cryptographic keys and provide a Hardware Root of Trust is:
+A. CPU
+B. TPM
+C. BIOS
+D. HSM
+Answer: B
+
+2. A feature that prevents unauthorized operating systems or "rootkits" from loading during boot is:
+A. Full Disk Encryption
+B. Secure Boot
+C. Sandboxing
+D. Antivirus
+Answer: B
+
+3. Reducing a system's attack surface by disabling unnecessary services and closing unused ports is:
+A. Patching
+B. Hardening
+C. Auditing
+D. Fuzzing
+Answer: B
+
+4. An attack where an input exceeds the allocated memory, allowing the attacker to execute code is:
+A. SQL Injection
+B. Buffer Overflow
+C. XSS
+D. CSRF
+Answer: B
+
+5. An attack where malicious scripts are injected into web pages and executed in a victim's browser is:
+A. SQL Injection
+B. XSS (Cross-Site Scripting)
+C. CSRF (Cross-Site Request Forgery)
+D. Directory Traversal
+Answer: B
+
+6. Manipulating a backend database by inserting malicious commands into an input field is:
+A. Command Injection
+B. SQL Injection
+C. LDAP Injection
+D. XML Injection
+Answer: B
+
+7. A software development life cycle (SDLC) that focuses on iterative development and frequent updates is:
+A. Waterfall
+B. Agile
+C. Sequential
+D. Spiral
+Answer: B
+
+8. Reviewing an application's source code without executing the program is called:
+A. Dynamic Analysis
+B. Static Analysis
+C. Fuzzing
+D. Penetration Testing
+Answer: B
+
+9. The practice of automatically pushing every code change that passes testing into production is:
+A. Continuous Integration
+B. Continuous Deployment
+C. Continuous Delivery
+D. Version Control
+Answer: B
+
+10. Providing a program with many different types of random or malformed input to find bugs is:
+A. Regression testing
+B. Fuzzing
+C. Unit testing
+D. Integration testing
+Answer: B

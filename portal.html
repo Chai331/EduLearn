@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EduLearn Student Portal – Track progress, view courses, manage resources." />
+  <title>Student Portal – EduLearn</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav class="w3-bar edu-navbar w3-top" id="mainNav">
+    <a href="dashboard.html" class="w3-bar-item brand-logo"><i class="fas fa-graduation-cap"></i> EduLearn</a>
+    <div class="w3-right w3-hide-small">
+      <a href="dashboard.html" class="w3-bar-item w3-button nav-link">Home</a>
+      <a href="courses.html" class="w3-bar-item w3-button nav-link">Courses</a>
+      <a href="portal.html" class="w3-bar-item w3-button nav-link active">My Portal</a>
+      <a href="forum.html" class="w3-bar-item w3-button nav-link">Forum</a>
+      <a href="bookstore.html" class="w3-bar-item w3-button nav-link">Bookstore</a>
+      <a href="admin_dashboard.html" class="w3-bar-item w3-button nav-link" id="adminLink" style="display:none;color:#f87171 !important;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+      <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+      <a href="cart.html" class="w3-bar-item w3-button nav-link" style="position:relative;">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartBadge"
+          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size:0.6rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
+      </a>
+      <button onclick="doLogout()" class="w3-bar-item w3-button"
+        style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
+          class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+      onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></a>
+  </nav>
+  <div id="mobileMenu" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium mobile-menu">
+    <a href="dashboard.html" class="w3-bar-item w3-button">Home</a>
+    <a href="courses.html" class="w3-bar-item w3-button">Courses</a>
+    <a href="portal.html" class="w3-bar-item w3-button">My Portal</a>
+    <a href="forum.html" class="w3-bar-item w3-button">Forum</a>
+    <a href="bookstore.html" class="w3-bar-item w3-button">Bookstore</a>
+    <a href="cart.html" class="w3-bar-item w3-button"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="admin_dashboard.html" class="w3-bar-item w3-button" id="adminLinkMob" style="display:none;color:#ef4444;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+    <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i
+        class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <div class="page-header">
+    <div class="w3-content container-max">
+      <div class="breadcrumb"><a href="dashboard.html">Home</a> &rsaquo; Student Portal</div>
+      <h1><i class="fas fa-user-graduate"></i> Student Portal</h1>
+      <p>Manage your learning journey, track progress, and access resources</p>
+    </div>
+  </div>
+
+  <section class="section-pad" style="background:#e2e8f0;">
+    <div class="w3-content container-max">
+      <div class="portal-grid">
+
+        <!-- SIDEBAR -->
+        <aside class="portal-sidebar">
+          <div class="portal-avatar" id="sideAvatar">?</div>
+          <div class="portal-name" id="sideName">Loading…</div>
+          <div class="portal-email" id="sideEmail"></div>
+          <ul class="portal-nav">
+            <li><a href="#" class="active" onclick="showTab('overview',this)"><i class="fas fa-tachometer-alt"></i>
+                Dashboard</a></li>
+            <li><a href="#" onclick="showTab('courses',this)"><i class="fas fa-book-open"></i> My Courses</a></li>
+            <li><a href="#" onclick="showTab('resources',this)"><i class="fas fa-bookmark"></i> Resources</a></li>
+            <li><a href="#" onclick="showTab('orders',this)"><i class="fas fa-shopping-bag"></i> My Orders</a></li>
+            <li><a href="#" onclick="showTab('settings',this)"><i class="fas fa-cog"></i> Settings</a></li>
+          </ul>
+          <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid #f3f4f6;">
+            <a onclick="doLogout()"
+              style="display:flex;align-items:center;gap:8px;color:#ef4444;font-size:0.85rem;font-weight:600;cursor:pointer;"><i
+                class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="portal-main">
+
+          <!-- OVERVIEW TAB -->
+          <div id="tab-overview" style="display:flex; flex-direction:column; gap:1.5rem;">
+            <div class="stat-cards" id="statCards"></div>
+            <div class="progress-section">
+              <h3><i class="fas fa-chart-line" style="color:#667eea;margin-right:8px;"></i>Course Progress</h3>
+              <div id="progressList"></div>
+            </div>
+            <div class="progress-section">
+              <h3><i class="fas fa-history" style="color:#667eea;margin-right:8px;"></i>Recent Activity</h3>
+              <ul style="list-style:none;" id="activityList"></ul>
+            </div>
+          </div>
+
+          <!-- COURSES TAB -->
+          <div id="tab-courses" style="display:none;">
+            <div class="progress-section">
+              <h3><i class="fas fa-book-open" style="color:#667eea;margin-right:8px;"></i>My Enrolled Courses</h3>
+              <div id="coursesList"></div>
+            </div>
+          </div>
+
+          <!-- RESOURCES TAB -->
+          <div id="tab-resources" style="display:none;">
+            <div class="progress-section">
+              <h3><i class="fas fa-bookmark" style="color:#667eea;margin-right:8px;"></i>Saved Resources</h3>
+              <div id="savedResourcesList"></div>
+            </div>
+          </div>
+
+          <!-- ORDERS TAB -->
+          <div id="tab-orders" style="display:none;">
+            <div class="progress-section">
+              <h3><i class="fas fa-shopping-bag" style="color:#667eea;margin-right:8px;"></i>Purchase History</h3>
+              <div id="ordersList"></div>
+            </div>
+          </div>
+
+
+          <!-- SETTINGS TAB -->
+          <div id="tab-settings" style="display:none;">
+            <div class="progress-section">
+              <h3><i class="fas fa-cog" style="color:#667eea;margin-right:8px;"></i>Account Settings</h3>
+              <div class="form-group"><label>Full Name</label><input type="text" id="setName" class="form-control" />
+              </div>
+              <div class="form-group"><label>Email Address</label><input type="email" id="setEmail"
+                  class="form-control" /></div>
+              <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f3f4f6;">
+                <h4 style="font-size:0.9rem;font-weight:800;color:#1a1a2e;margin-bottom:1rem;">Change Password</h4>
+                <div class="form-group"><label>Old Password</label><input type="password" id="setOldPass" class="form-control" placeholder="Required for password change" /></div>
+                <div class="form-group"><label>New Password</label><input type="password" id="setNewPass" class="form-control" placeholder="Enter new password" /></div>
+              </div>
+              <button class="btn-submit" style="max-width:200px;" onclick="saveSettings()">Save Changes</button>
+              <div id="savedMsg" style="display:none;margin-top:1rem;" class="alert-success"><i
+                  class="fas fa-check-circle"></i> Settings saved!</div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <footer class="edu-footer">
+    <div class="w3-content container-max">
+      <div class="footer-bottom" style="border-top:none;padding:1.5rem 0;">
+        <p>&copy; 2025 EduLearn. All rights reserved. | <a href="dashboard.html">Dashboard</a> | <a
+            href="courses.html">Courses</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="db.js"></script>
+  <script src="courses_data.js"></script>
+  <script>
+    /* ── Auth Guard ── */
+    var __sess = EduDB.getSession();
+    if (!__sess) { window.location.href = 'index.html'; }
+
+    function doLogout() { EduDB.logout(); window.location.href = 'index.html'; }
+    function toggleMobileMenu() { var m = document.getElementById('mobileMenu'); m.className.indexOf('w3-show') === -1 ? m.className += ' w3-show' : m.className = m.className.replace(' w3-show', ''); }
+    window.onscroll = function () { document.getElementById('mainNav').classList[window.pageYOffset > 60 ? 'add' : 'remove']('scrolled'); };
+
+    /* ── Tab system ── */
+    var tabs = ['overview', 'courses', 'resources', 'orders', 'settings'];
+    function showTab(name, link) {
+      tabs.forEach(function (t) { document.getElementById('tab-' + t).style.display = 'none'; });
+      document.querySelectorAll('.portal-nav li a').forEach(function (a) { a.classList.remove('active'); });
+      var tab = document.getElementById('tab-' + name);
+      tab.style.display = 'flex'; tab.style.flexDirection = 'column';
+      if (link) link.classList.add('active');
+      if (name === 'orders') renderOrders();
+      if (name === 'resources') renderSavedResources();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!__sess) return;
+      /* Nav greeting & Admin link */
+      var ng = document.getElementById('navGreet');
+      if (ng && __sess) ng.innerHTML = '<i class="fas fa-user-circle"></i> ' + __sess.firstName;
+      if (__sess && __sess.role === 'admin') {
+        var al = document.getElementById('adminLink');
+        if (al) al.style.display = 'block';
+        var alm = document.getElementById('adminLinkMob');
+        if (alm) alm.style.display = 'block';
+      }
+
+      /* Sidebar */
+      var av = document.getElementById('sideAvatar');
+      av.textContent = __sess.avatar;
+      av.style.background = __sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)';
+      document.getElementById('sideName').textContent = __sess.firstName + ' ' + (__sess.lastName || '');
+      document.getElementById('sideEmail').textContent = __sess.email;
+
+      /* Settings pre-fill */
+      document.getElementById('setName').value = __sess.firstName + ' ' + (__sess.lastName || '');
+      document.getElementById('setEmail').value = __sess.email;
+
+      /* Enrollments */
+      var enr = EduDB.getUserEnrollments(__sess.id);
+
+      /* Stat cards */
+      var orders = EduDB.getUserOrders(__sess.id);
+      var avgPct = enr.length > 0 ? Math.round(enr.reduce(function (s, e) { return s + e.progress; }, 0) / enr.length) : 0;
+      var statData = [
+        { icon: 'fa-book-open', bg: 'linear-gradient(135deg,#667eea,#764ba2)', num: enr.length, label: 'Courses' },
+        { icon: 'fa-check-circle', bg: 'linear-gradient(135deg,#43e97b,#38f9d7)', num: avgPct + '%', label: 'Avg Progress' },
+        { icon: 'fa-shopping-bag', bg: 'linear-gradient(135deg,#f093fb,#f5576c)', num: orders.length, label: 'Orders' },
+        { icon: 'fa-comments', bg: 'linear-gradient(135deg,#4facfe,#00f2fe)', num: EduDB.getAllPosts().length, label: 'Forum Posts' }
+      ];
+      var sc = document.getElementById('statCards');
+      statData.forEach(function (s) {
+        var d = document.createElement('div'); d.className = 'stat-card';
+        d.innerHTML = '<div class="stat-card-icon" style="background:' + s.bg + ';"><i class="fas ' + s.icon + '"></i></div><div><div class="stat-card-num">' + s.num + '</div><div class="stat-card-label">' + s.label + '</div></div>';
+        sc.appendChild(d);
+      });
+
+      /* Progress bars */
+      var pl = document.getElementById('progressList');
+      if (enr.length === 0) { pl.innerHTML = '<p style="color:#9ca3af;font-size:0.88rem;">No courses enrolled yet. <a href="courses.html" style="color:#667eea;">Browse courses</a></p>'; }
+      enr.forEach(function (e) {
+        var pct = e.progress;
+        pl.innerHTML += '<div class="progress-item"><div class="progress-item-header"><span class="progress-item-title">' + e.courseName + '</span><span class="progress-item-pct" style="background:#f0f2ff;padding:2px 8px;border-radius:12px;">' + pct + '%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:' + pct + '%;"></div></div></div>';
+      });
+
+      /* Activity */
+      var al = document.getElementById('activityList');
+      var realActs = EduDB.getActivityLog(__sess.id);
+      if (realActs.length === 0) {
+        al.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;padding:0.5rem 0;">No recent activity.</p>';
+      } else {
+        realActs.forEach(function (a) {
+          al.innerHTML += '<li style="padding:0.7rem 0;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:10px;font-size:0.85rem;color:#4b5563;"><span style="width:32px;height:32px;border-radius:50%;background:' + a.bg + ';display:flex;align-items:center;justify-content:center;"><i class="fas ' + a.icon + '" style="color:' + a.iclr + ';"></i></span>' + a.text + '<span style="margin-left:auto;color:#9ca3af;font-size:0.75rem;">' + EduDB.ago(a.createdAt) + '</span></li>';
+        });
+      }
+
+      /* Courses tab content */
+      var cl = document.getElementById('coursesList');
+      var isAdmin = __sess && __sess.role === 'admin';
+      
+      if (isAdmin) {
+        // Show ALL courses for Admin
+        cl.innerHTML = '<div style="margin-bottom:1.5rem;padding:1rem;background:#fef2f2;border-radius:12px;border:1px solid #fee2e2;color:var(--admin-primary);font-weight:700;font-size:0.85rem;"><i class="fas fa-user-shield"></i> Admin View: All platform courses are visible and accessible.</div>';
+        COURSES.forEach(function (c) {
+          var userEnr = enr.find(function(e){ return e.courseId === c.id; });
+          var pct = userEnr ? userEnr.progress : 0;
+          var detail = userEnr ? (userEnr.completedLectures ? userEnr.completedLectures.length : 0) + ' of ' + (userEnr.weeksTotal || 5) + ' lectures' : 'Admin Preview Mode';
+          cl.innerHTML += '<div style="background:#fff;border-radius:16px;padding:1.4rem;display:flex;align-items:center;gap:1.2rem;box-shadow:0 4px 20px rgba(0,0,0,0.05);border:1px solid #e5e7eb;margin-bottom:1rem;"><div style="width:60px;height:60px;border-radius:16px;' + c.color + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas ' + c.icon + '" style="color:#fff;font-size:1.5rem;"></i></div><div style="flex:1;"><div style="font-weight:700;color:#1a1a2e;font-size:1rem;margin-bottom:4px;">' + c.title + '</div><div style="font-size:0.8rem;color:#6b7280;margin-bottom:8px;">' + detail + (userEnr ? ' · <span style="color:#667eea;font-weight:800;">' + pct + '% complete</span>' : '') + '</div>' + (userEnr ? '<div class="progress-bar-wrap" style="height:8px;"><div class="progress-bar-fill" style="width:' + pct + '%;"></div></div>' : '<div style="font-size:0.75rem;color:#9ca3af;font-style:italic;">No student progress tracked for your admin account.</div>') + '</div><div style="margin-left:1rem;"><a href="courses.html?id=' + c.id + '" class="btn-submit" style="font-size:0.8rem;padding:0.6rem 1.2rem;white-space:nowrap;">View Content <i class="fas fa-arrow-right"></i></a></div></div>';
+        });
+      } else {
+        // Show Enrolled courses for Students
+        if (enr.length === 0) { cl.innerHTML = '<p style="color:#9ca3af;font-size:0.88rem;text-align:center;padding:1.5rem 0;">No courses enrolled yet. <a href="courses.html" style="color:#667eea;">Browse courses</a></p>'; }
+        enr.forEach(function (e) {
+          var detail = (e.completedLectures ? e.completedLectures.length : 0) + ' of ' + (e.weeksTotal || 5) + ' lectures';
+          if (e.quizDone) detail += ' · Quiz passed';
+          cl.innerHTML += '<div style="background:#fff;border-radius:16px;padding:1.4rem;display:flex;align-items:center;gap:1.2rem;box-shadow:0 4px 20px rgba(0,0,0,0.05);border:1px solid #e5e7eb;margin-bottom:1rem;"><div style="width:60px;height:60px;border-radius:16px;' + e.color + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas ' + e.icon + '" style="color:#fff;font-size:1.5rem;"></i></div><div style="flex:1;"><div style="font-weight:700;color:#1a1a2e;font-size:1rem;margin-bottom:4px;">' + e.courseName + '</div><div style="font-size:0.8rem;color:#6b7280;margin-bottom:8px;">' + detail + ' · <span style="color:#667eea;font-weight:800;">' + e.progress + '% complete</span></div><div class="progress-bar-wrap" style="height:8px;"><div class="progress-bar-fill" style="width:' + e.progress + '%;"></div></div></div><div style="margin-left:1rem;"><a href="courses.html" class="btn-submit" style="font-size:0.8rem;padding:0.6rem 1.2rem;white-space:nowrap;">Continue <i class="fas fa-arrow-right"></i></a></div></div>';
+        });
+      }
+    });
+
+    /* ── Orders ── */
+    function renderOrders() {
+      var orders = EduDB.getUserOrders(__sess.id);
+      var ol = document.getElementById('ordersList');
+      ol.innerHTML = '';
+      if (orders.length === 0) {
+        ol.innerHTML = '<p style="color:#9ca3af;font-size:0.88rem;text-align:center;padding:1.5rem 0;">No orders yet. <a href="bookstore.html" style="color:#667eea;">Visit Bookstore</a></p>';
+        return;
+      }
+      orders.forEach(function (o) {
+        var items = o.items.map(function (i) { return i.name + ' ×' + i.qty; }).join(', ');
+        ol.innerHTML += '<div style="background:#f9fafb;border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem;border:1px solid #e5e7eb;">'
+          + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
+          + '<div style="font-weight:700;color:#1a1a2e;font-size:0.88rem;">Order #' + o.orderNum + '</div>'
+          + '<span class="badge badge-green">' + o.status + '</span></div>'
+          + '<div style="font-size:0.8rem;color:#6b7280;margin-bottom:0.3rem;">' + items + '</div>'
+          + '<div style="display:flex;justify-content:space-between;font-size:0.78rem;color:#9ca3af;">'
+          + '<span>' + new Date(o.createdAt).toLocaleDateString() + '</span>'
+          + '<span style="font-weight:700;color:#667eea;">RM ' + o.total.toFixed(2) + '</span></div></div>';
+      });
+    }
+
+    function renderSavedResources() {
+      var saved = EduDB.getSavedResources(__sess.id);
+      var sl = document.getElementById('savedResourcesList');
+      sl.innerHTML = '';
+      if (saved.length === 0) {
+        sl.innerHTML = '<p style="color:#9ca3af;font-size:0.88rem;text-align:center;padding:2rem 0;">No resources saved yet. Check back after your lectures!</p>';
+        return;
+      }
+      var ul = document.createElement('ul');
+      ul.style.listStyle = 'none';
+      ul.style.padding = '0';
+      saved.forEach(function (res) {
+        var isVid = res.type === 'video' || (res.file && (res.file.includes('cloudinary') || res.file.includes('youtube') || res.file.includes('mp4')));
+        var li = document.createElement('li');
+        li.style.cssText = 'padding:1rem 0;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:12px;font-size:0.86rem;color:#374151;';
+        li.innerHTML = 
+          '<i class="fas ' + (isVid ? 'fa-video' : 'fa-file-pdf') + '" style="color:' + (isVid ? '#667eea' : '#ef4444') + ';font-size:1.1rem;width:20px;"></i>' +
+          '<div style="flex:1;">' +
+            '<div style="font-weight:600;">' + res.title + (res.week ? ' (Week ' + res.week + ')' : '') + '</div>' +
+            '<div style="font-size:0.75rem;color:#9ca3af;">' + (isVid ? 'Video' : 'Document') + ' · Saved ' + EduDB.ago(res.savedAt) + '</div>' +
+          '</div>' +
+          '<div style="display:flex;gap:12px;">' +
+            '<a href="' + res.file + '" target="_blank" style="color:#667eea;font-size:0.85rem;"><i class="fas ' + (isVid ? 'fa-play' : 'fa-eye') + '"></i></a>' +
+            '<a href="javascript:void(0)" onclick="removeSaved(\'' + res.file + '\')" style="color:#ef4444;font-size:0.85rem;"><i class="fas fa-trash"></i></a>' +
+          '</div>';
+        ul.appendChild(li);
+      });
+      sl.appendChild(ul);
+    }
+
+    function removeSaved(file) {
+      EduDB.toggleSavedResource(__sess.id, { file: file });
+      renderSavedResources();
+    }
+
+    function saveSettings() {
+      var name = document.getElementById('setName').value.trim();
+      var email = document.getElementById('setEmail').value.trim();
+      var oldPass = document.getElementById('setOldPass').value;
+      var newPass = document.getElementById('setNewPass').value;
+
+      var updateData = { firstName: name.split(' ')[0], lastName: name.split(' ').slice(1).join(' '), email: email };
+      
+      // If trying to change password
+      if (newPass) {
+        if (!oldPass) { alert('Please enter your old password to set a new one.'); return; }
+        var res = EduDB.updateUserPassword(__sess.id, oldPass, newPass);
+        if (!res.success) { alert(res.message); return; }
+      }
+
+      var resProfile = EduDB.updateUserProfile(__sess.id, updateData);
+      if (resProfile.success) {
+        document.getElementById('savedMsg').style.display = 'block';
+        setTimeout(function () { 
+          document.getElementById('savedMsg').style.display = 'none';
+          location.reload(); 
+        }, 1500);
+      } else {
+        alert(resProfile.message);
+      }
+    }
+  </script>
+</body>
+
+</html>

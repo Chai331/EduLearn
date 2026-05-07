@@ -1,0 +1,69 @@
+1.What is the main purpose of requirements engineering? (Slide: Requirements engineering)
+A.Writing code
+B.Testing software
+C.Defining system services and constraints
+D.Debugging programs
+Answer: C
+
+2.Which of the following is a functional requirement? (Slide: Functional requirements)
+A.System must respond within 2 seconds
+B.System shall allow user login
+C.System must use Java
+D.System must be portable
+Answer: B
+
+3.Non-functional requirements mainly describe: (Slide: Non-functional requirements)
+A.System services
+B.System constraints and properties
+C.User interface design
+D.Algorithms
+Answer: B
+
+4.Which type of requirement describes system constraints from the domain? (Slide: Types of requirement)
+A.Functional requirement
+B.Non-functional requirement
+C.Domain requirement
+D.User requirement
+Answer: C
+
+5.User requirements are typically written for: (Slide: User requirements)
+A.Developers
+B.Customers
+C.Testers
+D.Managers only
+Answer: B
+
+6.Which is a problem with natural language specification? (Slide: Problems with natural language)
+A.Too precise
+B.Lack of clarity
+C.Too formal
+D.Too technical
+Answer: B
+
+7.What does a structured specification aim to do? (Slide: Structured specifications)
+A. ncrease ambiguity
+B. Standardize requirement writing
+C. Remove diagrams
+D. Reduce documentation
+Answer: B
+
+8.What is a use case? (Slide: Use cases)
+A.A test case
+B.A programming method
+C.A scenario describing system interaction
+D.A debugging tool
+Answer: C
+
+9.The software requirements document focuses on: (Slide: Software requirements document)
+A.HOW the system works
+B.WHAT the system should do
+C.Coding standards
+D.Testing methods
+Answer: B
+
+10.Which section defines technical terms in a requirements document? (Slide: Structure of requirements document)
+A.Introduction
+B.Glossary
+C.Appendix
+D.Preface
+Answer: B

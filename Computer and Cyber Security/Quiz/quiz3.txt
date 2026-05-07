@@ -1,0 +1,69 @@
+1. Which of the following is considered a "Something You Know" factor?
+A. Smart card
+B. PIN
+C. Fingerprint
+D. USB Token
+Answer: B
+
+2. Multifactor Authentication (MFA) requires at least:
+A. Two different passwords
+B. Two different types (factors) of authentication
+C. A password and a recovery email
+D. A PIN and a pattern
+Answer: B
+
+3. Which authentication protocol is commonly used for Single Sign-On (SSO) in Windows domains?
+A. PAP
+B. CHAP
+C. Kerberos
+D. RADIUS
+Answer: C
+
+4. In biometrics, if a legitimate user is incorrectly denied access, it is a:
+A. False Acceptance (Type II)
+B. False Rejection (Type I)
+C. Crossover Error
+D. Throughput Error
+Answer: B
+
+5. A policy that requires employees to take time off to help uncover potential fraud is:
+A. Job Rotation
+B. Mandatory Vacation
+C. Separation of Duties
+D. Clean Desk
+Answer: B
+
+6. Managing identities across multiple distinct networks or organizations is called:
+A. Centralized Management
+B. Federated Identity Management
+C. Directory Services
+D. Local Authentication
+Answer: B
+
+7. Which access control model allows the owner of a resource to set permissions?
+A. MAC (Mandatory Access Control)
+B. DAC (Discretionary Access Control)
+C. RBAC (Role-based Access Control)
+D. ABAC (Attribute-based Access Control)
+Answer: B
+
+8. In Linux, the file that stores encrypted user password hashes is:
+A. /etc/passwd
+B. /etc/shadow
+C. /etc/group
+D. /etc/sudoers
+Answer: B
+
+9. An attack using precomputed hash values to crack passwords is called a:
+A. Brute Force attack
+B. Dictionary attack
+C. Rainbow Table attack
+D. Birthday attack
+Answer: C
+
+10. A One-Time Password (OTP) sent to a user via SMS or email is an example of:
+A. Knowledge factor
+B. 2-Step Verification
+C. Biometric factor
+D. Static code
+Answer: B

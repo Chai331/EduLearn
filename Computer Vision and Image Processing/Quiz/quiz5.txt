@@ -1,0 +1,69 @@
+1. In computer vision, what is an edge?
+A. A uniform region of constant intensity
+B. A significant local change or discontinuity in image intensity
+C. The center point of a digital image
+D. The lowest intensity pixel in an image
+Answer: B
+
+2. Which type of edge profile represents an instantaneous and abrupt change in intensity?
+A. Step edge
+B. Ramp edge
+C. Roof edge
+D. Line edge
+Answer: A
+
+3. In real images, ideal step edges become ramp edges due to:
+A. High resolution sensors
+B. Image acquisition imperfection and illumination conditions
+C. Highpass filtering
+D. Thresholding
+Answer: B
+
+4. The three main steps in edge detection algorithms are Filtering, Enhancement, and:
+A. Acquisition
+B. Digitization
+C. Detection
+D. Compression
+Answer: C
+
+5. Which property of the first-order derivative is used to detect the presence of an edge?
+A. Sign
+B. Magnitude
+C. Zero-crossing
+D. Phase
+Answer: B
+
+6. In a second-order derivative, what feature indicates the midpoint of a ramp edge?
+A. Local maximum
+B. Local minimum
+C. Zero-crossing
+D. Infinite peak
+Answer: C
+
+7. Which operator is the 2D equivalent of the second derivative?
+A. Gradient
+B. Sobel
+C. Laplacian
+D. Prewitt
+Answer: C
+
+8. Why is the standard Laplacian operator not frequently used alone for edge detection?
+A. It is too slow to compute.
+B. It is highly sensitive to noise.
+C. It only detects horizontal edges.
+D. It produces a blurred output.
+Answer: B
+
+9. To combat noise sensitivity, the Laplacian of Gaussian (LoG) operator combines the Laplacian with which type of filter?
+A. Highpass filter
+B. Median filter
+C. Gaussian smoothing filter
+D. Contrast stretching
+Answer: C
+
+10. The Laplacian of Gaussian (LoG) operator is commonly known as the:
+A. Top-hat operator
+B. Mexican hat operator
+C. Bell curve operator
+D. Step operator
+Answer: B

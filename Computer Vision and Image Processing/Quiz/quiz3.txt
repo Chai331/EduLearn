@@ -1,0 +1,69 @@
+1. What is the main objective of image enhancement?
+A. To compress the image size
+B. To transform an image into a form more suitable for a specific application
+C. To extract 3D information from 2D images
+D. To classify objects in an image
+Answer: B
+
+2. Which category of image enhancement is based on direct manipulation of pixels in the image plane?
+A. Frequency domain methods
+B. Spatial domain methods
+C. Temporal domain methods
+D. Transform domain methods
+Answer: B
+
+3. Which of the following is considered a point operation in spatial domain image enhancement?
+A. Neighborhood averaging
+B. Median filtering
+C. Contrast stretching
+D. Spatial lowpass filtering
+Answer: C
+
+4. A spatial domain transformation that produces a two-level (binary) image is called:
+A. Contrast stretching
+B. Bit-plane slicing
+C. Thresholding
+D. Image negative
+Answer: C
+
+5. What does the x-axis of an image intensity histogram represent?
+A. Frequency of pixel intensities
+B. Spatial coordinates of pixels
+C. Gray level intensities
+D. Number of color channels
+Answer: C
+
+6. In a normalized histogram, what does the sum of all components equal?
+A. 0
+B. 1
+C. 255
+D. Total number of pixels
+Answer: B
+
+7. A dark image typically has a histogram that is concentrated on the:
+A. Left side (lower intensity values)
+B. Right side (higher intensity values)
+C. Middle
+D. Entire range uniformly
+Answer: A
+
+8. What type of image enhancement technique increases the dynamic range of gray levels in the image?
+A. Thresholding
+B. Contrast stretching
+C. Bit-plane slicing
+D. Lowpass filtering
+Answer: B
+
+9. Which operation is useful for distinguishing pixels of a higher intensity from pixels with a lower intensity value, separating foreground from background?
+A. Thresholding
+B. Averaging
+C. Image negatives
+D. Integration
+Answer: A
+
+10. In adaptive thresholding, the threshold value T depends on:
+A. A single global constant
+B. Spatial coordinates or local neighborhood properties
+C. The image's frequency domain
+D. The bit-plane level
+Answer: B
