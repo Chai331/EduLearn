@@ -83,6 +83,10 @@
       grid-template-columns: 1fr 1fr;
       min-height: calc(100vh - 64px);
       width: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(99, 102, 241, .18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(139, 92, 246, .18), transparent 35%),
+        #07051f;
     }
 
     /* LEFT */
@@ -91,10 +95,6 @@
       align-items: center;
       justify-content: center;
       padding: 40px 55px;
-      background:
-        radial-gradient(circle at top left, rgba(99, 102, 241, .18), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(139, 92, 246, .18), transparent 35%),
-        #07051f;
     }
 
     .hero-left::before {
@@ -227,8 +227,6 @@
       align-items: center;
       justify-content: center;
       padding: 2rem 2.5rem;
-      background: #0d0d24;
-      border-left: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .login-card {
@@ -566,8 +564,6 @@
 
       .hero-right {
         padding: 2rem 1.5rem;
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
 
       .landing-stats {
