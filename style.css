@@ -797,18 +797,19 @@ img {
 }
 
 .page-header p {
-  color: #4b5563;
-  font-size: 1rem;
+  color: #e2e8f0;
+  font-size: 1.15rem;
 }
 
 .breadcrumb {
-  color: #374151;
-  font-size: 0.97rem;
+  color: #cbd5e1;
+  font-size: 1.1rem;
   margin-bottom: 0.8rem;
+  font-weight: 500;
 }
 
 .breadcrumb a {
-  color: #667eea;
+  color: #818cf8;
 }
 
 /* ============================================
@@ -1072,9 +1073,9 @@ img {
   gap: 10px;
   padding: 0.7rem 1rem;
   border-radius: 10px;
-  color: #4b5563;
-  font-weight: 500;
-  font-size: 1.03rem;
+  color: #1a1a2e;
+  font-weight: 600;
+  font-size: 1.15rem;
   transition: all 0.2s;
   margin-bottom: 0.3rem;
 }
@@ -1126,14 +1127,15 @@ img {
 }
 
 .stat-card-num {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: #1a1a2e;
 }
 
 .stat-card-label {
-  font-size: 0.95rem;
-  color: #4b5563;
+  font-size: 1.15rem;
+  color: #1a1a2e;
+  font-weight: 600;
 }
 
 .progress-section {
