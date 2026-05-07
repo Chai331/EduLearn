@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * ============================================================
  *  EduLearn – localStorage Database Simulation
  *  Simulates MySQL / MongoDB for local file deployment
@@ -31,8 +31,8 @@ window.EduDB = (function () {
   };
 
   /* ─── Low-level CRUD ───────────────────────────────────── */
-  function readTable(key, defaultVal) { 
-    return JSON.parse(localStorage.getItem(key) || (defaultVal || '[]')); 
+  function readTable(key, defaultVal) {
+    return JSON.parse(localStorage.getItem(key) || (defaultVal || '[]'));
   }
   function readOne(key) { return JSON.parse(localStorage.getItem(key) || 'null'); }
   function writeTable(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
@@ -60,98 +60,98 @@ window.EduDB = (function () {
   /* ─── Firebase Cloud Sync Layer ─────────────────────────── */
   var _fb = {
     db: null, ready: false,
-    init: function() {
+    init: function () {
       try {
         if (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length > 0) {
           this.db = firebase.firestore(); this.ready = true;
           console.log('EduDB: Firestore connected ✓');
         }
-      } catch(e) { console.warn('EduDB: Firebase unavailable.'); }
+      } catch (e) { console.warn('EduDB: Firebase unavailable.'); }
     },
-    saveUser: function(user) {
+    saveUser: function (user) {
       if (!this.ready) return;
       this.db.collection('users').doc(user.id).set(JSON.parse(JSON.stringify(user)))
-        .catch(function(e){ console.warn('saveUser:', e); });
+        .catch(function (e) { console.warn('saveUser:', e); });
     },
-    saveUserData: function(userId) {
+    saveUserData: function (userId) {
       if (!this.ready) return;
-      var enr = readTable(K.ENROLLMENTS).filter(function(e){ return e.userId === userId; });
-      var pRec = readTable(K.PURCHASED).find(function(r){ return r.userId === userId; });
-      var ords = readTable(K.ORDERS).filter(function(o){ return o.userId === userId; });
+      var enr = readTable(K.ENROLLMENTS).filter(function (e) { return e.userId === userId; });
+      var pRec = readTable(K.PURCHASED).find(function (r) { return r.userId === userId; });
+      var ords = readTable(K.ORDERS).filter(function (o) { return o.userId === userId; });
       this.db.collection('userData').doc(userId).set({
         enrollments: enr, purchased: pRec ? pRec.books : [], orders: ords,
         updatedAt: new Date().toISOString()
-      }).catch(function(e){ console.warn('saveUserData:', e); });
+      }).catch(function (e) { console.warn('saveUserData:', e); });
     },
-    syncUserData: function(userId, callback) {
+    syncUserData: function (userId, callback) {
       if (!this.ready) { if (callback) callback(false); return; }
-      this.db.collection('userData').doc(userId).get().then(function(doc) {
+      this.db.collection('userData').doc(userId).get().then(function (doc) {
         if (doc.exists) {
           var data = doc.data();
           if (data.enrollments && data.enrollments.length > 0) {
             var lEnr = readTable(K.ENROLLMENTS);
-            data.enrollments.forEach(function(ce) {
-              var i = lEnr.findIndex(function(le){ return le.id === ce.id; });
+            data.enrollments.forEach(function (ce) {
+              var i = lEnr.findIndex(function (le) { return le.id === ce.id; });
               if (i === -1) lEnr.push(ce); else if (ce.progress >= lEnr[i].progress) lEnr[i] = ce;
             });
             writeTable(K.ENROLLMENTS, lEnr);
           }
           if (data.purchased && data.purchased.length > 0) {
             var allP = readTable(K.PURCHASED);
-            var rec = allP.find(function(r){ return r.userId === userId; });
+            var rec = allP.find(function (r) { return r.userId === userId; });
             if (!rec) allP.push({ userId: userId, books: data.purchased });
-            else data.purchased.forEach(function(b){ if (rec.books.indexOf(b) === -1) rec.books.push(b); });
+            else data.purchased.forEach(function (b) { if (rec.books.indexOf(b) === -1) rec.books.push(b); });
             writeTable(K.PURCHASED, allP);
           }
           if (data.orders && data.orders.length > 0) {
             var lOrds = readTable(K.ORDERS);
-            data.orders.forEach(function(co){
-              if (!lOrds.some(function(lo){ return lo.id === co.id; })) lOrds.unshift(co);
+            data.orders.forEach(function (co) {
+              if (!lOrds.some(function (lo) { return lo.id === co.id; })) lOrds.unshift(co);
             });
             writeTable(K.ORDERS, lOrds);
           }
         }
         if (callback) callback(true);
-      }).catch(function(e){ console.warn('syncUserData:', e); if (callback) callback(false); });
+      }).catch(function (e) { console.warn('syncUserData:', e); if (callback) callback(false); });
     },
-    fetchUserByEmail: function(email, callback) {
+    fetchUserByEmail: function (email, callback) {
       if (!this.ready) { callback(null); return; }
       this.db.collection('users').where('email', '==', email.toLowerCase().trim()).get()
-        .then(function(snap){ callback(snap.empty ? null : snap.docs[0].data()); })
-        .catch(function(){ callback(null); });
+        .then(function (snap) { callback(snap.empty ? null : snap.docs[0].data()); })
+        .catch(function () { callback(null); });
     },
-    savePosts: function() {
+    savePosts: function () {
       if (!this.ready) return;
       this.db.collection('appData').doc('forumPosts')
         .set({ posts: readTable(K.POSTS), updatedAt: new Date().toISOString() })
-        .catch(function(e){ console.warn('savePosts:', e); });
+        .catch(function (e) { console.warn('savePosts:', e); });
     },
-    loadPosts: function(callback) {
+    loadPosts: function (callback) {
       if (!this.ready) { if (callback) callback(false); return; }
-      this.db.collection('appData').doc('forumPosts').get().then(function(doc) {
+      this.db.collection('appData').doc('forumPosts').get().then(function (doc) {
         if (doc.exists && doc.data().posts) {
           var cp = doc.data().posts, lp = readTable(K.POSTS);
-          cp.forEach(function(c){
-            var i = lp.findIndex(function(l){ return l.id === c.id; });
+          cp.forEach(function (c) {
+            var i = lp.findIndex(function (l) { return l.id === c.id; });
             if (i === -1) lp.push(c); else if (c.replies >= lp[i].replies) lp[i] = c;
           });
           writeTable(K.POSTS, lp);
         }
         if (callback) callback(true);
-      }).catch(function(){ if (callback) callback(false); });
+      }).catch(function () { if (callback) callback(false); });
     }
   };
 
   /* Cross-device login: fetches user from Firestore, caches locally, then logs in */
   function loginFromCloud(email, password, callback) {
-    _fb.fetchUserByEmail(email, function(cloudUser) {
+    _fb.fetchUserByEmail(email, function (cloudUser) {
       if (!cloudUser) { callback({ success: false, message: 'No account found with that email.' }); return; }
       var users = readTable(K.USERS);
-      if (!users.some(function(u){ return u.email === cloudUser.email; })) {
+      if (!users.some(function (u) { return u.email === cloudUser.email; })) {
         users.push(cloudUser); writeTable(K.USERS, users);
       }
       var result = login(email, password);
-      if (result.success) _fb.syncUserData(cloudUser.id, function(){ callback(result); });
+      if (result.success) _fb.syncUserData(cloudUser.id, function () { callback(result); });
       else callback(result);
     });
   }
@@ -169,42 +169,37 @@ window.EduDB = (function () {
       var changed = false;
 
       // Remove Ahmad from users
-      var newUsers = users.filter(function(u) { return u.firstName !== 'Ahmad' || u.lastName !== 'Farid'; });
+      var newUsers = users.filter(function (u) { return u.firstName !== 'Ahmad' || u.lastName !== 'Farid'; });
       if (newUsers.length !== users.length) { writeTable(K.USERS, newUsers); changed = true; }
 
       // Remove Ahmad from enrollments
-      var newEnrol = enrollments.filter(function(e) { return e.userId !== 'u_seed01'; });
+      var newEnrol = enrollments.filter(function (e) { return e.userId !== 'u_seed01'; });
       if (newEnrol.length !== enrollments.length) { writeTable(K.ENROLLMENTS, newEnrol); changed = true; }
 
       // Remove Ahmad from posts
-      var newPosts = posts.filter(function(p) { return p.author !== 'Ahmad Farid'; });
+      var newPosts = posts.filter(function (p) { return p.author !== 'Ahmad Farid'; });
       if (newPosts.length !== posts.length) { writeTable(K.POSTS, newPosts); changed = true; }
 
       if (changed) { console.log('EduDB: Ahmad Farid data purged.'); }
     })();
 
-    /* Users table */
-    if (readTable(K.USERS).length === 0) {
-      writeTable(K.USERS, [
-        {
-          id: 'u_seed01',
-          firstName: 'Ahmad', lastName: 'Farid',
-          email: 'student@edu.com',
-          password: hashPw('password123'),
-          programme: 'Computer Science', year: '2',
-          avatar: 'A',
-          avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
-          id: 'u_admin',
-          firstName: 'Edu', lastName: 'Support',
-          email: 'support@edulearn.com',
-          password: hashPw('admin123'),
-          programme: 'Staff', year: 'N/A',
-          avatar: 'A',
-          avatarColor: 'linear-gradient(135deg,#ef4444,#991b1b)',
-          createdAt: '2025-01-10T08:00:00Z',
-          role: 'admin'
-        }
-      ]);
+    /* Users table - seed the admin account */
+    var existingUsers = readTable(K.USERS);
+    var hasAdmin = existingUsers.some(function (u) { return u.role === 'admin'; });
+    if (!hasAdmin) {
+      existingUsers = existingUsers.filter(function (u) { return u.role !== 'admin'; });
+      existingUsers.push({
+        id: 'u_admin',
+        firstName: 'Admin', lastName: 'EduLearn',
+        email: 'admin@edulearn.com',
+        password: hashPw('admin123'),
+        programme: 'Administration', year: 'N/A',
+        avatar: 'A',
+        avatarColor: 'linear-gradient(135deg,#ef4444,#991b1b)',
+        createdAt: '2025-01-01T08:00:00Z',
+        role: 'admin'
+      });
+      writeTable(K.USERS, existingUsers);
     }
 
     /* Enrollments table */
@@ -230,11 +225,12 @@ window.EduDB = (function () {
     /* Forum posts table - Seeded with 25 real Q&A sets */
     if (readTable(K.POSTS).length === 0) {
       var seedUsers = [
-        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#43e97b,#38f9d7)', id: 'u_seed03' },
-        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'u_seed02' },
-        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#4facfe,#00f2fe)', id: 'u_seed04' },
-        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#fa709a,#fee140)', id: 'u_seed05' },
-        { name: 'Edu Support', avatar: 'E', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'u_admin' }
+        { name: 'Raj Kumar', avatar: 'R', color: 'linear-gradient(135deg,#43e97b,#38f9d7)', id: 'edu_0001' },
+        { name: 'Siti Nurhaliza', avatar: 'S', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'edu_0002' },
+        { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#4facfe,#00f2fe)', id: 'edu_0003' },
+        { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#fa709a,#fee140)', id: 'edu_0004' },
+        { name: 'Loh Mun Yee', avatar: 'L', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'edu_0005' },
+        { name: 'Edu Support', avatar: 'E', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'admin' }
       ];
 
       var data = [
@@ -318,501 +314,501 @@ window.EduDB = (function () {
    * @returns {Object} {success, message, user?}
    */
   function register(d) {
-  if (!d.firstName || !d.email || !d.password)
-    return { success: false, message: 'Please fill in all required fields.' };
-  if (d.password.length < 8)
-    return { success: false, message: 'Password must be at least 8 characters.' };
-  if (d.password !== d.confirm)
-    return { success: false, message: 'Passwords do not match.' };
-  if (d.email.toLowerCase().trim() === 'admin@edulearn.com')
-    return { success: false, message: 'This email is reserved for system administrators.' };
+    if (!d.firstName || !d.email || !d.password)
+      return { success: false, message: 'Please fill in all required fields.' };
+    if (d.password.length < 8)
+      return { success: false, message: 'Password must be at least 8 characters.' };
+    if (d.password !== d.confirm)
+      return { success: false, message: 'Passwords do not match.' };
+    if (d.email.toLowerCase().trim() === 'admin@edulearn.com')
+      return { success: false, message: 'This email is reserved for system administrators.' };
 
-  var users = readTable(K.USERS);
-  if (users.some(function (u) { return u.email.toLowerCase() === d.email.toLowerCase().trim(); }))
-    return { success: false, message: 'This email is already registered.' };
+    var users = readTable(K.USERS);
+    if (users.some(function (u) { return u.email.toLowerCase() === d.email.toLowerCase().trim(); }))
+      return { success: false, message: 'This email is already registered.' };
 
-  var user = {
-    id: uid(),
-    firstName: d.firstName.trim(),
-    lastName: (d.lastName || '').trim(),
-    email: d.email.toLowerCase().trim(),
-    password: hashPw(d.password),
-    programme: d.programme || 'Computer Science',
-    year: d.year || '1',
-    avatar: d.firstName.charAt(0).toUpperCase(),
-    avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
-    createdAt: new Date().toISOString(),
-    role: 'student'
-  };
-  users.push(user);
-  writeTable(K.USERS, users);
-  _fb.saveUser(user);
-  return { success: true, message: 'Account created successfully!', user: user };
-}
-
-/**
- * Log in with email & password.
- * @returns {Object} {success, message, user?}
- */
-function login(email, password) {
-  var users = readTable(K.USERS);
-  var user = users.find(function (u) {
-    return u.email.toLowerCase() === email.toLowerCase().trim();
-  });
-  if (!user)
-    return { success: false, message: 'No account found with that email.' };
-  if (user.password !== hashPw(password))
-    return { success: false, message: 'Incorrect password. Please try again.' };
-
-  var session = {
-    id: user.id, firstName: user.firstName, lastName: user.lastName,
-    email: user.email, programme: user.programme,
-    avatar: user.avatar, avatarColor: user.avatarColor,
-    role: user.role || 'student'
-  };
-  writeTable(K.SESSION, session);
-  return { success: true, message: 'Login successful!', user: session };
-}
-
-/** Update user profile data */
-function updateUserProfile(userId, data) {
-  var users = readTable(K.USERS);
-  var userIdx = users.findIndex(function(u) { return u.id === userId; });
-  if (userIdx === -1) return { success: false, message: 'User not found.' };
-
-  users[userIdx].firstName = data.firstName || users[userIdx].firstName;
-  users[userIdx].lastName = data.lastName || users[userIdx].lastName;
-  users[userIdx].email = data.email || users[userIdx].email;
-  users[userIdx].avatar = users[userIdx].firstName.charAt(0).toUpperCase();
-
-  writeTable(K.USERS, users);
-
-  // Update session
-  var sess = getSession();
-  if (sess && sess.id === userId) {
-    sess.firstName = users[userIdx].firstName;
-    sess.lastName = users[userIdx].lastName;
-    sess.email = users[userIdx].email;
-    sess.avatar = users[userIdx].avatar;
-    writeTable(K.SESSION, sess);
-  }
-  return { success: true, message: 'Profile updated.' };
-}
-
-/** Change user password with old password verification */
-function updateUserPassword(userId, oldPass, newPass) {
-  var users = readTable(K.USERS);
-  var userIdx = users.findIndex(function(u) { return u.id === userId; });
-  if (userIdx === -1) return { success: false, message: 'User not found.' };
-
-  if (users[userIdx].password !== hashPw(oldPass)) {
-    return { success: false, message: 'Incorrect old password.' };
-  }
-  if (newPass.length < 8) {
-    return { success: false, message: 'New password must be at least 8 characters.' };
+    var user = {
+      id: uid(),
+      firstName: d.firstName.trim(),
+      lastName: (d.lastName || '').trim(),
+      email: d.email.toLowerCase().trim(),
+      password: hashPw(d.password),
+      programme: d.programme || 'Computer Science',
+      year: d.year || '1',
+      avatar: d.firstName.charAt(0).toUpperCase(),
+      avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
+      createdAt: new Date().toISOString(),
+      role: 'student'
+    };
+    users.push(user);
+    writeTable(K.USERS, users);
+    _fb.saveUser(user);
+    return { success: true, message: 'Account created successfully!', user: user };
   }
 
-  users[userIdx].password = hashPw(newPass);
-  writeTable(K.USERS, users);
-  return { success: true, message: 'Password changed successfully.' };
-}
+  /**
+   * Log in with email & password.
+   * @returns {Object} {success, message, user?}
+   */
+  function login(email, password) {
+    var users = readTable(K.USERS);
+    var user = users.find(function (u) {
+      return u.email.toLowerCase() === email.toLowerCase().trim();
+    });
+    if (!user)
+      return { success: false, message: 'No account found with that email.' };
+    if (user.password !== hashPw(password))
+      return { success: false, message: 'Incorrect password. Please try again.' };
 
-/** Log out the current user. */
-function logout() { localStorage.removeItem(K.SESSION); }
+    var session = {
+      id: user.id, firstName: user.firstName, lastName: user.lastName,
+      email: user.email, programme: user.programme,
+      avatar: user.avatar, avatarColor: user.avatarColor,
+      role: user.role || 'student'
+    };
+    writeTable(K.SESSION, session);
+    return { success: true, message: 'Login successful!', user: session };
+  }
 
-/** Return the current session object, or null. */
-function getSession() { return readOne(K.SESSION); }
+  /** Update user profile data */
+  function updateUserProfile(userId, data) {
+    var users = readTable(K.USERS);
+    var userIdx = users.findIndex(function (u) { return u.id === userId; });
+    if (userIdx === -1) return { success: false, message: 'User not found.' };
 
-/** Return true if a user is logged in. */
-function isLoggedIn() { return getSession() !== null; }
+    users[userIdx].firstName = data.firstName || users[userIdx].firstName;
+    users[userIdx].lastName = data.lastName || users[userIdx].lastName;
+    users[userIdx].email = data.email || users[userIdx].email;
+    users[userIdx].avatar = users[userIdx].firstName.charAt(0).toUpperCase();
 
-/* ─── ENROLLMENTS ───────────────────────────────────────── */
+    writeTable(K.USERS, users);
 
-function getUserEnrollments(userId) {
-  return readTable(K.ENROLLMENTS).filter(function (e) { return e.userId === userId; });
-}
-
-function enrol(userId, courseId, courseName, icon, color) {
-  var enr = readTable(K.ENROLLMENTS);
-  if (enr.some(function (e) { return e.userId === userId && e.courseId === courseId; }))
-    return { success: false, message: 'Already enrolled in this course.' };
-  enr.push({
-    id: uid(), userId: userId, courseId: courseId,
-    courseName: courseName, progress: 0,
-    weeksTotal: 12, weeksCurrent: 0,
-    completedLectures: [], completedQuizzes: [],
-    icon: icon, color: color
-  });
-  writeTable(K.ENROLLMENTS, enr);
-  _fb.saveUserData(userId);
-  return { success: true, message: 'Successfully enrolled!' };
-}
-
-function updateProgress(enrollmentId, progress, weeksCurrent) {
-  var enr = readTable(K.ENROLLMENTS);
-  enr.forEach(function (e) {
-    if (e.id === enrollmentId) {
-      e.progress = progress;
-      e.weeksCurrent = weeksCurrent;
+    // Update session
+    var sess = getSession();
+    if (sess && sess.id === userId) {
+      sess.firstName = users[userIdx].firstName;
+      sess.lastName = users[userIdx].lastName;
+      sess.email = users[userIdx].email;
+      sess.avatar = users[userIdx].avatar;
+      writeTable(K.SESSION, sess);
     }
-  });
-  writeTable(K.ENROLLMENTS, enr);
-}
+    return { success: true, message: 'Profile updated.' };
+  }
 
-function markLectureRead(userId, courseId, week, lectureTitle, totalLecs, totalQuiz) {
-  var enr = readTable(K.ENROLLMENTS);
-  var enrollment = enr.find(function (e) { return e.userId === userId && e.courseId === courseId; });
-  if (!enrollment) return;
+  /** Change user password with old password verification */
+  function updateUserPassword(userId, oldPass, newPass) {
+    var users = readTable(K.USERS);
+    var userIdx = users.findIndex(function (u) { return u.id === userId; });
+    if (userIdx === -1) return { success: false, message: 'User not found.' };
 
-  if (!enrollment.completedLectures) enrollment.completedLectures = [];
-  if (enrollment.completedLectures.indexOf(week) === -1) {
-    enrollment.completedLectures.push(week);
+    if (users[userIdx].password !== hashPw(oldPass)) {
+      return { success: false, message: 'Incorrect old password.' };
+    }
+    if (newPass.length < 8) {
+      return { success: false, message: 'New password must be at least 8 characters.' };
+    }
 
-    var doneLecs = enrollment.completedLectures.length;
-    var doneQuizzes = (enrollment.completedQuizzes || []).length;
-    var totalItems = (totalLecs || 5) + (totalQuiz || 5);
+    users[userIdx].password = hashPw(newPass);
+    writeTable(K.USERS, users);
+    return { success: true, message: 'Password changed successfully.' };
+  }
 
-    enrollment.progress = Math.min(100, Math.round(((doneLecs + doneQuizzes) / totalItems) * 100));
-    if (enrollment.weeksCurrent < week) enrollment.weeksCurrent = week;
+  /** Log out the current user. */
+  function logout() { localStorage.removeItem(K.SESSION); }
 
+  /** Return the current session object, or null. */
+  function getSession() { return readOne(K.SESSION); }
+
+  /** Return true if a user is logged in. */
+  function isLoggedIn() { return getSession() !== null; }
+
+  /* ─── ENROLLMENTS ───────────────────────────────────────── */
+
+  function getUserEnrollments(userId) {
+    return readTable(K.ENROLLMENTS).filter(function (e) { return e.userId === userId; });
+  }
+
+  function enrol(userId, courseId, courseName, icon, color) {
+    var enr = readTable(K.ENROLLMENTS);
+    if (enr.some(function (e) { return e.userId === userId && e.courseId === courseId; }))
+      return { success: false, message: 'Already enrolled in this course.' };
+    enr.push({
+      id: uid(), userId: userId, courseId: courseId,
+      courseName: courseName, progress: 0,
+      weeksTotal: 12, weeksCurrent: 0,
+      completedLectures: [], completedQuizzes: [],
+      icon: icon, color: color
+    });
     writeTable(K.ENROLLMENTS, enr);
     _fb.saveUserData(userId);
-    logActivity(userId, 'lecture', 'Watched: "' + lectureTitle + '" – ' + enrollment.courseName + ' Week ' + week, 'fa-play-circle', '#f0f2ff', '#667eea');
+    return { success: true, message: 'Successfully enrolled!' };
   }
-}
 
-function markQuizDone(userId, courseId, quizIndex, score, total, totalLecs, totalQuiz) {
-  var enr = readTable(K.ENROLLMENTS);
-  var enrollment = enr.find(function (e) { return e.userId === userId && e.courseId === courseId; });
-  if (!enrollment) return;
-
-  if (!enrollment.completedQuizzes) enrollment.completedQuizzes = [];
-  if (enrollment.completedQuizzes.indexOf(quizIndex) === -1) {
-    enrollment.completedQuizzes.push(quizIndex);
-
-    var doneLecs = (enrollment.completedLectures || []).length;
-    var doneQuizzes = enrollment.completedQuizzes.length;
-    var totalItems = (totalLecs || 5) + (totalQuiz || 5);
-
-    enrollment.progress = Math.min(100, Math.round(((doneLecs + doneQuizzes) / totalItems) * 100));
+  function updateProgress(enrollmentId, progress, weeksCurrent) {
+    var enr = readTable(K.ENROLLMENTS);
+    enr.forEach(function (e) {
+      if (e.id === enrollmentId) {
+        e.progress = progress;
+        e.weeksCurrent = weeksCurrent;
+      }
+    });
     writeTable(K.ENROLLMENTS, enr);
-    _fb.saveUserData(userId);
-    logActivity(userId, 'quiz', 'Completed Quiz ' + quizIndex + ': ' + enrollment.courseName + ' (Score: ' + score + '/' + total + ')', 'fa-check-circle', '#d1fae5', '#10b981');
   }
-}
 
-function logActivity(userId, type, text, icon, bg, iclr) {
-  var acts = readTable(K.ACTIVITY);
-  acts.unshift({
-    id: uid(), userId: userId, type: type, text: text, icon: icon, bg: bg, iclr: iclr, createdAt: new Date().toISOString()
-  });
-  if (acts.length > 20) acts.pop(); // keep last 20
-  writeTable(K.ACTIVITY, acts);
-}
+  function markLectureRead(userId, courseId, week, lectureTitle, totalLecs, totalQuiz) {
+    var enr = readTable(K.ENROLLMENTS);
+    var enrollment = enr.find(function (e) { return e.userId === userId && e.courseId === courseId; });
+    if (!enrollment) return;
 
-function getActivityLog(userId) {
-  return readTable(K.ACTIVITY).filter(function (a) { return a.userId === userId; });
-}
+    if (!enrollment.completedLectures) enrollment.completedLectures = [];
+    if (enrollment.completedLectures.indexOf(week) === -1) {
+      enrollment.completedLectures.push(week);
 
-/* ─── FORUM ─────────────────────────────────────────────── */
+      var doneLecs = enrollment.completedLectures.length;
+      var doneQuizzes = (enrollment.completedQuizzes || []).length;
+      var totalItems = (totalLecs || 5) + (totalQuiz || 5);
 
-function getAllPosts() { return readTable(K.POSTS); }
+      enrollment.progress = Math.min(100, Math.round(((doneLecs + doneQuizzes) / totalItems) * 100));
+      if (enrollment.weeksCurrent < week) enrollment.weeksCurrent = week;
 
-function addPost(sess, category, title, content) {
-  var posts = readTable(K.POSTS);
-  var post = {
-    id: uid(),
-    userId: sess.id,
-    author: (sess.firstName + ' ' + (sess.lastName || '')).trim(),
-    avatar: sess.avatar,
-    avatarColor: sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)',
-    category: category,
-    title: title,
-    content: content,
-    replies: 0,
-    replyData: [],
-    views: 1,
-    likes: [],
-    createdAt: new Date().toISOString(),
-    solved: false
-  };
-  posts.unshift(post);
-  writeTable(K.POSTS, posts);
-  _fb.savePosts();
-  return post;
-}
+      writeTable(K.ENROLLMENTS, enr);
+      _fb.saveUserData(userId);
+      logActivity(userId, 'lecture', 'Watched: "' + lectureTitle + '" – ' + enrollment.courseName + ' Week ' + week, 'fa-play-circle', '#f0f2ff', '#667eea');
+    }
+  }
 
-function addReply(postId, sess, content) {
-  var posts = readTable(K.POSTS);
-  var post = posts.find(function (p) { return p.id === postId; });
-  if (!post) return null;
+  function markQuizDone(userId, courseId, quizIndex, score, total, totalLecs, totalQuiz) {
+    var enr = readTable(K.ENROLLMENTS);
+    var enrollment = enr.find(function (e) { return e.userId === userId && e.courseId === courseId; });
+    if (!enrollment) return;
 
-  if (!post.replyData) post.replyData = [];
-  var reply = {
-    id: uid(),
-    userId: sess.id,
-    author: (sess.firstName + ' ' + (sess.lastName || '')).trim(),
-    avatar: sess.avatar,
-    avatarColor: sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)',
-    content: content,
-    likes: [],
-    createdAt: new Date().toISOString()
-  };
-  post.replyData.push(reply);
-  post.replies = post.replyData.length;
+    if (!enrollment.completedQuizzes) enrollment.completedQuizzes = [];
+    if (enrollment.completedQuizzes.indexOf(quizIndex) === -1) {
+      enrollment.completedQuizzes.push(quizIndex);
 
-  writeTable(K.POSTS, posts);
-  _fb.savePosts();
-  return post;
-}
+      var doneLecs = (enrollment.completedLectures || []).length;
+      var doneQuizzes = enrollment.completedQuizzes.length;
+      var totalItems = (totalLecs || 5) + (totalQuiz || 5);
 
-function togglePostLike(postId, userId) {
-  var posts = readTable(K.POSTS);
-  var post = posts.find(function (p) { return p.id === postId; });
-  if (!post) return null;
+      enrollment.progress = Math.min(100, Math.round(((doneLecs + doneQuizzes) / totalItems) * 100));
+      writeTable(K.ENROLLMENTS, enr);
+      _fb.saveUserData(userId);
+      logActivity(userId, 'quiz', 'Completed Quiz ' + quizIndex + ': ' + enrollment.courseName + ' (Score: ' + score + '/' + total + ')', 'fa-check-circle', '#d1fae5', '#10b981');
+    }
+  }
 
-  if (!post.likes) post.likes = [];
-  var idx = post.likes.indexOf(userId);
-  if (idx === -1) post.likes.push(userId);
-  else post.likes.splice(idx, 1);
+  function logActivity(userId, type, text, icon, bg, iclr) {
+    var acts = readTable(K.ACTIVITY);
+    acts.unshift({
+      id: uid(), userId: userId, type: type, text: text, icon: icon, bg: bg, iclr: iclr, createdAt: new Date().toISOString()
+    });
+    if (acts.length > 20) acts.pop(); // keep last 20
+    writeTable(K.ACTIVITY, acts);
+  }
 
-  writeTable(K.POSTS, posts);
-  return post;
-}
+  function getActivityLog(userId) {
+    return readTable(K.ACTIVITY).filter(function (a) { return a.userId === userId; });
+  }
 
-function toggleReplyLike(postId, replyId, userId) {
-  var posts = readTable(K.POSTS);
-  var post = posts.find(function (p) { return p.id === postId; });
-  if (!post) return null;
+  /* ─── FORUM ─────────────────────────────────────────────── */
 
-  var reply = post.replyData.find(function (r) { return r.id === replyId; });
-  if (!reply) return null;
+  function getAllPosts() { return readTable(K.POSTS); }
 
-  if (!reply.likes) reply.likes = [];
-  var idx = reply.likes.indexOf(userId);
-  if (idx === -1) reply.likes.push(userId);
-  else reply.likes.splice(idx, 1);
-
-  writeTable(K.POSTS, posts);
-  return post;
-}
-
-function deletePost(postId, userId, userRole) {
-  var posts = readTable(K.POSTS);
-  var post = posts.find(function (p) { return p.id === postId; });
-  if (!post) return false;
-
-  // Allow deletion if owner OR admin
-  if (post.userId === userId || userRole === 'admin') {
-    posts = posts.filter(function (p) { return p.id !== postId; });
+  function addPost(sess, category, title, content) {
+    var posts = readTable(K.POSTS);
+    var post = {
+      id: uid(),
+      userId: sess.id,
+      author: (sess.firstName + ' ' + (sess.lastName || '')).trim(),
+      avatar: sess.avatar,
+      avatarColor: sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)',
+      category: category,
+      title: title,
+      content: content,
+      replies: 0,
+      replyData: [],
+      views: 1,
+      likes: [],
+      createdAt: new Date().toISOString(),
+      solved: false
+    };
+    posts.unshift(post);
     writeTable(K.POSTS, posts);
-    return true;
+    _fb.savePosts();
+    return post;
   }
-  return false;
-}
 
-/* ─── ORDERS ────────────────────────────────────────────── */
+  function addReply(postId, sess, content) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function (p) { return p.id === postId; });
+    if (!post) return null;
 
-function addOrder(userId, items, total) {
-  var orders = readTable(K.ORDERS);
-  var order = {
-    id: uid(),
-    userId: userId,
-    items: items,
-    total: total,
-    status: 'Completed',
-    orderNum: Math.floor(Math.random() * 900000 + 100000),
-    createdAt: new Date().toISOString()
-  };
-  orders.unshift(order);
-  writeTable(K.ORDERS, orders);
-  _fb.saveUserData(userId);
-  return order;
-}
+    if (!post.replyData) post.replyData = [];
+    var reply = {
+      id: uid(),
+      userId: sess.id,
+      author: (sess.firstName + ' ' + (sess.lastName || '')).trim(),
+      avatar: sess.avatar,
+      avatarColor: sess.avatarColor || 'linear-gradient(135deg,#667eea,#764ba2)',
+      content: content,
+      likes: [],
+      createdAt: new Date().toISOString()
+    };
+    post.replyData.push(reply);
+    post.replies = post.replyData.length;
 
-function getUserOrders(userId) {
-  return readTable(K.ORDERS).filter(function (o) { return o.userId === userId; });
-}
-
-/* ─── PURCHASED BOOKS ──────────────────────────────────── */
-
-/**
- * Save the names of books a user has purchased.
- * @param {string} userId
- * @param {Array}  items  – cart items [{name, price, qty}, ...]
- */
-function addPurchasedBooks(userId, items) {
-  var all = readTable(K.PURCHASED);
-  var record = all.find(function (r) { return r.userId === userId; });
-  if (!record) {
-    record = { userId: userId, books: [] };
-    all.push(record);
+    writeTable(K.POSTS, posts);
+    _fb.savePosts();
+    return post;
   }
-  items.forEach(function (item) {
-    if (record.books.indexOf(item.name) === -1) {
-      record.books.push(item.name);
+
+  function togglePostLike(postId, userId) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function (p) { return p.id === postId; });
+    if (!post) return null;
+
+    if (!post.likes) post.likes = [];
+    var idx = post.likes.indexOf(userId);
+    if (idx === -1) post.likes.push(userId);
+    else post.likes.splice(idx, 1);
+
+    writeTable(K.POSTS, posts);
+    return post;
+  }
+
+  function toggleReplyLike(postId, replyId, userId) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function (p) { return p.id === postId; });
+    if (!post) return null;
+
+    var reply = post.replyData.find(function (r) { return r.id === replyId; });
+    if (!reply) return null;
+
+    if (!reply.likes) reply.likes = [];
+    var idx = reply.likes.indexOf(userId);
+    if (idx === -1) reply.likes.push(userId);
+    else reply.likes.splice(idx, 1);
+
+    writeTable(K.POSTS, posts);
+    return post;
+  }
+
+  function deletePost(postId, userId, userRole) {
+    var posts = readTable(K.POSTS);
+    var post = posts.find(function (p) { return p.id === postId; });
+    if (!post) return false;
+
+    // Allow deletion if owner OR admin
+    if (post.userId === userId || userRole === 'admin') {
+      posts = posts.filter(function (p) { return p.id !== postId; });
+      writeTable(K.POSTS, posts);
+      return true;
     }
-  });
-  writeTable(K.PURCHASED, all);
-  _fb.saveUserData(userId);
-}
+    return false;
+  }
 
-/**
- * Return the array of book names purchased by a user.
- * @param {string} userId
- * @returns {Array<string>}
- */
-function getPurchasedBooks(userId) {
-  var all = readTable(K.PURCHASED);
-  var record = all.find(function (r) { return r.userId === userId; });
-  return record ? record.books : [];
-}
+  /* ─── ORDERS ────────────────────────────────────────────── */
 
-/* ─── CART ──────────────────────────────────────────────── */
-function getCart() { return readTable(K.CART); }
-function saveCart(c) { writeTable(K.CART, c); }
-function clearCart() { localStorage.removeItem(K.CART); }
+  function addOrder(userId, items, total) {
+    var orders = readTable(K.ORDERS);
+    var order = {
+      id: uid(),
+      userId: userId,
+      items: items,
+      total: total,
+      status: 'Completed',
+      orderNum: Math.floor(Math.random() * 900000 + 100000),
+      createdAt: new Date().toISOString()
+    };
+    orders.unshift(order);
+    writeTable(K.ORDERS, orders);
+    _fb.saveUserData(userId);
+    return order;
+  }
 
-/* ─── ADMIN: CUSTOM BOOKS ───────────────────────────────── */
-function addCustomBook(book) {
-  var books = readTable(K.CUSTOM_BOOKS);
-  book.id = uid();
-  book.createdAt = new Date().toISOString();
-  books.push(book);
-  writeTable(K.CUSTOM_BOOKS, books);
-  return book;
-}
-function getCustomBooks() { return readTable(K.CUSTOM_BOOKS); }
-function deleteCustomBook(id) {
-  var books = readTable(K.CUSTOM_BOOKS).filter(function (b) { return b.id !== id; });
-  writeTable(K.CUSTOM_BOOKS, books);
-}
+  function getUserOrders(userId) {
+    return readTable(K.ORDERS).filter(function (o) { return o.userId === userId; });
+  }
 
-/* ─── ADMIN: CUSTOM COURSES ─────────────────────────────── */
-function addCustomCourseMaterial(courseId, material) {
-  var courses = readTable(K.CUSTOM_COURSES, '{}');
-  if (!courses[courseId]) courses[courseId] = { lectures: [], tutorials: [] };
-  material.id = uid();
-  material.createdAt = new Date().toISOString();
-  courses[courseId][material.tab].push(material); // tab is 'lectures' or 'tutorials'
-  writeTable(K.CUSTOM_COURSES, courses);
-  return material;
-}
-function getCustomCourseMaterials() { return readTable(K.CUSTOM_COURSES, '{}'); }
-function deleteCustomCourseMaterial(courseId, tab, materialId) {
-  var courses = readTable(K.CUSTOM_COURSES, '{}');
-  if (courses[courseId] && courses[courseId][tab]) {
-    courses[courseId][tab] = courses[courseId][tab].filter(function (m) { return m.id !== materialId; });
+  /* ─── PURCHASED BOOKS ──────────────────────────────────── */
+
+  /**
+   * Save the names of books a user has purchased.
+   * @param {string} userId
+   * @param {Array}  items  – cart items [{name, price, qty}, ...]
+   */
+  function addPurchasedBooks(userId, items) {
+    var all = readTable(K.PURCHASED);
+    var record = all.find(function (r) { return r.userId === userId; });
+    if (!record) {
+      record = { userId: userId, books: [] };
+      all.push(record);
+    }
+    items.forEach(function (item) {
+      if (record.books.indexOf(item.name) === -1) {
+        record.books.push(item.name);
+      }
+    });
+    writeTable(K.PURCHASED, all);
+    _fb.saveUserData(userId);
+  }
+
+  /**
+   * Return the array of book names purchased by a user.
+   * @param {string} userId
+   * @returns {Array<string>}
+   */
+  function getPurchasedBooks(userId) {
+    var all = readTable(K.PURCHASED);
+    var record = all.find(function (r) { return r.userId === userId; });
+    return record ? record.books : [];
+  }
+
+  /* ─── CART ──────────────────────────────────────────────── */
+  function getCart() { return readTable(K.CART); }
+  function saveCart(c) { writeTable(K.CART, c); }
+  function clearCart() { localStorage.removeItem(K.CART); }
+
+  /* ─── ADMIN: CUSTOM BOOKS ───────────────────────────────── */
+  function addCustomBook(book) {
+    var books = readTable(K.CUSTOM_BOOKS);
+    book.id = uid();
+    book.createdAt = new Date().toISOString();
+    books.push(book);
+    writeTable(K.CUSTOM_BOOKS, books);
+    return book;
+  }
+  function getCustomBooks() { return readTable(K.CUSTOM_BOOKS); }
+  function deleteCustomBook(id) {
+    var books = readTable(K.CUSTOM_BOOKS).filter(function (b) { return b.id !== id; });
+    writeTable(K.CUSTOM_BOOKS, books);
+  }
+
+  /* ─── ADMIN: CUSTOM COURSES ─────────────────────────────── */
+  function addCustomCourseMaterial(courseId, material) {
+    var courses = readTable(K.CUSTOM_COURSES, '{}');
+    if (!courses[courseId]) courses[courseId] = { lectures: [], tutorials: [] };
+    material.id = uid();
+    material.createdAt = new Date().toISOString();
+    courses[courseId][material.tab].push(material); // tab is 'lectures' or 'tutorials'
     writeTable(K.CUSTOM_COURSES, courses);
+    return material;
   }
-}
-
-/* ─── ADMIN: MONITORING ────────────────────────────────── */
-function getAllUsers() { return readTable(K.USERS); }
-function getAllEnrollments() { return readTable(K.ENROLLMENTS); }
-function getAllOrders() { 
-  var orders = readTable(K.ORDERS); 
-  var valid = orders.filter(function(o) { return o.items && o.items.length > 0; });
-  if(valid.length !== orders.length) writeTable(K.ORDERS, valid);
-  return valid;
-}
-
-function deleteOrder(orderId) {
-  var orders = readTable(K.ORDERS);
-  var filtered = orders.filter(function(o) { return o.id !== orderId; });
-  writeTable(K.ORDERS, filtered);
-}
-function getAllForumPosts() { return readTable(K.POSTS); }
-
-/* ─── SAVED RESOURCES ───────────────────────────────────── */
-function toggleSavedResource(userId, res) {
-  var all = readTable(K.SAVED_RESOURCES, '{}');
-  if (!all[userId]) all[userId] = [];
-  
-  var idx = all[userId].findIndex(function(item) { return item.file === res.file; });
-  if (idx === -1) {
-    res.savedAt = new Date().toISOString();
-    all[userId].push(res);
-    writeTable(K.SAVED_RESOURCES, all);
-    return { success: true, action: 'saved' };
-  } else {
-    all[userId].splice(idx, 1);
-    writeTable(K.SAVED_RESOURCES, all);
-    return { success: true, action: 'removed' };
+  function getCustomCourseMaterials() { return readTable(K.CUSTOM_COURSES, '{}'); }
+  function deleteCustomCourseMaterial(courseId, tab, materialId) {
+    var courses = readTable(K.CUSTOM_COURSES, '{}');
+    if (courses[courseId] && courses[courseId][tab]) {
+      courses[courseId][tab] = courses[courseId][tab].filter(function (m) { return m.id !== materialId; });
+      writeTable(K.CUSTOM_COURSES, courses);
+    }
   }
-}
 
-function getSavedResources(userId) {
-  var all = readTable(K.SAVED_RESOURCES, '{}');
-  return all[userId] || [];
-}
-function isResourceSaved(userId, file) {
-  var all = readTable(K.SAVED_RESOURCES, '{}');
-  if (!all[userId]) return false;
-  return all[userId].some(function(item) { return item.file === file; });
-}
+  /* ─── ADMIN: MONITORING ────────────────────────────────── */
+  function getAllUsers() { return readTable(K.USERS); }
+  function getAllEnrollments() { return readTable(K.ENROLLMENTS); }
+  function getAllOrders() {
+    var orders = readTable(K.ORDERS);
+    var valid = orders.filter(function (o) { return o.items && o.items.length > 0; });
+    if (valid.length !== orders.length) writeTable(K.ORDERS, valid);
+    return valid;
+  }
+
+  function deleteOrder(orderId) {
+    var orders = readTable(K.ORDERS);
+    var filtered = orders.filter(function (o) { return o.id !== orderId; });
+    writeTable(K.ORDERS, filtered);
+  }
+  function getAllForumPosts() { return readTable(K.POSTS); }
+
+  /* ─── SAVED RESOURCES ───────────────────────────────────── */
+  function toggleSavedResource(userId, res) {
+    var all = readTable(K.SAVED_RESOURCES, '{}');
+    if (!all[userId]) all[userId] = [];
+
+    var idx = all[userId].findIndex(function (item) { return item.file === res.file; });
+    if (idx === -1) {
+      res.savedAt = new Date().toISOString();
+      all[userId].push(res);
+      writeTable(K.SAVED_RESOURCES, all);
+      return { success: true, action: 'saved' };
+    } else {
+      all[userId].splice(idx, 1);
+      writeTable(K.SAVED_RESOURCES, all);
+      return { success: true, action: 'removed' };
+    }
+  }
+
+  function getSavedResources(userId) {
+    var all = readTable(K.SAVED_RESOURCES, '{}');
+    return all[userId] || [];
+  }
+  function isResourceSaved(userId, file) {
+    var all = readTable(K.SAVED_RESOURCES, '{}');
+    if (!all[userId]) return false;
+    return all[userId].some(function (item) { return item.file === file; });
+  }
 
 
-/* ─── Initialisation ────────────────────────────────────── */
-seed();              // populate demo data on first run
-_fb.init();          // connect to Firebase Firestore
+  /* ─── Initialisation ────────────────────────────────────── */
+  seed();              // populate demo data on first run
+  _fb.init();          // connect to Firebase Firestore
 
-/* ─── Public API ─────────────────────────────────────────── */
-return {
-  /* Auth */
-  register: register,
-  login: login,
-  logout: logout,
-  getSession: getSession,
-  isLoggedIn: isLoggedIn,
-  updateUserProfile: updateUserProfile,
-  updateUserPassword: updateUserPassword,
-  /* Enrollments */
-  getUserEnrollments: getUserEnrollments,
-  enrol: enrol,
-  updateProgress: updateProgress,
-  markLectureRead: markLectureRead,
-  markQuizDone: markQuizDone,
-  getActivityLog: getActivityLog,
-  /* Forum */
-  getAllPosts: getAllPosts,
-  addPost: addPost,
-  addReply: addReply,
-  togglePostLike: togglePostLike,
-  toggleReplyLike: toggleReplyLike,
-  deletePost: deletePost,
-  /* Orders */
-  addOrder: addOrder,
-  getUserOrders: getUserOrders,
-  /* Purchased Books */
-  addPurchasedBooks: addPurchasedBooks,
-  getPurchasedBooks: getPurchasedBooks,
-  /* Cart */
-  getCart: getCart,
-  saveCart: saveCart,
-  clearCart: clearCart,
-  /* Admin */
-  addCustomBook: addCustomBook,
-  getCustomBooks: getCustomBooks,
-  deleteCustomBook: deleteCustomBook,
-  addCustomCourseMaterial: addCustomCourseMaterial,
-  getCustomCourseMaterials: getCustomCourseMaterials,
-  deleteCustomCourseMaterial: deleteCustomCourseMaterial,
-  /* Admin Monitoring */
-  getAllUsers: getAllUsers,
-  getAllEnrollments: getAllEnrollments,
-  getAllOrders: getAllOrders,
-  deleteOrder: deleteOrder,
-  getAllForumPosts: getAllForumPosts,
-  /* Saved Resources */
-  toggleSavedResource: toggleSavedResource,
-  getSavedResources: getSavedResources,
-  isResourceSaved: isResourceSaved,
-  /* Utils */
-  ago: ago,
-  /* Cloud Sync */
-  loginFromCloud: loginFromCloud,
-  syncFromCloud: syncFromCloud,
-  loadPostsFromCloud: loadPostsFromCloud
-};
+  /* ─── Public API ─────────────────────────────────────────── */
+  return {
+    /* Auth */
+    register: register,
+    login: login,
+    logout: logout,
+    getSession: getSession,
+    isLoggedIn: isLoggedIn,
+    updateUserProfile: updateUserProfile,
+    updateUserPassword: updateUserPassword,
+    /* Enrollments */
+    getUserEnrollments: getUserEnrollments,
+    enrol: enrol,
+    updateProgress: updateProgress,
+    markLectureRead: markLectureRead,
+    markQuizDone: markQuizDone,
+    getActivityLog: getActivityLog,
+    /* Forum */
+    getAllPosts: getAllPosts,
+    addPost: addPost,
+    addReply: addReply,
+    togglePostLike: togglePostLike,
+    toggleReplyLike: toggleReplyLike,
+    deletePost: deletePost,
+    /* Orders */
+    addOrder: addOrder,
+    getUserOrders: getUserOrders,
+    /* Purchased Books */
+    addPurchasedBooks: addPurchasedBooks,
+    getPurchasedBooks: getPurchasedBooks,
+    /* Cart */
+    getCart: getCart,
+    saveCart: saveCart,
+    clearCart: clearCart,
+    /* Admin */
+    addCustomBook: addCustomBook,
+    getCustomBooks: getCustomBooks,
+    deleteCustomBook: deleteCustomBook,
+    addCustomCourseMaterial: addCustomCourseMaterial,
+    getCustomCourseMaterials: getCustomCourseMaterials,
+    deleteCustomCourseMaterial: deleteCustomCourseMaterial,
+    /* Admin Monitoring */
+    getAllUsers: getAllUsers,
+    getAllEnrollments: getAllEnrollments,
+    getAllOrders: getAllOrders,
+    deleteOrder: deleteOrder,
+    getAllForumPosts: getAllForumPosts,
+    /* Saved Resources */
+    toggleSavedResource: toggleSavedResource,
+    getSavedResources: getSavedResources,
+    isResourceSaved: isResourceSaved,
+    /* Utils */
+    ago: ago,
+    /* Cloud Sync */
+    loginFromCloud: loginFromCloud,
+    syncFromCloud: syncFromCloud,
+    loadPostsFromCloud: loadPostsFromCloud
+  };
 })();
