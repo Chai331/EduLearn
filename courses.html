@@ -29,7 +29,7 @@
       font-family: Inter, sans-serif;
       font-size: .86rem;
       font-weight: 700;
-      color: #6b7280;
+      color: #374151;
       cursor: pointer;
       white-space: nowrap;
       border-bottom: 3px solid transparent;
@@ -101,7 +101,7 @@
 
     .res-sub {
       font-size: .75rem;
-      color: #9ca3af;
+      color: #4b5563;
       margin-top: 2px
     }
 
@@ -270,7 +270,7 @@
     .locked-box {
       text-align: center;
       padding: 2.5rem 1rem;
-      color: #9ca3af
+      color: #4b5563
     }
 
     .locked-box i {
@@ -301,7 +301,7 @@
       <a href="admin_dashboard.html" class="w3-bar-item w3-button nav-link" id="adminLink"
         style="display:none;color:#f87171 !important;font-weight:800;"><i class="fas fa-user-shield"></i> Admin
         Panel</a>
-      <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+      <span class="w3-bar-item nav-link" id="navGreet" style="color:#e0e7ff;cursor:default;"></span>
       <a href="cart.html" class="w3-bar-item w3-button nav-link" style="position:relative;">
         <i class="fas fa-shopping-cart"></i>
         <span id="cartBadge"
@@ -392,7 +392,7 @@
                   </div>
                 </div>
                 <div id="progressStats"
-                  style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem;font-size:.78rem;color:#6b7280;"></div>
+                  style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem;font-size:.78rem;color:#374151;"></div>
               </div>
               <div class="detail-card">
                 <div class="sec-head"><i class="fas fa-align-left"></i> About This Course</div>
@@ -433,7 +433,7 @@
         <div id="tabQuiz" style="display:none;">
           <div class="detail-card">
             <div class="sec-head"><i class="fas fa-question-circle"></i> Quizzes</div>
-            <p style="font-size:.85rem;color:#6b7280;margin:0 0 1rem 0;">Test your knowledge after each lecture.</p>
+            <p style="font-size:.85rem;color:#374151;margin:0 0 1rem 0;">Test your knowledge after each lecture.</p>
             <div class="res-list" id="quizIndex"></div>
 
             <div id="quizActive"
@@ -441,7 +441,7 @@
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
                 <h3 id="activeQuizTitle" style="margin:0;font-size:1.2rem;color:#1a1a2e;"></h3>
                 <button onclick="closeActiveQuiz()"
-                  style="background:none;border:none;color:#6b7280;cursor:pointer;font-weight:600;"><i
+                  style="background:none;border:none;color:#374151;cursor:pointer;font-weight:600;"><i
                     class="fas fa-arrow-left"></i> Back to Quizzes</button>
               </div>
               <div id="quizResult" style="display:none;margin-bottom:1.5rem;"></div>
@@ -474,7 +474,7 @@
         <!-- Player will be injected here -->
       </div>
       <div style="background:#1a1a2e;border-radius:0 0 16px 16px;padding:1rem;text-align:center;">
-        <p id="videoModalDesc" style="color:#9ca3af;font-size:0.85rem;margin:0;">EduLearn Video Tutorial Player</p>
+        <p id="videoModalDesc" style="color:#4b5563;font-size:0.85rem;margin:0;">EduLearn Video Tutorial Player</p>
       </div>
     </div>
   </div>
@@ -537,7 +537,7 @@
 
       grid.innerHTML = '';
       if (filtered.length === 0) {
-        grid.innerHTML = '<p style="text-align:center;color:#9ca3af;grid-column:1/-1;padding:2rem;">No courses found.</p>';
+        grid.innerHTML = '<p style="text-align:center;color:#4b5563;grid-column:1/-1;padding:2rem;">No courses found.</p>';
         return;
       }
 
@@ -560,8 +560,8 @@
           '</div>' +
           '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">' +
           '<div style="font-size:0.97rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.4;">' + c.title + '</div>' +
-          '<div style="font-size:0.78rem;color:#6b7280;margin-bottom:0.8rem;flex:1;">' + c.desc.slice(0, 90) + '&hellip;</div>' +
-          '<div style="display:flex;gap:1rem;font-size:0.75rem;color:#9ca3af;margin-bottom:0.9rem;">' +
+          '<div style="font-size:0.78rem;color:#374151;margin-bottom:0.8rem;flex:1;">' + c.desc.slice(0, 90) + '&hellip;</div>' +
+          '<div style="display:flex;gap:1rem;font-size:0.75rem;color:#4b5563;margin-bottom:0.9rem;">' +
           '<span><i class="fas fa-clock"></i> ' + c.weeks + ' weeks</span>' +
           '<span><i class="fas fa-signal"></i> ' + c.level + '</span>' +
           '</div>' +
@@ -615,10 +615,10 @@
       document.getElementById('detailOutcomes').innerHTML = '<ul style="list-style:none;margin:0;padding:0;">' + outcomesList + '</ul>';
 
       var infoHtml =
-        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#6b7280;">Lectures</span><span style="font-weight:600;color:#1a1a2e;">' + CONTENT[courseId].lectures.length + ' Notes</span></div>' +
-        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#6b7280;">Tutorials</span><span style="font-weight:600;color:#1a1a2e;">' + (CONTENT[courseId].tutorials ? CONTENT[courseId].tutorials.length : 0) + ' Tasks</span></div>' +
-        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#6b7280;">Quizzes</span><span style="font-weight:600;color:#1a1a2e;">' + CONTENT[courseId].lectures.length + ' Quizzes</span></div>' +
-        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;font-size:.85rem;"><span style="color:#6b7280;">Certificate</span><span style="font-weight:600;color:#10b981;">Yes</span></div>';
+        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#374151;">Lectures</span><span style="font-weight:600;color:#1a1a2e;">' + CONTENT[courseId].lectures.length + ' Notes</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#374151;">Tutorials</span><span style="font-weight:600;color:#1a1a2e;">' + (CONTENT[courseId].tutorials ? CONTENT[courseId].tutorials.length : 0) + ' Tasks</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f3f4f6;font-size:.85rem;"><span style="color:#374151;">Quizzes</span><span style="font-weight:600;color:#1a1a2e;">' + CONTENT[courseId].lectures.length + ' Quizzes</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:.7rem 0;font-size:.85rem;"><span style="color:#374151;">Certificate</span><span style="font-weight:600;color:#10b981;">Yes</span></div>';
       document.getElementById('detailSidebar').innerHTML = infoHtml;
 
       var enrolBlock = document.getElementById('enrolBlock');
@@ -670,7 +670,7 @@
             '</div>' +
             '<div style="display:flex;gap:8px;">' +
             '<button class="res-btn" style="background:#f3f4f6;color:#374151;border:1px solid #d1d5db;" onclick="toggleSave(this, ' + JSON.stringify(l).replace(/"/g, '&quot;') + ')">' +
-            '<i class="' + (isSaved ? 'fas' : 'far') + ' fa-bookmark" style="color:' + (isSaved ? '#667eea' : '#9ca3af') + '"></i></button>' +
+            '<i class="' + (isSaved ? 'fas' : 'far') + ' fa-bookmark" style="color:' + (isSaved ? '#667eea' : '#4b5563') + '"></i></button>' +
             '<button class="res-btn" onclick="openFile(\'' + l.file + '\', ' + l.week + ', \'' + l.title.replace(/'/g, "\\'") + '\')"><i class="fas ' + (l.type === 'video' ? 'fa-play' : 'fa-eye') + '"></i> View</button>' +
             '</div>' +
             '</div>';
@@ -688,7 +688,7 @@
       if (!isEnrolled) {
         tHtml = '<div class="locked-box"><i class="fas fa-lock"></i><div>Please enrol to unlock tutorial exercises.</div></div>';
       } else if (tutorials.length === 0) {
-        tHtml = '<div style="padding:1rem;color:#6b7280;font-size:.85rem;">No tutorials available yet.</div>';
+        tHtml = '<div style="padding:1rem;color:#374151;font-size:.85rem;">No tutorials available yet.</div>';
       } else {
         tutorials.forEach(function (t) {
           var isVid = t.type === 'video' || (t.file && (t.file.includes('cloudinary') || t.file.includes('youtube') || t.file.includes('mp4')));
@@ -702,7 +702,7 @@
             '</div>' +
             '<div style="display:flex;gap:8px;">' +
             '<button class="res-btn" style="background:#f3f4f6;color:#374151;border:1px solid #d1d5db;" onclick="toggleSave(this, ' + JSON.stringify(t).replace(/"/g, '&quot;') + ')">' +
-            '<i class="' + (isSaved ? 'fas' : 'far') + ' fa-bookmark" style="color:' + (isSaved ? '#667eea' : '#9ca3af') + '"></i></button>' +
+            '<i class="' + (isSaved ? 'fas' : 'far') + ' fa-bookmark" style="color:' + (isSaved ? '#667eea' : '#4b5563') + '"></i></button>' +
             '<button class="res-btn tut" onclick="openFile(\'' + t.file + '\', null, \'' + t.title.replace(/'/g, "\\'") + '\')"><i class="fas ' + (isVid ? 'fa-play' : 'fa-eye') + '"></i> ' + (isVid ? 'Watch' : 'Open') + '</button>' +
             '</div>' +
             '</div>';
@@ -748,7 +748,7 @@
         }
 
         if (qIndexHtml === '') {
-          qIndexHtml = '<p style="padding:1rem;color:#6b7280;font-size:.85rem;">No quizzes available for this course yet.</p>';
+          qIndexHtml = '<p style="padding:1rem;color:#374151;font-size:.85rem;">No quizzes available for this course yet.</p>';
         }
       }
       document.getElementById('quizIndex').innerHTML = qIndexHtml;
@@ -964,7 +964,7 @@
           showToast('📌 Resource saved to your portal!');
         } else {
           ico.className = 'far fa-bookmark';
-          ico.style.color = '#9ca3af';
+          ico.style.color = '#4b5563';
           showToast('Removed from saved resources.');
         }
       }

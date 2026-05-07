@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    EduLearn – Global Stylesheet
    Using W3.CSS as base framework
    ============================================ */
@@ -288,7 +288,7 @@ img {
   display: inline-block;
   background: rgba(102, 126, 234, 0.2);
   border: 1px solid rgba(102, 126, 234, 0.5);
-  color: #a8b8f8;
+  color: #e0e7ff;
   padding: 6px 16px;
   border-radius: 25px;
   font-size: 0.82rem;
@@ -311,7 +311,7 @@ img {
 
 .hero-subtitle {
   font-size: 1.1rem;
-  color: #8899cc;
+  color: #4b5563;
   line-height: 1.7;
   margin-bottom: 2rem;
   font-weight: 400;
@@ -382,7 +382,7 @@ img {
 
 .stat-label {
   font-size: 0.75rem;
-  color: #8899cc;
+  color: #4b5563;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -470,7 +470,7 @@ img {
 }
 
 .feature-card p {
-  color: #6b7280;
+  color: #374151;
   font-size: 0.88rem;
   line-height: 1.6;
   margin-bottom: 1rem;
@@ -554,7 +554,7 @@ img {
 }
 
 .course-desc {
-  color: #6b7280;
+  color: #374151;
   font-size: 0.82rem;
   line-height: 1.5;
   margin-bottom: 0.8rem;
@@ -564,7 +564,7 @@ img {
   display: flex;
   gap: 1rem;
   font-size: 0.78rem;
-  color: #6b7280;
+  color: #374151;
   margin-bottom: 1rem;
 }
 
@@ -636,7 +636,7 @@ img {
 }
 
 .testimonial-author small {
-  color: #9ca3af;
+  color: #4b5563;
   font-size: 0.78rem;
 }
 
@@ -677,7 +677,7 @@ img {
    ============================================ */
 .edu-footer {
   background: #0a0a1e;
-  color: #8899cc;
+  color: #4b5563;
   padding: 60px 16px 0;
 }
 
@@ -698,7 +698,7 @@ img {
 .footer-brand p {
   font-size: 0.87rem;
   line-height: 1.7;
-  color: #6b7280;
+  color: #374151;
   max-width: 260px;
 }
 
@@ -743,7 +743,7 @@ img {
 }
 
 .footer-links ul li a {
-  color: #6b7280;
+  color: #374151;
   font-size: 0.87rem;
   transition: color 0.2s;
 }
@@ -754,7 +754,7 @@ img {
 
 .footer-contact p {
   font-size: 0.87rem;
-  color: #6b7280;
+  color: #374151;
   margin-bottom: 0.7rem;
   display: flex;
   align-items: center;
@@ -796,12 +796,12 @@ img {
 }
 
 .page-header p {
-  color: #8899cc;
+  color: #4b5563;
   font-size: 1rem;
 }
 
 .breadcrumb {
-  color: #6b7280;
+  color: #374151;
   font-size: 0.82rem;
   margin-bottom: 0.8rem;
 }
@@ -912,7 +912,7 @@ img {
 }
 
 .auth-card .subtitle {
-  color: #6b7280;
+  color: #374151;
   font-size: 0.9rem;
   margin-bottom: 1.8rem;
 }
@@ -972,7 +972,7 @@ img {
   text-align: center;
   margin-top: 1.5rem;
   font-size: 0.87rem;
-  color: #6b7280;
+  color: #374151;
 }
 
 .auth-footer a {
@@ -996,7 +996,7 @@ img {
 }
 
 .divider span {
-  color: #9ca3af;
+  color: #4b5563;
   font-size: 0.82rem;
 }
 
@@ -1056,7 +1056,7 @@ img {
 
 .portal-email {
   text-align: center;
-  color: #9ca3af;
+  color: #4b5563;
   font-size: 0.8rem;
   margin-bottom: 1.5rem;
 }
@@ -1132,7 +1132,7 @@ img {
 
 .stat-card-label {
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: #4b5563;
 }
 
 .progress-section {
@@ -1247,7 +1247,7 @@ img {
 
 .forum-post-meta {
   font-size: 0.78rem;
-  color: #9ca3af;
+  color: #4b5563;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -1357,13 +1357,13 @@ textarea.form-control {
 }
 
 .book-author {
-  color: #9ca3af;
+  color: #4b5563;
   font-size: 0.78rem;
   margin-bottom: 0.6rem;
 }
 
 .book-desc {
-  color: #6b7280;
+  color: #374151;
   font-size: 0.8rem;
   line-height: 1.5;
   margin-bottom: 0.8rem;
@@ -1533,7 +1533,7 @@ textarea.form-control {
   margin: 0 auto 0.4rem;
   border: 2px solid #e5e7eb;
   background: #fff;
-  color: #9ca3af;
+  color: #4b5563;
 }
 
 .step.active .step-circle {
@@ -1550,7 +1550,7 @@ textarea.form-control {
 
 .step-label {
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: #4b5563;
   font-weight: 600;
 }
 
@@ -1625,7 +1625,7 @@ textarea.form-control {
 }
 
 .text-muted {
-  color: #9ca3af;
+  color: #4b5563;
   font-size: 0.85rem;
 }
 
@@ -1697,7 +1697,7 @@ textarea.form-control {
 }
 
 .search-bar input::placeholder {
-  color: #9ca3af;
+  color: #4b5563;
 }
 
 .search-bar button {
@@ -1811,7 +1811,7 @@ textarea.form-control {
   flex-wrap: wrap;
   gap: 0.8rem;
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: #4b5563;
   align-items: center;
   margin-top: 0.4rem;
 }

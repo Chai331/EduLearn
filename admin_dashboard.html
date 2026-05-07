@@ -129,7 +129,7 @@
       text-align: left;
       padding: 12px;
       background: #f9fafb;
-      color: #6b7280;
+      color: #374151;
       font-weight: 700;
       border-bottom: 2px solid #f3f4f6;
     }
@@ -230,7 +230,7 @@
 
     .status-pending {
       background: #f9fafb;
-      color: #6b7280;
+      color: #374151;
       border: 1px solid #d1d5db;
     }
 
@@ -343,7 +343,7 @@
             <div class="admin-card" style="margin-top:2rem;">
               <h3><i class="fas fa-chart-line" style="color:var(--admin-primary);margin-right:8px;"></i>Platform
                 Overview</h3>
-              <p style="color:#6b7280;font-size:0.88rem;">Welcome back, Admin. Here is the latest activity across the
+              <p style="color:#374151;font-size:0.88rem;">Welcome back, Admin. Here is the latest activity across the
                 EduLearn platform.</p>
               <div id="recentActivityList"></div>
             </div>
@@ -462,7 +462,7 @@
             <div class="admin-card">
               <h3><i class="fas fa-comments" style="color:var(--admin-primary);margin-right:8px;"></i>Forum Moderation
               </h3>
-              <p style="font-size:0.85rem;color:#6b7280;margin-bottom:1.5rem;">Review and respond to student
+              <p style="font-size:0.85rem;color:#374151;margin-bottom:1.5rem;">Review and respond to student
                 discussions.</p>
               <div id="forumList"></div>
             </div>
@@ -570,13 +570,13 @@
       var actList = document.getElementById('recentActivityList');
       actList.innerHTML = '<h4 style="margin-top:1rem;margin-bottom:0.5rem;font-weight:700;color:#1a1a2e;">Recent Book Orders</h4>';
       if (orders.length === 0) {
-        actList.innerHTML += '<p style="color:#9ca3af;font-style:italic;font-size:0.85rem;">No recent book orders.</p>';
+        actList.innerHTML += '<p style="color:#4b5563;font-style:italic;font-size:0.85rem;">No recent book orders.</p>';
       } else {
         var tableHtml = '<div style="overflow-x:auto;"><table class="table-res" style="margin-top:0.5rem;"><thead><tr><th>Order #</th><th>Student</th><th>Items Purchased</th><th>Total</th><th>Date</th><th>Action</th></tr></thead><tbody>';
         orders.slice(0, 15).forEach(function (o) {
           var user = users.find(function (u) { return u.id === o.userId; });
           var userName = user ? user.firstName + ' ' + user.lastName : 'Guest';
-          var userEmail = user ? '<br><span style="font-size:0.75rem;color:#9ca3af;">' + user.email + '</span>' : '';
+          var userEmail = user ? '<br><span style="font-size:0.75rem;color:#4b5563;">' + user.email + '</span>' : '';
           var itemsHtml = o.items.map(function (i) { return '<div style="margin-bottom:2px;">' + i.qty + 'x ' + i.name + '</div>'; }).join('');
           var d = new Date(o.createdAt);
           var dateStr = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
@@ -585,7 +585,7 @@
             '<td>' + userName + userEmail + '</td>' +
             '<td style="font-size:0.8rem;color:#4b5563;max-width:250px;">' + itemsHtml + '</td>' +
             '<td style="font-weight:700;color:#10b981;">RM ' + o.total.toFixed(2) + '</td>' +
-            '<td style="font-size:0.8rem;color:#9ca3af;">' + dateStr + '</td>' +
+            '<td style="font-size:0.8rem;color:#4b5563;">' + dateStr + '</td>' +
             '<td><button class="btn-delete" onclick="deleteOrderRow(\'' + o.id + '\')" title="Delete Order"><i class="fas fa-trash-alt"></i></button></td>' +
             '</tr>';
         });
@@ -671,12 +671,12 @@
           '<td>' +
           '<div class="student-info">' +
           '<div class="student-pfp" style="background:' + (u.avatarColor || 'var(--admin-primary)') + '">' + (u.avatar || u.firstName[0]) + '</div>' +
-          '<div><div style="font-weight:700; font-size:0.9rem;">' + u.firstName + ' ' + u.lastName + '</div><div style="font-size:0.7rem; color:#9ca3af;">ID: ' + u.id + '</div></div>' +
+          '<div><div style="font-weight:700; font-size:0.9rem;">' + u.firstName + ' ' + u.lastName + '</div><div style="font-size:0.7rem; color:#4b5563;">ID: ' + u.id + '</div></div>' +
           '</div>' +
           '</td>' +
           '<td><div style="font-size:0.85rem;">' + u.email + '</div></td>' +
-          '<td style="min-width:200px;">' + (courseListHtml || '<div style="color:#9ca3af; font-style:italic; font-size:0.8rem;">No courses enrolled</div>') + '</td>' +
-          '<td>' + (bookImagesHtml || '<span style="color:#9ca3af; font-size:0.8rem; font-style:italic;">No purchases</span>') + '</td>' +
+          '<td style="min-width:200px;">' + (courseListHtml || '<div style="color:#4b5563; font-style:italic; font-size:0.8rem;">No courses enrolled</div>') + '</td>' +
+          '<td>' + (bookImagesHtml || '<span style="color:#4b5563; font-size:0.8rem; font-style:italic;">No purchases</span>') + '</td>' +
           '<td>' + statusHtml + '</td>' +
           '</tr>';
       });
@@ -696,7 +696,7 @@
           '<button class="btn-delete" style="padding:8px 14px;font-size:0.75rem;" onclick="deleteForumPost(\'' + p.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button>' +
           '</div>' +
           '</div>' +
-          '<div style="font-size:0.8rem;color:#6b7280;margin:5px 0;">By ' + p.author + ' &bull; ' + EduDB.ago(p.createdAt) + '</div>' +
+          '<div style="font-size:0.8rem;color:#374151;margin:5px 0;">By ' + p.author + ' &bull; ' + EduDB.ago(p.createdAt) + '</div>' +
           '<p style="font-size:0.85rem;margin:10px 0;color:#4b5563;">' + p.content.slice(0, 120) + '...</p>' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">' +
           '<div style="font-size:0.75rem;color:var(--admin-primary);font-weight:700;background:#fef2f2;padding:4px 10px;border-radius:20px;">' + p.replies + ' Replies</div>' +
@@ -717,10 +717,10 @@
         post.replyData.forEach(function (r) {
           list.innerHTML += '<div style="padding:8px;border-bottom:1px solid #f9fafb;font-size:0.8rem;">' +
             '<strong>' + r.author + ':</strong> ' + r.content +
-            '<div style="font-size:0.7rem;color:#9ca3af;">' + EduDB.ago(r.createdAt) + '</div></div>';
+            '<div style="font-size:0.7rem;color:#4b5563;">' + EduDB.ago(r.createdAt) + '</div></div>';
         });
       } else {
-        list.innerHTML = '<p style="color:#9ca3af;font-size:0.8rem;text-align:center;">No replies yet.</p>';
+        list.innerHTML = '<p style="color:#4b5563;font-size:0.8rem;text-align:center;">No replies yet.</p>';
       }
       document.getElementById('replyModal').style.display = 'block';
     }
@@ -752,22 +752,22 @@
       list.innerHTML = '';
       if (mats) {
         mats.lectures.forEach(function (m) {
-          list.innerHTML += '<div class="list-item"><div><strong style="color:#1a1a2e;">' + m.title + '</strong><br><small style="color:#9ca3af;">Week ' + m.week + ' (Lecture)</small></div><button class="btn-delete" onclick="delMat(\'' + cid + '\',\'lectures\',\'' + m.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button></div>';
+          list.innerHTML += '<div class="list-item"><div><strong style="color:#1a1a2e;">' + m.title + '</strong><br><small style="color:#4b5563;">Week ' + m.week + ' (Lecture)</small></div><button class="btn-delete" onclick="delMat(\'' + cid + '\',\'lectures\',\'' + m.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button></div>';
         });
         mats.tutorials.forEach(function (m) {
-          list.innerHTML += '<div class="list-item"><div><strong style="color:#1a1a2e;">' + m.title + '</strong><br><small style="color:#9ca3af;">Week ' + m.week + ' (Tutorial)</small></div><button class="btn-delete" onclick="delMat(\'' + cid + '\',\'tutorials\',\'' + m.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button></div>';
+          list.innerHTML += '<div class="list-item"><div><strong style="color:#1a1a2e;">' + m.title + '</strong><br><small style="color:#4b5563;">Week ' + m.week + ' (Tutorial)</small></div><button class="btn-delete" onclick="delMat(\'' + cid + '\',\'tutorials\',\'' + m.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button></div>';
         });
       }
 
       if (!mats || (mats.lectures.length === 0 && mats.tutorials.length === 0)) {
-        list.innerHTML = '<p style="color:#9ca3af;text-align:center;padding:1rem;font-size:0.85rem;">No custom materials added yet.</p>';
+        list.innerHTML = '<p style="color:#4b5563;text-align:center;padding:1rem;font-size:0.85rem;">No custom materials added yet.</p>';
       }
 
       // Add Quizzes Preview
       if (typeof CONTENT !== 'undefined' && CONTENT[cid] && CONTENT[cid].quiz) {
-        list.innerHTML += '<div style="margin-top:1.5rem;padding:0.5rem;border-top:2px dashed #f3f4f6;font-weight:800;font-size:0.85rem;color:#6b7280;text-transform:uppercase;letter-spacing:1px;">Standard Quizzes</div>';
+        list.innerHTML += '<div style="margin-top:1.5rem;padding:0.5rem;border-top:2px dashed #f3f4f6;font-weight:800;font-size:0.85rem;color:#374151;text-transform:uppercase;letter-spacing:1px;">Standard Quizzes</div>';
         list.innerHTML += '<div class="list-item" style="border-left:4px solid #6366f1;">' +
-          '<div><strong style="color:#1a1a2e;">Full Course Assessment</strong><br><small style="color:#9ca3af;">' + CONTENT[cid].quiz.length + ' Questions</small></div>' +
+          '<div><strong style="color:#1a1a2e;">Full Course Assessment</strong><br><small style="color:#4b5563;">' + CONTENT[cid].quiz.length + ' Questions</small></div>' +
           '<button class="admin-btn" style="padding:6px 12px;font-size:0.75rem;background:#6366f1;box-shadow:none;" onclick="previewQuiz(\'' + cid + '\')"><i class="fas fa-eye"></i> Preview Quiz</button>' +
           '</div>';
       }
@@ -844,7 +844,7 @@
       defaultBooks.forEach(function (b) {
         list.innerHTML += '<div class="list-item" style="display:flex;align-items:center;gap:15px;padding:12px;">' +
           '<img src="' + b.image + '" style="width:40px;height:55px;object-fit:cover;border-radius:4px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">' +
-          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size:0.9rem;">' + b.name + '</strong><br><small style="color:#9ca3af;font-weight:600;">RM ' + b.price + ' <span style="margin-left:6px;background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:0.65rem;color:#6b7280;">Default</span></small></div>' +
+          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size:0.9rem;">' + b.name + '</strong><br><small style="color:#4b5563;font-weight:600;">RM ' + b.price + ' <span style="margin-left:6px;background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:0.65rem;color:#374151;">Default</span></small></div>' +
           '<button class="btn-delete" disabled style="opacity:0.5;cursor:not-allowed;" title="Default books cannot be deleted"><i class="fas fa-lock"></i></button>' +
           '</div>';
       });
@@ -852,7 +852,7 @@
       books.forEach(function (b) {
         list.innerHTML += '<div class="list-item" style="display:flex;align-items:center;gap:15px;padding:12px;">' +
           '<img src="' + (b.image || 'Book/default.jpg') + '" style="width:40px;height:55px;object-fit:cover;border-radius:4px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">' +
-          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size:0.9rem;">' + b.name + '</strong><br><small style="color:#9ca3af;font-weight:600;">RM ' + b.price + '</small></div>' +
+          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size:0.9rem;">' + b.name + '</strong><br><small style="color:#4b5563;font-weight:600;">RM ' + b.price + '</small></div>' +
           '<button class="btn-delete" onclick="delBook(\'' + b.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button>' +
           '</div>';
       });

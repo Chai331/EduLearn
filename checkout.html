@@ -21,7 +21,7 @@
       <a href="dashboard.html" class="w3-bar-item w3-button nav-link">Home</a>
       <a href="bookstore.html" class="w3-bar-item w3-button nav-link">Bookstore</a>
       <a href="cart.html" class="w3-bar-item w3-button nav-link">Cart</a>
-      <span class="w3-bar-item nav-link" id="navGreet" style="color:#a8b8f8;cursor:default;"></span>
+      <span class="w3-bar-item nav-link" id="navGreet" style="color:#e0e7ff;cursor:default;"></span>
       <button onclick="doLogout()" class="w3-bar-item w3-button"
         style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
           class="fas fa-sign-out-alt"></i> Logout</button>
@@ -65,13 +65,13 @@
           <i class="fas fa-check"></i>
         </div>
         <h2 style="font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.6rem;">Order Confirmed! 🎉</h2>
-        <p style="color:#6b7280;margin-bottom:0.5rem;">Thank you for your purchase.</p>
+        <p style="color:#374151;margin-bottom:0.5rem;">Thank you for your purchase.</p>
         <p style="font-size:0.95rem;font-weight:700;color:#10b981;margin-bottom:0.5rem;">
           <i class="fas fa-lock-open" style="margin-right:6px;"></i>Your e-books are now unlocked!
         </p>
-        <p style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem;">Go to the Bookstore and <strong>click any
+        <p style="font-size:0.85rem;color:#374151;margin-bottom:0.4rem;">Go to the Bookstore and <strong>click any
             purchased book cover</strong> to read its PDF.</p>
-        <p style="font-size:0.85rem;color:#9ca3af;margin-bottom:2rem;">Order #<span id="orderNum"></span></p>
+        <p style="font-size:0.85rem;color:#4b5563;margin-bottom:2rem;">Order #<span id="orderNum"></span></p>
         <a href="bookstore.html" class="btn-primary-lg"><i class="fas fa-book-open"></i> Read My Books</a>
       </div>
 
@@ -151,7 +151,7 @@
               <div id="formError" style="display:none;margin-top:0.8rem;" class="alert-error"></div>
               <button class="btn-submit" style="margin-top:1rem;" onclick="placeOrder()"><i class="fas fa-lock"></i>
                 Place Order</button>
-              <div style="text-align:center;margin-top:0.8rem;font-size:0.75rem;color:#9ca3af;"><i
+              <div style="text-align:center;margin-top:0.8rem;font-size:0.75rem;color:#4b5563;"><i
                   class="fas fa-shield-alt" style="color:#10b981;"></i> Secured by 256-bit SSL encryption</div>
             </div>
           </div>
@@ -188,7 +188,7 @@
     function renderSummary() {
       var c = getCart();
       var html = ""; var sub = 0;
-      if (c.length === 0) { html = '<p style="font-size:0.85rem;color:#9ca3af;text-align:center;">Cart is empty. <a href="bookstore.html" style="color:#667eea;">Go shop</a></p>'; }
+      if (c.length === 0) { html = '<p style="font-size:0.85rem;color:#4b5563;text-align:center;">Cart is empty. <a href="bookstore.html" style="color:#667eea;">Go shop</a></p>'; }
       c.forEach(function (item) {
         var lt = item.price * item.qty;
         sub += lt;
