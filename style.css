@@ -1103,6 +1103,7 @@ img {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+  width: 100%;
 }
 
 @media (max-width: 992px) {
@@ -1143,6 +1144,7 @@ img {
   font-size: 1.8rem;
   font-weight: 800;
   color: #1a1a2e;
+  white-space: nowrap;
 }
 
 .stat-card-label {
