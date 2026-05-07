@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    EduLearn – Global Stylesheet
    Using W3.CSS as base framework
    ============================================ */
@@ -16,6 +16,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 115%;
 }
 
 body {
