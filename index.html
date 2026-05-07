@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -650,14 +650,6 @@
             <i class="fas fa-sign-in-alt"></i> Sign In
           </button>
 
-          <div class="divider-line"><span>or continue with</span></div>
-          <div class="social-row">
-            <button class="social-btn" onclick="demoSocial('Google')"><i class="fab fa-google"
-                style="color:#ea4335;margin-right:5px;"></i>Google</button>
-            <button class="social-btn" onclick="demoSocial('Microsoft')"><i class="fab fa-microsoft"
-                style="color:#00a4ef;margin-right:5px;"></i>Microsoft</button>
-          </div>
-
           <div class="demo-hint"><i class="fas fa-info-circle" style="color:#667eea;"></i> Demo: <b>student@edu.com</b>
             / <b>password123</b></div>
           <div class="switch-msg">New to EduLearn? <a href="#" onclick="switchTab('register')">Create a free account</a>
@@ -757,9 +749,9 @@
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script src="db.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="db.js"></script>
   <script>
     // If already logged in → go straight to dashboard
     if (EduDB.isLoggedIn()) { window.location.href = 'dashboard.html'; }
@@ -847,11 +839,11 @@
             onResult(result);
           } else if (result.message.indexOf('No account') !== -1) {
             btn.innerHTML = '<i class="fas fa-cloud-download-alt fa-spin"></i> Checking cloud…';
-            EduDB.loginFromCloud(email, pass, function(cloudResult) {
+            EduDB.loginFromCloud(email, pass, function (cloudResult) {
               onResult(cloudResult);
             });
             /* Fallback if cloud never responds */
-            setTimeout(function() {
+            setTimeout(function () {
               if (btn.disabled) {
                 btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
                 errD.innerHTML = '<i class="fas fa-times-circle"></i> Could not reach server. Please try again.';
@@ -861,7 +853,7 @@
           } else {
             onResult(result);
           }
-        } catch(e) {
+        } catch (e) {
           btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
           errD.innerHTML = '<i class="fas fa-times-circle"></i> An error occurred. Please refresh and try again.';
           errD.style.display = 'block';
