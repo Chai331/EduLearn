@@ -126,7 +126,7 @@
       padding: 0.8rem 2rem;
       border-radius: 12px;
       font-family: Inter, sans-serif;
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
@@ -305,7 +305,7 @@
       <a href="cart.html" class="w3-bar-item w3-button nav-link" style="position:relative;">
         <i class="fas fa-shopping-cart"></i>
         <span id="cartBadge"
-          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size:0.6rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
+          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size: 0.8rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
       </a>
       <button onclick="doLogout()" class="w3-bar-item w3-button"
         style="color:#f87171;font-weight:600;font-size:.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
@@ -474,7 +474,7 @@
         <!-- Player will be injected here -->
       </div>
       <div style="background:#1a1a2e;border-radius:0 0 16px 16px;padding:1rem;text-align:center;">
-        <p id="videoModalDesc" style="color:#4b5563;font-size:0.85rem;margin:0;">EduLearn Video Tutorial Player</p>
+        <p id="videoModalDesc" style="color:#4b5563;font-size: 1rem;margin:0;">EduLearn Video Tutorial Player</p>
       </div>
     </div>
   </div>
@@ -559,20 +559,20 @@
           '<i class="fas ' + c.icon + '" style="font-size:3rem; color:rgba(255,255,255,0.85);"></i>' +
           '</div>' +
           '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">' +
-          '<div style="font-size:0.97rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.4;">' + c.title + '</div>' +
-          '<div style="font-size:0.78rem;color:#374151;margin-bottom:0.8rem;flex:1;">' + c.desc.slice(0, 90) + '&hellip;</div>' +
-          '<div style="display:flex;gap:1rem;font-size:0.75rem;color:#4b5563;margin-bottom:0.9rem;">' +
+          '<div style="font-size: 1.07rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.4;">' + c.title + '</div>' +
+          '<div style="font-size: 0.98rem;color:#374151;margin-bottom:0.8rem;flex:1;">' + c.desc.slice(0, 90) + '&hellip;</div>' +
+          '<div style="display:flex;gap:1rem;font-size: 0.95rem;color:#4b5563;margin-bottom:0.9rem;">' +
           '<span><i class="fas fa-clock"></i> ' + c.weeks + ' weeks</span>' +
           '<span><i class="fas fa-signal"></i> ' + c.level + '</span>' +
           '</div>' +
           (isEnrolled
             ? '<div style="margin-bottom:0.7rem;">' +
-            '<div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:3px;"><span style="color:#374151;font-weight:600;">Progress</span><span style="color:#667eea;font-weight:700;">' + pct + '%</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size: 0.95rem;margin-bottom:3px;"><span style="color:#374151;font-weight:600;">Progress</span><span style="color:#667eea;font-weight:700;">' + pct + '%</span></div>' +
             '<div style="background:#f3f4f6;border-radius:10px;height:6px;overflow:hidden;">' +
             '<div style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px;width:' + pct + '%;"></div>' +
             '</div></div>'
             : '') +
-          '<button onclick="openCourseDetail(\'' + c.id + '\')" style="width:100%;border:none;padding:0.65rem;border-radius:8px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;' +
+          '<button onclick="openCourseDetail(\'' + c.id + '\')" style="width:100%;border:none;padding:0.65rem;border-radius:8px;font-family:Inter,sans-serif;font-size: 1rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;' +
           (showAsEnrolled
             ? 'background:linear-gradient(135deg,#43e97b,#38f9d7);color:#065f46;'
             : 'background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;') +
@@ -722,7 +722,7 @@
         // Render multi-part quizzes (from PARSED_QUIZZES)
         quizzes.forEach(function (q, i) {
           var isQuizDone = completedQuizzes.indexOf(i + 1) !== -1;
-          var doneHtml = isQuizDone ? '<span style="color:#10b981;font-size:0.75rem;margin-left:8px;font-weight:600;"><i class="fas fa-check-circle"></i> Passed</span>' : '';
+          var doneHtml = isQuizDone ? '<span style="color:#10b981;font-size: 0.95rem;margin-left:8px;font-weight:600;"><i class="fas fa-check-circle"></i> Passed</span>' : '';
           qIndexHtml +=
             '<div class="res-item">' +
             '<div class="res-ico" style="background:#e0e7ff;color:#4f46e5;"><i class="fas fa-question"></i></div>' +

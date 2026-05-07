@@ -39,7 +39,7 @@
       margin-bottom: 1rem;
       outline: none;
       transition: all .2s;
-      font-size: 0.88rem;
+      font-size: 1.03rem;
       background: #fff;
     }
 
@@ -70,7 +70,7 @@
       cursor: pointer;
       transition: all .2s;
       font-family: Inter, sans-serif;
-      font-size: 0.88rem;
+      font-size: 1.03rem;
       box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
     }
 
@@ -99,7 +99,7 @@
     }
 
     .prog-text {
-      font-size: 0.75rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #374151;
       margin-left: 8px;
@@ -122,7 +122,7 @@
     .table-res {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
 
     .table-res th {
@@ -156,7 +156,7 @@
       justify-content: center;
       color: #fff;
       font-weight: 800;
-      font-size: 0.85rem;
+      font-size: 1rem;
       flex-shrink: 0;
     }
 
@@ -172,7 +172,7 @@
     .badge-role {
       padding: 4px 10px;
       border-radius: 20px;
-      font-size: 0.65rem;
+      font-size: 0.85rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.3px;
@@ -215,7 +215,7 @@
     .badge-status {
       padding: 6px 12px;
       border-radius: 8px;
-      font-size: 0.75rem;
+      font-size: 0.95rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -257,7 +257,7 @@
       border: none;
       padding: 6px 12px;
       border-radius: 6px;
-      font-size: 0.75rem;
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
@@ -344,7 +344,7 @@
             <div class="admin-card" style="margin-top:2rem;">
               <h3><i class="fas fa-chart-line" style="color:var(--admin-primary);margin-right:8px;"></i>Platform
                 Overview</h3>
-              <p style="color:#374151;font-size:0.88rem;">Welcome back, Admin. Here is the latest activity across the
+              <p style="color:#374151;font-size: 1.03rem;">Welcome back, Admin. Here is the latest activity across the
                 EduLearn platform.</p>
               <div id="recentActivityList"></div>
             </div>
@@ -463,7 +463,7 @@
             <div class="admin-card">
               <h3><i class="fas fa-comments" style="color:var(--admin-primary);margin-right:8px;"></i>Forum Moderation
               </h3>
-              <p style="font-size:0.85rem;color:#374151;margin-bottom:1.5rem;">Review and respond to student
+              <p style="font-size: 1rem;color:#374151;margin-bottom:1.5rem;">Review and respond to student
                 discussions.</p>
               <div id="forumList"></div>
             </div>
@@ -473,7 +473,7 @@
           <div id="tab-passwords" style="display:none;">
             <div class="admin-card">
               <h3><i class="fas fa-key" style="color:var(--admin-primary);margin-right:8px;"></i>Password Reset Requests</h3>
-              <p style="color:#374151;font-size:0.85rem;margin-bottom:1.5rem;">Manage forgotten password requests from students.</p>
+              <p style="color:#374151;font-size: 1rem;margin-bottom:1.5rem;">Manage forgotten password requests from students.</p>
               <div id="resetList"></div>
             </div>
           </div>
@@ -489,7 +489,7 @@
               <div id="modalRepliesList"
                 style="max-height:300px;overflow-y:auto;margin-bottom:1rem;border-bottom:1px solid #f3f4f6;padding-bottom:1rem;">
               </div>
-              <label style="font-weight:700;font-size:0.85rem;color:var(--admin-primary);">Post Admin Reply</label>
+              <label style="font-weight:700;font-size: 1rem;color:var(--admin-primary);">Post Admin Reply</label>
               <textarea id="adminReplyText" class="admin-input input-3d" rows="4" placeholder="Type your answer here..."
                 style="margin-top:0.5rem; border:2px solid #fee2e2;"></textarea>
               <button class="admin-btn" style="width:100%;margin-top:0.5rem;" onclick="submitAdminReply()">
@@ -581,22 +581,22 @@
       var actList = document.getElementById('recentActivityList');
       actList.innerHTML = '<h4 style="margin-top:1rem;margin-bottom:0.5rem;font-weight:700;color:#1a1a2e;">Recent Book Orders</h4>';
       if (orders.length === 0) {
-        actList.innerHTML += '<p style="color:#4b5563;font-style:italic;font-size:0.85rem;">No recent book orders.</p>';
+        actList.innerHTML += '<p style="color:#4b5563;font-style:italic;font-size: 1rem;">No recent book orders.</p>';
       } else {
         var tableHtml = '<div style="overflow-x:auto;"><table class="table-res" style="margin-top:0.5rem;"><thead><tr><th>Order #</th><th>Student</th><th>Items Purchased</th><th>Total</th><th>Date</th><th>Action</th></tr></thead><tbody>';
         orders.slice(0, 15).forEach(function (o) {
           var user = users.find(function (u) { return u.id === o.userId; });
           var userName = user ? user.firstName + ' ' + user.lastName : 'Guest';
-          var userEmail = user ? '<br><span style="font-size:0.75rem;color:#4b5563;">' + user.email + '</span>' : '';
+          var userEmail = user ? '<br><span style="font-size: 0.95rem;color:#4b5563;">' + user.email + '</span>' : '';
           var itemsHtml = o.items.map(function (i) { return '<div style="margin-bottom:2px;">' + i.qty + 'x ' + i.name + '</div>'; }).join('');
           var d = new Date(o.createdAt);
           var dateStr = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
           tableHtml += '<tr>' +
             '<td style="font-weight:700;color:var(--admin-primary);">#' + (o.orderNum || 'N/A') + '</td>' +
             '<td>' + userName + userEmail + '</td>' +
-            '<td style="font-size:0.8rem;color:#4b5563;max-width:250px;">' + itemsHtml + '</td>' +
+            '<td style="font-size: 0.95rem;color:#4b5563;max-width:250px;">' + itemsHtml + '</td>' +
             '<td style="font-weight:700;color:#10b981;">RM ' + o.total.toFixed(2) + '</td>' +
-            '<td style="font-size:0.8rem;color:#4b5563;">' + dateStr + '</td>' +
+            '<td style="font-size: 0.95rem;color:#4b5563;">' + dateStr + '</td>' +
             '<td><button class="btn-delete" onclick="deleteOrderRow(\'' + o.id + '\')" title="Delete Order"><i class="fas fa-trash-alt"></i></button></td>' +
             '</tr>';
         });
@@ -654,8 +654,8 @@
         var courseListHtml = uEnrs.map(function (e) {
           return '<div class="course-pill-admin">' +
             '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">' +
-            '<span style="font-weight:700; font-size:0.75rem; color:#1a1a2e;">' + e.courseName + '</span>' +
-            '<span style="font-size:0.7rem; font-weight:800; color:var(--admin-primary);">' + e.progress + '%</span>' +
+            '<span style="font-weight:700; font-size: 0.95rem; color:#1a1a2e;">' + e.courseName + '</span>' +
+            '<span style="font-size: 0.9rem; font-weight:800; color:var(--admin-primary);">' + e.progress + '%</span>' +
             '</div>' +
             '<div class="progress-container-mini" style="width:100%; margin:0;"><div class="progress-bar-mini" style="width:' + e.progress + '%;"></div></div>' +
             '</div>';
@@ -682,12 +682,12 @@
           '<td>' +
           '<div class="student-info">' +
           '<div class="student-pfp" style="background:' + (u.avatarColor || 'var(--admin-primary)') + '">' + (u.avatar || u.firstName[0]) + '</div>' +
-          '<div><div style="font-weight:700; font-size:0.9rem;">' + u.firstName + ' ' + u.lastName + '</div><div style="font-size:0.7rem; color:#4b5563;">ID: ' + u.id + '</div></div>' +
+          '<div><div style="font-weight:700; font-size: 1rem;">' + u.firstName + ' ' + u.lastName + '</div><div style="font-size: 0.9rem; color:#4b5563;">ID: ' + u.id + '</div></div>' +
           '</div>' +
           '</td>' +
-          '<td><div style="font-size:0.85rem;">' + u.email + '</div></td>' +
-          '<td style="min-width:200px;">' + (courseListHtml || '<div style="color:#4b5563; font-style:italic; font-size:0.8rem;">No courses enrolled</div>') + '</td>' +
-          '<td>' + (bookImagesHtml || '<span style="color:#4b5563; font-size:0.8rem; font-style:italic;">No purchases</span>') + '</td>' +
+          '<td><div style="font-size: 1rem;">' + u.email + '</div></td>' +
+          '<td style="min-width:200px;">' + (courseListHtml || '<div style="color:#4b5563; font-style:italic; font-size: 0.95rem;">No courses enrolled</div>') + '</td>' +
+          '<td>' + (bookImagesHtml || '<span style="color:#4b5563; font-size: 0.95rem; font-style:italic;">No purchases</span>') + '</td>' +
           '<td>' + statusHtml + '</td>' +
           '</tr>';
       });
@@ -703,14 +703,14 @@
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
           '<strong style="font-size:1rem;">' + p.title + '</strong>' +
           '<div style="display:flex;gap:8px;">' +
-          '<button class="admin-btn" style="padding:6px 14px;font-size:0.75rem;background:#6366f1;box-shadow:none;display:flex;align-items:center;gap:6px;" onclick="viewReplies(\'' + p.id + '\')"><i class="fas fa-reply"></i> View/Reply</button>' +
-          '<button class="btn-delete" style="padding:8px 14px;font-size:0.75rem;" onclick="deleteForumPost(\'' + p.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button>' +
+          '<button class="admin-btn" style="padding:6px 14px;font-size: 0.95rem;background:#6366f1;box-shadow:none;display:flex;align-items:center;gap:6px;" onclick="viewReplies(\'' + p.id + '\')"><i class="fas fa-reply"></i> View/Reply</button>' +
+          '<button class="btn-delete" style="padding:8px 14px;font-size: 0.95rem;" onclick="deleteForumPost(\'' + p.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button>' +
           '</div>' +
           '</div>' +
-          '<div style="font-size:0.8rem;color:#374151;margin:5px 0;">By ' + p.author + ' &bull; ' + EduDB.ago(p.createdAt) + '</div>' +
-          '<p style="font-size:0.85rem;margin:10px 0;color:#4b5563;">' + p.content.slice(0, 120) + '...</p>' +
+          '<div style="font-size: 0.95rem;color:#374151;margin:5px 0;">By ' + p.author + ' &bull; ' + EduDB.ago(p.createdAt) + '</div>' +
+          '<p style="font-size: 1rem;margin:10px 0;color:#4b5563;">' + p.content.slice(0, 120) + '...</p>' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">' +
-          '<div style="font-size:0.75rem;color:var(--admin-primary);font-weight:700;background:#fef2f2;padding:4px 10px;border-radius:20px;">' + p.replies + ' Replies</div>' +
+          '<div style="font-size: 0.95rem;color:var(--admin-primary);font-weight:700;background:#fef2f2;padding:4px 10px;border-radius:20px;">' + p.replies + ' Replies</div>' +
           '</div>' +
           '</div>';
       });
@@ -726,12 +726,12 @@
 
       if (post.replyData && post.replyData.length > 0) {
         post.replyData.forEach(function (r) {
-          list.innerHTML += '<div style="padding:8px;border-bottom:1px solid #f9fafb;font-size:0.8rem;">' +
+          list.innerHTML += '<div style="padding:8px;border-bottom:1px solid #f9fafb;font-size: 0.95rem;">' +
             '<strong>' + r.author + ':</strong> ' + r.content +
-            '<div style="font-size:0.7rem;color:#4b5563;">' + EduDB.ago(r.createdAt) + '</div></div>';
+            '<div style="font-size: 0.9rem;color:#4b5563;">' + EduDB.ago(r.createdAt) + '</div></div>';
         });
       } else {
-        list.innerHTML = '<p style="color:#4b5563;font-size:0.8rem;text-align:center;">No replies yet.</p>';
+        list.innerHTML = '<p style="color:#4b5563;font-size: 0.95rem;text-align:center;">No replies yet.</p>';
       }
       document.getElementById('replyModal').style.display = 'block';
     }
@@ -771,15 +771,15 @@
       }
 
       if (!mats || (mats.lectures.length === 0 && mats.tutorials.length === 0)) {
-        list.innerHTML = '<p style="color:#4b5563;text-align:center;padding:1rem;font-size:0.85rem;">No custom materials added yet.</p>';
+        list.innerHTML = '<p style="color:#4b5563;text-align:center;padding:1rem;font-size: 1rem;">No custom materials added yet.</p>';
       }
 
       // Add Quizzes Preview
       if (typeof CONTENT !== 'undefined' && CONTENT[cid] && CONTENT[cid].quiz) {
-        list.innerHTML += '<div style="margin-top:1.5rem;padding:0.5rem;border-top:2px dashed #f3f4f6;font-weight:800;font-size:0.85rem;color:#374151;text-transform:uppercase;letter-spacing:1px;">Standard Quizzes</div>';
+        list.innerHTML += '<div style="margin-top:1.5rem;padding:0.5rem;border-top:2px dashed #f3f4f6;font-weight:800;font-size: 1rem;color:#374151;text-transform:uppercase;letter-spacing:1px;">Standard Quizzes</div>';
         list.innerHTML += '<div class="list-item" style="border-left:4px solid #6366f1;">' +
           '<div><strong style="color:#1a1a2e;">Full Course Assessment</strong><br><small style="color:#4b5563;">' + CONTENT[cid].quiz.length + ' Questions</small></div>' +
-          '<button class="admin-btn" style="padding:6px 12px;font-size:0.75rem;background:#6366f1;box-shadow:none;" onclick="previewQuiz(\'' + cid + '\')"><i class="fas fa-eye"></i> Preview Quiz</button>' +
+          '<button class="admin-btn" style="padding:6px 12px;font-size: 0.95rem;background:#6366f1;box-shadow:none;" onclick="previewQuiz(\'' + cid + '\')"><i class="fas fa-eye"></i> Preview Quiz</button>' +
           '</div>';
       }
     }
@@ -794,7 +794,7 @@
       quiz.forEach(function (q, i) {
         var optsHtml = q.opts.map(function (opt, j) {
           var isCorrect = j === q.ans;
-          return '<div style="padding:8px;margin-bottom:4px;border-radius:6px;font-size:0.85rem;' + (isCorrect ? 'background:#ecfdf5;color:#10b981;font-weight:700;border:1px solid #10b981;' : 'background:#f9fafb;color:#4b5563;border:1px solid #f3f4f6;') + '">' +
+          return '<div style="padding:8px;margin-bottom:4px;border-radius:6px;font-size: 1rem;' + (isCorrect ? 'background:#ecfdf5;color:#10b981;font-weight:700;border:1px solid #10b981;' : 'background:#f9fafb;color:#4b5563;border:1px solid #f3f4f6;') + '">' +
             String.fromCharCode(65 + j) + '. ' + opt + (isCorrect ? ' <i class="fas fa-check-circle"></i>' : '') +
             '</div>';
         }).join('');
@@ -855,7 +855,7 @@
       defaultBooks.forEach(function (b) {
         list.innerHTML += '<div class="list-item" style="display:flex;align-items:center;gap:15px;padding:12px;">' +
           '<img src="' + b.image + '" style="width:40px;height:55px;object-fit:cover;border-radius:4px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">' +
-          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size:0.9rem;">' + b.name + '</strong><br><small style="color:#4b5563;font-weight:600;">RM ' + b.price + ' <span style="margin-left:6px;background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:0.65rem;color:#374151;">Default</span></small></div>' +
+          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size: 1rem;">' + b.name + '</strong><br><small style="color:#4b5563;font-weight:600;">RM ' + b.price + ' <span style="margin-left:6px;background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size: 0.85rem;color:#374151;">Default</span></small></div>' +
           '<button class="btn-delete" disabled style="opacity:0.5;cursor:not-allowed;" title="Default books cannot be deleted"><i class="fas fa-lock"></i></button>' +
           '</div>';
       });
@@ -863,7 +863,7 @@
       books.forEach(function (b) {
         list.innerHTML += '<div class="list-item" style="display:flex;align-items:center;gap:15px;padding:12px;">' +
           '<img src="' + (b.image || 'Book/default.jpg') + '" style="width:40px;height:55px;object-fit:cover;border-radius:4px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">' +
-          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size:0.9rem;">' + b.name + '</strong><br><small style="color:#4b5563;font-weight:600;">RM ' + b.price + '</small></div>' +
+          '<div style="flex-grow:1;"><strong style="color:#1a1a2e;font-size: 1rem;">' + b.name + '</strong><br><small style="color:#4b5563;font-weight:600;">RM ' + b.price + '</small></div>' +
           '<button class="btn-delete" onclick="delBook(\'' + b.id + '\')"><i class="fas fa-trash-alt"></i> Delete</button>' +
           '</div>';
       });
@@ -905,7 +905,7 @@
       var reqs = EduDB.getResetRequests();
       var container = document.getElementById('resetList');
       if (reqs.length === 0) {
-        container.innerHTML = '<p style="color:#4b5563;font-style:italic;font-size:0.85rem;text-align:center;padding:1rem;">No pending password reset requests.</p>';
+        container.innerHTML = '<p style="color:#4b5563;font-style:italic;font-size: 1rem;text-align:center;padding:1rem;">No pending password reset requests.</p>';
         return;
       }
       var html = '<div style="overflow-x:auto;"><table class="table-res"><thead><tr><th>User Email</th><th>Date Requested</th><th>Action</th></tr></thead><tbody>';
@@ -914,7 +914,7 @@
           '<td><strong style="color:var(--admin-primary);">' + r.email + '</strong></td>' +
           '<td>' + EduDB.ago(r.createdAt) + '</td>' +
           '<td>' +
-            '<button class="admin-btn" style="background:#10b981;font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="adminResolvePassword(\'' + r.id + '\', \'' + r.email + '\')"><i class="fas fa-check"></i> Reset Password</button>' +
+            '<button class="admin-btn" style="background:#10b981;font-size: 0.95rem;padding:0.4rem 0.8rem;" onclick="adminResolvePassword(\'' + r.id + '\', \'' + r.email + '\')"><i class="fas fa-check"></i> Reset Password</button>' +
           '</td>' +
           '</tr>';
       });

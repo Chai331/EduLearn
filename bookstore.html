@@ -28,10 +28,10 @@
       <a href="cart.html" class="w3-bar-item w3-button nav-link" style="position:relative;">
         <i class="fas fa-shopping-cart"></i>
         <span id="cartBadge"
-          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size:0.6rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
+          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size: 0.8rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
       </a>
       <button onclick="doLogout()" class="w3-bar-item w3-button"
-        style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
+        style="color:#f87171;font-weight:600;font-size: 1rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
           class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
@@ -60,7 +60,7 @@
 
   <!-- TOAST -->
   <div id="toast"
-    style="display:none;position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:1rem 1.5rem;border-radius:12px;z-index:9999;font-size:0.88rem;font-weight:600;box-shadow:0 8px 25px rgba(0,0,0,0.3);border-left:4px solid #43e97b;">
+    style="display:none;position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:1rem 1.5rem;border-radius:12px;z-index:9999;font-size: 1.03rem;font-weight:600;box-shadow:0 8px 25px rgba(0,0,0,0.3);border-left:4px solid #43e97b;">
     <i class="fas fa-check-circle" style="color:#43e97b;margin-right:8px;"></i><span id="toastMsg"></span>
   </div>
 
@@ -72,43 +72,43 @@
         <!-- LEFT SIDEBAR: Filters -->
         <div class="w3-col m3 s12" style="margin-bottom:1.5rem;">
           <div class="progress-section">
-            <h3 style="font-size:0.92rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i class="fas fa-filter"
+            <h3 style="font-size: 1.02rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i class="fas fa-filter"
                 style="color:#667eea;margin-right:6px;"></i>Filter Books</h3>
 
             <div class="search-bar" style="max-width:100%;margin:0 0 1rem;padding:0.35rem 0.35rem 0.35rem 0.8rem;">
               <input type="text" id="bookSearch" placeholder="Search books…" onkeyup="filterBooks()"
-                style="font-size:0.82rem;" />
-              <button onclick="filterBooks()" style="padding:0.4rem 0.9rem;font-size:0.8rem;"><i
+                style="font-size: 0.97rem;" />
+              <button onclick="filterBooks()" style="padding:0.4rem 0.9rem;font-size: 0.95rem;"><i
                   class="fas fa-search"></i></button>
             </div>
 
             <div style="margin-bottom:1rem;">
               <div
-                style="font-size:0.8rem;font-weight:700;color:#374151;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;">
+                style="font-size: 0.95rem;font-weight:700;color:#374151;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;">
                 Category</div>
               <label
-                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                style="display:flex;align-items:center;gap:8px;font-size: 1rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
                   type="radio" name="bookCat" value="all" onchange="filterBooks()" checked /> All Categories</label>
               <label
-                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                style="display:flex;align-items:center;gap:8px;font-size: 1rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
                   type="radio" name="bookCat" value="security" onchange="filterBooks()" /> Cyber Security</label>
               <label
-                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                style="display:flex;align-items:center;gap:8px;font-size: 1rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
                   type="radio" name="bookCat" value="vision" onchange="filterBooks()" /> Computer Vision</label>
               <label
-                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                style="display:flex;align-items:center;gap:8px;font-size: 1rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
                   type="radio" name="bookCat" value="ds" onchange="filterBooks()" /> Data Structures</label>
               <label
-                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
+                style="display:flex;align-items:center;gap:8px;font-size: 1rem;color:#4b5563;padding:0.3rem 0;cursor:pointer;"><input
                   type="radio" name="bookCat" value="general" onchange="filterBooks()" /> General CS</label>
             </div>
 
             <div>
               <div
-                style="font-size:0.8rem;font-weight:700;color:#374151;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;">
+                style="font-size: 0.95rem;font-weight:700;color:#374151;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;">
                 Sort By</div>
               <select class="form-control" onchange="filterBooks()" id="sortSelect"
-                style="font-size:0.82rem;padding:0.5rem;">
+                style="font-size: 0.97rem;padding:0.5rem;">
                 <option value="default">Featured</option>
                 <option value="price-asc">Price: Low to High</option>
                 <option value="price-desc">Price: High to Low</option>
@@ -119,11 +119,11 @@
 
           <!-- Cart Summary -->
           <div class="progress-section" style="margin-top:1rem;">
-            <h3 style="font-size:0.92rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i
+            <h3 style="font-size: 1.02rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;"><i
                 class="fas fa-shopping-cart" style="color:#667eea;margin-right:6px;"></i>Cart Summary</h3>
-            <div id="cartSidebarCount" style="font-size:0.85rem;color:#4b5563;margin-bottom:0.8rem;">0 item(s)</div>
+            <div id="cartSidebarCount" style="font-size: 1rem;color:#4b5563;margin-bottom:0.8rem;">0 item(s)</div>
             <a href="cart.html" class="btn-primary-lg"
-              style="display:block;text-align:center;font-size:0.85rem;padding:0.65rem;">View Cart</a>
+              style="display:block;text-align:center;font-size: 1rem;padding:0.65rem;">View Cart</a>
           </div>
         </div>
 
@@ -131,7 +131,7 @@
         <div class="w3-col m9 s12">
           <div
             style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap;gap:0.5rem;">
-            <span id="bookCount" style="font-size:0.85rem;color:#374151;font-weight:600;">Showing 24 books</span>
+            <span id="bookCount" style="font-size: 1rem;color:#374151;font-weight:600;">Showing 24 books</span>
           </div>
           <div class="book-grid" id="bookGrid">
             <!-- Book 1 -->
@@ -811,7 +811,7 @@
             cover.style.cursor = 'pointer';
             var badge = document.createElement('div');
             badge.innerHTML = '<i class="fas fa-lock-open" style="margin-right:4px;"></i> Purchased – Click to Read';
-            badge.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e;font-size:0.72rem;font-weight:800;text-align:center;padding:0.5rem;z-index:2;border-radius:0 0 4px 4px;';
+            badge.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e;font-size: 0.92rem;font-weight:800;text-align:center;padding:0.5rem;z-index:2;border-radius:0 0 4px 4px;';
             cover.appendChild(badge);
             
             var pdfForCover = pdfPath;

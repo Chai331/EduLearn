@@ -27,10 +27,10 @@
       <a href="cart.html" class="w3-bar-item w3-button nav-link active" style="position:relative;">
         <i class="fas fa-shopping-cart"></i>
         <span id="cartBadge"
-          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size:0.6rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
+          style="position:absolute;top:10px;right:4px;background:#f5576c;color:#fff;font-size: 0.8rem;font-weight:800;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;">0</span>
       </a>
       <button onclick="doLogout()" class="w3-bar-item w3-button"
-        style="color:#f87171;font-weight:600;font-size:0.85rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
+        style="color:#f87171;font-weight:600;font-size: 1rem;line-height:65px;background:transparent;border:none;cursor:pointer;padding:0 14px;"><i
           class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
@@ -68,14 +68,14 @@
               <h2 style="font-size:1rem;font-weight:800;color:#1a1a2e;"><i class="fas fa-list"
                   style="color:#667eea;margin-right:8px;"></i>Cart Items</h2>
               <button onclick="clearCart()"
-                style="background:none;border:none;color:#ef4444;font-size:0.82rem;font-weight:600;cursor:pointer;"><i
+                style="background:none;border:none;color:#ef4444;font-size: 0.97rem;font-weight:600;cursor:pointer;"><i
                   class="fas fa-trash"></i> Clear All</button>
             </div>
 
             <div id="emptyCart" style="display:none;text-align:center;padding:3rem 0;">
               <i class="fas fa-shopping-cart"
                 style="font-size:3rem;color:#e5e7eb;margin-bottom:1rem;display:block;"></i>
-              <p style="color:#4b5563;font-size:0.95rem;margin-bottom:1.5rem;">Your cart is empty</p>
+              <p style="color:#4b5563;font-size: 1.05rem;margin-bottom:1.5rem;">Your cart is empty</p>
               <a href="bookstore.html" class="btn-primary-lg"><i class="fas fa-store"></i> Browse Books</a>
             </div>
 
@@ -93,7 +93,7 @@
             </table>
           </div>
           <div style="margin-top:1rem;">
-            <a href="bookstore.html" style="color:#667eea;font-size:0.88rem;font-weight:600;"><i
+            <a href="bookstore.html" style="color:#667eea;font-size: 1.03rem;font-weight:600;"><i
                 class="fas fa-arrow-left"></i> Continue Shopping</a>
           </div>
         </div>
@@ -111,16 +111,16 @@
             <!-- Promo Code -->
             <div style="margin:1rem 0;display:flex;gap:0.5rem;">
               <input type="text" id="promoInput" class="form-control" placeholder="Promo code"
-                style="font-size:0.82rem;padding:0.55rem 0.8rem;" />
+                style="font-size: 0.97rem;padding:0.55rem 0.8rem;" />
               <button onclick="applyPromo()"
-                style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:0 1rem;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.82rem;white-space:nowrap;">Apply</button>
+                style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:0 1rem;border-radius:8px;font-weight:700;cursor:pointer;font-size: 0.97rem;white-space:nowrap;">Apply</button>
             </div>
-            <div id="promoMsg" style="font-size:0.78rem;margin-bottom:0.5rem;"></div>
+            <div id="promoMsg" style="font-size: 0.98rem;margin-bottom:0.5rem;"></div>
 
             <a href="checkout.html" class="btn-primary-lg"
-              style="display:block;text-align:center;font-size:0.95rem;padding:0.85rem;"><i class="fas fa-lock"></i>
+              style="display:block;text-align:center;font-size: 1.05rem;padding:0.85rem;"><i class="fas fa-lock"></i>
               Proceed to Checkout</a>
-            <div style="text-align:center;margin-top:0.8rem;font-size:0.75rem;color:#4b5563;"><i
+            <div style="text-align:center;margin-top:0.8rem;font-size: 0.95rem;color:#4b5563;"><i
                 class="fas fa-shield-alt" style="color:#10b981;"></i> Secure &amp; encrypted payment</div>
           </div>
         </div>
@@ -174,7 +174,7 @@
         var lineTotal = (item.price * item.qty).toFixed(2);
         subtotal += parseFloat(lineTotal);
         var tr = document.createElement("tr");
-        tr.innerHTML = '<td><div style="font-weight:700;color:#1a1a2e;font-size:0.88rem;">' + item.name + '</div></td>'
+        tr.innerHTML = '<td><div style="font-weight:700;color:#1a1a2e;font-size: 1.03rem;">' + item.name + '</div></td>'
           + '<td style="color:#667eea;font-weight:700;">RM ' + item.price.toFixed(2) + '</td>'
           + '<td><div class="qty-control">'
           + '<button class="qty-btn" onclick="changeQty(' + i + ',-1)">−</button>'
