@@ -689,7 +689,7 @@
           </div>
           <div class="field-row">
             <label><input type="checkbox" style="accent-color:#667eea;" /> Remember me</label>
-            <a href="#">Forgot password?</a>
+            <a href="#" onclick="forgotPassword(event)">Forgot password?</a>
           </div>
           <button class="submit-btn" id="loginBtn" onclick="doLogin()">
             <i class="fas fa-sign-in-alt"></i> Sign In
@@ -952,6 +952,30 @@
       okD.innerHTML = '<i class="fas fa-info-circle"></i> ' + p + ' login is a demo feature.';
       okD.style.display = 'block';
       setTimeout(function () { okD.style.display = 'none'; }, 3000);
+    }
+
+    function forgotPassword(e) {
+      e.preventDefault();
+      var email = document.getElementById('logEmail').value.trim();
+      var errD = document.getElementById('loginErr');
+      var okD = document.getElementById('loginOk');
+      errD.style.display = 'none';
+      okD.style.display = 'none';
+
+      if (!email) {
+        errD.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please enter your email in the box to request a password reset.';
+        errD.style.display = 'block';
+        return;
+      }
+
+      var res = EduDB.requestPasswordReset(email);
+      if (res.success) {
+        okD.innerHTML = '<i class="fas fa-check-circle"></i> ' + res.message;
+        okD.style.display = 'block';
+      } else {
+        errD.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + res.message;
+        errD.style.display = 'block';
+      }
     }
   </script>
 </body>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -326,6 +326,7 @@
             </li>
             <li><a href="#" onclick="showTab('bookstore',this)"><i class="fas fa-book"></i> Bookstore</a></li>
             <li><a href="#" onclick="showTab('forum',this)"><i class="fas fa-comments"></i> Forum Moderation</a></li>
+            <li><a href="#" onclick="showTab('passwords',this)"><i class="fas fa-key"></i> Password Resets</a></li>
             <li style="margin-top:2rem;padding-top:1rem;border-top:1px solid #f3f4f6;">
               <a href="dashboard.html" class="admin-sidebar-btn">
                 <i class="fas fa-external-link-alt"></i> View Student Site
@@ -468,6 +469,15 @@
             </div>
           </div>
 
+          <!-- PASSWORD RESETS -->
+          <div id="tab-passwords" style="display:none;">
+            <div class="admin-card">
+              <h3><i class="fas fa-key" style="color:var(--admin-primary);margin-right:8px;"></i>Password Reset Requests</h3>
+              <p style="color:#374151;font-size:0.85rem;margin-bottom:1.5rem;">Manage forgotten password requests from students.</p>
+              <div id="resetList"></div>
+            </div>
+          </div>
+
           <!-- FORUM REPLY MODAL -->
           <div id="replyModal" class="w3-modal" style="z-index:10000;display:none;">
             <div class="w3-modal-content admin-card" style="max-width:600px;margin-top:50px;">
@@ -528,7 +538,7 @@
 
     /* ── Tab System ── */
     function showTab(name, link) {
-      ['overview', 'students', 'courses', 'bookstore', 'forum'].forEach(function (t) {
+      ['overview', 'students', 'courses', 'bookstore', 'forum', 'passwords'].forEach(function (t) {
         document.getElementById('tab-' + t).style.display = 'none';
       });
       document.querySelectorAll('.portal-nav li a').forEach(function (a) { a.classList.remove('active'); });
@@ -539,6 +549,7 @@
       if (name === 'students') renderStudents();
       if (name === 'courses') renderMaterials();
       if (name === 'forum') renderForum();
+      if (name === 'passwords') renderPasswords();
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -887,6 +898,41 @@
           showToast('Upload success!');
         }
       });
+    }
+
+    /* ── Password Resets ── */
+    function renderPasswords() {
+      var reqs = EduDB.getResetRequests();
+      var container = document.getElementById('resetList');
+      if (reqs.length === 0) {
+        container.innerHTML = '<p style="color:#4b5563;font-style:italic;font-size:0.85rem;text-align:center;padding:1rem;">No pending password reset requests.</p>';
+        return;
+      }
+      var html = '<div style="overflow-x:auto;"><table class="table-res"><thead><tr><th>User Email</th><th>Date Requested</th><th>Action</th></tr></thead><tbody>';
+      reqs.forEach(function(r) {
+        html += '<tr>' +
+          '<td><strong style="color:var(--admin-primary);">' + r.email + '</strong></td>' +
+          '<td>' + EduDB.ago(r.createdAt) + '</td>' +
+          '<td>' +
+            '<button class="admin-btn" style="background:#10b981;font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="adminResolvePassword(\'' + r.id + '\', \'' + r.email + '\')"><i class="fas fa-check"></i> Reset Password</button>' +
+          '</td>' +
+          '</tr>';
+      });
+      html += '</tbody></table></div>';
+      container.innerHTML = html;
+    }
+
+    function adminResolvePassword(reqId, email) {
+      var newPw = prompt('Enter a new password for ' + email + ' (or leave blank to cancel):');
+      if (newPw) {
+        var success = EduDB.resolveResetRequest(reqId, newPw);
+        if (success) {
+          showToast('Password reset successfully for ' + email);
+          renderPasswords();
+        } else {
+          showToast('Error resetting password or email not found.');
+        }
+      }
     }
   </script>
 </body>

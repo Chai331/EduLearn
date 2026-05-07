@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * ============================================================
  *  EduLearn – localStorage Database Simulation
  *  Simulates MySQL / MongoDB for local file deployment
@@ -27,7 +27,8 @@ window.EduDB = (function () {
     PURCHASED: 'eduDB_purchased',
     CUSTOM_BOOKS: 'eduDB_custom_books',
     CUSTOM_COURSES: 'eduDB_custom_courses',
-    SAVED_RESOURCES: 'eduDB_saved_resources'
+    SAVED_RESOURCES: 'eduDB_saved_resources',
+    RESET_REQUESTS: 'eduDB_reset_reqs'
   };
 
   /* ─── Low-level CRUD ───────────────────────────────────── */
@@ -748,6 +749,48 @@ window.EduDB = (function () {
     return all[userId].some(function (item) { return item.file === file; });
   }
 
+  /* ─── PASSWORD RESETS ───────────────────────────────────── */
+  function requestPasswordReset(email) {
+    if (!email) return { success: false, message: 'Please enter your email address.' };
+    email = email.toLowerCase().trim();
+    var users = readTable(K.USERS);
+    if (!users.some(function(u) { return u.email === email; })) {
+      return { success: true, message: 'If this email exists, a notification has been sent.' };
+    }
+    var reqs = readTable(K.RESET_REQUESTS);
+    if (reqs.some(function(r) { return r.email === email && r.status === 'pending'; })) {
+      return { success: true, message: 'A reset request is already pending for this email.' };
+    }
+    reqs.push({
+      id: 'req_' + uid(),
+      email: email,
+      createdAt: new Date().toISOString(),
+      status: 'pending'
+    });
+    writeTable(K.RESET_REQUESTS, reqs);
+    return { success: true, message: 'Notification sent to Admin. Please wait for an admin to assist you.' };
+  }
+
+  function getResetRequests() {
+    return readTable(K.RESET_REQUESTS).filter(function(r) { return r.status === 'pending'; });
+  }
+
+  function resolveResetRequest(reqId, newPassword) {
+    var reqs = readTable(K.RESET_REQUESTS);
+    var rIdx = reqs.findIndex(function(r) { return r.id === reqId; });
+    if (rIdx === -1) return false;
+    
+    var users = readTable(K.USERS);
+    var uIdx = users.findIndex(function(u) { return u.email === reqs[rIdx].email; });
+    if (uIdx !== -1) {
+      users[uIdx].password = hashPw(newPassword);
+      writeTable(K.USERS, users);
+    }
+    
+    reqs[rIdx].status = 'resolved';
+    writeTable(K.RESET_REQUESTS, reqs);
+    return true;
+  }
 
   /* ─── Initialisation ────────────────────────────────────── */
   seed();              // populate demo data on first run
@@ -804,6 +847,10 @@ window.EduDB = (function () {
     toggleSavedResource: toggleSavedResource,
     getSavedResources: getSavedResources,
     isResourceSaved: isResourceSaved,
+    /* Password Resets */
+    requestPasswordReset: requestPasswordReset,
+    getResetRequests: getResetRequests,
+    resolveResetRequest: resolveResetRequest,
     /* Utils */
     ago: ago,
     /* Cloud Sync */
