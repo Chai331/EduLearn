@@ -1021,7 +1021,7 @@ img {
    ============================================ */
 .portal-grid {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 1.5rem;
   min-height: 70vh;
 }
@@ -1078,6 +1078,7 @@ img {
   font-size: 1.15rem;
   transition: all 0.2s;
   margin-bottom: 0.3rem;
+  white-space: nowrap;
 }
 
 .portal-nav li a:hover,
