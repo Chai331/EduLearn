@@ -1101,8 +1101,20 @@ img {
 
 .stat-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .stat-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .stat-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .stat-card {
@@ -1137,6 +1149,7 @@ img {
   font-size: 1.15rem;
   color: #1a1a2e;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .progress-section {
