@@ -303,7 +303,7 @@ window.EduDB = (function () {
         { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#4facfe,#00f2fe)', id: 'edu_0003' },
         { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#fa709a,#fee140)', id: 'edu_0004' },
         { name: 'Loh Mun Yee', avatar: 'L', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'edu_0005' },
-        { name: 'Edu Support', avatar: 'E', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'admin', email: 'support@edulearn.com', password: 'hashPw(admin123)', role: 'admin' }
+        { name: 'Edu Support', avatar: 'E', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'admin', email: 'support@edulearn.com', password: hashPw('admin123'), role: 'admin' }
       ];
 
       var data = [
