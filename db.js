@@ -164,65 +164,74 @@ window.EduDB = (function () {
   function seed() {
     // ─── ONE-TIME MIGRATION TO SEQUENTIAL IDs ───
     (function migrateToEduIds() {
-      var users = readTable(K.USERS);
-      var enrollments = readTable(K.ENROLLMENTS);
-      var posts = readTable(K.POSTS);
-      var orders = readTable(K.ORDERS);
-      var activity = readTable(K.ACTIVITY);
-      var purchased = readTable(K.PURCHASED);
-      var saved = readTable(K.SAVED_RESOURCES);
-      
-      var needsMigration = users.some(function(u) { 
-        return u.role === 'student' && !u.id.startsWith('edu_'); 
-      });
+      try {
+        var users = readTable(K.USERS);
+        var enrollments = readTable(K.ENROLLMENTS);
+        var posts = readTable(K.POSTS);
+        var orders = readTable(K.ORDERS);
+        var activity = readTable(K.ACTIVITY);
+        var purchased = readTable(K.PURCHASED);
+        var saved = readTable(K.SAVED_RESOURCES);
+        
+        var needsMigration = users.some(function(u) { 
+          return u && u.role === 'student' && u.id && !u.id.startsWith('edu_'); 
+        });
 
-      if (!needsMigration) return;
+        if (!needsMigration) return;
 
-      var idMap = {};
-      var nextNum = 1;
+        var idMap = {};
+        var nextNum = 1;
 
-      // Map existing students to new IDs
-      users.forEach(function(u) {
-        if (u.role === 'student' && !u.id.startsWith('edu_')) {
-          var newId = 'edu_' + String(nextNum).padStart(4, '0');
-          idMap[u.id] = newId;
-          u.id = newId;
-          nextNum++;
-        } else if (u.id.startsWith('edu_')) {
-          var num = parseInt(u.id.split('_')[1]);
-          if (!isNaN(num) && num >= nextNum) nextNum = num + 1;
-        }
-      });
+        // Map existing students to new IDs
+        users.forEach(function(u) {
+          if (!u) return;
+          if (u.role === 'student' && u.id && !u.id.startsWith('edu_')) {
+            var ns = String(nextNum);
+            while(ns.length < 4) ns = '0' + ns; 
+            var newId = 'edu_' + ns;
+            idMap[u.id] = newId;
+            u.id = newId;
+            nextNum++;
+          } else if (u.id && u.id.startsWith('edu_')) {
+            var num = parseInt(u.id.split('_')[1]);
+            if (!isNaN(num) && num >= nextNum) nextNum = num + 1;
+          }
+        });
 
-      // Update all references
-      function updateRef(obj, key) { if (obj[key] && idMap[obj[key]]) obj[key] = idMap[obj[key]]; }
+        // Update all references
+        function updateRef(obj, key) { if (obj && obj[key] && idMap[obj[key]]) obj[key] = idMap[obj[key]]; }
 
-      enrollments.forEach(function(e) { updateRef(e, 'userId'); });
-      orders.forEach(function(o) { updateRef(o, 'userId'); });
-      activity.forEach(function(a) { updateRef(a, 'userId'); });
-      purchased.forEach(function(p) { updateRef(p, 'userId'); });
-      saved.forEach(function(s) { updateRef(s, 'userId'); });
-      
-      posts.forEach(function(p) {
-        updateRef(p, 'userId');
-        if (p.likes) p.likes = p.likes.map(function(l) { return idMap[l] || l; });
-        if (p.replyData) {
-          p.replyData.forEach(function(r) {
-            updateRef(r, 'userId');
-            if (r.likes) r.likes = r.likes.map(function(l) { return idMap[l] || l; });
-          });
-        }
-      });
+        enrollments.forEach(function(e) { updateRef(e, 'userId'); });
+        orders.forEach(function(o) { updateRef(o, 'userId'); });
+        activity.forEach(function(a) { updateRef(a, 'userId'); });
+        purchased.forEach(function(p) { updateRef(p, 'userId'); });
+        saved.forEach(function(s) { updateRef(s, 'userId'); });
+        
+        posts.forEach(function(p) {
+          if (!p) return;
+          updateRef(p, 'userId');
+          if (Array.isArray(p.likes)) p.likes = p.likes.map(function(l) { return idMap[l] || l; });
+          if (Array.isArray(p.replyData)) {
+            p.replyData.forEach(function(r) {
+              if (!r) return;
+              updateRef(r, 'userId');
+              if (Array.isArray(r.likes)) r.likes = r.likes.map(function(l) { return idMap[l] || l; });
+            });
+          }
+        });
 
-      writeTable(K.USERS, users);
-      writeTable(K.ENROLLMENTS, enrollments);
-      writeTable(K.POSTS, posts);
-      writeTable(K.ORDERS, orders);
-      writeTable(K.ACTIVITY, activity);
-      writeTable(K.PURCHASED, purchased);
-      writeTable(K.SAVED_RESOURCES, saved);
+        writeTable(K.USERS, users);
+        writeTable(K.ENROLLMENTS, enrollments);
+        writeTable(K.POSTS, posts);
+        writeTable(K.ORDERS, orders);
+        writeTable(K.ACTIVITY, activity);
+        writeTable(K.PURCHASED, purchased);
+        writeTable(K.SAVED_RESOURCES, saved);
 
-      console.log('EduDB: Migration to sequential IDs complete ✓');
+        console.log('EduDB: Migration to sequential IDs complete ✓');
+      } catch (err) {
+        console.error('EduDB: Migration failed:', err);
+      }
     })();
 
     // ─── ONE-TIME CLEANUP FOR AHMAD FARID ───
@@ -399,7 +408,9 @@ window.EduDB = (function () {
         if (!isNaN(num) && num >= nextNum) nextNum = num + 1;
       }
     });
-    var eduId = 'edu_' + String(nextNum).padStart(4, '0');
+    var ns = String(nextNum);
+    while(ns.length < 4) ns = '0' + ns; 
+    var eduId = 'edu_' + ns;
 
     var user = {
       id: eduId,
