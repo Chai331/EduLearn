@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * ============================================================
  *  EduLearn – localStorage Database Simulation
  *  Simulates MySQL / MongoDB for local file deployment
@@ -172,9 +172,9 @@ window.EduDB = (function () {
         var activity = readTable(K.ACTIVITY);
         var purchased = readTable(K.PURCHASED);
         var saved = readTable(K.SAVED_RESOURCES);
-        
-        var needsMigration = users.some(function(u) { 
-          return u && u.role === 'student' && u.id && !u.id.startsWith('edu_'); 
+
+        var needsMigration = users.some(function (u) {
+          return u && u.role === 'student' && u.id && !u.id.startsWith('edu_');
         });
 
         if (!needsMigration) return;
@@ -183,11 +183,11 @@ window.EduDB = (function () {
         var nextNum = 1;
 
         // Map existing students to new IDs
-        users.forEach(function(u) {
+        users.forEach(function (u) {
           if (!u) return;
           if (u.role === 'student' && u.id && !u.id.startsWith('edu_')) {
             var ns = String(nextNum);
-            while(ns.length < 4) ns = '0' + ns; 
+            while (ns.length < 4) ns = '0' + ns;
             var newId = 'edu_' + ns;
             idMap[u.id] = newId;
             u.id = newId;
@@ -201,21 +201,21 @@ window.EduDB = (function () {
         // Update all references
         function updateRef(obj, key) { if (obj && obj[key] && idMap[obj[key]]) obj[key] = idMap[obj[key]]; }
 
-        if (Array.isArray(enrollments)) enrollments.forEach(function(e) { updateRef(e, 'userId'); });
-        if (Array.isArray(orders)) orders.forEach(function(o) { updateRef(o, 'userId'); });
-        if (Array.isArray(activity)) activity.forEach(function(a) { updateRef(a, 'userId'); });
-        if (Array.isArray(purchased)) purchased.forEach(function(p) { updateRef(p, 'userId'); });
-        if (Array.isArray(saved)) saved.forEach(function(s) { updateRef(s, 'userId'); });
-        
-        if (Array.isArray(posts)) posts.forEach(function(p) {
+        if (Array.isArray(enrollments)) enrollments.forEach(function (e) { updateRef(e, 'userId'); });
+        if (Array.isArray(orders)) orders.forEach(function (o) { updateRef(o, 'userId'); });
+        if (Array.isArray(activity)) activity.forEach(function (a) { updateRef(a, 'userId'); });
+        if (Array.isArray(purchased)) purchased.forEach(function (p) { updateRef(p, 'userId'); });
+        if (Array.isArray(saved)) saved.forEach(function (s) { updateRef(s, 'userId'); });
+
+        if (Array.isArray(posts)) posts.forEach(function (p) {
           if (!p) return;
           updateRef(p, 'userId');
-          if (Array.isArray(p.likes)) p.likes = p.likes.map(function(l) { return idMap[l] || l; });
+          if (Array.isArray(p.likes)) p.likes = p.likes.map(function (l) { return idMap[l] || l; });
           if (Array.isArray(p.replyData)) {
-            p.replyData.forEach(function(r) {
+            p.replyData.forEach(function (r) {
               if (!r) return;
               updateRef(r, 'userId');
-              if (Array.isArray(r.likes)) r.likes = r.likes.map(function(l) { return idMap[l] || l; });
+              if (Array.isArray(r.likes)) r.likes = r.likes.map(function (l) { return idMap[l] || l; });
             });
           }
         });
@@ -303,7 +303,7 @@ window.EduDB = (function () {
         { name: 'Li Wei', avatar: 'L', color: 'linear-gradient(135deg,#4facfe,#00f2fe)', id: 'edu_0003' },
         { name: 'Maya Haris', avatar: 'M', color: 'linear-gradient(135deg,#fa709a,#fee140)', id: 'edu_0004' },
         { name: 'Loh Mun Yee', avatar: 'L', color: 'linear-gradient(135deg,#f093fb,#f5576c)', id: 'edu_0005' },
-        { name: 'Edu Support', avatar: 'E', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'admin' }
+        { name: 'Edu Support', avatar: 'E', color: 'linear-gradient(135deg,#ef4444,#991b1b)', id: 'admin', email: 'support@edulearn.com', password: 'admin123', role: 'admin' }
       ];
 
       var data = [
@@ -401,14 +401,14 @@ window.EduDB = (function () {
       return { success: false, message: 'This email is already registered.' };
 
     var nextNum = 1;
-    users.forEach(function(u) {
+    users.forEach(function (u) {
       if (u.id.startsWith('edu_')) {
         var num = parseInt(u.id.split('_')[1]);
         if (!isNaN(num) && num >= nextNum) nextNum = num + 1;
       }
     });
     var ns = String(nextNum);
-    while(ns.length < 4) ns = '0' + ns; 
+    while (ns.length < 4) ns = '0' + ns;
     var eduId = 'edu_' + ns;
 
     var user = {
@@ -837,11 +837,11 @@ window.EduDB = (function () {
     if (!email) return { success: false, message: 'Please enter your email address.' };
     email = email.toLowerCase().trim();
     var users = readTable(K.USERS);
-    if (!users.some(function(u) { return u.email === email; })) {
+    if (!users.some(function (u) { return u.email === email; })) {
       return { success: true, message: 'If this email exists, a notification has been sent.' };
     }
     var reqs = readTable(K.RESET_REQUESTS);
-    if (reqs.some(function(r) { return r.email === email && r.status === 'pending'; })) {
+    if (reqs.some(function (r) { return r.email === email && r.status === 'pending'; })) {
       return { success: true, message: 'A reset request is already pending for this email.' };
     }
     reqs.push({
@@ -855,21 +855,21 @@ window.EduDB = (function () {
   }
 
   function getResetRequests() {
-    return readTable(K.RESET_REQUESTS).filter(function(r) { return r.status === 'pending'; });
+    return readTable(K.RESET_REQUESTS).filter(function (r) { return r.status === 'pending'; });
   }
 
   function resolveResetRequest(reqId, newPassword) {
     var reqs = readTable(K.RESET_REQUESTS);
-    var rIdx = reqs.findIndex(function(r) { return r.id === reqId; });
+    var rIdx = reqs.findIndex(function (r) { return r.id === reqId; });
     if (rIdx === -1) return false;
-    
+
     var users = readTable(K.USERS);
-    var uIdx = users.findIndex(function(u) { return u.email === reqs[rIdx].email; });
+    var uIdx = users.findIndex(function (u) { return u.email === reqs[rIdx].email; });
     if (uIdx !== -1) {
       users[uIdx].password = hashPw(newPassword);
       writeTable(K.USERS, users);
     }
-    
+
     reqs[rIdx].status = 'resolved';
     writeTable(K.RESET_REQUESTS, reqs);
     return true;
