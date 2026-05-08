@@ -201,13 +201,13 @@ window.EduDB = (function () {
         // Update all references
         function updateRef(obj, key) { if (obj && obj[key] && idMap[obj[key]]) obj[key] = idMap[obj[key]]; }
 
-        enrollments.forEach(function(e) { updateRef(e, 'userId'); });
-        orders.forEach(function(o) { updateRef(o, 'userId'); });
-        activity.forEach(function(a) { updateRef(a, 'userId'); });
-        purchased.forEach(function(p) { updateRef(p, 'userId'); });
-        saved.forEach(function(s) { updateRef(s, 'userId'); });
+        if (Array.isArray(enrollments)) enrollments.forEach(function(e) { updateRef(e, 'userId'); });
+        if (Array.isArray(orders)) orders.forEach(function(o) { updateRef(o, 'userId'); });
+        if (Array.isArray(activity)) activity.forEach(function(a) { updateRef(a, 'userId'); });
+        if (Array.isArray(purchased)) purchased.forEach(function(p) { updateRef(p, 'userId'); });
+        if (Array.isArray(saved)) saved.forEach(function(s) { updateRef(s, 'userId'); });
         
-        posts.forEach(function(p) {
+        if (Array.isArray(posts)) posts.forEach(function(p) {
           if (!p) return;
           updateRef(p, 'userId');
           if (Array.isArray(p.likes)) p.likes = p.likes.map(function(l) { return idMap[l] || l; });
