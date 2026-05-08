@@ -1597,26 +1597,126 @@ textarea.form-control {
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
+  /* Layout */
   .portal-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .portal-sidebar {
+    padding: 1.2rem;
+  }
+
+  .portal-main {
+    padding: 0;
+  }
+
+  /* Spacing */
+  body {
+    padding-top: 60px;
+  }
+
+  .page-header {
+    padding: 50px 16px 40px;
+  }
+
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .container-max {
+    padding: 0 12px;
+  }
+
+  /* Stat Cards */
+  .stat-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card-num {
+    font-size: 1.4rem;
   }
 
   .hero-stats {
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
   }
 
   .stat-divider {
     display: none;
   }
 
+  /* Forum */
+  .forum-post {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .forum-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .forum-post-meta {
+    font-size: 0.85rem;
+  }
+
+  /* Tables */
+  .table-res {
+    font-size: 0.85rem;
+  }
+
+  .table-res th, .table-res td {
+    padding: 8px 10px;
+  }
+
+  /* Search & Filter */
+  .search-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-bar button {
+    width: 100%;
+  }
+
+  .filter-bar {
+    gap: 0.4rem;
+  }
+
+  .filter-btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  /* Checkout/Cart */
   .checkout-steps {
     overflow-x: auto;
+    padding-bottom: 5px;
   }
 
   .cart-table {
     display: block;
     overflow-x: auto;
+  }
+
+  /* Admin Cards */
+  .admin-card {
+    padding: 1.2rem;
+  }
+
+  /* Grid Layouts */
+  .course-grid-page, .book-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
@@ -1887,16 +1987,4 @@ textarea.form-control {
 /* ============================================
    RESPONSIVE ADDITIONS
    ============================================ */
-@media (max-width: 768px) {
-  .course-grid-page {
-    grid-template-columns: 1fr;
-  }
-
-  .search-bar {
-    flex-direction: column;
-  }
-
-  .search-bar button {
-    width: 100%;
-  }
-}
+/* Removed redundant queries */
