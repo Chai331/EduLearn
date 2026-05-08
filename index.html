@@ -124,7 +124,13 @@
     .hero-left-content {
       width: 100%;
       max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+
+    .hero-left-content > :first-child { margin-top: 0 !important; }
+    .hero-left-content > :last-child { margin-bottom: 0 !important; }
 
     .landing-badge {
       display: inline-flex;
@@ -232,13 +238,19 @@
     .login-card {
       width: 100%;
       max-width: 440px;
-      padding: 38px;
+      padding: 40px;
       border-radius: 12px;
       background: rgba(15, 12, 45, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+
+    .login-card > :first-child { margin-top: 0 !important; }
+    .login-card > :last-child { margin-bottom: 0 !important; }
 
     .auth-tabs-row {
       display: flex;
