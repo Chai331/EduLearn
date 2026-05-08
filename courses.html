@@ -722,6 +722,7 @@
 
         // Render multi-part quizzes (from PARSED_QUIZZES)
         quizzes.forEach(function (q, i) {
+          if (!q || q.length === 0) return; // Skip empty quizzes
           var isQuizDone = completedQuizzes.indexOf(i + 1) !== -1;
           var doneHtml = isQuizDone ? '<span style="color:#10b981;font-size: 0.95rem;margin-left:8px;font-weight:600;"><i class="fas fa-check-circle"></i> Passed</span>' : '';
           qIndexHtml +=
@@ -735,16 +736,18 @@
             '</div>';
         });
 
-        // Render standard quiz (if exists and not already showing)
-        if (standardQuiz && quizzes.length === 0) {
+        // Render standard quiz (always show if it exists)
+        if (standardQuiz) {
+          var isStandardDone = completedQuizzes.indexOf('standard') !== -1;
+          var doneHtml = isStandardDone ? '<span style="color:#10b981;font-size: 0.95rem;margin-left:8px;font-weight:600;"><i class="fas fa-check-circle"></i> Passed</span>' : '';
           qIndexHtml +=
             '<div class="res-item">' +
-            '<div class="res-ico" style="background:#e0e7ff;color:#4f46e5;"><i class="fas fa-trophy"></i></div>' +
+            '<div class="res-ico" style="background:#fef3c7;color:#d97706;"><i class="fas fa-trophy"></i></div>' +
             '<div class="res-meta">' +
-            '<div class="res-title">Full Course Quiz</div>' +
+            '<div class="res-title">Full Course Quiz ' + doneHtml + '</div>' +
             '<div class="res-sub">Comprehensive Assessment (' + standardQuiz.length + ' Qs)</div>' +
             '</div>' +
-            '<button class="res-btn" style="background:#4f46e5;color:#fff;" onclick="openStandardQuiz()"><i class="fas fa-play"></i> Start Quiz</button>' +
+            '<button class="res-btn" style="background:#d97706;color:#fff;" onclick="openStandardQuiz()"><i class="fas fa-play"></i> Start Quiz</button>' +
             '</div>';
         }
 
