@@ -162,6 +162,69 @@ window.EduDB = (function () {
 
   /* ─── Seed demo data ────────────────────────────────────── */
   function seed() {
+    // ─── ONE-TIME MIGRATION TO SEQUENTIAL IDs ───
+    (function migrateToEduIds() {
+      var users = readTable(K.USERS);
+      var enrollments = readTable(K.ENROLLMENTS);
+      var posts = readTable(K.POSTS);
+      var orders = readTable(K.ORDERS);
+      var activity = readTable(K.ACTIVITY);
+      var purchased = readTable(K.PURCHASED);
+      var saved = readTable(K.SAVED_RESOURCES);
+      
+      var needsMigration = users.some(function(u) { 
+        return u.role === 'student' && !u.id.startsWith('edu_'); 
+      });
+
+      if (!needsMigration) return;
+
+      var idMap = {};
+      var nextNum = 1;
+
+      // Map existing students to new IDs
+      users.forEach(function(u) {
+        if (u.role === 'student' && !u.id.startsWith('edu_')) {
+          var newId = 'edu_' + String(nextNum).padStart(4, '0');
+          idMap[u.id] = newId;
+          u.id = newId;
+          nextNum++;
+        } else if (u.id.startsWith('edu_')) {
+          var num = parseInt(u.id.split('_')[1]);
+          if (!isNaN(num) && num >= nextNum) nextNum = num + 1;
+        }
+      });
+
+      // Update all references
+      function updateRef(obj, key) { if (obj[key] && idMap[obj[key]]) obj[key] = idMap[obj[key]]; }
+
+      enrollments.forEach(function(e) { updateRef(e, 'userId'); });
+      orders.forEach(function(o) { updateRef(o, 'userId'); });
+      activity.forEach(function(a) { updateRef(a, 'userId'); });
+      purchased.forEach(function(p) { updateRef(p, 'userId'); });
+      saved.forEach(function(s) { updateRef(s, 'userId'); });
+      
+      posts.forEach(function(p) {
+        updateRef(p, 'userId');
+        if (p.likes) p.likes = p.likes.map(function(l) { return idMap[l] || l; });
+        if (p.replyData) {
+          p.replyData.forEach(function(r) {
+            updateRef(r, 'userId');
+            if (r.likes) r.likes = r.likes.map(function(l) { return idMap[l] || l; });
+          });
+        }
+      });
+
+      writeTable(K.USERS, users);
+      writeTable(K.ENROLLMENTS, enrollments);
+      writeTable(K.POSTS, posts);
+      writeTable(K.ORDERS, orders);
+      writeTable(K.ACTIVITY, activity);
+      writeTable(K.PURCHASED, purchased);
+      writeTable(K.SAVED_RESOURCES, saved);
+
+      console.log('EduDB: Migration to sequential IDs complete ✓');
+    })();
+
     // ─── ONE-TIME CLEANUP FOR AHMAD FARID ───
     (function cleanupOldSeed() {
       var users = readTable(K.USERS);
@@ -170,18 +233,19 @@ window.EduDB = (function () {
       var changed = false;
 
       // Remove Ahmad from users
-      var newUsers = users.filter(function (u) { return u.firstName !== 'Ahmad' || u.lastName !== 'Farid'; });
+      var newUsers = users.filter(function (u) { return (u.firstName !== 'Ahmad' || u.lastName !== 'Farid') && u.id !== 'u_seed01'; });
       if (newUsers.length !== users.length) { writeTable(K.USERS, newUsers); changed = true; }
 
       // Remove Ahmad from enrollments
-      var newEnrol = enrollments.filter(function (e) { return e.userId !== 'u_seed01'; });
+      var newEnrol = enrollments.filter(function (e) { return e.userId !== 'u_seed01' && e.userId !== 'edu_0001' && !e.userId.startsWith('u_seed'); });
+      // Keep some seed enrollments if they are mapped
       if (newEnrol.length !== enrollments.length) { writeTable(K.ENROLLMENTS, newEnrol); changed = true; }
 
       // Remove Ahmad from posts
       var newPosts = posts.filter(function (p) { return p.author !== 'Ahmad Farid'; });
       if (newPosts.length !== posts.length) { writeTable(K.POSTS, newPosts); changed = true; }
 
-      if (changed) { console.log('EduDB: Ahmad Farid data purged.'); }
+      if (changed) { console.log('EduDB: Seed cleanup complete.'); }
     })();
 
     /* Users table - seed the admin account */
@@ -328,8 +392,17 @@ window.EduDB = (function () {
     if (users.some(function (u) { return u.email.toLowerCase() === d.email.toLowerCase().trim(); }))
       return { success: false, message: 'This email is already registered.' };
 
+    var nextNum = 1;
+    users.forEach(function(u) {
+      if (u.id.startsWith('edu_')) {
+        var num = parseInt(u.id.split('_')[1]);
+        if (!isNaN(num) && num >= nextNum) nextNum = num + 1;
+      }
+    });
+    var eduId = 'edu_' + String(nextNum).padStart(4, '0');
+
     var user = {
-      id: uid(),
+      id: eduId,
       firstName: d.firstName.trim(),
       lastName: (d.lastName || '').trim(),
       email: d.email.toLowerCase().trim(),
