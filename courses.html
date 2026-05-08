@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -509,6 +509,7 @@
     var currentFilter = 'all';
     var currentCourse = null;
     var quizAnswers = [];
+    var activeQuizIndex = 0;
 
     function setFilter(btn, cat) {
       document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
@@ -824,6 +825,7 @@
         showToast("⚠️ Quiz data not found.");
         return;
       }
+      activeQuizIndex = index;
       activeQuizData = quizArray[index - 1];
       renderActiveQuiz('Quiz ' + index);
     }
@@ -834,6 +836,7 @@
         showToast("⚠️ Standard quiz data not found.");
         return;
       }
+      activeQuizIndex = 'standard';
       renderActiveQuiz('Full Course Quiz');
     }
 
@@ -896,7 +899,11 @@
         (pass ? 'Excellent! You passed the quiz 🎉' : 'You must get all answers correct to pass the quiz. Try again! 💪');
       if (pass) {
         var totalLecs = CONTENT[currentCourse.id].lectures.length;
-        var totalQuiz = CONTENT[currentCourse.id].quizzes.length;
+        var qArr = CONTENT[currentCourse.id].quizzes || [];
+        var totalQuiz = qArr.filter(function(q) { return q && q.length > 0; }).length;
+        // Also count the standard quiz if it exists
+        if (CONTENT[currentCourse.id].quiz) totalQuiz += 1;
+
         EduDB.markQuizDone(__sess.id, currentCourse.id, activeQuizIndex, score, quiz.length, totalLecs, totalQuiz);
         openCourseDetail(currentCourse.id);
       }
@@ -921,7 +928,10 @@
       // Mark as read
       if (week && title && currentCourse) {
         var totalLecs = CONTENT[currentCourse.id].lectures.length;
-        var totalQuiz = CONTENT[currentCourse.id].quizzes.length;
+        var qArr = CONTENT[currentCourse.id].quizzes || [];
+        var totalQuiz = qArr.filter(function(q) { return q && q.length > 0; }).length;
+        if (CONTENT[currentCourse.id].quiz) totalQuiz += 1;
+
         EduDB.markLectureRead(__sess.id, currentCourse.id, week, title, totalLecs, totalQuiz);
         openCourseDetail(currentCourse.id);
       }
