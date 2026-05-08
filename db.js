@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * ============================================================
  *  EduLearn – localStorage Database Simulation
  *  Simulates MySQL / MongoDB for local file deployment
@@ -238,7 +238,8 @@ window.EduDB = (function () {
 
     /* Users table - seed the accounts */
     var existingUsers = readTable(K.USERS);
-    var hasAdmin = existingUsers.some(function (u) { return u.role === 'admin'; });
+    var hasAdmin = existingUsers.some(function (u) { return u.role === 'admin' && u.email === 'admin@edulearn.com'; });
+    var hasSupport = existingUsers.some(function (u) { return u.email === 'support@edulearn.com'; });
     var hasDemo = existingUsers.some(function (u) { return u.email === 'student@edu.com'; });
     var changedUsers = false;
 
@@ -251,6 +252,21 @@ window.EduDB = (function () {
         password: hashPw('admin123'),
         programme: 'Administration', year: 'N/A',
         avatar: 'A',
+        avatarColor: 'linear-gradient(135deg,#ef4444,#991b1b)',
+        createdAt: '2025-01-01T08:00:00Z',
+        role: 'admin'
+      });
+      changedUsers = true;
+    }
+
+    if (!hasSupport) {
+      existingUsers.push({
+        id: 'u_support',
+        firstName: 'Edu', lastName: 'Support',
+        email: 'support@edulearn.com',
+        password: hashPw('admin123'),
+        programme: 'Support', year: 'N/A',
+        avatar: 'E',
         avatarColor: 'linear-gradient(135deg,#ef4444,#991b1b)',
         createdAt: '2025-01-01T08:00:00Z',
         role: 'admin'
