@@ -234,34 +234,16 @@ window.EduDB = (function () {
       }
     })();
 
-    // ─── ONE-TIME CLEANUP FOR AHMAD FARID ───
-    (function cleanupOldSeed() {
-      var users = readTable(K.USERS);
-      var enrollments = readTable(K.ENROLLMENTS);
-      var posts = readTable(K.POSTS);
-      var changed = false;
 
-      // Remove Ahmad from users
-      var newUsers = users.filter(function (u) { return (u.firstName !== 'Ahmad' || u.lastName !== 'Farid') && u.id !== 'u_seed01'; });
-      if (newUsers.length !== users.length) { writeTable(K.USERS, newUsers); changed = true; }
 
-      // Remove Ahmad from enrollments
-      var newEnrol = enrollments.filter(function (e) { return e.userId !== 'u_seed01' && e.userId !== 'edu_0001' && !e.userId.startsWith('u_seed'); });
-      // Keep some seed enrollments if they are mapped
-      if (newEnrol.length !== enrollments.length) { writeTable(K.ENROLLMENTS, newEnrol); changed = true; }
-
-      // Remove Ahmad from posts
-      var newPosts = posts.filter(function (p) { return p.author !== 'Ahmad Farid'; });
-      if (newPosts.length !== posts.length) { writeTable(K.POSTS, newPosts); changed = true; }
-
-      if (changed) { console.log('EduDB: Seed cleanup complete.'); }
-    })();
-
-    /* Users table - seed the admin account */
+    /* Users table - seed the accounts */
     var existingUsers = readTable(K.USERS);
     var hasAdmin = existingUsers.some(function (u) { return u.role === 'admin'; });
+    var hasDemo = existingUsers.some(function (u) { return u.email === 'student@edu.com'; });
+    var changedUsers = false;
+
     if (!hasAdmin) {
-      existingUsers = existingUsers.filter(function (u) { return u.role !== 'admin'; });
+      existingUsers = existingUsers.filter(function (u) { return u.email !== 'admin@edulearn.com'; });
       existingUsers.push({
         id: 'u_admin',
         firstName: 'Admin', lastName: 'EduLearn',
@@ -273,8 +255,25 @@ window.EduDB = (function () {
         createdAt: '2025-01-01T08:00:00Z',
         role: 'admin'
       });
-      writeTable(K.USERS, existingUsers);
+      changedUsers = true;
     }
+
+    if (!hasDemo) {
+      existingUsers.push({
+        id: 'edu_0000',
+        firstName: 'Demo', lastName: 'Student',
+        email: 'student@edu.com',
+        password: hashPw('password123'),
+        programme: 'Computer Science', year: '2',
+        avatar: 'S',
+        avatarColor: 'linear-gradient(135deg,#667eea,#764ba2)',
+        createdAt: '2025-01-01T08:00:00Z',
+        role: 'student'
+      });
+      changedUsers = true;
+    }
+
+    if (changedUsers) writeTable(K.USERS, existingUsers);
 
     /* Enrollments table */
     if (readTable(K.ENROLLMENTS).length === 0) {
