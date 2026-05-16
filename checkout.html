@@ -87,15 +87,15 @@
               <h3 style="font-size:1rem;font-weight:800;color:#1a1a2e;margin-bottom:1.2rem;"><i
                   class="fas fa-user-circle" style="color:#667eea;margin-right:8px;"></i>User Details</h3>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
-                <div class="form-group"><label>First Name</label><input type="text" id="firstName"
-                    class="form-control" placeholder="Ahmad" /></div>
-                <div class="form-group"><label>Last Name</label><input type="text" id="lastName"
-                    class="form-control" placeholder="bin Ali" /></div>
+                <div class="form-group"><label>First Name</label><input type="text" id="firstName" class="form-control"
+                    placeholder="Ahmad" /></div>
+                <div class="form-group"><label>Last Name</label><input type="text" id="lastName" class="form-control"
+                    placeholder="bin Ali" /></div>
               </div>
-              <div class="form-group"><label>Email Address</label><input type="email" id="chkEmail"
-                  class="form-control" placeholder="student@edulearn.com" /></div>
-              <div class="form-group"><label>Phone Number</label><input type="tel" id="chkPhone"
-                  class="form-control" placeholder="+60 12-345 6789" /></div>
+              <div class="form-group"><label>Email Address</label><input type="email" id="chkEmail" class="form-control"
+                  placeholder="student@edulearn.com" /></div>
+              <div class="form-group"><label>Phone Number</label><input type="tel" id="chkPhone" class="form-control"
+                  placeholder="+60 12-345 6789" /></div>
               <div
                 style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;padding:0.8rem 1rem;margin-top:0.5rem;font-size: 0.98rem;color:#065f46;">
                 <i class="fas fa-bolt" style="margin-right:6px;"></i><strong>Instant Delivery!</strong> Your e-books
@@ -123,8 +123,8 @@
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
                 <div class="form-group"><label>Expiry Date</label><input type="text" id="cardExpiry"
                     class="form-control" placeholder="MM/YY" maxlength="5" /></div>
-                <div class="form-group"><label>CVV</label><input type="password" id="cardCvv"
-                    class="form-control" placeholder="•••" maxlength="3" /></div>
+                <div class="form-group"><label>CVV</label><input type="password" id="cardCvv" class="form-control"
+                    placeholder="•••" maxlength="3" /></div>
               </div>
               <div class="form-group"><label>Cardholder Name</label><input type="text" id="cardName"
                   class="form-control" placeholder="FULL NAME AS ON CARD" /></div>
@@ -171,9 +171,9 @@
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script src="db.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="db.js"></script>
   <script>
     var __sess = EduDB.getSession();
     if (!__sess) { window.location.href = 'index.html'; }
@@ -216,14 +216,14 @@
         err.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
         return;
       }
-      
+
       var items = EduDB.getCart();
       if (!items || items.length === 0) {
         err.style.display = "block";
         err.innerHTML = '<i class="fas fa-exclamation-circle"></i> Your cart is empty. Please add books before checking out.';
         return;
       }
-      
+
       err.style.display = "none";
       var total = items.reduce(function (s, i) { return s + (i.price * i.qty); }, 0);
       var order = EduDB.addOrder(__sess ? __sess.id : 'guest', items, total);

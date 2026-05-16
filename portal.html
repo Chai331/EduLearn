@@ -21,7 +21,9 @@
       <a href="portal.html" class="w3-bar-item w3-button nav-link active">My Portal</a>
       <a href="forum.html" class="w3-bar-item w3-button nav-link">Forum</a>
       <a href="bookstore.html" class="w3-bar-item w3-button nav-link">Bookstore</a>
-      <a href="admin_dashboard.html" class="w3-bar-item w3-button nav-link" id="adminLink" style="display:none;color:#f87171 !important;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+      <a href="admin_dashboard.html" class="w3-bar-item w3-button nav-link" id="adminLink"
+        style="display:none;color:#f87171 !important;font-weight:800;"><i class="fas fa-user-shield"></i> Admin
+        Panel</a>
       <span class="w3-bar-item nav-link" id="navGreet" style="color:#e0e7ff;cursor:default;"></span>
       <a href="cart.html" class="w3-bar-item w3-button nav-link" style="position:relative;">
         <i class="fas fa-shopping-cart"></i>
@@ -42,7 +44,8 @@
     <a href="forum.html" class="w3-bar-item w3-button">Forum</a>
     <a href="bookstore.html" class="w3-bar-item w3-button">Bookstore</a>
     <a href="cart.html" class="w3-bar-item w3-button"><i class="fas fa-shopping-cart"></i> Cart</a>
-    <a href="admin_dashboard.html" class="w3-bar-item w3-button" id="adminLinkMob" style="display:none;color:#ef4444;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+    <a href="admin_dashboard.html" class="w3-bar-item w3-button" id="adminLinkMob"
+      style="display:none;color:#ef4444;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
     <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i
         class="fas fa-sign-out-alt"></i> Logout</a>
   </div>
@@ -130,8 +133,10 @@
                   class="form-control" /></div>
               <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f3f4f6;">
                 <h4 style="font-size: 1rem;font-weight:800;color:#1a1a2e;margin-bottom:1rem;">Change Password</h4>
-                <div class="form-group"><label>Old Password</label><input type="password" id="setOldPass" class="form-control" placeholder="Required for password change" /></div>
-                <div class="form-group"><label>New Password</label><input type="password" id="setNewPass" class="form-control" placeholder="Enter new password" /></div>
+                <div class="form-group"><label>Old Password</label><input type="password" id="setOldPass"
+                    class="form-control" placeholder="Required for password change" /></div>
+                <div class="form-group"><label>New Password</label><input type="password" id="setNewPass"
+                    class="form-control" placeholder="Enter new password" /></div>
               </div>
               <button class="btn-submit" style="max-width:200px;" onclick="saveSettings()">Save Changes</button>
               <div id="savedMsg" style="display:none;margin-top:1rem;" class="alert-success"><i
@@ -154,9 +159,9 @@
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script src="db.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="db.js"></script>
   <script src="courses_data.js"></script>
   <script>
     /* ── Auth Guard ── */
@@ -243,12 +248,12 @@
       /* Courses tab content */
       var cl = document.getElementById('coursesList');
       var isAdmin = __sess && __sess.role === 'admin';
-      
+
       if (isAdmin) {
         // Show ALL courses for Admin
         cl.innerHTML = '<div style="margin-bottom:1.5rem;padding:1rem;background:#fef2f2;border-radius:12px;border:1px solid #fee2e2;color:var(--admin-primary);font-weight:700;font-size: 1rem;"><i class="fas fa-user-shield"></i> Admin View: All platform courses are visible and accessible.</div>';
         COURSES.forEach(function (c) {
-          var userEnr = enr.find(function(e){ return e.courseId === c.id; });
+          var userEnr = enr.find(function (e) { return e.courseId === c.id; });
           var pct = userEnr ? userEnr.progress : 0;
           var detail = userEnr ? (userEnr.completedLectures ? userEnr.completedLectures.length : 0) + ' of ' + (userEnr.weeksTotal || 5) + ' lectures' : 'Admin Preview Mode';
           cl.innerHTML += '<div style="background:#fff;border-radius:16px;padding:1.4rem;display:flex;align-items:center;gap:1.2rem;box-shadow:0 4px 20px rgba(0,0,0,0.05);border:1px solid #e5e7eb;margin-bottom:1rem;"><div style="width:60px;height:60px;border-radius:16px;' + c.color + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas ' + c.icon + '" style="color:#fff;font-size:1.5rem;"></i></div><div style="flex:1;"><div style="font-weight:700;color:#1a1a2e;font-size:1rem;margin-bottom:4px;">' + c.title + '</div><div style="font-size: 0.95rem;color:#374151;margin-bottom:8px;">' + detail + (userEnr ? ' · <span style="color:#667eea;font-weight:800;">' + pct + '% complete</span>' : '') + '</div>' + (userEnr ? '<div class="progress-bar-wrap" style="height:8px;"><div class="progress-bar-fill" style="width:' + pct + '%;"></div></div>' : '<div style="font-size: 0.95rem;color:#4b5563;font-style:italic;">No student progress tracked for your admin account.</div>') + '</div><div style="margin-left:1rem;"><a href="courses.html?id=' + c.id + '" class="btn-submit" style="font-size: 0.95rem;padding:0.6rem 1.2rem;white-space:nowrap;">View Content <i class="fas fa-arrow-right"></i></a></div></div>';
@@ -301,15 +306,15 @@
         var isVid = res.type === 'video' || (res.file && (res.file.includes('cloudinary') || res.file.includes('youtube') || res.file.includes('mp4')));
         var li = document.createElement('li');
         li.style.cssText = 'padding:1rem 0;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:12px;font-size: 1.01rem;color:#374151;';
-        li.innerHTML = 
+        li.innerHTML =
           '<i class="fas ' + (isVid ? 'fa-video' : 'fa-file-pdf') + '" style="color:' + (isVid ? '#667eea' : '#ef4444') + ';font-size:1.1rem;width:20px;"></i>' +
           '<div style="flex:1;">' +
-            '<div style="font-weight:600;">' + res.title + (res.week ? ' (Week ' + res.week + ')' : '') + '</div>' +
-            '<div style="font-size: 0.95rem;color:#4b5563;">' + (isVid ? 'Video' : 'Document') + ' · Saved ' + EduDB.ago(res.savedAt) + '</div>' +
+          '<div style="font-weight:600;">' + res.title + (res.week ? ' (Week ' + res.week + ')' : '') + '</div>' +
+          '<div style="font-size: 0.95rem;color:#4b5563;">' + (isVid ? 'Video' : 'Document') + ' · Saved ' + EduDB.ago(res.savedAt) + '</div>' +
           '</div>' +
           '<div style="display:flex;gap:12px;">' +
-            '<a href="' + res.file + '" target="_blank" style="color:#667eea;font-size: 1rem;"><i class="fas ' + (isVid ? 'fa-play' : 'fa-eye') + '"></i></a>' +
-            '<a href="javascript:void(0)" onclick="removeSaved(\'' + res.file + '\')" style="color:#ef4444;font-size: 1rem;"><i class="fas fa-trash"></i></a>' +
+          '<a href="' + res.file + '" target="_blank" style="color:#667eea;font-size: 1rem;"><i class="fas ' + (isVid ? 'fa-play' : 'fa-eye') + '"></i></a>' +
+          '<a href="javascript:void(0)" onclick="removeSaved(\'' + res.file + '\')" style="color:#ef4444;font-size: 1rem;"><i class="fas fa-trash"></i></a>' +
           '</div>';
         ul.appendChild(li);
       });
@@ -328,7 +333,7 @@
       var newPass = document.getElementById('setNewPass').value;
 
       var updateData = { firstName: name.split(' ')[0], lastName: name.split(' ').slice(1).join(' '), email: email };
-      
+
       // If trying to change password
       if (newPass) {
         if (!oldPass) { alert('Please enter your old password to set a new one.'); return; }
@@ -339,9 +344,9 @@
       var resProfile = EduDB.updateUserProfile(__sess.id, updateData);
       if (resProfile.success) {
         document.getElementById('savedMsg').style.display = 'block';
-        setTimeout(function () { 
+        setTimeout(function () {
           document.getElementById('savedMsg').style.display = 'none';
-          location.reload(); 
+          location.reload();
         }, 1500);
       } else {
         alert(resProfile.message);

@@ -481,9 +481,9 @@
 
   <div class="toast" id="toast"></div>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script src="db.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="db.js"></script>
   <script src="courses_data.js"></script>
   <script>
     var __sess = EduDB.getSession();
@@ -903,7 +903,7 @@
       if (pass) {
         var totalLecs = CONTENT[currentCourse.id].lectures.length;
         var qArr = CONTENT[currentCourse.id].quizzes || [];
-        var totalQuiz = qArr.filter(function(q) { return q && q.length > 0; }).length;
+        var totalQuiz = qArr.filter(function (q) { return q && q.length > 0; }).length;
         // Also count the standard quiz if it exists
         if (CONTENT[currentCourse.id].quiz) totalQuiz += 1;
 
@@ -932,7 +932,7 @@
       if (week && title && currentCourse) {
         var totalLecs = CONTENT[currentCourse.id].lectures.length;
         var qArr = CONTENT[currentCourse.id].quizzes || [];
-        var totalQuiz = qArr.filter(function(q) { return q && q.length > 0; }).length;
+        var totalQuiz = qArr.filter(function (q) { return q && q.length > 0; }).length;
         if (CONTENT[currentCourse.id].quiz) totalQuiz += 1;
 
         EduDB.markLectureRead(__sess.id, currentCourse.id, week, title, totalLecs, totalQuiz);

@@ -472,8 +472,10 @@
           <!-- PASSWORD RESETS -->
           <div id="tab-passwords" style="display:none;">
             <div class="admin-card">
-              <h3><i class="fas fa-key" style="color:var(--admin-primary);margin-right:8px;"></i>Password Reset Requests</h3>
-              <p style="color:#374151;font-size: 1rem;margin-bottom:1.5rem;">Manage forgotten password requests from students.</p>
+              <h3><i class="fas fa-key" style="color:var(--admin-primary);margin-right:8px;"></i>Password Reset Requests
+              </h3>
+              <p style="color:#374151;font-size: 1rem;margin-bottom:1.5rem;">Manage forgotten password requests from
+                students.</p>
               <div id="resetList"></div>
             </div>
           </div>
@@ -521,9 +523,9 @@
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script src="db.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="db.js"></script>
   <script src="courses_data.js"></script>
   <script>
     var __sess = EduDB.getSession();
@@ -909,12 +911,12 @@
         return;
       }
       var html = '<div style="overflow-x:auto;"><table class="table-res"><thead><tr><th>User Email</th><th>Date Requested</th><th>Action</th></tr></thead><tbody>';
-      reqs.forEach(function(r) {
+      reqs.forEach(function (r) {
         html += '<tr>' +
           '<td><strong style="color:var(--admin-primary);">' + r.email + '</strong></td>' +
           '<td>' + EduDB.ago(r.createdAt) + '</td>' +
           '<td>' +
-            '<button class="admin-btn" style="background:#10b981;font-size: 0.95rem;padding:0.4rem 0.8rem;" onclick="adminResolvePassword(\'' + r.id + '\', \'' + r.email + '\')"><i class="fas fa-check"></i> Reset Password</button>' +
+          '<button class="admin-btn" style="background:#10b981;font-size: 0.95rem;padding:0.4rem 0.8rem;" onclick="adminResolvePassword(\'' + r.id + '\', \'' + r.email + '\')"><i class="fas fa-check"></i> Reset Password</button>' +
           '</td>' +
           '</tr>';
       });

@@ -23,7 +23,9 @@
       <a href="portal.html" class="w3-bar-item w3-button nav-link">My Portal</a>
       <a href="forum.html" class="w3-bar-item w3-button nav-link">Forum</a>
       <a href="bookstore.html" class="w3-bar-item w3-button nav-link active">Bookstore</a>
-      <a href="admin_dashboard.html" class="w3-bar-item w3-button nav-link" id="adminLink" style="display:none;color:#f87171 !important;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+      <a href="admin_dashboard.html" class="w3-bar-item w3-button nav-link" id="adminLink"
+        style="display:none;color:#f87171 !important;font-weight:800;"><i class="fas fa-user-shield"></i> Admin
+        Panel</a>
       <span class="w3-bar-item nav-link" id="navGreet" style="color:#e0e7ff;cursor:default;"></span>
       <a href="cart.html" class="w3-bar-item w3-button nav-link" style="position:relative;">
         <i class="fas fa-shopping-cart"></i>
@@ -43,7 +45,8 @@
     <a href="portal.html" class="w3-bar-item w3-button">My Portal</a>
     <a href="forum.html" class="w3-bar-item w3-button">Forum</a>
     <a href="bookstore.html" class="w3-bar-item w3-button">Bookstore</a>
-    <a href="admin_dashboard.html" class="w3-bar-item w3-button" id="adminLinkMob" style="display:none;color:#ef4444;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
+    <a href="admin_dashboard.html" class="w3-bar-item w3-button" id="adminLinkMob"
+      style="display:none;color:#ef4444;font-weight:800;"><i class="fas fa-user-shield"></i> Admin Panel</a>
     <a href="cart.html" class="w3-bar-item w3-button"><i class="fas fa-shopping-cart"></i> Cart</a>
     <a href="#" onclick="doLogout()" class="w3-bar-item w3-button" style="color:#ef4444;"><i
         class="fas fa-sign-out-alt"></i> Logout</a>
@@ -151,8 +154,7 @@
                   for students and practitioners who want to understand how theoretical methods are applied in
                   real-world software engineering environments.</div>
                 <div class="book-price">RM 120.00</div>
-                <button class="btn-add-cart"
-                  onclick="addToCart('Handbook of Software Engineering Methods', 120.00)"><i
+                <button class="btn-add-cart" onclick="addToCart('Handbook of Software Engineering Methods', 120.00)"><i
                     class="fas fa-cart-plus"></i> Add to Cart</button>
               </div>
             </div>
@@ -671,9 +673,9 @@
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script src="db.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="db.js"></script>
   <script>
     var __sess = EduDB.getSession();
     if (!__sess) { window.location.href = 'index.html'; }
@@ -687,28 +689,28 @@
         var alm = document.getElementById('adminLinkMob');
         if (alm) alm.style.display = 'block';
       }
-      
+
       // Inject custom books
       var customBooks = EduDB.getCustomBooks() || [];
       var grid = document.getElementById("bookGrid");
-      customBooks.forEach(function(b) {
+      customBooks.forEach(function (b) {
         var c = document.createElement('div');
         c.className = 'book-card';
         c.setAttribute('data-cat', b.cat);
         c.setAttribute('data-price', b.price);
         c.setAttribute('data-name', b.name);
         if (b.pdf) c.setAttribute('data-pdf', b.pdf);
-        
+
         var imgUrl = b.image;
-        c.innerHTML = 
+        c.innerHTML =
           '<div class="book-cover" style="padding:0;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;">' +
-            '<img src="' + imgUrl + '" alt="' + b.name + '" style="max-width:100%;max-height:100%;object-fit:contain;display:block;"/>' +
+          '<img src="' + imgUrl + '" alt="' + b.name + '" style="max-width:100%;max-height:100%;object-fit:contain;display:block;"/>' +
           '</div>' +
           '<div class="book-body">' +
-            '<div class="book-title">' + b.name + '</div>' +
-            '<div class="book-desc">' + b.desc + '</div>' +
-            '<div class="book-price">RM ' + b.price + '</div>' +
-            '<button class="btn-add-cart" onclick="addToCart(\'' + b.name.replace(/'/g,"\\'") + '\', ' + b.price + ')"><i class="fas fa-cart-plus"></i> Add to Cart</button>' +
+          '<div class="book-title">' + b.name + '</div>' +
+          '<div class="book-desc">' + b.desc + '</div>' +
+          '<div class="book-price">RM ' + b.price + '</div>' +
+          '<button class="btn-add-cart" onclick="addToCart(\'' + b.name.replace(/'/g, "\\'") + '\', ' + b.price + ')"><i class="fas fa-cart-plus"></i> Add to Cart</button>' +
           '</div>';
         grid.appendChild(c);
       });
@@ -759,27 +761,27 @@
       });
       document.getElementById("bookCount").textContent = "Showing " + visible.length + " books";
       var grid = document.getElementById("bookGrid");
-      
+
       var purchased = __sess ? EduDB.getPurchasedBooks(__sess.id) : [];
-      var isPurchased = function(c) {
+      var isPurchased = function (c) {
         return purchased.indexOf(c.dataset.name) !== -1;
       };
 
-      visible.sort(function(a, b) {
+      visible.sort(function (a, b) {
         var aPurchased = isPurchased(a);
         var bPurchased = isPurchased(b);
-        
+
         // Always put purchased books first
         if (aPurchased && !bPurchased) return -1;
         if (!aPurchased && bPurchased) return 1;
-        
+
         // Otherwise use the selected sort logic
         if (sort === "price-asc") return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
         if (sort === "price-desc") return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
         if (sort === "name") return a.dataset.name.localeCompare(b.dataset.name);
         return 0; // Default featured sort within same group
       });
-      
+
       visible.forEach(function (c) { grid.appendChild(c); });
     }
 
@@ -793,18 +795,18 @@
         (function (card) {
           var name = card.dataset.name;
           if (purchased.indexOf(name) === -1) return;
-          
+
           var pdfPath = card.dataset.pdf; // Try data-pdf first
           if (!pdfPath) {
             // Fallback for hardcoded books
             var img = card.querySelector('.book-cover img');
             var imgUrl = img ? img.getAttribute('src') : '';
             pdfPath = imgUrl;
-            if(pdfPath.indexOf('.pdf') === -1) {
+            if (pdfPath.indexOf('.pdf') === -1) {
               pdfPath = pdfPath.replace(/\.(jpg|jpeg|png)$/i, '.pdf');
             }
           }
-          
+
           var cover = card.querySelector('.book-cover');
           if (cover) {
             cover.style.position = 'relative';
@@ -813,7 +815,7 @@
             badge.innerHTML = '<i class="fas fa-lock-open" style="margin-right:4px;"></i> Purchased – Click to Read';
             badge.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e;font-size: 0.92rem;font-weight:800;text-align:center;padding:0.5rem;z-index:2;border-radius:0 0 4px 4px;';
             cover.appendChild(badge);
-            
+
             var pdfForCover = pdfPath;
             cover.addEventListener('click', function () { window.open(pdfForCover, '_blank'); });
             card.style.boxShadow = '0 0 0 3px #43e97b, 0 8px 25px rgba(67,233,123,0.2)';
@@ -826,10 +828,10 @@
             var pdfForBtn = pdfPath;
             btn.onclick = function () { window.open(pdfForBtn, '_blank'); };
           }
-          
+
           // Move purchased book to the front by forcing it to the top of the grid
           card.style.order = "-1";
-          
+
         })(cards[i]);
       }
     }

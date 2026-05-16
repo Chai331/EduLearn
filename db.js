@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * ============================================================
  *  EduLearn – localStorage Database Simulation
  *  Simulates MySQL / MongoDB for local file deployment
